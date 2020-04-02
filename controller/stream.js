@@ -33,6 +33,8 @@ const streamController = {
             for (var i=0; i<tags.length; i++) {
                 stream.stream_tags.push(tags[i]);
             }
+
+            stream.stream_creator_id = req.user._id;
     
             await stream.save();
             let stream_id = stream._id;
@@ -49,11 +51,23 @@ const streamController = {
         }
     },
 
-    async showVideo(req, res) {
+    async showStream(req, res) {
         try {        
-            let video_id = req.params.videoId;
+
+            let stream_id = req.params.streamId;
+
+            let stream = await Stream.findById(stream_id);
+            if (!stream) {
+                return res.status(404).json({
+                    errors: "Stream not found."
+                });
+            }
+
+            let video_id = stream.stream_video_id;
+            
             res.render('watch', {
-                video_id: video_id
+                video_id: video_id,
+                stream
             });
         } catch(error) {
             console.log(error);

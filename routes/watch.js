@@ -14,7 +14,7 @@ const validator = require('../controller/validator')
 
 const streamController = require('../controller/stream');
 
-router.get('/:videoId', ensureAuthenticated, streamController.showVideo);
+router.get('/:streamId', ensureAuthenticated, streamController.showStream);
 
 
 /*====== Access control  ======*/

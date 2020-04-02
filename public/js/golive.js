@@ -14,7 +14,8 @@ $(document).ready(function () {
             type: 'POST',
             data: stream_data,
             success: function(data) {
-                window.location.href = "/watch/" + stream_data.stream_video_id;
+                let stream_id = data.stream_id;
+                window.location.href = "/watch/" + stream_id;
             },
             error: function(err) {
                 imageError("Could not save file reference.", err);

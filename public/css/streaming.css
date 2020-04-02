@@ -17,17 +17,30 @@
     cursor: pointer;
 }
 
-.live_player {
-    border-radius: 10px;
+.player_container {
     margin-right: 50px;
     margin-left: auto;
     margin-top: 5%;
 }
 
-.live_chat {
-    border-radius: 3px;
+.player_sidebar_container {
     margin-top: 5%;
     margin-right: 10px;
+}
+
+.sidebar_section_top {
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    padding: 20px 15px;
+    background-color: #f1f1f1;
+}
+
+.live_player {
+    border-radius: 10px;
+}
+
+.live_chat {
+    border-radius: 3px;
 }
 
 .ytp-title {
@@ -41,4 +54,8 @@
 .ytp-watch-later-button,
 .ytp-show-watch-later-title {
     display: none;
+}
+
+.stream_owner {
+    width: 100%;
 }
