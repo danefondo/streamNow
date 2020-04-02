@@ -29,3 +29,16 @@
     margin-top: 5%;
     margin-right: 10px;
 }
+
+.ytp-title {
+    display: none;
+}
+
+.ytp-title-channel {
+    display: none;
+}
+
+.ytp-watch-later-button,
+.ytp-show-watch-later-title {
+    display: none;
+}
