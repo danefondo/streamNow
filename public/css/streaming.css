@@ -70,3 +70,11 @@
 .stream_owner {
     width: 100%;
 }
+
+.stream_details_block {
+    padding: 10px;
+}
+
+.stream_name {
+    font-size: 25px;
+}
