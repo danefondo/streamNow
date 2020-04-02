@@ -4,11 +4,11 @@ block content
     .streaming_area
         .stream_owner
             if (user.firstname)
-                p #{user.firstname}
+                p.streamer_first_name #{user.firstname}
                 if (user.lastname)
-                    p #{user.lastname}
+                    p.streamer_last_name #{user.lastname}
             else
-                p #{user.username}
+                p.streamer_username #{user.username}
         .player_container
             iframe.live_player(width='800', height='480', src='https://www.youtube-nocookie.com/embed/' + video_id + '?modestbranding=1&showinfo=0&rel=0&theme=light&color=white', frameborder='0', allow='accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture', allowfullscreen='')
         .player_sidebar_container

@@ -21,6 +21,10 @@
     margin-left: auto;
 }
 
+.streamer_username {
+    font-size: 24px;
+}
+
 .player_container {
     margin-right: 50px;
     /* margin-left: auto; */
@@ -62,4 +66,5 @@
 
 .stream_owner {
     width: 100%;
+    margin-top: 20px;
 }
