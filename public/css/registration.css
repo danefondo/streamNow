@@ -48,10 +48,11 @@
 
 .register-button {
 	margin-left: 2px;
+	margin-right: 10px;
 	border-radius: 40px;
 	padding: 12px;
 	font-weight: 600;
-	width: 200px;
+	width: 170px;
 	text-align: left;
 /*	font-size: 17px;*/
 	font-size: 20px;
