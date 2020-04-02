@@ -11,7 +11,8 @@ const stream_schema = new mongoose.Schema({
     thumbnail_url: String,
     thumbnail_name: String,
     thumbnail_id: String,
-    stream_creator_id: String
+    stream_creator_id: String,
+    stream_status: String
 });
 
 const Stream = module.exports = mongoose.model('Stream', stream_schema);

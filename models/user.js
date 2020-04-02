@@ -14,6 +14,7 @@ const UserSchema = new mongoose.Schema({
 		type: String,
 		required: true
 	},
+	currently_live: Boolean,
 	lastLogin: Date,
 	verificationToken: String,
 	resetToken: String,

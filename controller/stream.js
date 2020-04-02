@@ -28,10 +28,11 @@ const streamController = {
             stream.stream_description = stream_data.stream_description;
             stream.stream_video_id = stream_data.stream_video_id;
 
-            console.log("data: ", stream_data);
             let tags = stream_data.stream_tags;
-            for (var i=0; i<tags.length; i++) {
-                stream.stream_tags.push(tags[i]);
+            tags = JSON.parse(tags);
+            
+            for (const tag of tags) {
+                stream.stream_tags.push(tag);
             }
 
             stream.stream_creator_id = req.user._id;

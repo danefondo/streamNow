@@ -1,5 +1,11 @@
 $('.go_live_button').hide();
 
+// don't take it too seriously
+// all problems, from religion to war...
+// comes from taking it seriously
+// and that comes from resistance to the end of it
+// none of the nonsense has any hold over you if you aren't so invested, don't care so much for it all
+
 $(document).ready(function () {	
 
     let coreURL =  'dashboard';
@@ -80,7 +86,9 @@ $(document).ready(function () {
         let stream_data = {};
         stream_data.stream_name = $('.stream_name').val();
         stream_data.stream_description = $('.stream_description').val();
-        stream_data.stream_tags = [] + $('#input-tags')[0].selectize.items;;
+        let tags = $('#input-tags')[0].selectize.items;
+        // stringified because server-side ran into problems otherwise;
+        stream_data.stream_tags = JSON.stringify(tags);
         stream_data.stream_video_id = $('.stream_video_id_input').val();
         return stream_data;
     }
