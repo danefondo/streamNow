@@ -7,6 +7,8 @@ $(document).ready(function () {
 
     function create_live_stream(stream_data) {
 
+        console.log("tags", stream_data.stream_tags);
+
         stream_data.date_created = new Date();
 
         $.ajax({
@@ -79,7 +81,8 @@ $(document).ready(function () {
         let stream_data = {};
         stream_data.stream_name = $('.stream_name').val();
         stream_data.stream_description = $('.stream_description').val();
-        stream_data.stream_tags = $('#input-tags')[0].selectize.items;
+        stream_data.stream_tags = [] + $('#input-tags')[0].selectize.items;
+        console.log("tags", stream_data.stream_tags);
         stream_data.stream_video_id = $('.stream_video_id_input').val();
         return stream_data;
     }
