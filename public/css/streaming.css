@@ -16,3 +16,16 @@
     background-color: blue;
     cursor: pointer;
 }
+
+.live_player {
+    border-radius: 10px;
+    margin-right: 50px;
+    margin-left: auto;
+    margin-top: 5%;
+}
+
+.live_chat {
+    border-radius: 3px;
+    margin-top: 5%;
+    margin-right: 10px;
+}

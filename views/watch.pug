@@ -1,5 +1,5 @@
 extends layout
 
 block content
-    iframe(width='560', height='315', src='https://www.youtube.com/embed/' + video_id + '?modestbranding=1&showinfo=0&rel=0&theme=light&color=white', frameborder='0', allow='accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture', allowfullscreen='')
-    iframe(width='300px', height='600px', src='https://www.youtube.com/live_chat?v=' + video_id + '&embed_domain=stream-one.herokuapp.com') 
+    iframe.live_player(width='800', height='480', src='https://www.youtube.com/embed/' + video_id + '?modestbranding=1&showinfo=0&rel=0&theme=light&color=white', frameborder='0', allow='accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture', allowfullscreen='')
+    iframe.live_chat(width='425px', height='600px', src='https://www.youtube.com/live_chat?v=' + video_id + '&embed_domain=stream-one.herokuapp.com') 
