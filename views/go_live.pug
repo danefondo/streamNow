@@ -1,0 +1,88 @@
+extends layout
+
+include mixins/startLiveModal
+include mixins/scheduleEventModal
+
+block header
+    link(rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.css')
+    script(src="https://cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js")
+    link(href='/css/datepicker.css', rel='stylesheet')
+    link(href='/css/selectize.css', rel='stylesheet')
+    link(href='/css/modal.css', rel='stylesheet')
+
+
+block content
+    +startLiveModal
+    +scheduleEventModal
+    .contentArea
+        .generalErrorContainer
+            .generalErrorText Please fill all required empty fields.
+        .stream_input_container
+            .stream_input_title Give your livestream a name
+            input.stream_input.stream_name(placeholder='Your livestream name')
+            .inputErrorContainer
+                .inputErrorText
+        .stream_input_container
+            .stream_input_title What's your livestream about?
+            textarea.stream_input.stream_description(placeholder='Briefly describe your livestream')
+            .inputErrorContainer
+                .inputErrorText
+        .stream_input_container
+            .stream_input_title Add tags (max 3)
+            input#input-tags(type="text" placeholder="Write a tag")
+            .inputErrorContainer
+                .inputErrorText
+        .stream_input_container
+            .stream_input_title YouTube video ID
+            input.stream_input.stream_video_id_input(placeholder='e.g. NMPqo3XiOUg')
+            .inputErrorContainer
+                .inputErrorText
+        .stream_input_container
+            .stream_input_title Upload custom thumbnail (optional)
+            .entryDetailsGroup
+                .mainImage(id= "imageArea_")
+                    .file-upload.imageBlock(data-type="mainImage" data-image-key="")
+                        form.image-upload-wrap.imageForm(action= "/' + coreURL + '/sign-s3" method="POST" enctype= "multipart/form-data")
+                            input#file-input.file-upload-input(type='file', name='image', accept='image/jpg')
+                            .drag-text
+                                button.file-upload-btn(type='button') Upload custom thumbnail
+                                h3 Or just drag and drop a file
+                        .file-upload-content
+                            img.file-upload-image(src="", alt='your image')
+                            .image-title-wrap
+                                button.remove-image(type='button')
+                                    span.image-pre-title Remove 
+                                    span.image-title Untitled Image
+                                    span.image-uploading-title Uploading image...
+            .inputErrorContainer
+                .inputErrorText
+        .go_live Go live
+        .subArea
+            .stream_input_title.inline Schedule for later?
+            img.arrow.hidden(src="/images/up_arrow.png")
+            img.arrow(src="/images/down_arrow.png")
+        .schedule_container.hidden
+            .schedule_stream_section
+                .stream_input_title Pick date
+                .date_picker
+                    input.picker(data-toggle='datepicker' placeholder="Pick a date")
+                    button.date_picker_button
+                        i.fa.fa-calendar
+            .schedule_stream_section
+                .stream_input_title Pick time
+                .time_picker
+                    input.timepicker(name="time" type="text")
+                    button.date_picker_button
+                        i.fa.fa-clock-o
+            .schedule_stream_section
+                .stream_input_title Privacy
+                .switch-field
+                    input#radio-one(type='radio', name='switch-one', value='public', checked='')
+                    label(for='radio-one') Public
+                    input#radio-two(type='radio', name='switch-one', value='unlisted')
+                    label(for='radio-two') Unlisted
+            .create_event Create event
+block scripts
+    script(src='/js/golive.js')
+    script(src='/js/datepicker.js')
+    script(src='/js/selectize.js')

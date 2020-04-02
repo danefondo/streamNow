@@ -1,0 +1,38 @@
+include images/profileIcon
+include mixins/topmenu
+include mixins/streamers
+
+doctype html
+html
+	head
+		title Costream
+		meta(name='viewport', content='width=device-width, initial-scale=1.0')
+		link(rel='stylesheet' href='/css/reset.css')
+		link(rel='stylesheet', href='/css/unreset.css')
+		link(rel='stylesheet' href='/css/main.css')
+		link(rel='stylesheet' href='/css/registration.css')
+		link(rel='stylesheet' href='/css/navigation.css')
+		link(rel='stylesheet' href='/css/streamPreviews.css')
+		link(rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css')
+		link(href="https://fonts.googleapis.com/css?family=Lora:400,400i,700,700i&display=swap" rel="stylesheet")
+		link(href="https://fonts.googleapis.com/css?family=Lato:400,400i,700,700i&display=swap" rel="stylesheet")
+		script(src='https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js')
+		script(src='https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.js')
+		script(src='https://momentjs.com/downloads/moment.min.js')
+		link(rel='stylesheet' href='/css/responsive.css')
+		link(rel='stylesheet' href='/css/streaming.css')
+		link(rel='stylesheet' href='/css/content.css')
+		block header
+
+	body
+		- var coreURL = 'dashboard';
+		+topmenu(user)
+		block heading
+		.container
+			block content
+			block scripts
+			script(src='/js/main.js')
+			script(src='/js/topbar__dropdown.js')
+
+
+

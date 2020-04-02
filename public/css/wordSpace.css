@@ -1,0 +1,137 @@
+body {
+  font-size: 1.3rem;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 400;
+  color: #fff;
+  background-color: #E10E49;
+}
+
+.cd-title {
+  position: relative;
+  height: 80px;
+  line-height: 80px;
+  text-align: center;
+}
+.cd-title h1 {
+  font-size: 2rem;
+}
+
+.cd-filter, .cd-intro {
+  width: 90%;
+  text-align: center;
+}
+
+.cd-intro {
+  margin: 2em auto;
+}
+
+.cd-filter {
+  margin: 0 auto;
+  text-align: center;
+}
+.cd-filter li {
+  position: relative;
+  display: inline-block;
+  margin: 0;
+}
+.cd-filter input {
+  position: absolute;
+  left: 0;
+  top: 0;
+  opacity: 0;
+}
+
+.cd-filter input:checked + label {
+  border-color: #e6d925;
+  color: rgba(255, 255, 255, 1);
+}
+.cd-filter label {
+  border-color: #e10e49;
+  border-style: solid;
+  border-width: 0 0 2px;
+  color: rgba(255, 255, 255, 0.7);
+  cursor: pointer;
+  display: inline-block;
+  margin: 0;
+  padding: 0.4em 0.6em;
+}
+.cd-filter label:hover {
+  border-color: rgba(255, 255, 255, 0.7);
+}
+
+.cd-headline {
+  font-size: 5rem;
+  font-weight: 300;
+  line-height: 1;
+}
+
+.cd-words-wrapper {
+  display: inline-block;
+  position: relative;
+  text-align: left;
+}
+.cd-words-wrapper b {
+  display: inline-block;
+  position: absolute;
+  white-space: nowrap;
+  left: 0;
+  top: 0;
+}
+.cd-words-wrapper b.is-visible {
+  position: relative;
+}
+
+/* -------------------------------- 
+
+xslide 
+
+-------------------------------- */
+.cd-headline.slide span {
+  display: inline-block;
+  padding: .2em 0 .3em;
+}
+.cd-headline.slide .cd-words-wrapper {
+  overflow: hidden;
+  vertical-align: top;
+}
+.cd-headline.slide b {
+  opacity: 0;
+  top: .2em;
+}
+.cd-headline.slide b.is-visible {
+  top: 0;
+  opacity: 1;
+  animation: slide-in 0.6s;
+}
+.cd-headline.slide b.is-hidden {
+  animation: slide-out 0.6s;
+}
+
+@keyframes slide-in {
+  0% {
+    opacity: 0;
+    transform: translateY(-100%);
+  }
+  60% {
+    opacity: 1;
+    transform: translateY(20%);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@keyframes slide-out {
+  0% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  60% {
+    opacity: 0;
+    transform: translateY(120%);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(100%);
+  }
+}

@@ -1,0 +1,23 @@
+mixin scheduleEventModal
+    .scheduleEventModal
+        .scheduleEventBackground
+        .createModal
+            .cancel_schedule_event x
+            .big-content-wrapper
+                .createListArea--dashboard__entries
+                    .templateDetails
+                        .coreErrorContainer.hidden
+                            .coreErrorText
+                        .listDetails
+                            p.listTitleInstruction Link name (optional):
+                            input.link_name_input(placeholder= 'What do you want to call your link?')
+                        .listDetails
+                            p.listTitleInstruction Link:
+                            input.link_input(placeholder= 'www.example.com')
+                            .inputErrorContainer.hidden
+                                .inputErrorText
+                        .listDetails
+                            p.listTitleInstruction Summary (optional):
+                            textarea.new_link_summary_edit(placeholder= 'What is this link about?')
+                        .add_new_link Start stream
+                        .press_enter (Or Press Enter)

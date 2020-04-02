@@ -1,0 +1,48 @@
+extends layout
+
+block content
+	.registrationBlock__registerPage
+		.titleBlock__registerPage
+			h1.title__registerPage Join Costream
+			.subtitle__registerPage ...and start broadcasting today.
+		.registration-form
+			form.form-register(method='POST')
+				.notifier__register
+					h2 Errors
+				.form-groups
+					.form-group
+						input.input__registration.first-input(name='email' type='text' placeholder='example@mail.com' autocomplete="falsess")
+						.inputErrorContainer
+							.inputErrorText
+						.serverErrorContainer
+							.serverErrorText
+					.form-group
+						input.input__registration(name='username' type='text' placeholder='Username' autocomplete="falsess")
+						.inputErrorContainer
+							.inputErrorText
+						.serverErrorContainer
+							.serverErrorText
+					.form-group
+						input.input__registration.inline.passwordInput(name='password' type='password' placeholder='Password (at least 8 characters)' autocomplete="off")
+						.showPassContainer
+							img.showPass.inline(src= '/images/light-eye-unbox.png')
+						.inputErrorContainer
+							.inputErrorText
+						.serverErrorContainer
+							.serverErrorText
+					.form-group.last-form-group
+						input.input__registration.last-input.passwordInput(name='passcheck' type='password' placeholder='Confirm password' autocomplete="off")
+						.showPassContainer
+							img.showPass.inline(src= '/images/light-eye-unbox.png')
+						.inputErrorContainer
+							.inputErrorText
+						.serverErrorContainer
+							.serverErrorText
+				.buttonGroup
+					input.register-button(type='submit' value='Create account')
+					a.accountExists__registerPage(href='/accounts/loginForm') Already have an account?
+block scripts
+	script(src='/js/coreExternal.js')
+
+
+

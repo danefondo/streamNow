@@ -1,0 +1,20 @@
+extends layout
+
+block content
+	.account-manager 
+		form.form__forgotPass(method='POST')
+			.inputErrorContainer
+				.inputErrorText
+			.login-title Forgot your password?
+			.subtitle__forgotPass Enter the email address you used to create your account. We will send you a link to reset your password. You may need to check your spam folder.
+			input.login-input(name='email' type='text' placeholder='Email address' autocomplete="off") 
+			.submit
+				input(type='submit' value='Submit' class='forgotPass-button')
+			.successMessage A password reset link has been sent to the email address you entered.
+			a.accountExists__registerPage(href='/accounts/loginForm') Login instead.
+
+block scripts
+	script(src='/js/pass__forgot.js')
+
+
+

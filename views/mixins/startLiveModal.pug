@@ -1,0 +1,31 @@
+mixin startLiveModal
+    .startLiveModal
+        .startLiveBackground
+        .createModal
+            .cancel_start_live x
+            .big-content-wrapper
+                .createListArea--dashboard__entries
+                    .templateDetails
+                        .modalTitle Confirm stream details
+                        .coreErrorContainer.hidden
+                            .coreErrorText
+                        .listDetails
+                            p.listTitleInstruction Stream name
+                            .stream_name_text.stream_input_value
+                        .listDetails
+                            p.listTitleInstruction Stream description
+                            .stream_description_text.stream_input_value
+                        .listDetails
+                            p.listTitleInstruction Tags
+                            .stream_tags
+                        .listDetails
+                            .listTitleInstruction YouTube video ID
+                            .stream_video_id.stream_input_value
+                        .listDetails
+                            p.listTitleInstruction Thumbnail
+                            //- img.file-upload-image(src="", alt='your image')
+                            .no_thumbnail
+                                .no_thumbnail_box No custom thumbnail
+                                h3 Thumbnail will be pulled from the live video
+                        .add_new_link Start stream
+                        .press_enter (Or Press Enter)

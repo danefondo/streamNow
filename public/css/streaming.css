@@ -1,0 +1,18 @@
+.stream_buttons {
+    margin-left: auto;
+}
+
+.go_live_button,
+.schedule_stream_button {
+    color: white;
+    font-weight: bold;
+    padding: 10px 16px;
+    border-radius: 4px;
+    margin: 0px 6px;
+    box-sizing: border-box;
+    margin-bottom: 2px;
+    border: 1px solid transparent;
+    display: inline-block;
+    background-color: blue;
+    cursor: pointer;
+}

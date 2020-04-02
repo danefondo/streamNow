@@ -1,0 +1,86 @@
+.streams {
+    display: flex;
+    margin: 0 auto;
+}
+
+.stream {
+    width: 350px;
+    height: 350px;
+    display: inline-block;
+    flex-direction: row;
+    margin: 30px 10px;
+    margin-top: 10px;
+    border-radius: 40px;
+    padding: 40px 0px;
+    border: 1px solid transparent;
+    background-color: white;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.stream:hover {
+    border: 1px solid #eee;
+}
+
+.streamPreviewContainer {
+    border: 1px solid #eee;
+    width: 325px;
+    height: 205px;
+}
+
+.streamMetaContainer {
+    width: 100%;
+    max-width: 325px;
+    padding: 5px;
+}
+
+.streamTag {
+    display: inline-block;
+    border-radius: 360px;
+    background-color: blue;
+    padding: 2px 10px;
+    font-size: 13px;
+    font-weight: bold;
+    color: white;
+    margin: 0 2px;
+}
+
+.streamNameContainer {
+    padding: 5px;
+}
+
+.streamName {
+    font-size: 20px;
+}
+
+.streamerProfileContainer {
+    display: flex;
+    padding: 5px 0;
+}
+
+.streamerProfileImageContainer {
+    display: inline-block;
+}
+
+.streamerProfileImage {
+    width: 40px;
+    height: 40px;
+    border-radius: 360px;
+    background-color: #eee;
+}
+
+.streamerLevelContainer {
+    display: inline-block;
+}
+
+.streamerUsernameContainer {
+    display: inline-block;
+    height: 40px;
+    padding-left: 10px;
+}
+
+.streamerUsername {
+    line-height: 40px;
+}

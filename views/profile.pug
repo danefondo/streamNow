@@ -1,0 +1,56 @@
+extends layout
+
+include mixins/streamers
+include mixins/profile_public
+include mixins/profile_private
+
+block header
+	link(rel='stylesheet' href='/css/profile.css')
+
+block content
+	.profileArea
+		p profilepage
+		p myname: #{user.email}
+		p.level 72 #{user.username}
+		.title_meta Streams count:
+		if (user.previous_streams.length > 0)
+			.streams_count #{user.previous_streams.length}
+		else
+			.streams_count 0
+		.views
+			.view_count 2,312 views
+		.description Blablabla
+		.links
+			.insta_link insta_icon
+			.yt_link yt_icon
+			.twitter_link twitter_icon
+		if (user.live_right_now)
+			.liveVideo 'Embedded live video w/chat'
+			.liveIcon LIVE
+		if (user.upcoming_streams > 0)
+			.upcoming Next stream on Friday 5PM
+		else
+			.upcoming No upcoming streams planned
+		.tabs
+			.upcoming_tab Upcoming
+				if (user.upcoming_streams > 0)
+					.upcoming Next stream on Friday 5PM
+				else
+					.upcoming No upcoming streams planned
+			.previous_tab Previous streams
+				if (user.previous_streams > 0)
+					.previous_streams
+				else
+					.previous_streams 
+						p User has no previous streams.
+	//- if user
+	//- 	+profile_private
+	//- else
+	//- 	.profile_public
+	
+//- most popular in x, y, z tags
+//- request to schedule private call
+
+
+//- in private:
+	//- add first & last name

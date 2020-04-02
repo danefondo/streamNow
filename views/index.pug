@@ -1,0 +1,21 @@
+extends layout
+
+block content
+    if !user
+        .registration-block
+            .title__landingPage.cd-words-wrapper
+                .landingTitleP1 Stream your
+                .landingTitleP2.is-visible talents.
+                .landingSubtitle Let's unite and keep the human spirit strong during Covid-19.
+            a.signupPageLink(href='/accounts/registerForm') start streaming
+            //- img.imageBlockX(src='/images/pablo-sign-in.png')
+        .examplesSection__landingPage
+            .examplesContainer__landingPage
+                .examplesTitle__landingPage Trending right now
+        +streamers
+    else
+        .contentArea
+            .examplesSection__landingPage
+                .examplesContainer__landingPage
+                    .examplesTitle__landingPage Trending right now
+            +streamers
