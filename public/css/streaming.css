@@ -19,6 +19,9 @@
 
 .streaming_area {
     margin-left: auto;
+    margin-right: auto;
+    margin-top: 40px;
+    display: flex;
 }
 
 .streamer_username {
@@ -66,5 +69,4 @@
 
 .stream_owner {
     width: 100%;
-    margin-top: 20px;
 }

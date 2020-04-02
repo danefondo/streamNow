@@ -12,6 +12,12 @@ block content
                     p.streamer_username #{user.username}
             .player_container
                 iframe.live_player(width='800', height='480', src='https://www.youtube-nocookie.com/embed/' + video_id + '?modestbranding=1&showinfo=0&rel=0&theme=light&color=white', frameborder='0', allow='accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture', allowfullscreen='')
+            .stream_details
+                .stream_name #{stream.stream_name}
+                .stream_description #{stream.stream_description}
+                .stream_tags
+                each tag in stream.stream_tags
+                    .stream_tag #{tag}
         .section_right
             .player_sidebar_container
                 .sidebar_section_top
