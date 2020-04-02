@@ -18,8 +18,9 @@
 }
 
 .go_live_button {
-    margin-bottom: 0px;
-    margin-top: 9px;
+    margin-top: 8px;
+    margin-bottom: 8px;
+    margin-right: 8px;
 }
 
 .streaming_area {
@@ -48,7 +49,7 @@
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
     padding: 20px 15px;
-    background-color: #f1f1f1;
+    background-color: #f9f9f9;
 }
 
 .live_player {
@@ -90,4 +91,8 @@
     padding: 5px;
     margin-right: 8px;
     border-radius: 3px;
+}
+
+.nav-container {
+    padding-top: 0px;
 }

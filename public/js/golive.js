@@ -1,9 +1,9 @@
+$('.go_live_button').hide();
+
 $(document).ready(function () {	
 
     let coreURL =  'dashboard';
     let uploadData = {};
-
-    $('.go_live_button').hide();
 
     function create_live_stream(stream_data) {
 
