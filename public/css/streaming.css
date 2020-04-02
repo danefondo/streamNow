@@ -17,9 +17,13 @@
     cursor: pointer;
 }
 
+.streaming_area {
+    margin-left: auto;
+}
+
 .player_container {
     margin-right: 50px;
-    margin-left: auto;
+    /* margin-left: auto; */
     margin-top: 2%;
 }
 
