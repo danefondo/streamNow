@@ -20,7 +20,7 @@ block content
                 .stream_details_block
                     .stream_tags
                         each tag in stream.stream_tags
-                            .stream_tag #{tag}
+                            .stream_tag= '#' + #{tag}
         .section_right
             .player_sidebar_container
                 .sidebar_section_top

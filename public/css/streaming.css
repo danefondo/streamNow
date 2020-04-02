@@ -17,15 +17,20 @@
     cursor: pointer;
 }
 
+.go_live_button {
+    margin-bottom: 0px;
+    margin-top: 9px;
+}
+
 .streaming_area {
     margin-left: auto;
     margin-right: auto;
-    margin-top: 40px;
+    margin-top: 50px;
     display: flex;
 }
 
 .streamer_username {
-    font-size: 24px;
+    font-size: 22px;
 }
 
 .player_container {
