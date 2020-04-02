@@ -78,3 +78,11 @@
 .stream_name {
     font-size: 25px;
 }
+
+.stream_tag {
+    display: inline-block;
+    background-color: #eee;
+    padding: 5px;
+    margin-right: 8px;
+    border-radius: 3px;
+}
