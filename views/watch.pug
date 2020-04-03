@@ -3,13 +3,18 @@ extends layout
 block content
     .streaming_area
         .section_center
-            .stream_owner
-                if (user.firstname)
-                    p.streamer_first_name #{user.firstname}
-                    if (user.lastname)
-                        p.streamer_last_name #{user.lastname}
+            .stream_center_top
+                if (stream.stream_live_status == true)
+                    .stream_live_status LIVE
                 else
-                    p.streamer_username #{user.username}
+                    .stream_live_status Not live
+                .stream_owner
+                    if (user.firstname)
+                        p.streamer_first_name #{user.firstname}
+                        if (user.lastname)
+                            p.streamer_last_name #{user.lastname}
+                    else
+                        p.streamer_username #{user.username}
             .player_container
                 iframe.live_player(width='800', height='480', src='https://www.youtube-nocookie.com/embed/' + video_id + '?modestbranding=1&showinfo=0&rel=0&theme=light&color=white', frameborder='0', allow='accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture', allowfullscreen='')
             .stream_details

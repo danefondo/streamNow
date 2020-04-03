@@ -30,12 +30,13 @@ const streamController = {
 
             let tags = stream_data.stream_tags;
             tags = JSON.parse(tags);
-            
+
             for (const tag of tags) {
                 stream.stream_tags.push(tag);
             }
 
             stream.stream_creator_id = req.user._id;
+            stream.stream_live_status = true;
     
             await stream.save();
             let stream_id = stream._id;
