@@ -5,9 +5,9 @@ block content
         .section_center
             .stream_center_top
                 if (stream.stream_live_status == true)
-                    .stream_live_status LIVE
+                    .stream_live LIVE
                 else
-                    .stream_live_status Not live
+                    .stream_offline Offline
                 .stream_owner
                     if (user.firstname)
                         p.streamer_first_name #{user.firstname}
