@@ -97,6 +97,11 @@
     color: #989898;
 }
 
+.stream_center_top {
+    display: flex;
+    justify-content: center;
+}
+
 .stream_live_status {
     padding: 6px 12px;
     border-radius: 3px;
