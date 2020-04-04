@@ -238,3 +238,25 @@
     background-color: #e4ff00;
     font-weight: bold;
 }
+
+/* --------------------------------
+    streamer followings count
+-------------------------------- */
+.streamer_stats {
+    margin-top: 40px;
+}
+
+.streamer_followings {
+    padding: 20px;
+    background-color: #f7f7f7;
+    border-radius: 4px;
+    width: 200px;
+}
+
+.streamer_followings_count {
+    padding: 5px;
+    font-weight: bold;
+    color: #444;
+    font-size: 20px;
+    margin-bottom: 10px;
+}
