@@ -61,8 +61,8 @@ const streamController = {
 
             let stream = await Stream.findById(stream_id);
             if (!stream) {
-                return res.status(404).json({
-                    errors: "Stream not found."
+                res.render('stream_not_found', {
+                    error: "Stream not found."
                 });
             }
 
@@ -70,11 +70,10 @@ const streamController = {
 
             let streamer_id = stream.streamer_id;
 
-            let streamer = await User.findById(streamer_id);
+            let streamer;
+            streamer = await User.findById(streamer_id);
             if (!streamer) {
-                return res.status(404).json({
-                    errors: "Streamer not found."
-                });
+                streamer = 
             }
 
             let visitor;
