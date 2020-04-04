@@ -73,12 +73,12 @@ const streamController = {
             let streamer;
             streamer = await User.findById(streamer_id);
             if (!streamer) {
-                streamer = 
+                streamer = "N/A";
             }
 
             let visitor;
-            let user_like_boolean;
-            let user_following_boolean;
+            let user_like_boolean = "N/A";
+            let user_following_boolean = "N/A";
             if (req.isAuthenticated()) {
                 visitor = await User.findById(req.user._id);
                 if (!visitor) {
