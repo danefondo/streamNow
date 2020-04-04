@@ -192,7 +192,7 @@
 -------------------------------- */
 
 .streamer_follow {
-    margin-left: auto;
+    margin-left: 22px;
     margin-right: 20px;
     display: flex;
     align-items: center;
