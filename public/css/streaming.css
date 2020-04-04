@@ -201,6 +201,7 @@
     padding: 4px 15px;
     cursor: pointer;
     transition: .2s ease;
+    font-weight: bold;
 
 }
 
@@ -233,7 +234,7 @@
 }
 
 [data-following="true"] {
-    /* background-color: #0000ff17; */
+    background-color: #e4ff00;;
     background-color: transparent;
     font-weight: bold;
 }
