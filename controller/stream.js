@@ -69,12 +69,20 @@ const streamController = {
             let video_id = stream.stream_video_id;
 
             let streamer_id = stream.streamer_id;
+            let streamer_followers_count;
+            let streamer_following_count;
 
             let streamer;
             streamer = await User.findById(streamer_id);
             if (!streamer) {
                 streamer = "N/A";
+                streamer_followers_count = "N/A";
+                streamer_following_count = "N/A";
+            } else {
+                streamer_followers_count = streamer.followers.length;
+                streamer_following_count = streamer.following.length;
             }
+
 
             let visitor;
             let user_like_boolean = "N/A";
@@ -233,10 +241,30 @@ const streamController = {
 
             await user.save();
 
+            let streamer = await User.findById(streamer_id);
+            if (!user) {
+                return res.status(404).json({
+                    errors: "User not found."
+                });
+            }
+
+            let streamer_followers_boolean = streamer.followers.includes(user._id);
+
+            if (streamer_followers_boolean == true) {
+
+                streamer.followers.pull(user._id);
+            } else {
+
+                streamer.followers.push(user._id);
+            }
+
+            await streamer.save();
+
             // let stream_followers_count = stream.stream_followers_count;
 
             res.json({
-                stream: stream
+                stream: stream,
+                streamer: streamer
             })
         
         } catch(error) {

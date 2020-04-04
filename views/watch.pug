@@ -49,6 +49,10 @@ block content
                     .stream_tags
                         each tag in stream.stream_tags
                             .stream_tag ##{tag}
+            .streamer_stats
+                .streamer_followings
+                    p Followers #{streamer.followers.length}
+                    p Following #{streamer.following.length}
         .section_right
             .player_sidebar_container
                 .sidebar_section_top
