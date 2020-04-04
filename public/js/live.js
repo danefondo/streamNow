@@ -89,19 +89,26 @@
 				let following_text = following_state.text();
 				let already_following_boolean;
 				let original_state = following_text;
+				
+				let follow_icon = $('.streamer_follow_icon');
+				let follow_icon_original = follow_icon.attr('src');
 
 				let already_following_check = streamer_following.attr('data-following');
 				if (already_following_check == "true") {
 					// remove like
 					following_text = "Follow";
 					already_following_boolean = "false";
+					follow_icon_version = '/images/follow_icon.png'
+
 				} else {
 					following_text = "Following";
 					already_following_boolean = "true";
+					follow_icon_version = '/images/following_icon.png'
 				}
 
 				following_state.text(following_text);
 				streamer_following.attr('data-following', already_following_boolean);
+				follow_icon.attr('src', follow_icon_version);
 
 				let stream_id = $('.stream_id').attr('data-stream-id');
 
@@ -117,6 +124,7 @@
 						already_following_boolean = !already_following_boolean;
 						already_following_boolean = "" + already_following_boolean;
 						streamer_following.attr('data-following', already_following_boolean);
+						follow_icon.attr('src', follow_icon_original);
 						// display error message
 					}
 				});
