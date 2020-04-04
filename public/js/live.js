@@ -138,6 +138,17 @@
 	}
 	init_streamer_following();
 
+	let user_header = $(".stream_center_top");
+
+	$(window).scroll(function() {    
+		var scroll = $(window).scrollTop();
+	
+		if (scroll >= 100) {
+			user_header.addClass("fixed_user_header");
+		} else {
+			user_header.removeClass("fixed_user_header");
+		}
+	});
 
 
  });

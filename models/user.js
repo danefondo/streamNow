@@ -1,8 +1,6 @@
 const mongoose = require('mongoose');
 let Schema = mongoose.Schema;
 
-const stream = require('./stream.js').model('Stream').schema;
-
 // User Schema
 const UserSchema = new mongoose.Schema({
 	firstname: String,
@@ -22,8 +20,8 @@ const UserSchema = new mongoose.Schema({
 	defaultCurataId: String,
 	oldUserId: String,
 	dateCreated: Date,
-	upcoming_streams: [stream],
-	previous_streams: [stream],
+	upcoming_streams: [String],
+	previous_streams: [String],
 	live_right_now: Boolean,
 	current_stream_url: String,
 	current_stream_thumbnail: String,

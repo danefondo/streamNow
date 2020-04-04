@@ -49,10 +49,15 @@ block content
                     .stream_tags
                         each tag in stream.stream_tags
                             .stream_tag ##{tag}
-            .streamer_stats
-                .streamer_followings
-                    p #{streamer.followers.length} Followers
-                    p #{streamer.following.length} Following
+            .streamer_profile_container
+                .streamer_stats
+                    .streamer_followings
+                        p.streamer_count #{streamer.followers.length} Followers
+                        p.streamer_count #{streamer.following.length} Following
+                        p.streamer_count #{streamer.previous_streams.length} Streams done
+                .previous_streams_container
+                    .previous_streams
+                        p.previous_streams_title Previous streams
         .section_right
             .player_sidebar_container
                 .sidebar_section_top

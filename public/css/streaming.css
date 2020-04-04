@@ -243,7 +243,6 @@
     streamer followings count
 -------------------------------- */
 .streamer_stats {
-    margin-top: 40px;
 }
 
 .streamer_followings {
@@ -253,10 +252,52 @@
     width: 200px;
 }
 
-.streamer_followings_count {
+.streamer_count {
     padding: 5px;
     font-weight: bold;
-    color: #444;
-    font-size: 20px;
+    color: #333;
+    font-size: 19px;
     margin-bottom: 10px;
 }
+
+.fixed_user_header {
+    position: fixed;
+    background: white;
+    padding: 13px;
+    top: 0px;
+    width: 100%;
+}
+
+/* --------------------------------
+    streamer profile
+-------------------------------- */
+
+.streamer_profile_container {
+    margin-top: 80px;
+    margin-bottom: 50px;
+    display: flex;
+}
+
+/* --------------------------------
+    streamer previous streams
+-------------------------------- */
+
+.previous_streams_container {
+    margin-left: 17px;
+}
+
+.previous_streams {
+    width: 550px;
+    padding: 20px;
+    border-radius: 4px;
+}
+
+.previous_streams_title {
+    padding: 5px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 10px;
+    font-size: 28px;
+}
+
+
