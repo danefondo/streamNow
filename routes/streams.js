@@ -4,17 +4,15 @@ const path = require('path');
 const assert = require('assert');
 const mongoose = require('mongoose');
 const passport = require('passport');
-const { validationResult } = require('express-validator');
 mongoose.Promise = Promise;
 
 const router = express.Router();
 
-let User = require('../models/user');
-const validator = require('../controller/validator')
-
 const streamController = require('../controller/stream');
 
-router.get('/:streamId', streamController.showStream);
+router.post('/:streamId/updateLikes', streamController.updateLikes);
+
+router.post('/:streamId/followUnfollow', streamController.followUnfollow);
 
 
 /*====== Access control  ======*/

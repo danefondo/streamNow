@@ -2,7 +2,6 @@ const mongoose = require('mongoose');
 let Schema = mongoose.Schema;
 
 const stream = require('./stream.js').model('Stream').schema;
-const user = require('./user.js');
 
 // User Schema
 const UserSchema = new mongoose.Schema({
@@ -21,7 +20,6 @@ const UserSchema = new mongoose.Schema({
 	resetTokenExpires: Number,
 	verifiedStatus: Boolean,
 	defaultCurataId: String,
-	likedSpaces: [String],
 	oldUserId: String,
 	dateCreated: Date,
 	upcoming_streams: [stream],
@@ -29,12 +27,16 @@ const UserSchema = new mongoose.Schema({
 	live_right_now: Boolean,
 	current_stream_url: String,
 	current_stream_thumbnail: String,
-	followers: [user],
-	following: [user],
+	followers: [String],
+	following: [String],
+	subscribed: [String],
 	fb_link: String,
 	yt_link: String,
 	insta_link: String,
-	website_link: String
+	website_link: String,
+	total_stream_likes: Number,
+	total_stream_views: Number,
+	liked_streams_ids: [String]
 });
 
 const User = module.exports = mongoose.model('User', UserSchema);

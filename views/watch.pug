@@ -1,6 +1,9 @@
 extends layout
 
 block content
+    .stream_id(data-stream-id= stream.id)
+    if (user)
+        .user_check(data-user-id= user.id)
     .streaming_area
         .section_center
             .stream_center_top
@@ -9,17 +12,34 @@ block content
                 else
                     .stream_offline Offline
                 .stream_owner
-                    if (user.firstname)
-                        p.streamer_first_name #{user.firstname}
+                    if (streamer.firstname)
+                        p.streamer_first_name #{streamer.firstname}
                         if (user.lastname)
-                            p.streamer_last_name #{user.lastname}
+                            p.streamer_last_name #{streamer.lastname}
                     else
-                        p.streamer_username #{user.username}
+                        p.streamer_username #{streamer.username}
+                //- CHANGE THIS BELOW, ADD '!' so that only visitors see follow button
+                if (user && streamer.id !== user.id)
+                    .streamer_follow(data-following= "" + user_following_boolean)
+                        .streamer_follow_button
+                            img.streamer_follow_icon(src= '/images/follow_icon.png')
+                        if (user_following_boolean)
+                            .streamer_follow_state Following
+                        else
+                            .streamer_follow_state Follow
             .player_container
                 iframe.live_player(width='800', height='480', src='https://www.youtube-nocookie.com/embed/' + video_id + '?modestbranding=1&showinfo=0&rel=0&theme=light&color=white', frameborder='0', allow='accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture', allowfullscreen='')
             .stream_details
                 .stream_details_block
                     .stream_name #{stream.stream_name}
+                    .stream_likes(data-liked= "" + user_like_boolean)
+                        .stream_like_button
+                            img.stream_like_icon(src= '/images/like_icon.png')
+                            span.stream_like_text Likes
+                        if (stream.stream_likes_count)
+                            .stream_likes_count #{stream.stream_likes_count}
+                        else
+                            .stream_likes_count 0
                 .stream_details_block
                     .stream_description #{stream.stream_description}
                 .stream_details_block

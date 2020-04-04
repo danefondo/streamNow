@@ -78,13 +78,19 @@
     width: 100%;
 }
 
+.stream_details {
+    max-width: 800px;
+    padding-top: 10px;
+}
+
 .stream_details_block {
     padding: 10px;
+    display: flex;
+    align-items: center;
 }
 
 .stream_name {
     font-size: 25px;
-    padding-top: 8.5px;
 }
 
 .stream_tag {
@@ -99,7 +105,8 @@
 
 .stream_center_top {
     display: flex;
-    justify-content: center;
+    align-items: center;
+    max-width: 800px;
 }
 
 .stream_live,
@@ -125,4 +132,100 @@
 
 .nav-container {
     padding-top: 0px;
+}
+
+/* --------------------------------
+    stream likes
+-------------------------------- */
+
+.stream_likes {
+    margin-left: auto;
+    margin-right: 20px;
+    display: flex;
+    align-items: center;
+    background-color: #f7f7f7;
+    border-radius: 4px;
+    padding: 4px 15px;
+    cursor: pointer;
+    transition: .2s ease;
+}
+
+.stream_likes:hover {
+    background-color: #0000ff17;
+    transform: scale(1.01);
+}
+
+.stream_likes:hover > .stream_like_button {
+    border-color: #8686862b;
+}
+
+.stream_like_button {
+    display: flex;
+    align-items: center;
+    border-right: 1px solid #c7c7c7;
+    padding-right: 10px;
+}
+
+.stream_like_icon {
+    max-height: 30px;
+}
+
+.stream_like_text {
+    margin-left: 10px;
+
+}
+
+.stream_likes_count {
+    margin-left: 12px;
+}
+
+[data-liked="true"] {
+    background-color: #0000ff17;
+}
+
+/* --------------------------------
+    stream following
+-------------------------------- */
+
+.streamer_follow {
+    margin-left: auto;
+    margin-right: 20px;
+    display: flex;
+    align-items: center;
+    background-color: #f7f7f7;
+    border-radius: 4px;
+    padding: 4px 15px;
+    cursor: pointer;
+    transition: .2s ease;
+}
+
+.streamer_follow:hover {
+    background-color: #0000ff17;
+    transform: scale(1.01);
+}
+
+.streamer_follow:hover > .streamer_follow_button {
+    border-color: #8686862b;
+}
+
+.streamer_follow_button {
+    display: flex;
+    align-items: center;
+}
+
+.streamer_follow_icon {
+    max-height: 30px;
+}
+
+.streamer_follow_text {
+    margin-left: 10px;
+
+}
+
+.streamer_follow_state {
+    margin-left: 12px;
+}
+
+[data-following="true"] {
+    background-color: #0000ff17;
 }

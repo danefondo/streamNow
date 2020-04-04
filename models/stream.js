@@ -11,8 +11,10 @@ const stream_schema = new mongoose.Schema({
     thumbnail_url: String,
     thumbnail_name: String,
     thumbnail_id: String,
-    stream_creator_id: String,
-    stream_live_status: Boolean
+    streamer_id: String,
+    stream_live_status: Boolean,
+    stream_likes_count: Number,
+    users_who_like_stream: [String]
 });
 
 const Stream = module.exports = mongoose.model('Stream', stream_schema);
