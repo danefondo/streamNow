@@ -27,7 +27,7 @@ block content
                                 img.streamer_follow_icon(src= '/images/follow_icon.png')
                             .streamer_follow_state Follow
             .player_container
-                iframe.live_player(width='800', height='480', src='https://www.youtube-nocookie.com/embed/' + video_id + '?modestbranding=1&showinfo=0&rel=0&theme=light&color=white', frameborder='0', allow='accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture', allowfullscreen='')
+                iframe.live_player(width='850', height='540', src='https://www.youtube-nocookie.com/embed/' + video_id + '?modestbranding=1&showinfo=0&rel=0&theme=light&color=white', frameborder='0', allow='accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture', allowfullscreen='')
             .stream_details
                 .stream_details_block
                     .stream_name #{stream.stream_name}
@@ -58,11 +58,27 @@ block content
                 .previous_streams_container
                     .previous_streams
                         p.previous_streams_title Previous streams
+                        if (streamer.previous_streams.length > 0)
+                            each stream in streamer.previous_streams
+                                .previous_stream stream
+                        else
+                            .no_previous_streams
+                                .no_streams_text User has no previous streams.
+                            .previous_stream
+                                .previous_stream_details
+                                    .stream_title Space shizz
+                                    .stream_date April 4
+                                iframe.live_player(width='590', height='331', src='https://www.youtube-nocookie.com/embed/' + video_id + '?modestbranding=1&showinfo=0&rel=0&theme=light&color=white', frameborder='0', allow='accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture', allowfullscreen='')
+                            .previous_stream
+                                .previous_stream_details
+                                    .stream_title More space shizz
+                                    .stream_date April 3
+                                iframe.live_player(width='590', height='331', src='https://www.youtube-nocookie.com/embed/' + video_id + '?modestbranding=1&showinfo=0&rel=0&theme=light&color=white', frameborder='0', allow='accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture', allowfullscreen='')
         .section_right
             .player_sidebar_container
                 .sidebar_section_top
                     .hide_chat Hide chat
-                iframe.live_chat(width='425px', height='600px', src='https://www.youtube.com/live_chat?v=' + video_id + '&embed_domain=stream-one.herokuapp.com') 
+                iframe.live_chat(width='350px', height='600px', src='https://www.youtube.com/live_chat?v=' + video_id + '&embed_domain=stream-one.herokuapp.com') 
 
 block scripts
     script(src='/js/live.js')

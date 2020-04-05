@@ -143,12 +143,18 @@
 	$(window).scroll(function() {    
 		var scroll = $(window).scrollTop();
 	
-		if (scroll >= 100) {
+		if (scroll >= 80) {
 			user_header.addClass("fixed_user_header");
 		} else {
 			user_header.removeClass("fixed_user_header");
 		}
 	});
+
+	//- check if stream_active
+	//- when stream is ended, then add to previous_streams
+		//- if stream is re-started, it's a new stream
+	//- if viewed by Streamer, show 'edit' and 'end stream' options
+		//- under 'edit', also show 'delete stream' option
 
 
  });

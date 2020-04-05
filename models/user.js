@@ -22,6 +22,7 @@ const UserSchema = new mongoose.Schema({
 	dateCreated: Date,
 	upcoming_streams: [String],
 	previous_streams: [String],
+	active_stream_id: String,
 	live_right_now: Boolean,
 	current_stream_url: String,
 	current_stream_thumbnail: String,
