@@ -14,7 +14,8 @@ const stream_schema = new mongoose.Schema({
     streamer_id: String,
     stream_live_status: Boolean,
     stream_likes_count: Number,
-    users_who_like_stream: [String]
+    users_who_like_stream: [String],
+    is_live: Boolean
 });
 
 const Stream = module.exports = mongoose.model('Stream', stream_schema);

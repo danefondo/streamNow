@@ -11,7 +11,6 @@ const UserSchema = new mongoose.Schema({
 		type: String,
 		required: true
 	},
-	currently_live: Boolean,
 	lastLogin: Date,
 	verificationToken: String,
 	resetToken: String,
@@ -23,7 +22,7 @@ const UserSchema = new mongoose.Schema({
 	upcoming_streams: [String],
 	previous_streams: [String],
 	active_stream_id: String,
-	live_right_now: Boolean,
+	is_live: Boolean,
 	current_stream_url: String,
 	current_stream_thumbnail: String,
 	followers: [String],

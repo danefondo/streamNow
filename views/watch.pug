@@ -58,17 +58,15 @@ block content
                         p.streamer_count #{streamer.following.length} Following
                         p.streamer_count #{streamer.previous_streams.length} Streams done
                 .streams_container
-                    .upcoming_streams_container.scrll
-                        .upcoming_streams.scrll-cntnr
-                            p.upcoming_streams_title Upcoming streams
+                    p.upcoming_streams_title Upcoming streams
+                    .upcoming_streams_container
+                        .upcoming_streams
                             if (streamer.upcoming_streams.length > 0)
                                 each stream in streamer.upcoming_streams
-                                    .upcoming_stream.scrll-card stream
+                                    .upcoming_stream stream
                             else
                                 .no_upcoming_streams
                                     .no_streams_text User has no upcoming streams.
-                                .upcoming_stream.scrll-card stream
-                                .upcoming_stream.scrll-card stream
                     .previous_streams_container
                         .previous_streams
                             p.previous_streams_title Previous streams
@@ -82,11 +80,6 @@ block content
                                     .previous_stream_details
                                         .stream_title Space shizz
                                         .stream_date April 4
-                                    iframe.live_player(width='590', height='331', src='https://www.youtube-nocookie.com/embed/' + video_id + '?modestbranding=1&showinfo=0&rel=0&theme=light&color=white', frameborder='0', allow='accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture', allowfullscreen='')
-                                .previous_stream
-                                    .previous_stream_details
-                                        .stream_title More space shizz
-                                        .stream_date April 3
                                     iframe.live_player(width='590', height='331', src='https://www.youtube-nocookie.com/embed/' + video_id + '?modestbranding=1&showinfo=0&rel=0&theme=light&color=white', frameborder='0', allow='accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture', allowfullscreen='')
         .section_right
             .player_sidebar_container

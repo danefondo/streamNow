@@ -13,6 +13,9 @@ block content
 		p myname: #{user.email}
 		p.level 72 #{user.username}
 		.title_meta Streams count:
+		.is_live_status(data-live-status= user.is_live)
+		if (user.is_live)
+			.live_stream_id(data-live-id= user.active_stream_id)
 		if (user.previous_streams.length > 0)
 			.streams_count #{user.previous_streams.length}
 		else
@@ -24,7 +27,7 @@ block content
 			.insta_link insta_icon
 			.yt_link yt_icon
 			.twitter_link twitter_icon
-		if (user.live_right_now)
+		if (user.is_live)
 			.liveVideo 'Embedded live video w/chat'
 			.liveIcon LIVE
 		if (user.upcoming_streams > 0)

@@ -13,7 +13,8 @@ mixin topmenu(user=0)
 			.navlinks-container
 				a.topNavigationLink__topBar(href= '/discover') Discover
 			.stream_buttons
-				a.go_live_button(href="/" + coreURL + "/golive") Go Live
+				if (!user.is_live)
+					a.go_live_button(href="/" + coreURL + "/golive") Go Live
 				//- .schedule_stream_button Schedule stream
 			.logout-container
 				.DropdownX

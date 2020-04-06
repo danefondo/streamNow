@@ -304,9 +304,15 @@
     streamer previous streams
 -------------------------------- */
 
-.previous_streams_container,
 .upcoming_streams_container {
     margin-left: 30px;
+    align-items: center;
+    display: flex;
+    height: auto;
+    flex: 1;
+    margin: 0 0 0 30px;
+    overflow-y: auto;
+    width: 630px;
 }
 
 .previous_streams_container {
@@ -317,10 +323,15 @@
 
 .previous_streams,
 .upcoming_streams {
-    width: 590px;
+    width: 630px;
+    box-sizing: border-box;
     padding: 20px;
     padding-top: 0px;
     border-radius: 4px;
+}
+
+.upcoming_streams {
+    display: flex;
 }
 
 .previous_streams_title,
@@ -330,6 +341,11 @@
     color: #333;
     margin-bottom: 15px;
     font-size: 32px;
+}
+
+.upcoming_streams_title {
+    margin-left: 30px;
+    padding-left: 24px;
 }
 
 .no_previous_streams,
@@ -343,9 +359,26 @@
     height: 250px;
 }
 
+.no_upcoming_streams {
+    width: 630px;
+}
+
 .previous_stream,
 .upcoming_stream {
     margin-top: 40px;
+}
+
+.upcoming_stream {
+    margin: 0 15px;
+    min-width: 250px;
+    max-width: 350px;
+    font-size: 22px;
+    font-weight: bold;
+    color: #444;
+    background-color: #f7f7f7;
+    border-radius: 4px;
+    height: 250px;
+    padding: 24px;
 }
 
 .previous_stream_details,
@@ -365,47 +398,3 @@
     font-size: 12px;
     color: #666;
 }
-
-
-/* --------------------------------
-    horizontal stream scrolling
--------------------------------- */
-  
-  .scrll {
-    align-items: center;
-    background-color: #eee;
-    border-bottom: 1px solid #222;
-    border-top: 1px solid #222;
-    box-shadow: #aaa 0px 2px 5px -2px inset;
-    display: flex;
-    height: auto;
-    flex: 1;
-    margin: 0 auto;
-    overflow-y: auto;
-    width: 300px;
-  }
-  
-  /*
-  .scrll::-webkit-scrollbar {
-    background-color: #eee;
-    height: 7.5px;
-  }
-  
-  .scrll::-webkit-scrollbar-thumb {
-    background-color: #ccc;
-  }
-  */
-  
-  .scrll-cntnr {
-    display: flex;
-  }
-  
-  .scrll-card {
-    background-color: #fff;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    height: 200px;
-    margin: 20px;
-    padding: 5px;
-    width: 200px;
-  }

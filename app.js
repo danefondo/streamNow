@@ -9,6 +9,9 @@ const passport = require('passport');
 const config = require('./config/database');
 const MongoStore = require('connect-mongo')(session);
 
+
+const streamController = require('./controller/stream');
+
 /*====== DATABASE SETUP ======*/
 
 // Set up default mongoose connection // var db_uri = 'mongodb://127.0.0.1/my_database';
@@ -96,11 +99,8 @@ app.get('*', function(req, res, next){
 
 /*====== ROUTES ======*/
 
-
 // Home route
-app.get('/', function(req, res) {
-    res.render('index');
-});
+app.get('/', streamController.getStreams); 
 
 app.get('/discover', function(req, res) {
     res.render('index');

@@ -91,6 +91,7 @@
   padding: 6px 15px;
   background-color: #fff;
   /* background-color: #111d23; */
+  height: 60px;
 }
 
 .nav-container a {

@@ -3,6 +3,30 @@ let User = require('../models/user');
 
 const streamController = {
 
+    async getStreams(req, res) {
+        try {
+
+            let streams = await Stream.find({"is_live": true});
+            if (!streams) {
+                console.log("nooo streams");
+                return res.render('index', {
+                    error: "Couldn't get streams"
+                });
+            }
+            console.log("sttreams", streams);
+
+            res.render('index', {
+                streams: streams
+            });
+
+        } catch(error) {
+            console.log(error);
+            res.status(500).json({
+                errors: "An unknown error occurred"
+            });
+        }
+    },
+
     async create_live_stream(req, res) {
         try {        
             let stream = new Stream();
@@ -38,14 +62,40 @@ const streamController = {
 
             stream.streamer_id = req.user._id;
             stream.stream_live_status = true;
+            stream.is_live = true;
     
             await stream.save();
             let stream_id = stream._id;
+
+            let user;
+            user = await User.findById(req.user._id);
+            if (!user) {
+                return res.status(404).json({
+                    errors: "User not found."
+                });
+            }
+            user.is_live = true;
+            user.active_stream_id = stream._id;
+            await user.save();
 
             res.json({
                 stream: stream,
                 stream_id: stream_id
             })
+        } catch(error) {
+            console.log(error);
+            res.status(500).json({
+                errors: "An unknown error occurred"
+            });
+        }
+    },
+
+    async endStream(req, res) {
+        try {
+            let stream = await Stream.findById(req.body.stream_id);
+            if (!stream) {
+
+            }
         } catch(error) {
             console.log(error);
             res.status(500).json({

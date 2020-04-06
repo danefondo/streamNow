@@ -1,60 +1,66 @@
-mixin streamers
-    .streams
-        .stream
-            .streamPreviewContainer
-                .streamPreview
-                .live
-                .viewerCount
-            .streamMetaContainer
-                .streamNameContainer
-                    .streamName Training
-                .streamTags
-                    .streamTag #exercise
-                .streamerProfileContainer
-                    .streamerProfileImageContainer
-                        .streamerProfileImage
-                    .streamerLevelContainer
-                        .streamerStar
-                        .streamerLevel
-                        .verifiedSign.hidden
-                    .streamerUsernameContainer
-                        .streamerUsername Alicia Dorothy
-        .stream
-            .streamPreviewContainer
-                .streamPreview
-                .live
-                .viewerCount
-            .streamMetaContainer
-                .streamNameContainer
-                    .streamName Singing
-                .streamTags
-                    .streamTag #music
-                    .streamTag #singing
-                .streamerProfileContainer
-                    .streamerProfileImageContainer
-                        .streamerProfileImage
-                    .streamerLevelContainer
-                        .streamerStar
-                        .streamerLevel
-                        .verifiedSign.hidden
-                    .streamerUsernameContainer
-                        .streamerUsername John Cane
-        .stream
-            .streamPreviewContainer
-                .streamPreview
-                .live
-                .viewerCount
-            .streamMetaContainer
-                .streamNameContainer
-                    .streamName Training
-                .streamTags
-                    .streamTag #exercise
-                .streamerProfileContainer
-                    .streamerProfileImageContainer
-                        .streamerProfileImage
-                    .streamerLevelContainer
-                        .streamerStar
-                        .streamerLevel
-                        .verifiedSign.hidden
-                    .streamerUsernameContainer
-                        .streamerUsername Arthur King
+mixin streamers(streams=0)
+        .streams
+            each stream in streams
+                .stream
+                    .streamPreviewContainer
+                        .streamPreview
+                        .live
+                        .viewerCount
+                    .streamMetaContainer
+                        .streamNameContainer
+                            if (stream.stream_name)
+                                .streamName #{stream.stream_name}
+                            else
+                                .streamName Untitled stream
+                        .streamTags
+                            if (stream.stream_tags)
+                                each tag in stream.stream_tags
+                                    .streamTag #{tag}
+                        .streamerProfileContainer
+                            .streamerProfileImageContainer
+                                .streamerProfileImage
+                            .streamerLevelContainer
+                                .streamerStar
+                                .streamerLevel
+                                .verifiedSign.hidden
+                            .streamerUsernameContainer
+                                .streamerUsername Alicia Dorothy
+        //- .stream
+        //-     .streamPreviewContainer
+        //-         .streamPreview
+        //-         .live
+        //-         .viewerCount
+        //-     .streamMetaContainer
+        //-         .streamNameContainer
+        //-             .streamName Singing
+        //-         .streamTags
+        //-             .streamTag #music
+        //-             .streamTag #singing
+        //-         .streamerProfileContainer
+        //-             .streamerProfileImageContainer
+        //-                 .streamerProfileImage
+        //-             .streamerLevelContainer
+        //-                 .streamerStar
+        //-                 .streamerLevel
+        //-                 .verifiedSign.hidden
+        //-             .streamerUsernameContainer
+        //-                 .streamerUsername John Cane
+        //- .stream
+        //-     .streamPreviewContainer
+        //-         .streamPreview
+        //-         .live
+        //-         .viewerCount
+        //-     .streamMetaContainer
+        //-         .streamNameContainer
+        //-             .streamName Training
+        //-         .streamTags
+        //-             .streamTag #exercise
+        //-         .streamerProfileContainer
+        //-             .streamerProfileImageContainer
+        //-                 .streamerProfileImage
+        //-             .streamerLevelContainer
+        //-                 .streamerStar
+        //-                 .streamerLevel
+        //-                 .verifiedSign.hidden
+        //-             .streamerUsernameContainer
+        //-                 .streamerUsername Arthur King
