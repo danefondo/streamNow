@@ -94,12 +94,14 @@
 
 .stream_tag {
     display: inline-block;
-    background-color: #f9f9f9;
-    padding: 5px;
+    background-color: #f7f7f7;
+    padding: 6px 12px;
     margin-right: 8px;
-    border-radius: 3px;
-    font-size: 17px;
-    color: #989898;
+    border-radius: 18px;
+    font-size: 16px;
+    /* color: #989898;
+    color: #1600ff75; */
+    color: #0000007a;
 }
 
 .stream_center_top {
@@ -136,6 +138,26 @@
 
 .stream_offline {
     color: #555;
+}
+
+.stream_edit_button {
+    padding: 6px 16px;
+    font-size: 17px;
+    display: inline-block;
+    color: #777;
+    background-color: #f7f7f7;
+    font-weight: bold;
+    border-radius: 3px;
+    margin-right: 15px;
+    text-align: center;
+    cursor: default;
+    transition: .2s ease;
+    cursor: pointer;
+}
+
+.stream_edit_button:hover {
+    color: #333;
+    transform: scale(1.01);
 }
 
 
@@ -282,18 +304,27 @@
     streamer previous streams
 -------------------------------- */
 
-.previous_streams_container {
+.previous_streams_container,
+.upcoming_streams_container {
     margin-left: 30px;
 }
 
-.previous_streams {
+.previous_streams_container {
+    margin-left: 30px;
+    margin-top: 40px;
+}
+
+
+.previous_streams,
+.upcoming_streams {
     width: 590px;
     padding: 20px;
     padding-top: 0px;
     border-radius: 4px;
 }
 
-.previous_streams_title {
+.previous_streams_title,
+.upcoming_streams_title {
     padding: 5px;
     font-weight: bold;
     color: #333;
@@ -301,7 +332,8 @@
     font-size: 32px;
 }
 
-.no_previous_streams {
+.no_previous_streams,
+.no_upcoming_streams {
     padding: 24px;
     font-size: 22px;
     font-weight: bold;
@@ -311,18 +343,20 @@
     height: 250px;
 }
 
-.previous_stream {
+.previous_stream,
+.upcoming_stream {
     margin-top: 40px;
 }
 
-.previous_stream_details {
+.previous_stream_details,
+.upcoming_stream_details {
     display: flex;
     align-items: center;
     padding: 5px 10px 12px 1px;
 }
 
 .stream_title {
-    font-size: 22px;
+    font-size: 24px;
 }
 
 .stream_date {
@@ -331,3 +365,47 @@
     font-size: 12px;
     color: #666;
 }
+
+
+/* --------------------------------
+    horizontal stream scrolling
+-------------------------------- */
+  
+  .scrll {
+    align-items: center;
+    background-color: #eee;
+    border-bottom: 1px solid #222;
+    border-top: 1px solid #222;
+    box-shadow: #aaa 0px 2px 5px -2px inset;
+    display: flex;
+    height: auto;
+    flex: 1;
+    margin: 0 auto;
+    overflow-y: auto;
+    width: 300px;
+  }
+  
+  /*
+  .scrll::-webkit-scrollbar {
+    background-color: #eee;
+    height: 7.5px;
+  }
+  
+  .scrll::-webkit-scrollbar-thumb {
+    background-color: #ccc;
+  }
+  */
+  
+  .scrll-cntnr {
+    display: flex;
+  }
+  
+  .scrll-card {
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    height: 200px;
+    margin: 20px;
+    padding: 5px;
+    width: 200px;
+  }
