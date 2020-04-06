@@ -93,7 +93,19 @@ font-size: 18px;
     font-size: 24px;
 }
 
-.add_new_link {
+.confirm_modal_title {
+    font-size: 24px;
+    margin-bottom: 45px;
+}
+
+.end_stream_actions {
+    display: flex;
+    align-items: center;
+}
+
+.add_new_link,
+.end_stream,
+.end_stream_confirm {
     width: 165px;
     background-color: #f5f5f5;
     cursor: pointer;
@@ -110,8 +122,14 @@ font-size: 18px;
     display: block;
 }
 
-.add_new_link:hover {
+.add_new_link:hover,
+.end_stream:hover,
+.end_stream_confirm:hover {
     background-color: #e8e8e8 !important;
+}
+
+.end_stream_confirm {
+    margin: unset;
 }
 
 .link_input,
@@ -223,4 +241,11 @@ font-size: 18px;
     box-sizing: border-box;
     display: inline-block;
     border-radius: 3px;
+}
+
+.end_stream_fail_message {
+    display: none;
+    color: red;
+    margin-top: 15px;
+    margin-left: 5px;
 }

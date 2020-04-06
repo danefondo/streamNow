@@ -2869,7 +2869,8 @@ button.button-white.confirmComponentDelete {
 .createModal,
 .createEntryModal__space,
 .trashedEntryModal,
-.editEntryModal__space {
+.editEntryModal__space,
+.confirm_modal {
 /*  position:absolute;*/
   position: fixed;
   z-index:9999;
@@ -2885,7 +2886,8 @@ button.button-white.confirmComponentDelete {
   padding: 20px;
 }
 
-.createModal {
+.createModal,
+.confirm_modal {
   width: 400px;
   padding: 25px;
 }
@@ -2893,7 +2895,8 @@ button.button-white.confirmComponentDelete {
 .emptyModal,
 .emptyConfirmModal,
 .trashedModal,
-.editEntryModal {
+.editEntryModal,
+.confirm_end_modal {
   display: none;
 }
 
@@ -2959,7 +2962,8 @@ button.button-white.confirmComponentDelete {
 .modalBackground__deleteList,
 .modalBackground__deleteAccount,
 .modalBackground__deleteSpace,
-.modalBackground__changePassword {
+.modalBackground__changePassword,
+.confirm_modal_background {
   /* background-color: white; */
   background-color: #1f1f1f;
   opacity: 0.5;
@@ -3169,7 +3173,8 @@ button.button-white.confirmComponentDelete {
   }
 }
 
-.cancelListCreating {
+.cancelListCreating,
+.cancel_end_stream {
 /*  float: right;*/
   padding: 7px 11px;
   transition: .2s ease-in-out;
@@ -3177,10 +3182,15 @@ button.button-white.confirmComponentDelete {
   font-size: 18px;
 }
 
-.cancelListCreating:hover {
+.cancelListCreating:hover,
+.cancel_end_stream:hover {
     background-color: #ececec;
     border-radius: 360px;
     cursor: pointer;
+}
+
+.cancel_end_stream {
+  float: right;
 }
 
 .deleteArchived {

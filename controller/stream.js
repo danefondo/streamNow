@@ -92,10 +92,38 @@ const streamController = {
 
     async endStream(req, res) {
         try {
-            let stream = await Stream.findById(req.body.stream_id);
+            let stream = await Stream.findById(req.params.streamId);
             if (!stream) {
-
+                return res.status(404).json({
+                    errors: "Stream not found."
+                });
             }
+
+            console.log("yo  made it");
+            if (stream.is_live) {
+                stream.is_live = false;
+            }
+
+            await stream.save();
+
+            let user;
+            user = await User.findById(req.user._id);
+            if (!user) {
+                return res.status(404).json({
+                    errors: "User not found."
+                });
+            }
+            user.is_live = false;
+            user.active_stream_id = undefined;
+            user.current_stream_url = undefined;
+            user.current_stream_thumbnail = undefined;
+            user.previous_streams.push(stream._id);
+            await user.save();
+
+            res.json({
+                stream: stream
+            })
+
         } catch(error) {
             console.log(error);
             res.status(500).json({

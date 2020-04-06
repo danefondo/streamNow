@@ -1,7 +1,13 @@
 extends layout
 
+include mixins/confirm_end
+
+block header
+    link(rel='stylesheet' href='/css/modal.css')
+
 block content
     .stream_id(data-stream-id= stream.id)
+    +confirm_end
     if (user)
         .user_check(data-user-id= user.id)
     .streaming_area
@@ -16,6 +22,7 @@ block content
                         else
                             p.streamer_username #{streamer.username}
                 //- CHANGE THIS BELOW, ADD '!' so that only visitors see follow button
+                //- IF STREAM NO LONGER LIVE, SAY SO.
                 if (user && streamer.id !== user.id)
                     .streamer_follow(data-following= "" + user_following_boolean)
                         if (user_following_boolean)
@@ -37,6 +44,7 @@ block content
                         .stream_offline Offline
                     if (user && user.id == streamer.id)
                         .stream_edit_button Edit
+                        .stream_end_button End stream
                     .stream_likes(data-liked= "" + user_like_boolean)
                         .stream_like_button
                             img.stream_like_icon(src= '/images/like_icon.png')
@@ -72,15 +80,17 @@ block content
                             p.previous_streams_title Previous streams
                             if (streamer.previous_streams.length > 0)
                                 each stream in streamer.previous_streams
-                                    .previous_stream stream
+                                    .previous_stream
+                                        .previous_stream_details
+                                            if (stream.stream_name)
+                                                .stream_title #{stream.stream_name}
+                                            else
+                                                .stream_title Untitled stream
+                                            .stream_date April 4
+                                        iframe.live_player(width='590', height='331', src='https://www.youtube-nocookie.com/embed/' + video_id + '?modestbranding=1&showinfo=0&rel=0&theme=light&color=white', frameborder='0', allow='accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture', allowfullscreen='')
                             else
                                 .no_previous_streams
                                     .no_streams_text User has no previous streams.
-                                .previous_stream
-                                    .previous_stream_details
-                                        .stream_title Space shizz
-                                        .stream_date April 4
-                                    iframe.live_player(width='590', height='331', src='https://www.youtube-nocookie.com/embed/' + video_id + '?modestbranding=1&showinfo=0&rel=0&theme=light&color=white', frameborder='0', allow='accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture', allowfullscreen='')
         .section_right
             .player_sidebar_container
                 .sidebar_section_top

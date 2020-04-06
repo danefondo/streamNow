@@ -156,5 +156,64 @@
 	//- if viewed by Streamer, show 'edit' and 'end stream' options
 		//- under 'edit', also show 'delete stream' option
 
+	function init_end_stream() {
+
+		let confirm_end_modal = $('.confirm_end_modal');
+		let fail_message = $('.end_stream_fail_message');
+
+		$('.cancel_end_stream').off('click');
+		$('.cancel_end_stream').on('click', function() {
+			confirm_end_modal.hide();
+			reset_confirm_live_modal()
+			fail_message.hide();
+		})
+		
+		$('.confirm_modal_background').off('click');
+		$('.confirm_modal_background').on('click', function() {
+			confirm_end_modal.hide();
+			reset_confirm_live_modal()
+			fail_message.hide();
+		})
+
+		// Press esc key to hide
+		$(document).keydown(function(event) { 
+			if (event.keyCode == 27) { 
+				if (confirm_end_modal.length) {
+					let modalState = confirm_end_modal.css('display');
+					if (modalState == "block") {
+						confirm_end_modal.hide();
+						reset_confirm_live_modal()
+					}
+				}
+			}
+		});
+
+		$('.stream_end_button').off('click');
+		$('.stream_end_button').on('click', function() {
+			confirm_end_modal.show();
+		})
+
+		$('.end_stream_confirm').off('click');
+		$('.end_stream_confirm').on('click', function() {
+			let stream_id = $('.stream_id').attr('data-stream-id');
+
+			$.ajax({
+				type: 'POST',
+				url: '/streams/' + stream_id + '/endStream',
+				success: function(data) {
+					//- in the future, display some stream stats, how it went
+					location.reload();
+				},
+				error: function(err) {
+					fail_message.show();
+					fail_message.text("An error has occurred.");
+				}
+			});
+
+		});
+
+	}
+	init_end_stream();
+
 
  });

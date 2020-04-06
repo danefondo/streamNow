@@ -14,6 +14,8 @@ router.post('/:streamId/updateLikes', streamController.updateLikes);
 
 router.post('/:streamId/followUnfollow', streamController.followUnfollow);
 
+router.post('/:streamId/endStream', ensureAuthenticated, streamController.endStream);
+
 
 /*====== Access control  ======*/
 function ensureAuthenticated(req, res, next){
