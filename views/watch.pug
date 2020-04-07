@@ -1,6 +1,7 @@
 extends layout
 
 include mixins/confirm_end
+include mixins/profile_stats
 
 block header
     link(rel='stylesheet' href='/css/modal.css')
@@ -34,17 +35,20 @@ block content
                                 img.streamer_follow_icon(src= '/images/follow_icon.png')
                             .streamer_follow_state Follow
             .player_container
+                if (!stream.is_live)
+                    .stream_not_live Stream has ended. Watch recording.
                 iframe.live_player(width='850', height='540', src='https://www.youtube-nocookie.com/embed/' + video_id + '?modestbranding=1&showinfo=0&rel=0&theme=light&color=white', frameborder='0', allow='accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture', allowfullscreen='')
             .stream_details
                 .stream_details_block
                     .stream_name #{stream.stream_name}
-                    if (stream.stream_live_status == true)
+                    if (stream.is_live)
                         .stream_live LIVE
                     else
                         .stream_offline Offline
                     if (user && user.id == streamer.id)
                         .stream_edit_button Edit
-                        .stream_end_button End stream
+                        if (stream.is_live)
+                            .stream_end_button End stream
                     .stream_likes(data-liked= "" + user_like_boolean)
                         .stream_like_button
                             img.stream_like_icon(src= '/images/like_icon.png')
@@ -59,43 +63,13 @@ block content
                     .stream_tags
                         each tag in stream.stream_tags
                             .stream_tag #{tag}
-            .streamer_profile_container
-                .streamer_stats
-                    .streamer_followings
-                        p.streamer_count #{streamer.followers.length} Followers
-                        p.streamer_count #{streamer.following.length} Following
-                        p.streamer_count #{streamer.previous_streams.length} Streams done
-                .streams_container
-                    p.upcoming_streams_title Upcoming streams
-                    .upcoming_streams_container
-                        .upcoming_streams
-                            if (streamer.upcoming_streams.length > 0)
-                                each stream in streamer.upcoming_streams
-                                    .upcoming_stream stream
-                            else
-                                .no_upcoming_streams
-                                    .no_streams_text User has no upcoming streams.
-                    .previous_streams_container
-                        .previous_streams
-                            p.previous_streams_title Previous streams
-                            if (streamer.previous_streams.length > 0)
-                                each stream in streamer.previous_streams
-                                    .previous_stream
-                                        .previous_stream_details
-                                            if (stream.stream_name)
-                                                .stream_title #{stream.stream_name}
-                                            else
-                                                .stream_title Untitled stream
-                                            .stream_date April 4
-                                        iframe.live_player(width='590', height='331', src='https://www.youtube-nocookie.com/embed/' + video_id + '?modestbranding=1&showinfo=0&rel=0&theme=light&color=white', frameborder='0', allow='accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture', allowfullscreen='')
-                            else
-                                .no_previous_streams
-                                    .no_streams_text User has no previous streams.
+            +profile_stats(stream, streamer)
         .section_right
             .player_sidebar_container
-                .sidebar_section_top
-                    .hide_chat Hide chat
-                iframe.live_chat(width='350px', height='600px', src='https://www.youtube.com/live_chat?v=' + video_id + '&embed_domain=stream-one.herokuapp.com') 
+                if (stream.is_live)
+                    .sidebar_section_top
+                        .hide_chat Hide chat
+                    iframe.live_chat(width='350px', height='600px', src='https://www.youtube.com/live_chat?v=' + video_id + '&embed_domain=stream-one.herokuapp.com') 
 
 block scripts
     script(src='/js/live.js')

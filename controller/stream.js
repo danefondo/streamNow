@@ -139,7 +139,7 @@ const streamController = {
 
             let stream = await Stream.findById(stream_id);
             if (!stream) {
-                res.render('stream_not_found', {
+                return res.render('stream_not_found', {
                     error: "Stream not found."
                 });
             }
@@ -151,7 +151,7 @@ const streamController = {
             let streamer_following_count;
 
             let streamer;
-            streamer = await User.findById(streamer_id);
+            streamer = await User.findById(streamer_id).populate('previous_streams').exec();
             if (!streamer) {
                 streamer = "N/A";
                 streamer_followers_count = "N/A";
@@ -191,6 +191,67 @@ const streamController = {
                 errors: "An unknown error occurred"
             });
         }       
+    },
+
+    async getStreamer(req, res) {
+        try {        
+
+            let user_id = req.params.userId;
+
+            let user;
+            user = await User.findById(user_id).populate('previous_streams').populate('upcoming_streams').exec();
+
+            let stream;
+            let stream_id;
+            let video_id;
+            if (user.is_live && user.active_stream_id) {
+                stream_id = user.active_stream_id;
+
+                stream = await Stream.findById(stream_id);
+                if (!stream) {
+                    return res.render('stream_not_found', {
+                        error: "Stream not found."
+                    });
+                }
+                video_id = stream.stream_video_id;
+            }
+
+            let streamer_followers_count = user.followers.length;
+            let streamer_following_count = user.following.length;
+
+            let visitor;
+            let user_like_boolean = "N/A";
+            let user_following_boolean = "N/A";
+            if (req.isAuthenticated()) {
+                visitor = await User.findById(req.user._id);
+                if (!visitor) {
+                    return res.status(404).json({
+                        errors: "User that seemed to be logged in was no longer found."
+                    });
+                }
+                
+                if (user.is_live && stream_id) {
+                    user_like_boolean = visitor.liked_streams_ids.includes(stream_id);
+                }
+                user_following_boolean = visitor.following.includes(user_id);
+            }
+            console.log("boolean", user_like_boolean);
+            console.log("following", user_following_boolean);
+            
+            let streamer = user;
+            res.render('profile', {
+                video_id: video_id,
+                stream,
+                streamer,
+                user_like_boolean,
+                user_following_boolean
+            });
+        } catch(error) {
+            console.log(error);
+            res.status(500).json({
+                errors: "An unknown error occurred"
+            });
+        }  
     },
 
     async updateLikes(req, res) {

@@ -3,7 +3,13 @@ mixin streamers(streams=0)
             each stream in streams
                 .stream
                     .streamPreviewContainer
-                        .streamPreview
+                        if (stream.thumbnail_url)
+                            .streamPreview(href= stream.thumbnail_url)
+                        else if (stream.stream_video_id)
+                            //- To get youtube thumbnail: https://stackoverflow.com/questions/2068344/how-do-i-get-a-youtube-video-thumbnail-from-the-youtube-api
+                            .streamPreview(href="https://img.youtube.com/vi/" + stream.stream_video_id +"/hqdefault.jpg")
+                        else
+                            .streamPreview
                         .live
                         .viewerCount
                     .streamMetaContainer

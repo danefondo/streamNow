@@ -31,7 +31,7 @@ mixin topmenu(user=0)
 					nav.Dropdown-nav.SettingsNav
 						ul.Dropdown-group
 							li
-								a.entypo-newspaper.NavLinkX(href= '/' + coreURL + '/profile') Profile
+								a.entypo-newspaper.NavLinkX(href= '/profile/' + user.id) Profile
 								a.entypo-plus.OptionLink(href='#')
 							//- li
 							//- 	a.entypo-newspaper.NavLinkX(href='#') Profile

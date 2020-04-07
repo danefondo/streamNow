@@ -1,51 +1,98 @@
 extends layout
 
 include mixins/streamers
+include mixins/confirm_end
 include mixins/profile_public
 include mixins/profile_private
+include mixins/profile_stats
 
 block header
 	link(rel='stylesheet' href='/css/profile.css')
+	link(rel='stylesheet' href='/css/modal.css')
 
 block content
-	.profileArea
-		p profilepage
-		p myname: #{user.email}
-		p.level 72 #{user.username}
-		.title_meta Streams count:
-		.is_live_status(data-live-status= user.is_live)
-		if (user.is_live)
-			.live_stream_id(data-live-id= user.active_stream_id)
-		if (user.previous_streams.length > 0)
-			.streams_count #{user.previous_streams.length}
-		else
-			.streams_count 0
-		.views
-			.view_count 2,312 views
-		.description Blablabla
-		.links
-			.insta_link insta_icon
-			.yt_link yt_icon
-			.twitter_link twitter_icon
-		if (user.is_live)
-			.liveVideo 'Embedded live video w/chat'
-			.liveIcon LIVE
-		if (user.upcoming_streams > 0)
-			.upcoming Next stream on Friday 5PM
-		else
-			.upcoming No upcoming streams planned
-		.tabs
-			.upcoming_tab Upcoming
-				if (user.upcoming_streams > 0)
-					.upcoming Next stream on Friday 5PM
-				else
-					.upcoming No upcoming streams planned
-			.previous_tab Previous streams
-				if (user.previous_streams > 0)
-					.previous_streams
-				else
-					.previous_streams 
-						p User has no previous streams.
+	if (stream)
+		.stream_id(data-stream-id= stream.id)
+	+confirm_end
+	if (user)
+		.user_check(data-user-id= user.id)
+	.streaming_area
+		.section_center
+			.stream_center_top
+				.stream_owner
+					if (streamer.profile_image_url)
+						img.streamer_profile_icon(src= streamer.profile_image_url)
+					else
+						img.streamer_profile_icon(src="/images/profile_icon.png")
+					if (streamer)
+						if (streamer.firstname)
+							p.streamer_first_name #{streamer.firstname}
+							if (user.lastname)
+								p.streamer_last_name #{streamer.lastname}
+						else
+							p.streamer_username #{streamer.username}
+				.links
+					if (user.fb_link)
+						.fb_link fb
+					if (user.insta_link)
+						.insta_link ig
+					if (user.yt_link)
+						.yt_link yt
+					if (user.twitter_link)
+						.twitter_link tw
+					if (user.website_link)
+						.website_link wb
+				//- CHANGE THIS BELOW, ADD '!' so that only visitors see follow button
+				//- IF STREAM NO LONGER LIVE, SAY SO.
+				if (user && streamer.id !== user.id)
+					.streamer_follow(data-following= "" + user_following_boolean)
+						if (user_following_boolean)
+							.streamer_follow_button
+								img.streamer_follow_icon(src= '/images/following_icon.png')
+							.streamer_follow_state Following
+						else
+							.streamer_follow_button
+								img.streamer_follow_icon(src= '/images/follow_icon.png')
+							.streamer_follow_state Follow
+			if (user.is_live)
+				.player_container
+					iframe.live_player(width='850', height='540', src='https://www.youtube-nocookie.com/embed/' + video_id + '?modestbranding=1&showinfo=0&rel=0&theme=light&color=white', frameborder='0', allow='accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture', allowfullscreen='')
+				.stream_details
+					.stream_details_block
+						.stream_name #{stream.stream_name}
+						if (stream.is_live)
+							.stream_live LIVE
+						else
+							.stream_offline Offline
+						if (user && user.id == streamer.id)
+							.stream_edit_button Edit
+							if (stream.is_live)
+								.stream_end_button End stream
+						.stream_likes(data-liked= "" + user_like_boolean)
+							.stream_like_button
+								img.stream_like_icon(src= '/images/like_icon.png')
+								span.stream_like_text Likes
+							if (stream.stream_likes_count)
+								.stream_likes_count #{stream.stream_likes_count}
+							else
+								.stream_likes_count 0
+					.stream_details_block
+						.stream_description #{stream.stream_description}
+					.stream_details_block
+						.stream_tags
+							each tag in stream.stream_tags
+								.stream_tag #{tag}
+			+profile_stats(stream, streamer)
+		.section_right
+			if (user.is_live)
+				.player_sidebar_container
+					if (stream.is_live)
+						.sidebar_section_top
+							.hide_chat Hide chat
+						iframe.live_chat(width='350px', height='600px', src='https://www.youtube.com/live_chat?v=' + video_id + '&embed_domain=stream-one.herokuapp.com') 
+
+block scripts
+	script(src='/js/live.js')
 	//- if user
 	//- 	+profile_private
 	//- else
