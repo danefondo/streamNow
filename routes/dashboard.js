@@ -27,13 +27,19 @@ router.post('/UploadSingleImage', ensureAuthenticated, imageController.uploadSin
 
 router.post('/saveFileReference', ensureAuthenticated, imageController.saveFileReference);
 
+router.post('/saveProfileImageReference', ensureAuthenticated, imageController.saveProfileImageReference);
+
 router.post('/createLiveStream', ensureAuthenticated, streamController.create_live_stream);
 
 router.delete('/DeleteImage', ensureAuthenticated, imageController.deleteImage);
 
+router.delete('/DeleteProfileImage', ensureAuthenticated, imageController.deleteProfileImage);
+
 router.get('/settings', ensureAuthenticated, function(req, res) {
 
-	res.render('user__accountSettings');
+	res.render('user__accountSettings', {
+    settings: true
+  });
 
 })
 

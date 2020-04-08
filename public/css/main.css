@@ -698,6 +698,15 @@ p.noDefaultCurataTextSmall {
   font-size: 16px;
 }
 
+.show {
+  display: block !important;
+}
+
+.hide {
+  display: none !important;
+}
+
+
 
 /*
 ===========================
@@ -1547,9 +1556,7 @@ a {
     position: absolute;
     width: 3px;
     height: 28px;
-/*    background-color: #3d6def;*/
-/*    background-color: #673ab7;*/
-    background-color: #1e323c;
+    background-color: blue;
     left: 0px;
     top: 50%;
     transform: translateY(-50%);
@@ -1671,7 +1678,7 @@ a {
 
 
 .WelcomeBlock {
-	margin: 150px auto 0px auto;
+	margin: 50px auto 0px auto;
 	text-align: center;
 }
 
@@ -1683,58 +1690,73 @@ h1.RegisterSuccess {
 }
 
 .WelcomeMessage {
-	font-size: 7vh !important;
+	font-size: 60px !important;
 }
 
 .WelcomeSubtitle {
-	font-size: 3vh !important;
-	color: #555 !important;
+	font-size: 22px !important;
+	color: #333 !important;
 }
 
-.StartCuratingBlock {
-  background-color: #673ab7;
-  margin: 60px auto 0px auto;
-  padding: 25px 50px;
-  border-radius: 6px;
+.success_input_title {
+  font-size: 20px;
+  /* max-width: 325px; */
+  font-weight: bold;
+  text-align: center;
+  color: #333;
+}
+
+.go_live_block {
+  background-color: blue;
+  margin: 0px auto 0px auto;
+  padding: 14px 30px;
+  border-radius: 4px;
   color: white;
   cursor: pointer;
   transition: .2s ease-in-out;
 }
 
-.StartCuratingBlock:hover {
+.go_live_block:hover {
 	transform: scale(1.02);
 }
 
-h1.StartCurating {
-    font-size: 3.5vh;
+h1.start_streaming {
+    font-size: 30px;
 }
 
 .RegisterSuccessContainer {
     display: flex;
-    flex-wrap: wrap;
     flex-direction: column;
     max-width: 100%;
     width: 100%;
-    height: 100vh;
-    background-color: #e0e0e04a;
     z-index: 1;
 }
 
 .CheckOthersBlock {
-	margin: 100px auto 0px auto;
+	margin: 65px auto 0px auto;
 }
 
 h2.CheckOthers {
 	background-color: #ffffff80;
     padding: 5px;
     margin: 10px auto;
-    font-size: 22px;
+    font-size: 25px;
 }
 
 .HappyContainer {
-	position: absolute;
+	/* position: absolute;
 	top: 30vh;
-	left: 5vh;
+  left: 5vh; */
+  
+  z-index: -1;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 60px;
+  margin-top: 20px;
+}
+
+.happy_image {
+  height: 400px;
 }
 
 /*
@@ -2830,18 +2852,17 @@ button.button-white.confirmComponentDelete {
   font-weight: 600;
   color: white;
   letter-spacing: 0.1rem;
-/*  background-color: #ff0744;*/
-  background-color: #673AB7;
+  background-color: blue;
   cursor: pointer;
-  border-radius: 2px;
+  border-radius: 3px;
   border: none;
-  padding: 1rem;
+  padding: 12px;
   text-align: center;
   transition: .2s ease;
 }
 
 .button-filled:hover {
-  background-color: #7E57C2;
+  background-color: #0000ff94;
 }
 
 /*New code: adding button-outline style*/
@@ -2903,6 +2924,8 @@ button.button-white.confirmComponentDelete {
 .content-wrapper{
   width:290px;
   margin:auto;
+  display: flex;
+  flex-wrap: wrap;
 }
 
 .big-content-wrapper {
@@ -3257,6 +3280,11 @@ button.button-white.confirmComponentDelete {
   color: #333;
 }
 
+.pageTitle__accountSettings {
+  text-align: center;
+  font-size: 40px;
+}
+
 .pageDescription__default {
   font-size: 35px;
   color: #ccc;
@@ -3447,11 +3475,57 @@ button.button-white.confirmComponentDelete {
   padding-top: 18px;
 }
 
+.user_not_verified {
+  margin: 0 auto;
+  max-width: 300px;
+  text-align: center;
+  padding: 10px 5px;
+  border-radius: 2px;
+  background-color: #ffbcbc;
+  font-weight: bold;
+}
+
+.save_pass_button,
+.save_username_button,
+.save_email_button,
+.save_description_button,
+.save_name_button {
+  text-align: center;
+  padding: 15px;
+  border-radius: 3px;
+  transition: .2s ease-in-out;
+  cursor: pointer;
+  display: block;
+  color: white;
+  font-weight: bold;
+  font-size: 16px;
+  /* width: 296px; */
+  margin: 0 auto;
+  background-color: blue;
+  margin-top: 20px;
+}
+
+.save_pass_button:hover,
+.save_username_button:hover,
+.save_email_button:hover,
+.save_description_button:hover,
+.save_name_button:hover {
+  transform: scale(1.02);
+}
+
+.save_pass_text {
+  font-size: 19px;
+}
+
 .deleteAccountText {
   font-size: 17px;
   color: #424242;
   padding-top: 25px;
   line-height: 23px;
+  padding-left: 7px;
+  padding-right: 6px;
+  line-height: 25px;
+  font-weight: 400;
 }
 
 .deleteSpaceButton,
@@ -3460,7 +3534,7 @@ button.button-white.confirmComponentDelete {
   background-color: #a70029;
   padding: 15px;
   margin-top: 20px;
-  width: 150px;
+  /* width: 150px; */
   border-radius: 3px;
 /*  border: 2px solid #710000;*/
   transition: .2s ease-in-out;
@@ -3523,9 +3597,12 @@ button.button-white.confirmComponentDelete {
   min-height: 66px;
 }
 
+.section__accountSettings {
+  margin-top: 14px;
+}
+
 .deleteAccount__accountSettings {
   border: 1px solid #eaeaea;
-  background-color: #f5f5f5;
   font-weight: bold;
   box-shadow: none;
 }
@@ -4132,11 +4209,6 @@ button.button-white.confirmComponentDelete {
 .passwordErrorNotifier__accountSettings,
 .passwordChangeErrorNotifier__accountSettings {
   display: none;
-  position: absolute;
-  width: 35%;
-  height: 60px;
-  box-shadow: 0px 3px 5px 0px #f1f1f1;
-  right: -45%;
   border-radius: 4px;
   color: white;
   font-weight: bold;
@@ -4150,7 +4222,11 @@ button.button-white.confirmComponentDelete {
   position: relative;
   width: 100%;
   right: 0px;
-  background-color: #b63a3a;
+  background-color: transparent;
+  padding: 10px;
+  margin-top: 10px;
+  color: red;
+  font-weight: 400;
 }
 
 .block__accountSettings {
@@ -4290,7 +4366,8 @@ button.button-white.confirmComponentDelete {
   color: #222;
 }
 
-.image-uploading-title {
+.image-uploading-title,
+.image-removing-title {
   display: none;
 }
 

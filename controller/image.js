@@ -1,4 +1,5 @@
 let Image = require('../models/image');
+let User = require('../models/user');
 const aws = require('aws-sdk');
 
 aws.config.update({
@@ -97,8 +98,45 @@ const imageController = {
             let image_id = image._id;
 
             res.json({
-                imageKey: imageKey,
-                imageURL: imageURL,
+                imageKey: req.body.fileKey,
+                imageURL: req.body.fileURL,
+                image_id: image_id
+            })
+        } catch(error) {
+            console.log(error);
+            res.status(500).json({
+                errors: "An unknown error occurred"
+            });
+        }
+    },
+
+    async saveProfileImageReference(req, res) {
+        try {        
+
+            let image = new Image();
+            image.imageKey = req.body.fileKey;
+            image.imageURL = req.body.fileURL;
+            image.imageName = req.body.imageName;
+    
+            await image.save();
+            let image_id = image._id;
+
+
+            let user = await User.findById(req.user._id);
+            if (!user) {
+                return res.status(404).json({
+                    errors: "User not found."
+                });
+            }
+
+            user.profile_image_url = req.body.fileURL;
+            user.profile_image_key = req.body.fileKey;
+            user.profile_image_name = req.body.imageName;
+            await user.save();
+
+            res.json({
+                imageKey: req.body.fileKey,
+                imageURL: req.body.fileURL,
                 image_id: image_id
             })
         } catch(error) {
@@ -132,6 +170,69 @@ const imageController = {
                     if (err) return console.log(err);
                     console.log("Successfully removed image.");
                     res.status(200).end();
+                  });
+            })
+        } catch(error) {
+			console.log("error", error);
+			res.status('500').json({
+				message: "An error occurred while deleting image." 
+			});  
+        }
+    },
+
+    async deleteProfileImage(req, res) {
+        try {
+            console.log("1");
+            let imageKey = req.body.imageKey;
+
+            let image = await Image.find({"imageKey": imageKey});
+            if (!image) {
+                return res.status('404').json({
+                    message: "Could not find image to delete."
+                });
+            }
+
+            console.log("2");
+        
+            s3.deleteObject({
+                Bucket: 'curata',
+                Key: '' + imageKey
+            }, function (err, data) {
+                if (err) {
+                    console.log("Error: ", err);
+                }
+
+                console.log("3");
+
+                Image.deleteOne({ _id: image._id }, function (err) {
+                    if (err) return console.log(err);
+                    console.log("Successfully removed image from DB.");
+                    console.log("4");
+
+                    User.findById(req.user._id, function(err, user) {
+                        if (err) {
+                            return res.status(404).json({
+                                errors: "User not found."
+                            });
+                        }
+                        console.log("4");
+
+                        user.profile_image_url = undefined;
+                        user.profile_image_key = undefined;
+                        user.profile_image_name = undefined;
+                        console.log("5");
+						user.save(function(err) {
+							if (err) {
+                                console.log("7");
+								return console.log("User save failed: ", err);
+							} else {
+                                console.log("User successfully updated: ", user);
+                                console.log("6");
+                                res.status(200).end();
+							}
+						});
+                    });
+
                   });
             })
         } catch(error) {

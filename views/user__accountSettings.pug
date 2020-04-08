@@ -1,5 +1,8 @@
 extends layout
 
+block header
+	link(href='/css/modal.css', rel='stylesheet')
+
 block content
 	.modal__changePassword
 		.modalBackground__changePassword
@@ -7,7 +10,7 @@ block content
 			.content-wrapper
 				.msg-title Enter your current password
 				.msg-body Verify it's you.
-				input.passwordCurrent__accountSettings(placeholder= "Your current password"  type="password" data-fieldType= "password")
+				input.stream_input(placeholder= "Your current password"  type="password" data-field= "currentpass") 
 				.passwordChangeErrorNotifier__accountSettings
 					.passwordChangeError__accountSettings
 				.action-group.modifiedActionGroup
@@ -24,56 +27,108 @@ block content
 					.confirmPermaDeleteAccount.button-filled DELETE
 	.curataContainer.sideNavMargin
 		.pageTitle__accountSettings Account settings
-		//- p.autoSaveNotice Changes are automatically saved.
-		.settingsContainer__accountSettings
-			//- p Text is automatically saved
-			.settingGroup__accountSettings
-				.sectionTitle__accountSettings Change your first name
-				.section__accountSettings
-					.block__accountSettings
-						input.inputField__accountSettings(placeholder= "Your title" value= user.firstname data-fieldType= "firstName")
-						.saveButton__accountSettings.inline Save
-						.availabilityNotifier__accountSettings
-							.availabilityStatus__accountSettings
-			.settingGroup__accountSettings
-				.sectionTitle__accountSettings Change your last name
-				.section__accountSettings
-					.block__accountSettings
-						input.inputField__accountSettings(placeholder= "Your title" value= user.lastname data-fieldType= "lastName")
-						.saveButton__accountSettings.inline Save
-						.availabilityNotifier__accountSettings
-							.availabilityStatus__accountSettings
-			.settingGroup__accountSettings
-				.sectionTitle__accountSettings Change your username
-				.section__accountSettings
-					.block__accountSettings
-						input.inputField__accountSettings(placeholder= "Your title" value= user.username data-fieldType= "username")
-						.saveButton__accountSettings.inline Save
-						.availabilityNotifier__accountSettings
-							.availabilityStatus__accountSettings
-			//- .settingGroup__accountSettings
-			//- 	.sectionTitle__accountSettings Change your email
-			//- 	.section__accountSettings
-			//- 		.block__accountSettings
-			//- 			input.inputField__accountSettings(placeholder= "Your title" value= user.email data-fieldType= "email")
-			//- 			.saveButton__accountSettings
-			.settingGroup__accountSettings
-				.sectionTitle__accountSettings Change your password
-				.section__accountSettings.passwordBlock
-					.block__accountSettings
-						input.password__accountSettings(placeholder= "**********"  type="password" data-fieldType= "password")
-				.section__accountSettings.passwordConfirmationBlock
-					.block__accountSettings
-						input.passwordConfirmation__accountSettings(placeholder= "Confirm new password"  type="password" data-fieldType= "password")
-						.changePasswordButton__accountSettings.inline Save
-						.passwordErrorNotifier__accountSettings
-							.passwordError__accountSettings
-			.settingGroup__accountSettings
-				.sectionTitle__accountSettings Delete your account
+		if (!user.verifiedStatus)
+			.user_not_verified
+				p.not_verified_message Please verify your email address.
+		.success_content
+			.generalErrorContainer
+				.generalErrorText Please fill all required empty fields.
+			.settings_section
+				.success_input_title What's your name?
+				.pass_section
+					.pass_field First name
+					input.stream_input.stream_name(placeholder="This' what they call me" data-field="firstname")
+				.pass_section
+					.pass_field Last name
+					input.stream_input.stream_name(placeholder='Dr. Strange' data-field="lastname")
+				.inputErrorContainer
+					.inputErrorText
+				.inputSuccessContainer
+					.inputSuccessText
+				.save_name_button Save name
+			.settings_section
+				.success_input_title Now how about a description!
+				textarea.stream_input.stream_description.height-120(placeholder='Genius, billionaire, playboy, philanthropist' data-field="description")
+				.inputErrorContainer
+					.inputErrorText
+				.inputSuccessContainer
+					.inputSuccessText
+				.save_description_button Save description
+			.settings_section
+				.success_input_title How about a profile picture?
+				.entryDetailsGroup.auto-side-margins
+					.mainImage(id= "imageArea_")
+						.file-upload.imageBlock(data-type="mainImage" data-image-key=user.profile_image_key)
+							if (!user.profile_image_url)
+								form.image-upload-wrap.imageForm.show(action= "/' + coreURL + '/sign-s3" method="POST" enctype= "multipart/form-data")
+									input#file-input.file-upload-input(type='file', name='image', accept='image/jpg')
+									.drag-text.padding-90
+										button.file-upload-btn(type='button') Upload profile image
+										h3 Or just drag and drop a file
+								.file-upload-content.hide
+									img.file-upload-image(src=user.profile_image_url, alt='your image')
+									.image-title-wrap
+										button.remove-image(type='button')
+											span.image-pre-title Remove 
+											if (user.profile_image_name && user.profile_image_name.length) 
+												span.image-title #{user.profile_image_name}
+											else
+												span.image-title Untitled Image
+											span.image-uploading-title Uploading image...
+											span.image-removing-title Removing image...
+							else
+								form.image-upload-wrap.imageForm.hide(action= "/' + coreURL + '/sign-s3" method="POST" enctype= "multipart/form-data")
+									input#file-input.file-upload-input(type='file', name='image', accept='image/jpg')
+									.drag-text.padding-90
+										button.file-upload-btn(type='button') Upload profile image
+										h3 Or just drag and drop a file
+								.file-upload-content.show
+									img.file-upload-image(src=user.profile_image_url, alt='your image')
+									.image-title-wrap
+										button.remove-image(type='button')
+											span.image-pre-title Remove 
+											if (user.profile_image_name && user.profile_image_name.length) 
+												span.image-title #{user.profile_image_name}
+											else
+												span.image-title Untitled Image
+											span.image-uploading-title Uploading image...
+											span.image-removing-title Removing image...
+				.inputErrorContainer
+					.inputErrorText
+				.inputSuccessContainer
+					.inputSuccessText
+			.settings_section
+				.success_input_title Change your username
+				input.stream_input.stream_name(placeholder='That cool user handle' value= user.username data-field="username")
+				.inputErrorContainer
+					.inputErrorText
+				.save_username_button Save username
+			.settings_section
+				.success_input_title Change your email
+				input.stream_input.stream_name(placeholder='example@cool.com' value= user.email data-field="email")
+				.inputErrorContainer
+					.inputErrorText
+				.inputSuccessContainer
+					.inputSuccessText
+				.save_email_button Save email
+			.settings_section
+				.success_input_title Change your password
+				.pass_section
+					.pass_field New password
+					input.stream_input.stream_name(placeholder= "**********"  type="password" data-field="password")
+				.pass_section
+					.pass_field Confirm password
+					input.stream_input.stream_name(placeholder= "**********"  type="password" data-field="passconfirm")
+				.inputErrorContainer
+					.inputErrorText
+				.inputSuccessContainer
+					.inputSuccessText
+				.save_pass_button Save password
+			.settings_delete_section
+				.success_input_title Delete your account
 				.section__accountSettings.deleteAccount__accountSettings
-					.deleteAccountText Deleting your account will not delete public Curatas, however, you will lose ownership and access to your public Curatas. All private content will be deleted. The ownership of your Curatas will either be passed on to the most active top contributor if any or the Curata's ownership will be reassigned to the official Curata account. The deleting of your account will cancel all memberships.
+					.deleteAccountText Deleting your account will permanently and irreversably delete all your streams, stream data and profile details and history. Deleting your account will cancel any memberships you have.
 					.deleteAccountButton
 						p.deleteAccountButtonText Delete account
-
 block scripts
-	script(src='/js/accountSettings.js')
+	script(src='/js/settings.js')

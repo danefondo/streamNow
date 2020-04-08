@@ -2,15 +2,19 @@ extends layout
 
 include images/HappyImage
 
+block header
+	link(href='/css/modal.css', rel='stylesheet')
+
 block content
 	- var coreURL = 'dashboard';
-	.HappyContainer
-		+HappyImage
 	.RegisterSuccessContainer
 		.WelcomeBlock
 			h1.RegisterSuccess.WelcomeMessage Welcome aboard!
-			h1.RegisterSuccess.WelcomeSubtitle You have successfully signed up
-		a.StartCuratingBlock(href='/' + coreURL + '/curatas/curate')
-			h1.StartCurating Start curating
+			h1.RegisterSuccess.WelcomeSubtitle You're officially part of the club!
+		.HappyContainer
+			//- +HappyImage
+			img.happy_image(src="/images/success.png")
+		a.go_live_block(href='/' + coreURL + '/golive')
+			h1.start_streaming Start streaming!
 		.CheckOthersBlock
-			h2.CheckOthers Check out cool curations made by fellow curators:
+			h2.CheckOthers Or check out some cool streams by fellow streamers:

@@ -15,6 +15,31 @@ block content
     +startLiveModal
     +scheduleEventModal
     .contentArea
+        .subArea
+            .stream_input_title.inline Schedule for later?
+            img.arrow.hidden(src="/images/up_arrow.png")
+            img.arrow(src="/images/down_arrow.png")
+        .schedule_container.hidden
+            .schedule_stream_section
+                .stream_input_title Pick date
+                .date_picker
+                    input.picker(data-toggle='datepicker' placeholder="Pick a date")
+                    button.date_picker_button
+                        i.fa.fa-calendar
+            .schedule_stream_section
+                .stream_input_title Pick time
+                .time_picker
+                    input.timepicker(name="time" type="text")
+                    button.date_picker_button
+                        i.fa.fa-clock-o
+            .schedule_stream_section
+                .stream_input_title Privacy
+                .switch-field
+                    input#radio-one(type='radio', name='switch-one', value='public', checked='')
+                    label(for='radio-one') Public
+                    input#radio-two(type='radio', name='switch-one', value='unlisted')
+                    label(for='radio-two') Unlisted
+            .create_event Create event
         .generalErrorContainer
             .generalErrorText Please fill all required empty fields.
         .stream_input_container
@@ -57,31 +82,6 @@ block content
             .inputErrorContainer
                 .inputErrorText
         .go_live Go live
-        .subArea
-            .stream_input_title.inline Schedule for later?
-            img.arrow.hidden(src="/images/up_arrow.png")
-            img.arrow(src="/images/down_arrow.png")
-        .schedule_container.hidden
-            .schedule_stream_section
-                .stream_input_title Pick date
-                .date_picker
-                    input.picker(data-toggle='datepicker' placeholder="Pick a date")
-                    button.date_picker_button
-                        i.fa.fa-calendar
-            .schedule_stream_section
-                .stream_input_title Pick time
-                .time_picker
-                    input.timepicker(name="time" type="text")
-                    button.date_picker_button
-                        i.fa.fa-clock-o
-            .schedule_stream_section
-                .stream_input_title Privacy
-                .switch-field
-                    input#radio-one(type='radio', name='switch-one', value='public', checked='')
-                    label(for='radio-one') Public
-                    input#radio-two(type='radio', name='switch-one', value='unlisted')
-                    label(for='radio-two') Unlisted
-            .create_event Create event
 block scripts
     script(src='/js/golive.js')
     script(src='/js/datepicker.js')

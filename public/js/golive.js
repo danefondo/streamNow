@@ -203,6 +203,7 @@ $(document).ready(function () {
 
       $('.subArea').on('click', function() {
           $('.schedule_container').toggleClass('hidden');
+          $(this).toggleClass('margin-10');
       })
 
     //   $('.getShit').on('click', function() {

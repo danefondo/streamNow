@@ -24,8 +24,6 @@ router.post('/checkUnique', accountController.checkUnique);
 
 router.post('/register', validator.register, accountController.register);
 
-
-
 //token verification
 router.get('/verify/:verificationToken', function(req, res, next) {
 	const { verificationToken } = req.params;
@@ -75,9 +73,10 @@ router.get('/logout', function(req, res) {
 	res.redirect('/');
 });
 
-router.post('/changePassword', function(req, res) {
-	const newPassword = req.body.newPassword;
-	const oldPassword = req.body.oldPassword;
+router.post('/updatePassword', function(req, res) {
+	const newPassword = req.body.password;
+	const oldPassword = req.body.currentpass;
+	const confirmPassword = req.body.passconfirm;
 
 	let success = "Password successfully changed.";
 	let fail = "Wrong password.";
@@ -106,18 +105,18 @@ router.post('/changePassword', function(req, res) {
 								return console.log("Password change failed: ", err);
 							} else {
 								console.log('Password successfully changed.');
-								res.json({success: success});
+								res.status(200).json({success: success});
 							}
 						});
 					})
 				});
 			});
 		} else {
-			res.json({samePassFail: samePassFail});
+			return res.status(500).json({message: samePassFail})
 		}
 	} else {
 		// Passwords did not match
-		res.json({fail: fail});
+		return res.status(500).json({message: fail})
 	}
 })
 

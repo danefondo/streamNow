@@ -135,7 +135,7 @@ fieldset {
 }
 
 .hide {
-  display: none;
+  display: none !important;
 }
 
 .hide-children label, .hide-children p {
