@@ -73,6 +73,17 @@ router.get('/logout', function(req, res) {
 	res.redirect('/');
 });
 
+router.post('/updateName', ensureAuthenticated, accountController.updateName);
+
+router.post('/updateDescription', ensureAuthenticated, accountController.updateDescription);
+
+router.post('/updateUsername', ensureAuthenticated, validator.check_username, accountController.updateUsername);
+
+router.post('/updateEmail', validator.check_email, accountController.updateEmail);
+
+router.post('/updateSocial', ensureAuthenticated, accountController.updateSocial);
+
+
 router.post('/updatePassword', function(req, res) {
 	const newPassword = req.body.password;
 	const oldPassword = req.body.currentpass;

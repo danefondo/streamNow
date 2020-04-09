@@ -41,9 +41,12 @@
     display: flex;
 }
 
-.streamer_username {
+.streamer_username,
+.streamer_first_name,
+.streamer_last_name {
     font-size: 22px;
     display: inline;
+    margin-right: 5px;
 }
 
 .player_container {

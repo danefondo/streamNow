@@ -240,7 +240,158 @@ const accountController = {
 				message: 'An error occurred, please try again later.'
 			});			
 		}
+	},
+
+	async updateName(req, res) {
+		try {
+			const firstname = req.body.first_name;
+			const lastname = req.body.last_name;
+		
+
+			let user = await User.findById(req.user._id);
+			user.firstname = firstname;
+			user.lastname = lastname;
+
+			await user.save();
+
+			res.status(200).json({
+				message: 'Name successfully changed!'
+			})
+
+		}  catch(err) {
+			console.log(err);
+			res.status(500).json({
+				message: 'An error occurred, please try again later.'
+			});			
+		}
+	},
+
+	async updateDescription(req, res) {
+		try {
+			const description = req.body.description;
+
+			let user = await User.findById(req.user._id);
+			user.description = description;
+
+			await user.save();
+
+			res.status(200).json({
+				message: 'Description successfully changed!'
+			})
+
+		}  catch(err) {
+			console.log(err);
+			res.status(500).json({
+				message: 'An error occurred, please try again later.'
+			});			
+		}
+	},
+
+	async updateUsername(req, res) {
+		const errors = validationResult(req);
+		if (!errors.isEmpty()) {
+			console.log('errors')
+			return res.status(422).json({ errors: errors.array() });
+		}
+		try {
+			const username = req.body.username;
+
+			let user = await User.findById(req.user._id);
+			user.username = username;
+
+			await user.save();
+
+			res.status(200).json({
+				message: 'Username successfully changed!'
+			})
+
+		}  catch(err) {
+			console.log(err);
+			res.status(500).json({
+				message: 'An error occurred, please try again later.'
+			});			
+		}
+	},
+
+	async updateEmail(req, res) {
+		const errors = validationResult(req);
+		if (!errors.isEmpty()) {
+			console.log('errors')
+			return res.status(422).json({ errors: errors.array() });
+		}
+		try {
+			const email = req.body.email;
+			const verificationToken = await accountUtil.generateToken();
+
+			let user = await User.findById(req.user._id);
+			user.email = email;
+			user.verifiedStatus = false;
+			user.verificationToken = verificationToken;
+
+			const link = `${req.protocol}://${req.get('host')}/accounts/verify/${verificationToken}`;
+
+			await user.save();
+
+			mail.sendVerificationMail(email, link);
+
+			res.status(200).json({
+				message: 'Email successfully changed!'
+			})
+
+		}  catch(err) {
+			console.log(err);
+			res.status(500).json({
+				message: 'An error occurred, please try again later.'
+			});			
+		}
+	},
+
+	async updateSocial(req, res) {
+		try {
+			const website = req.body.website_link;
+			const facebook = req.body.fb_link;
+			const youtube = req.body.yt_link;
+			const twitter = req.body.twitter_link;
+			const instagram = req.body.insta_link;
+
+			let user = await User.findById(req.user._id);
+
+			if (website) {
+				let websiteParsed = (website.indexOf('://') === -1) ? 'http://' + website : website;
+				user.website_link = websiteParsed;user.website_link = websiteParsed;
+			}
+			if (facebook) {
+				let facebookParsed = (facebook.indexOf('://') === -1) ? 'http://' + facebook : facebook;
+				user.fb_link = facebookParsed;
+			}
+			if (youtube) {
+				let youtubeParsed = (youtube.indexOf('://') === -1) ? 'http://' + youtube : youtube;
+				user.yt_link = youtubeParsed;
+			}
+			if (twitter) {
+				let twitterParsed = (twitter.indexOf('://') === -1) ? 'http://' + twitter : twitter;
+				user.twitter_link = twitterParsed;
+			}
+			if (instagram) {
+				let instagramParsed = (instagram.indexOf('://') === -1) ? 'http://' + instagram : instagram;
+				user.insta_link = instagramParsed;
+			}
+
+			await user.save();
+
+			res.status(200).json({
+				message: 'Social media links successfully saved!'
+			})
+
+		}  catch(err) {
+			console.log(err);
+			res.status(500).json({
+				message: 'An error occurred, please try again later.'
+			});			
+		}
 	}
+
+
 
 
 	// async canUserViewCurata(req, res, next) {

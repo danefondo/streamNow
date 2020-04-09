@@ -13,11 +13,11 @@ $(document).ready(function () {
             let original_text = button.text();
             button.text('Saving...');
 
-            let first_name = $('*[data-field="firstname"]');
-            let last_name = $('*[data-field="lastname"]');
+            let first_name = $('*[data-field="firstname"]').val();
+            let last_name = $('*[data-field="lastname"]').val();
             data.first_name = first_name;
             data.last_name = last_name;
-            let url = '/' + core + '/updateName';
+            let url = '/accounts/updateName';
 
             saveData(data, url, button, original_text);
         })
@@ -29,7 +29,7 @@ $(document).ready(function () {
             let original_text = button.text();
             button.text('Saving...');
 
-            let description = $('*[data-field="description"]');
+            let description = $('*[data-field="description"]').val();
             data.description = description;
             let url = '/' + core + '/updateDescription';
 
@@ -60,6 +60,10 @@ $(document).ready(function () {
             } else if (!password || !passconfirm) {
                 error_container.show();
                 error_container.children('.inputErrorText').text("Passwords can't be empty!");
+                return;
+            } else if (password.length < 8) {
+                error_container.show();
+                error_container.children('.inputErrorText').text("Password must be at least 8 characters long!");
                 return;
             } else {
                 error_container.hide();
@@ -153,7 +157,7 @@ $(document).ready(function () {
             let original_text = button.text();
             button.text('Saving...');
 
-            let username = $('*[data-field="username"]');
+            let username = $('*[data-field="username"]').val();
 
             data.username = username;
             let url = '/' + core + '/updateUsername';
@@ -168,10 +172,35 @@ $(document).ready(function () {
             let original_text = button.text();
             button.text('Saving...');
 
-            let email = $('*[data-field="email"]');
+            let email = $('*[data-field="email"]').val();
 
             data.email = email;
             let url = '/' + core + '/updateEmail';
+
+            saveData(data, url, button, original_text);
+        })
+
+
+        $('.save_social_button').off('click');
+        $('.save_social_button').on('click', function() {
+            let data =  {};
+            let button = $(this);
+            let original_text = button.text();
+            button.text('Saving...');
+
+            let website = $('*[data-field="website"]').val();
+            let facebook = $('*[data-field="facebook"]').val();
+            let twitter = $('*[data-field="twitter"]').val();
+            let youtube = $('*[data-field="youtube"]').val();
+            let instagram = $('*[data-field="instagram"]').val();
+
+            data.website_link = website;
+            data.fb_link = facebook;
+            data.twitter_link = twitter;
+            data.yt_link = youtube;
+            data.insta_link = instagram;
+
+            let url = '/' + core + '/updateSocial';
 
             saveData(data, url, button, original_text);
         })
@@ -180,20 +209,28 @@ $(document).ready(function () {
     init_save_settings();
 
     function saveData(data, url, button, original_text) {
+        let success_container = button.siblings('.inputSuccessContainer');
+        let error_container = button.siblings('.inputErrorContainer');
         $.ajax({
             data: data,
             type:'POST',
             url: url,
             success: function(response) {
                 button.text(original_text);
+                success_container.show();
+                success_container.children('.inputSuccessText').text(response.message);
+                error_container.hide();
+                error_container.children('.inputErrorText').text("");
             },
             error: function(err) {
-                button.siblings('.inputErrorContainer').children('.inputErrorText').show().text(err.message);
+                button.text(original_text);
+                error_container.show();
+                let err_message = err.responseJSON.message || err.responseJSON.errors[0].msg
+                error_container.children('.inputErrorText').text(err_message);
+                success_container.children('.inputSuccessText').text("");
             }
         });
     }
-
-
 
     function init_delete_confirm() {
         let delete_button = $('.deleteAccountButton');

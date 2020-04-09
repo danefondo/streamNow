@@ -37,10 +37,10 @@ block content
 				.success_input_title What's your name?
 				.pass_section
 					.pass_field First name
-					input.stream_input.stream_name(placeholder="This' what they call me" data-field="firstname")
+					input.stream_input.stream_name(placeholder="This' what they call me" data-field="firstname" value=user.firstname)
 				.pass_section
 					.pass_field Last name
-					input.stream_input.stream_name(placeholder='Dr. Strange' data-field="lastname")
+					input.stream_input.stream_name(placeholder='Dr. Strange' data-field="lastname" value=user.lastname)
 				.inputErrorContainer
 					.inputErrorText
 				.inputSuccessContainer
@@ -48,7 +48,7 @@ block content
 				.save_name_button Save name
 			.settings_section
 				.success_input_title Now how about a description!
-				textarea.stream_input.stream_description.height-120(placeholder='Genius, billionaire, playboy, philanthropist' data-field="description")
+				textarea.stream_input.stream_description.height-120(placeholder='Genius, billionaire, playboy, philanthropist' data-field="description") #{user.description}
 				.inputErrorContainer
 					.inputErrorText
 				.inputSuccessContainer
@@ -98,10 +98,34 @@ block content
 				.inputSuccessContainer
 					.inputSuccessText
 			.settings_section
+				.success_input_title Let's add some social media!
+				.pass_section
+					.pass_field Website
+					input.stream_input.stream_name(placeholder="www.myswag.com" data-field="website" value=user.website_link)
+				.pass_section
+					.pass_field Facebook
+					input.stream_input.stream_name(placeholder='www.facebook.com' data-field="facebook" value=user.fb_link)
+				.pass_section
+					.pass_field Twitter
+					input.stream_input.stream_name(placeholder='www.twitter.com' data-field="twitter" value=user.twitter_link)
+				.pass_section
+					.pass_field YouTube
+					input.stream_input.stream_name(placeholder='www.youtube.com' data-field="youtube" value=user.yt_link)
+				.pass_section
+					.pass_field Instagram
+					input.stream_input.stream_name(placeholder='www.instagram.com' data-field="instagram" value=user.insta_link)
+				.inputErrorContainer
+					.inputErrorText
+				.inputSuccessContainer
+					.inputSuccessText
+				.save_social_button Save social media links
+			.settings_section
 				.success_input_title Change your username
 				input.stream_input.stream_name(placeholder='That cool user handle' value= user.username data-field="username")
 				.inputErrorContainer
 					.inputErrorText
+				.inputSuccessContainer
+					.inputSuccessText
 				.save_username_button Save username
 			.settings_section
 				.success_input_title Change your email

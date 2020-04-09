@@ -2982,6 +2982,10 @@ button.button-white.confirmComponentDelete {
   margin-right:12px;
 }
 
+.confirmPermaDeleteAccount {
+  background-color: #a70029;
+}
+
 .modalBackground,
 .confirmBackground,
 .modalBackground__deleteEntry,
@@ -3492,7 +3496,8 @@ button.button-white.confirmComponentDelete {
 .save_username_button,
 .save_email_button,
 .save_description_button,
-.save_name_button {
+.save_name_button,
+.save_social_button {
   text-align: center;
   padding: 15px;
   border-radius: 3px;
@@ -3512,7 +3517,8 @@ button.button-white.confirmComponentDelete {
 .save_username_button:hover,
 .save_email_button:hover,
 .save_description_button:hover,
-.save_name_button:hover {
+.save_name_button:hover,
+.save_social_button:hover {
   transform: scale(1.02);
 }
 

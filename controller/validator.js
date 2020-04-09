@@ -40,6 +40,29 @@ module.exports = {
 
 	],
 
+	check_email: [
+		check('email').isEmail()
+			.custom(value => {
+				return accountController.checkIfUserWithValueExists('email', value).then(exists => {
+					if (exists) {
+						return Promise.reject("Email already exists");
+					}
+				});
+			})
+   ],
+
+   check_username: [
+	check('username').not().isEmpty()
+	.withMessage('Username cannot be empty.')
+	.custom(value => {
+		return accountController.checkIfUserWithValueExists('username', value).then(exists => {
+			if (exists) {
+				return Promise.reject("Username already exists");
+			}
+		});
+	})
+],
+
 	forgotPass: [
 		 check('email').isEmail().withMessage('Email empty or in incorrect format')
 	],
@@ -61,5 +84,5 @@ module.exports = {
 		 	.withMessage('File name is required'),
 		 check('fileURL').not().isEmpty()
 		 	.withMessage('File url is required')
-	],
+	]
 }
