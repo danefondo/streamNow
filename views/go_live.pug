@@ -65,9 +65,9 @@ block content
 		.stream_input_container
 			.stream_input_title Upload custom thumbnail (optional)
 			.entryDetailsGroup.auto-side-margins
-				.mainImage(id= "imageArea_" + stream.thumbnail_id)
-					.file-upload.imageBlock(data-type="mainImage" data-image-key=stream.thumbnail_key)
-						if (!stream.thumbnail_url)
+				.mainImage(id= "imageArea_" )
+					.file-upload.imageBlock(data-type="mainImage")
+						if (!stream || !stream.thumbnail_url)
 							form.image-upload-wrap.imageForm.show(action= "/' + coreURL + '/sign-s3" method="POST" enctype= "multipart/form-data")
 								input#file-input.file-upload-input(type='file', name='image', accept='image/jpg')
 								.drag-text.padding-90
