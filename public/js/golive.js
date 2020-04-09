@@ -47,12 +47,40 @@ $(document).ready(function () {
             type: 'POST',
             data: stream_data,
             success: function(data) {
-                window.location.href = "/watch/" + stream_id;
+                update_stream(data.stream);
             },
             error: function(err) {
                 imageError("Could not save file reference.", err);
             }
         })
+    }
+
+    function update_stream(stream) {
+		let edit_modal = $('.edit_stream_details');
+		let details = $('.stream_details');
+		let player = $('.player_container');
+		let chat = $('.player_sidebar_container');
+
+        $('.stream_name_display').text(stream.stream_name);
+        $('.stream_description_display').text(stream.stream_description);
+        $('.stream_tags_display').empty();
+        let tags = stream.stream_tags;
+        tags.forEach(function(tag) {
+            let tag_div = $('<div>', {'class': 'stream_tag'});
+            tag_div.text(tag);
+            $('.stream_tags_display').append(tag_div);
+        });
+
+        edit_modal.toggle();
+        details.toggle();
+        player.toggle();
+        chat.toggle();
+
+        let player_url = 'https://www.youtube-nocookie.com/embed/' + stream.stream_video_id + '?modestbranding=1&showinfo=0&rel=0&theme=light&color=white'
+        player.find('.live_player').attr('src', player_url)
+
+        let chat_url = 'https://www.youtube.com/live_chat?v=' + stream.stream_video_id + '&embed_domain=stream-one.herokuapp.com'
+        chat.find('.live_chat').attr('src', chat_url)
     }
     
    /* --------------------------------
@@ -187,6 +215,7 @@ $(document).ready(function () {
         $('.generalErrorContainer').hide();
         let stream_data  = get_stream_data();
         let errors = false;
+        console.log("data", stream_data);
         if (!stream_data.stream_name) {
             errors = true;
             let input_div = $('.stream_name');
@@ -254,17 +283,17 @@ $(document).ready(function () {
     // })
 
 
-    $('.timepicker').timepicker({
-        timeFormat: 'h:mm p',
-        interval: 15,
-        minTime: '12:00am',
-        maxTime: '11:55pm',
-        defaultTime: 'now',
-        startTime: '12:00am',
-        dynamic: false,
-        dropdown: true,
-        scrollbar: true
-    });
+    // $('.timepicker').timepicker({
+    //     timeFormat: 'h:mm p',
+    //     interval: 15,
+    //     minTime: '12:00am',
+    //     maxTime: '11:55pm',
+    //     defaultTime: 'now',
+    //     startTime: '12:00am',
+    //     dynamic: false,
+    //     dropdown: true,
+    //     scrollbar: true
+    // });
 
     $('[data-toggle="datepicker"]').datepicker({
         date: new Date()
@@ -304,9 +333,10 @@ function enableImageUpload() {
     fileUploadButton.on('click', function() {
         fileUploadInput.trigger( 'click' );
     })
-
+    console.log("yoss");
     fileUploadInput.off('change');
     fileUploadInput.on('change', function() {
+        console.log("yo");
 
         readURL(this);
         // setup upload failed instead and set the image later and until then set uploading image
@@ -330,13 +360,14 @@ function enableImageUpload() {
         uploadData.file = file;
         uploadData.image_exists = true;
 
-        saveFileReferenceSuccess(uploadData, imageBlock);
+        // saveFileReferenceSuccess(uploadData, imageBlock);
 
     });
 }
 enableImageUpload();
 
 function startImageUpload(uploadData, stream_data, state) {
+    toggleImageTitle();
     getSignedRequest(uploadData, stream_data, state);
 }
 
@@ -345,9 +376,10 @@ function enableImageDelete() {
     removeImage.off('click');
     removeImage.on('click', function() {
         // let obj = this;
-        deleteImage();
+        removeUpload();
     })
 }
+enableImageDelete();
 
 function disableImageDelete() {
     $('.remove-image').off('click');
@@ -387,11 +419,11 @@ function readURL(input) {
     reader.onload = function(e) {
 
         $('.image-upload-wrap').hide();
+        $('.image-upload-wrap').removeClass('show');
 
         $('.file-upload-image').attr('src', e.target.result);
         $('.file-upload-content').show();
-
-        toggleImageTitle();
+        $('.file-upload-content').removeClass('hide');
 
         $('.image-title').html(input.files[0].name);
     };
@@ -400,35 +432,37 @@ function readURL(input) {
     return 
 
   } else {
-    deleteImage();
+    console.log("y");
+    removeUpload();
   }
 }
 
-function deleteImage() {
-    let image = $('.imageBlock');
-    image.find('.file-upload-image').removeAttr('src');
-    $('.file-upload-input').val('')
-    $('.file-upload-content').hide();
-    $('.image-upload-wrap').show();
-    disableImageDelete();
-    enableImageUpload();
-}
-
-function removeUpload(image) {
+function removeUpload() {
     console.log("Beginning image delete.");
+    let image = $('.imageBlock');
+
+    let imagePreTitle = $('.image-pre-title');
+    let imageTitle = $('.image-title');
+    let imageRemovingTitle = $('.image-removing-title');
+    imagePreTitle.toggle();
+    imageTitle.toggle();
+    imageRemovingTitle.toggle();
 
     // image = '.imageBlock'
     let imageKey = image.attr('data-image-key');
-    let dateUpdated = new Date(); 
+    let stream_id = $('.stream_id').attr('data-stream-id');
 
     $.ajax({
         data: {
             imageKey: imageKey,
-            dateUpdated: dateUpdated
+            stream_id: stream_id
         },
         type:'DELETE',
         url: '/' + coreURL + '/DeleteImage',
         success: function(response) {
+            imagePreTitle.toggle();
+            imageTitle.toggle();
+            imageRemovingTitle.toggle();        
             console.log("Deleted image from database.");
             image.removeAttr('data-image-key');
             image.removeAttr('data-image-url');
@@ -436,6 +470,8 @@ function removeUpload(image) {
             image.find('.file-upload-image').removeAttr('src');
             $('.file-upload-input').val('')
             $('.file-upload-content').hide();
+            $('.file-upload-content').removeClass('show');
+            $('.image-upload-wrap').removeClass('hide');
             $('.image-upload-wrap').show();
             disableImageDelete();
             enableImageUpload();
@@ -471,13 +507,13 @@ function saveReference(uploadData, stream_data, state) {
         contentType: 'application/json',
         success: function(data) {
             console.log("saveref data", data);
-            stream_data.thumbnail_id = data.image_id;
+            stream_data.thumbnail_id = data.image._id;
             if (state == "create") {
                 create_live_stream(stream_data);
             } else if (state == "save") {
                 update_live_stream(stream_data);
             }
-            
+            console.log("yoo");
             saveFileReferenceSuccess(uploadData, imageBlock);
         },
         error: function(err) {
@@ -531,7 +567,7 @@ function getSignedRequest(uploadData, stream_data,  state) {
             stream_data.thumbnail_key = uploadData.fileKey;
             stream_data.thumbnail_url = uploadData.fileURL;
             stream_data.thumbnail_name = uploadData.imageName;
-            uploadFile(file, signedRequest, responseURL, uploadData, stream_data, statte);
+            uploadFile(file, signedRequest, responseURL, uploadData, stream_data, state);
         },
         error: function(err) {
             imageError("Could not get signed URL.", err);

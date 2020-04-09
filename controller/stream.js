@@ -126,7 +126,7 @@ const streamController = {
             let tags = stream_data.stream_tags;
             tags = JSON.parse(tags);
 
-            stream.stream_tags = undefined;
+            stream.stream_tags = [];
             for (const tag of tags) {
                 stream.stream_tags.push(tag);
             }
@@ -137,8 +137,7 @@ const streamController = {
             await stream.save();
 
             res.json({
-                stream: stream,
-                stream_id: stream_id
+                stream: stream
             })
         } catch(error) {
             console.log(error);

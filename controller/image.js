@@ -1,5 +1,6 @@
 let Image = require('../models/image');
 let User = require('../models/user');
+let Stream = require('../models/stream');
 const aws = require('aws-sdk');
 
 aws.config.update({
@@ -99,8 +100,10 @@ const imageController = {
             let image_id = image._id;
 
             res.json({
+                image: image,
                 imageKey: req.body.fileKey,
                 imageURL: req.body.fileURL,
+                imageName: req.body.imageName,
                 image_id: image_id
             })
         } catch(error) {
@@ -170,9 +173,32 @@ const imageController = {
 
                 Image.deleteOne({ _id: image._id }, function (err) {
                     if (err) return console.log(err);
-                    console.log("Successfully removed image.");
-                    res.status(200).end();
-                  });
+                    console.log("Successfully removed image from DB.");
+
+                    Stream.findById(req.body.stream_id, function(err, stream) {
+                        if (err) {
+                            return res.status(404).json({
+                                errors: "Stream not found."
+                            });
+                        }
+
+                        stream.thumbnail_url = undefined;
+                        stream.thumbnail_key = undefined;
+                        stream.thumbnail_name = undefined;
+                        stream.thumbnail_id = undefined;
+                        console.log("5");
+						stream.save(function(err) {
+							if (err) {
+                                console.log("7");
+								return console.log("Stream save failed: ", err);
+							} else {
+                                console.log("Stream successfully updated: ", stream);
+                                console.log("6");
+                                res.status(200).end();
+							}
+						});
+                    });
+                });
             })
         } catch(error) {
 			console.log("error", error);
@@ -184,7 +210,6 @@ const imageController = {
 
     async deleteProfileImage(req, res) {
         try {
-            console.log("1");
             let imageKey = req.body.imageKey;
 
             let image = await Image.find({"imageKey": imageKey});
@@ -193,8 +218,6 @@ const imageController = {
                     message: "Could not find image to delete."
                 });
             }
-
-            console.log("2");
         
             s3.deleteObject({
                 Bucket: 'curata',
@@ -204,12 +227,9 @@ const imageController = {
                     console.log("Error: ", err);
                 }
 
-                console.log("3");
-
                 Image.deleteOne({ _id: image._id }, function (err) {
                     if (err) return console.log(err);
                     console.log("Successfully removed image from DB.");
-                    console.log("4");
 
                     User.findById(req.user._id, function(err, user) {
                         if (err) {
@@ -234,8 +254,7 @@ const imageController = {
 							}
 						});
                     });
-
-                  });
+                });
             })
         } catch(error) {
 			console.log("error", error);

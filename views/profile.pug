@@ -60,7 +60,7 @@ block content
 					iframe.live_player(width='850', height='540', src='https://www.youtube-nocookie.com/embed/' + video_id + '?modestbranding=1&showinfo=0&rel=0&theme=light&color=white', frameborder='0', allow='accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture', allowfullscreen='')
 				.stream_details
 					.stream_details_block
-						.stream_name #{stream.stream_name}
+						.stream_name_display #{stream.stream_name}
 						if (stream.is_live)
 							.stream_live LIVE
 						else
@@ -78,9 +78,9 @@ block content
 							else
 								.stream_likes_count 0
 					.stream_details_block
-						.stream_description #{stream.stream_description}
+						.stream_description_display #{stream.stream_description}
 					.stream_details_block
-						.stream_tags
+						.stream_tags_display
 							each tag in stream.stream_tags
 								.stream_tag #{tag}
 			if (streamer.is_live)
