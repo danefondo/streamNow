@@ -8,9 +8,9 @@ block header
     link(href='/css/datepicker.css', rel='stylesheet')
     link(href='/css/selectize.css', rel='stylesheet')
 
-
 block content
-    .stream_id(data-stream-id= stream.id)
+    if (stream)
+        .stream_id(data-stream-id= stream.id)
     +confirm_end
     if (user)
         .user_check(data-user-id= user.id)
@@ -18,6 +18,10 @@ block content
         .section_center
             .stream_center_top
                 .stream_owner
+					if (streamer.profile_image_url)
+						img.streamer_profile_icon(src= streamer.profile_image_url)
+					else
+						img.streamer_profile_icon(src="/images/profile_icon.png")
                     if (streamer)
                         if (streamer.firstname)
                             p.streamer_first_name #{streamer.firstname}
