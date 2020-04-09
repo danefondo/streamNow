@@ -74,14 +74,11 @@ block content
 									button.file-upload-btn(type='button') Upload custom thumbnail
 									h3 Or just drag and drop a file
 							.file-upload-content.hide
-								img.file-upload-image(src=stream.thumbnail_url, alt='your image')
+								img.file-upload-image(alt='your image')
 								.image-title-wrap
 									button.remove-image(type='button')
 										span.image-pre-title Remove 
-										if (stream.thumbnail_name && stream.thumbnail_name.length) 
-											span.image-title #{stream.thumbnail_name}
-										else
-											span.image-title Untitled Image
+										span.image-title
 										span.image-uploading-title Uploading image...
 										span.image-removing-title Removing image...
 						else
