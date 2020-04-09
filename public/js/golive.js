@@ -263,13 +263,16 @@ $(document).ready(function () {
 			}
         },
         onInitialize: function() {
-            var tags = JSON.parse(this.$input.attr('data-tags'));
-            var self = this;
-            tags.forEach(function(tag) {
-                //- requires adding option first/ requires adding option first
-                self.addOption({text: tag, value:tag});
-                self.addItem(tag);
-            })
+            let attr_div = this.$input.attr('data-tags');
+            if (attr_div.length) {
+                var tags = JSON.parse(this.$input.attr('data-tags'));
+                var self = this;
+                tags.forEach(function(tag) {
+                    //- requires adding option first/ requires adding option first
+                    self.addOption({text: tag, value:tag});
+                    self.addItem(tag);
+                })
+            }
         }
     });
 
@@ -282,18 +285,23 @@ $(document).ready(function () {
     //     selectize.addItem(tag);
     // })
 
-
-    // $('.timepicker').timepicker({
-    //     timeFormat: 'h:mm p',
-    //     interval: 15,
-    //     minTime: '12:00am',
-    //     maxTime: '11:55pm',
-    //     defaultTime: 'now',
-    //     startTime: '12:00am',
-    //     dynamic: false,
-    //     dropdown: true,
-    //     scrollbar: true
-    // });
+    function init_timepicker() {
+        let timepicker = $('.timepicker');
+        if (timepicker.length) {
+            timepicker.timepicker({
+                timeFormat: 'h:mm p',
+                interval: 15,
+                minTime: '12:00am',
+                maxTime: '11:55pm',
+                defaultTime: 'now',
+                startTime: '12:00am',
+                dynamic: false,
+                dropdown: true,
+                scrollbar: true
+            });
+        }
+    }
+    init_timepicker();
 
     $('[data-toggle="datepicker"]').datepicker({
         date: new Date()
