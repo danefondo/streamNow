@@ -2891,7 +2891,8 @@ button.button-white.confirmComponentDelete {
 .createEntryModal__space,
 .trashedEntryModal,
 .editEntryModal__space,
-.confirm_modal {
+.confirm_modal,
+.edit_modal {
 /*  position:absolute;*/
   position: fixed;
   z-index:9999;
@@ -2908,7 +2909,8 @@ button.button-white.confirmComponentDelete {
 }
 
 .createModal,
-.confirm_modal {
+.confirm_modal,
+.edits_modal {
   width: 400px;
   padding: 25px;
 }
@@ -2917,7 +2919,8 @@ button.button-white.confirmComponentDelete {
 .emptyConfirmModal,
 .trashedModal,
 .editEntryModal,
-.confirm_end_modal {
+.confirm_end_modal,
+.edit_stream_modal {
   display: none;
 }
 

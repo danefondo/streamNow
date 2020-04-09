@@ -1,7 +1,20 @@
 const { validationResult } = require('express-validator');
 let User = require('../models/user');
+let Image = require('../models/image');
+let Stream = require('../models/stream');
 const accountUtil = require('../utils/account')
 const mail = require('../utils/mail');
+
+const aws = require('aws-sdk');
+
+aws.config.update({
+    accessKeyId: "AKIARKLMM5TMEHGOSNJC",
+    secretAccessKey: "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",
+    region: "us-east-1" 
+});
+
+const s3 = new aws.S3();
+const S3_BUCKET = 'curata';
 
 const accountController = {
 	checkIfUserWithValueExists(field, value) {
@@ -160,7 +173,75 @@ const accountController = {
 				message: 'An error occurred, please try again later.'
 			});
 		}
+	},
+
+	async deleteAccount(req, res) {
+
+		try {
+			let user_id = req.user._id;
+
+            if (!user_id) {
+                return res.status(404).json({
+                    errors: "User id missing."
+                });
+			}
+			
+			User.deleteOne({_id: user_id}).exec(function(err, removed) {
+				if (err)  {
+					return console.log("Failed to delete account: ", err);
+				}
+				console.log("Successfully deleted account.");
+
+			})
+
+            let images = await Image.find({"streamer_id": user_id});
+            const imageKeys = [];
+            images.forEach(function(image) {
+                // Pull image reference from curataFiles
+                console.log("One imageId to remove: ", image);
+
+                imageKeys.push({
+                    Key: '' + image.imageKey
+                })
+			});
+			
+            if (imageKeys.length) {
+                s3.deleteObjects({
+                Bucket: S3_BUCKET,
+                Delete: {
+                    Objects: imageKeys
+                }
+                }, function (err, data) {
+                    if (err) {
+                        console.log("Error: ", err);
+                    } else {
+                        console.log("Successfully deleted image from AWS.");
+                    }
+                })
+            }
+
+			await Image.deleteMany({ "streamer_id": user_id});
+			console.log("Associated images successfully removed.");
+
+			await Stream.deleteMany({ "streamer_id": user_id});
+			console.log("Associated streams successfully removed.");
+			
+			//- pull your id from everyone's following/followers list
+			//- remove user like & comments?
+			req.logout();
+			console.log('Account deleted and you are logged out');
+			res.status(200).json({
+				message: "Removed."
+			})
+
+		} catch(err) {
+			console.log(err);
+			res.status(500).json({
+				message: 'An error occurred, please try again later.'
+			});			
+		}
 	}
+
 
 	// async canUserViewCurata(req, res, next) {
 	// 	const curata = await utils.getCurata(req.params.curataId);

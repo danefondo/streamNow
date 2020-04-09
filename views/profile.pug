@@ -9,6 +9,7 @@ include mixins/profile_stats
 block header
 	link(rel='stylesheet' href='/css/profile.css')
 	link(rel='stylesheet' href='/css/modal.css')
+	link(href='/css/selectize.css', rel='stylesheet')
 
 block content
 	if (stream)
@@ -82,6 +83,76 @@ block content
 						.stream_tags
 							each tag in stream.stream_tags
 								.stream_tag #{tag}
+			if (streamer.is_live)
+				.edit_stream_details
+					.stream_details_block
+						if (user && user.id == streamer.id)
+							.save_stream_changes Save changes
+							.cancel_stream_changes Cancel
+							if (stream.is_live)
+								.stream_end_button.margin-left-auto End stream
+					.edit_stream_inputs
+						.stream_input_container.edit_input
+							.stream_input_title Change livestream a name
+							input.stream_input.stream_name(placeholder='Livestream name' value=stream.stream_name)
+							.inputErrorContainer
+								.inputErrorText
+						.stream_input_container.edit_input
+							.stream_input_title Change livestream description
+							textarea.stream_input.stream_description(placeholder='Describe your livestream') #{stream.stream_description}
+							.inputErrorContainer
+								.inputErrorText
+						.stream_input_container.edit_input
+							.stream_input_title Change tags (max 3)
+							input#input-tags(type="text" placeholder="Write a tag" data-tags=stream.stream_tags)
+							.inputErrorContainer
+								.inputErrorText
+						.stream_input_container.edit_input
+							.stream_input_title Change YouTube video ID
+							input.stream_input.stream_video_id_input(placeholder='e.g. NMPqo3XiOUg' value=stream.stream_video_id)
+							.inputErrorContainer
+								.inputErrorText
+						.stream_input_container.edit_input
+							.stream_input_title Change custom thumbnail 
+							.entryDetailsGroup.auto-side-margins
+								.mainImage(id= "imageArea_")
+									.file-upload.imageBlock(data-type="mainImage" data-image-key=user.profile_image_key)
+										if (!user.profile_image_url)
+											form.image-upload-wrap.imageForm.show(action= "/' + coreURL + '/sign-s3" method="POST" enctype= "multipart/form-data")
+												input#file-input.file-upload-input(type='file', name='image', accept='image/jpg')
+												.drag-text.padding-90
+													button.file-upload-btn(type='button') Upload custom thumbnail
+													h3 Or just drag and drop a file
+											.file-upload-content.hide
+												img.file-upload-image(src=user.profile_image_url, alt='your image')
+												.image-title-wrap
+													button.remove-image(type='button')
+														span.image-pre-title Remove 
+														if (user.profile_image_name && user.profile_image_name.length) 
+															span.image-title #{user.profile_image_name}
+														else
+															span.image-title Untitled Image
+														span.image-uploading-title Uploading image...
+														span.image-removing-title Removing image...
+										else
+											form.image-upload-wrap.imageForm.hide(action= "/' + coreURL + '/sign-s3" method="POST" enctype= "multipart/form-data")
+												input#file-input.file-upload-input(type='file', name='image', accept='image/jpg')
+												.drag-text.padding-90
+													button.file-upload-btn(type='button') Upload custom thumbnail
+													h3 Or just drag and drop a file
+											.file-upload-content.show
+												img.file-upload-image(src=user.profile_image_url, alt='your image')
+												.image-title-wrap
+													button.remove-image(type='button')
+														span.image-pre-title Remove 
+														if (user.profile_image_name && user.profile_image_name.length) 
+															span.image-title #{user.profile_image_name}
+														else
+															span.image-title Untitled Image
+														span.image-uploading-title Uploading image...
+														span.image-removing-title Removing image...
+							.inputErrorContainer
+								.inputErrorText
 			+profile_stats(stream, streamer)
 		.section_right
 			if (user.is_live)
@@ -93,6 +164,9 @@ block content
 
 block scripts
 	script(src='/js/live.js')
+	script(src='/js/golive.js')
+	script(src='/js/datepicker.js')
+	script(src='/js/selectize.js')
 	//- if user
 	//- 	+profile_private
 	//- else

@@ -31,6 +31,8 @@ router.post('/saveProfileImageReference', ensureAuthenticated, imageController.s
 
 router.post('/createLiveStream', ensureAuthenticated, streamController.create_live_stream);
 
+router.post('/updateLiveStream', ensureAuthenticated, streamController.update_live_stream);
+
 router.delete('/DeleteImage', ensureAuthenticated, imageController.deleteImage);
 
 router.delete('/DeleteProfileImage', ensureAuthenticated, imageController.deleteProfileImage);

@@ -104,17 +104,20 @@ $(document).ready(function () {
 
             button.text('Saving...');
 
-            let currentpass = $('*[data-field="currentpass"]').val();
-
-            data.password = password;
-            data.passconfirm = passconfirm;
-            data.currentpass = currentpass;
-
             let url = '/' + core + '/updatePassword';
 
             $('.confirmChangePassword').off('click');
             $('.confirmChangePassword').on('click', function() {
         
+                let currentpass = $('*[data-field="currentpass"]').val();
+                console.log("cp", currentpass);
+                console.log("p", password);
+                console.log("pc", passconfirm);
+    
+                data.password = password;
+                data.passconfirm = passconfirm;
+                data.currentpass = currentpass;            
+
                 $.ajax({
                     data: data,
                     type: 'POST',
@@ -193,12 +196,67 @@ $(document).ready(function () {
 
 
     function init_delete_confirm() {
+        let delete_button = $('.deleteAccountButton');
+        delete_button.off('click');
+        delete_button.on('click', function() {
 
+            let delete_modal = $('.modal__deleteAccount');
+
+            delete_modal.show();
+            
+            $('.cancelPermaDeleteAccount').off('click');
+            $('.cancelPermaDeleteAccount').on('click', function() {
+                delete_modal.hide();
+            })
+        
+            $('.modalBackground__deleteAccount').off('click');
+            $('.modalBackground__deleteAccount').on('click', function() {
+                delete_modal.hide();
+            })
+        
+            // Press esc key to hide
+            $(document).keydown(function(event) { 
+              if (event.keyCode == 27) { 
+                  if (delete_modal.length) {
+                      let modalState = delete_modal.css('display');
+                      if (modalState == "block") {
+                        delete_modal.hide();
+                      }
+                  }
+              }
+            });
+
+        
+            init_delete_account();
+
+        })
     }
     init_delete_confirm();
 
     function init_delete_account() {
+        let core =  'accounts';
+        let delete_button = $('.confirmPermaDeleteAccount');
+        let delete_modal = $('.modal__deleteAccount');
+        delete_button.off('click');
+        delete_button.on('click', function() {
 
+			$.ajax({
+				type: 'DELETE',
+				url: '/' + core + '/deleteAccount',
+				success: function(response) {
+					console.log('Account deleted. Redirecting.');
+					window.location.href = '/';
+
+				},
+				error: function(err) {
+                    delete_modal.hide();
+                    alert("Failed to delete account. Refresh and try again.");
+					//TODO: Display error message
+				}
+			})
+            
+
+        })
     }
 
     /* -------------------------------

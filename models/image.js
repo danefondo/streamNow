@@ -6,6 +6,7 @@ const imageSchema = new mongoose.Schema({
 	imageURL: String,
     imageName: String,
     streamId: String,
+    streamer_id: String
 });
 
 const image = module.exports = mongoose.model('image', imageSchema);

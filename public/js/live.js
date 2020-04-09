@@ -2,8 +2,6 @@
 
 	let likes_being_updated = false;
 
-	$('.ytp-title-channel').hide();
-
 	function init_stream_likes() {
 		let stream_likes = $('.stream_likes');
 		stream_likes.off('click');
@@ -138,23 +136,54 @@
 	}
 	init_streamer_following();
 
-	let user_header = $(".stream_center_top");
+	function init_header_scroll() {
+		let user_header = $(".stream_center_top");
 
-	$(window).scroll(function() {    
-		var scroll = $(window).scrollTop();
-	
-		if (scroll >= 80) {
-			user_header.addClass("fixed_user_header");
-		} else {
-			user_header.removeClass("fixed_user_header");
-		}
-	});
+		$(window).scroll(function() {    
+			var scroll = $(window).scrollTop();
+		
+			if (scroll >= 80) {
+				user_header.addClass("fixed_user_header");
+			} else {
+				user_header.removeClass("fixed_user_header");
+			}
+		});		
+	}
+	init_header_scroll();
 
 	//- check if stream_active
 	//- when stream is ended, then add to previous_streams
 		//- if stream is re-started, it's a new stream
 	//- if viewed by Streamer, show 'edit' and 'end stream' options
 		//- under 'edit', also show 'delete stream' option
+
+	function edit_stream() {
+		let edit_modal = $('.edit_stream_details');
+		let details = $('.stream_details');
+		let player = $('.player_container');
+		let chat = $('.player_sidebar_container');
+
+		$('.stream_edit_button').off('click');
+		$('.stream_edit_button').on('click', function() {
+			edit_modal.toggle();
+			details.toggle();
+			player.toggle();
+			chat.toggle();
+		})
+
+		$('.cancel_stream_changes').off('click');
+		$('.cancel_stream_changes').on('click', function() {
+			edit_modal.toggle();
+			details.toggle();
+			player.toggle();
+			chat.toggle();
+		})
+	}
+	edit_stream();
+
+	function reset_confirm_live_modal() {
+        $('.stream_tags').empty();
+    }
 
 	function init_end_stream() {
 
@@ -196,8 +225,12 @@
 		$('.end_stream_confirm').off('click');
 		$('.end_stream_confirm').on('click', function() {
 			let stream_id = $('.stream_id').attr('data-stream-id');
+			let end_date = new Date();
 
 			$.ajax({
+				data: {
+					end_date: end_date
+				},
 				type: 'POST',
 				url: '/streams/' + stream_id + '/endStream',
 				success: function(data) {

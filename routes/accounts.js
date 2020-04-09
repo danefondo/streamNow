@@ -83,6 +83,8 @@ router.post('/updatePassword', function(req, res) {
 	let samePassFail = "New password must be different.";
 
 	const hashedPass = req.user.password;
+	console.log("hashed", hashedPass);
+	console.log("old", oldPassword);
 
 	let match = bcrypt.compareSync(oldPassword, hashedPass);
 
@@ -165,5 +167,19 @@ router.get('/reset/:token', async function(req, res) {
 
 
 router.post('/reset/', validator.reset, accountController.resetPassword)
+
+router.delete('/deleteAccount', ensureAuthenticated, accountController.deleteAccount);
+
+/*====== Access control  ======*/
+function ensureAuthenticated(req, res, next){
+	if(req.isAuthenticated()){
+		console.log("Authentication successful.");
+	  return next();
+	} else {
+		console.log("Authentication failed.");
+	  res.redirect(302, '/');
+	}
+}
+
 
 module.exports = router;

@@ -93,6 +93,7 @@ const imageController = {
             image.imageKey = req.body.fileKey;
             image.imageURL = req.body.fileURL;
             image.imageName = req.body.imageName;
+            image.streamer_id = req.user._id;
     
             await image.save();
             let image_id = image._id;
@@ -117,6 +118,7 @@ const imageController = {
             image.imageKey = req.body.fileKey;
             image.imageURL = req.body.fileURL;
             image.imageName = req.body.imageName;
+            image.streamer_id = req.user._id;
     
             await image.save();
             let image_id = image._id;

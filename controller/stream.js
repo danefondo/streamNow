@@ -60,6 +60,8 @@ const streamController = {
                 stream.stream_tags.push(tag);
             }
 
+            console.log("user_id", req.user._id);
+
             stream.streamer_id = req.user._id;
             stream.stream_live_status = true;
             stream.is_live = true;
@@ -90,6 +92,62 @@ const streamController = {
         }
     },
 
+    async update_live_stream(req, res) {
+        try {        
+            let stream = await Stream.findById(req.body.stream_id);
+            if (!stream) {
+                return res.status(404).json({
+                    errors: "Stream not found."
+                });
+            }
+
+            let stream_data = req.body;
+
+            if (stream_data.thumbnail_key) {
+                stream.thumbnail_key = stream_data.thumbnail_key;
+            }
+
+            if (stream_data.thumbnail_url) {
+                stream.thumbnail_url = stream_data.thumbnail_url;
+            }
+
+            if (stream_data.thumbnail_name) {
+                stream.thumbnail_name = stream_data.thumbnail_name;
+            }
+            
+            if (stream_data.thumbnail_id) {
+                stream.thumbnail_id = stream_data.thumbnail_id;
+            }
+
+            stream.stream_name = stream_data.stream_name;
+            stream.stream_description = stream_data.stream_description;
+            stream.stream_video_id = stream_data.stream_video_id;
+
+            let tags = stream_data.stream_tags;
+            tags = JSON.parse(tags);
+
+            stream.stream_tags = undefined;
+            for (const tag of tags) {
+                stream.stream_tags.push(tag);
+            }
+
+            console.log("user_id", req.user._id);
+
+    
+            await stream.save();
+
+            res.json({
+                stream: stream,
+                stream_id: stream_id
+            })
+        } catch(error) {
+            console.log(error);
+            res.status(500).json({
+                errors: "An unknown error occurred"
+            });
+        }
+    },
+
     async endStream(req, res) {
         try {
             let stream = await Stream.findById(req.params.streamId);
@@ -102,6 +160,7 @@ const streamController = {
             console.log("yo  made it");
             if (stream.is_live) {
                 stream.is_live = false;
+                stream.end_date = req.body.end_date;
             }
 
             await stream.save();
@@ -153,6 +212,7 @@ const streamController = {
             let streamer;
             streamer = await User.findById(streamer_id).populate('previous_streams').exec();
             if (!streamer) {
+                console.log("Did not find streamer");
                 streamer = "N/A";
                 streamer_followers_count = "N/A";
                 streamer_following_count = "N/A";
