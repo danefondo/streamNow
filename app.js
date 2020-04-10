@@ -42,9 +42,9 @@ db.on('error', function(err) {
 const app = express();
 app.locals.moment = require('moment');
 
-if (process.env.NODE_ENV === 'production') {
-  app.use(enforce.HTTPS({ trustProtoHeader: true }));
-}
+// if (process.env.NODE_ENV === 'production') {
+//   app.use(enforce.HTTPS({ trustProtoHeader: true }));
+// }
 
 // Bring in models
 let User = require('./models/user');
