@@ -24,7 +24,8 @@ html {
 
 body {
   /* font-family: Verdana, Geneva, sans-serif; */
-  font-family: 'Lora', serif;
+  /* font-family: 'Lora', serif; */
+  font-family: 'Trebuchet MS', sans-serif;
 /*	background-color: #f9f9f9;*/
   background-color: #ffffff;
 /*  background-color: #fbfbfb;*/
@@ -49,7 +50,8 @@ input {
 	/*border-radius: 4px;*/
 	border-radius: 0;
 	background-color: #fff;
-	font-family: 'Lora', serif;
+  /* font-family: 'Lora', serif; */
+  font-family: 'Trebuchet MS', sans-serif;
 }
 
 h1 {
@@ -74,7 +76,8 @@ h3 {
 input[type="submit"] {
 	background-color: #1600ff;
 	color: white;
-  font-family: 'Lora', serif;
+  /* font-family: 'Lora', serif; */
+  font-family: 'Trebuchet MS', sans-serif;
   transition: .2s ease-in-out !important;
 }
 
@@ -130,8 +133,6 @@ div, p {
 .so-good {
 	color: grey;
 	font-size: 10px;
-  /* font-family: Verdana, Geneva, sans-serif; */
-  font-family: 'Lora', serif;
 	background-color: transparent;
 }
 
@@ -289,7 +290,8 @@ PAGE: submitEntry.pug
   resize: none;
   overflow: hidden;
   overflow-wrap: break-word;
-  font-family: 'Lora', serif;
+  /* font-family: 'Lora', serif; */
+  font-family: 'Trebuchet MS', sans-serif;
   height: 40px;
   letter-spacing: normal;
   word-spacing: normal;
@@ -605,7 +607,8 @@ p.noDefaultCurataTextSmall {
   font-weight: bold;
   border: none;
   background-color: #f1f1f1;
-  font-family: 'Lora', serif;
+  /* font-family: 'Lora', serif; */
+  font-family: 'Trebuchet MS', sans-serif;
   margin-top: 15px;
   outline: none;
   transition: .2s ease;
@@ -761,7 +764,8 @@ p.noDefaultCurataTextSmall {
   resize: none;
   overflow: hidden;
   overflow-wrap: break-word;
-  font-family: 'Lora', serif;
+  /* font-family: 'Lora', serif; */
+  font-family: 'Trebuchet MS', sans-serif;
   height: 40px;
   letter-spacing: normal;
   word-spacing: normal;
@@ -1056,7 +1060,8 @@ p.noDefaultCurataTextSmall {
   font-size: 17px;
   border-radius: 4px;
   margin: 0px 5px;
-  font-family: 'Lora', serif;
+  /* font-family: 'Lora', serif; */
+  font-family: 'Trebuchet MS', sans-serif;
   font-size: 17px;
   font-weight: bold;
   color: #333;
@@ -1919,7 +1924,8 @@ h2.CheckOthers {
   resize: none;
   overflow: hidden;
   overflow-wrap: break-word;
-  font-family: 'Lora', serif;
+  /* font-family: 'Lora', serif; */
+  font-family: 'Trebuchet MS', sans-serif;
   text-rendering: auto;
   white-space: pre-wrap;
   flex-direction: column;
@@ -2045,7 +2051,8 @@ h2.CheckOthers {
   resize: none;
   border: none;
   width: 97%;
-  font-family: 'Lora', serif;
+  /* font-family: 'Lora', serif; */
+  font-family: 'Trebuchet MS', sans-serif;
 }
 
 .EntryTitle {
@@ -2061,7 +2068,8 @@ h2.CheckOthers {
 .entryLink,
 .trashLink {
   font-size: 20px;
-  font-family: 'Lora', serif;
+  /* font-family: 'Lora', serif; */
+  font-family: 'Trebuchet MS', sans-serif;
   padding: 4px 5px;
   width: 95%;
 }
@@ -2188,7 +2196,8 @@ h2.CheckOthers {
   resize: none;
   overflow: hidden;
   overflow-wrap: break-word;
-  font-family: 'Lora', serif;
+  /* font-family: 'Lora', serif; */
+  font-family: 'Trebuchet MS', sans-serif;
   height: 35px;
   letter-spacing: normal;
   word-spacing: normal;
@@ -2254,7 +2263,8 @@ h2.CheckOthers {
   resize: none;
   overflow: hidden;
   overflow-wrap: break-word;
-  font-family: 'Lora', serif;
+  /* font-family: 'Lora', serif; */
+  font-family: 'Trebuchet MS', sans-serif;
   height: 40px;
   letter-spacing: normal;
   word-spacing: normal;
@@ -3431,7 +3441,8 @@ button.button-white.confirmComponentDelete {
   resize: none;
   overflow: hidden;
   overflow-wrap: break-word;
-  font-family: 'Lora', serif;
+  /* font-family: 'Lora', serif; */
+  font-family: 'Trebuchet MS', sans-serif;
   height: 50px;
   letter-spacing: normal;
   word-spacing: normal;
@@ -4309,7 +4320,8 @@ button.button-white.confirmComponentDelete {
   transition: all .2s ease;
   outline: none;
   font-weight: 700;
-  font-family: 'Lora', serif;
+  /* font-family: 'Lora', serif; */
+  font-family: 'Trebuchet MS', sans-serif;
   margin-bottom: 10px;
 }
 

@@ -151,7 +151,8 @@ font-size: 18px;
     resize: none;
     overflow: hidden;
     overflow-wrap: break-word;
-    font-family: 'Lora', serif;
+    /* font-family: 'Lora', serif; */
+    font-family: 'Trebuchet MS', sans-serif;
     text-rendering: auto;
     white-space: pre-wrap;
     flex-direction: column;
@@ -189,7 +190,8 @@ font-size: 18px;
     resize: none;
     overflow: hidden;
     overflow-wrap: break-word;
-    font-family: 'Lora', serif;
+    /* font-family: 'Lora', serif; */
+    font-family: 'Trebuchet MS', sans-serif;
     text-rendering: auto;
     white-space: pre-wrap;
     flex-direction: column;

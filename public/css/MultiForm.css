@@ -1,10 +1,12 @@
 @font-face {
-  font-family: 'Lora', serif;
+  /* font-family: 'Lora', serif; */
+  font-family: 'Trebuchet MS', sans-serif;
   src: url("https://zephyo.github.io/22Days/code/9/graphics/GothamRounded-Book.otf");
   font-weight: normal;
 }
 @font-face {
-  font-family: 'Lora', serif;
+  /* font-family: 'Lora', serif; */
+  font-family: 'Trebuchet MS', sans-serif;
   src: url("https://zephyo.github.io/22Days/code/9/graphics/GothamRounded-Medium.otf");
   font-weight: bold;
 }
@@ -14,7 +16,8 @@ html, body {
 }
 
 body {
-  font-family: 'Lora', serif;
+  /* font-family: 'Lora', serif; */
+  font-family: 'Trebuchet MS', sans-serif;
   position: relative;
 }
 
@@ -94,7 +97,8 @@ fieldset {
   margin-top: 50px;
   font-weight: bold;
   font-size: 25px;
-  font-family: 'Lora', serif;
+  /* font-family: 'Lora', serif; */
+  font-family: 'Trebuchet MS', sans-serif;
   width: 200px;
   height: 50px;
   color: white;
@@ -501,7 +505,8 @@ fieldset.form-group {
   resize: none;
   overflow: hidden;
   overflow-wrap: break-word;
-  font-family: 'Lora', serif;
+  /* font-family: 'Lora', serif; */
+  font-family: 'Trebuchet MS', sans-serif;
   height: 50px;
   letter-spacing: normal;
   word-spacing: normal;

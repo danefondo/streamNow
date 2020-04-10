@@ -62,7 +62,8 @@
     border: none;
 	background-color: #1600ff;
     color: white;
-    font-family: 'Lora', serif;
+	/* font-family: 'Lora', serif; */
+	font-family: 'Trebuchet MS', sans-serif;
     box-sizing: border-box;
     display: inline-block;
 }
@@ -326,7 +327,8 @@ form.signin-form .submit {
 	box-shadow: 4px 4px 0px 0px #1600ffba;
 	background-color: blue;
     color: white;
-    font-family: 'Lora', serif;
+	/* font-family: 'Lora', serif; */
+	font-family: 'Trebuchet MS', sans-serif;
  	font-size: 42px;
     margin-left: 25px;
     text-transform: lowercase;
@@ -568,7 +570,8 @@ form.signin-form .submit {
     font-weight: 600;
     padding: 8px;
     border-radius: 3px;
-    font-family: 'Lora', serif;
+	/* font-family: 'Lora', serif; */
+	font-family: 'Trebuchet MS', sans-serif;
     display: none;
 }
 

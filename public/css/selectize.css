@@ -161,7 +161,8 @@
   box-shadow: 4px 5px 0px 0px #e6e6e6 !important;
   margin-top: 15px !important;
   box-sizing: border-box !important;
-  font-family: 'Lora', serif !important;
+  /* font-family: 'Lora', serif !important; */
+  font-family: 'Trebuchet MS', sans-serif !important;
 }
 
 .selectize-input.focus {
