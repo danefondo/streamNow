@@ -1,7 +1,7 @@
 mixin streamers(streams=0)
         .streams
             each stream in streams
-                .stream
+                a.stream(href="/watch/" + stream.id)
                     .streamPreviewContainer
                         if (stream.thumbnail_url)
                             img.streamPreview(src= stream.thumbnail_url)

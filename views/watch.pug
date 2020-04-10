@@ -48,11 +48,11 @@ block content
 			.stream_details
 				.stream_details_block
 					.stream_name_display #{stream.stream_name}
+					if (stream.is_live)
+						.stream_live LIVE
+					else
+						.stream_offline Offline
 					.livestream_buttons
-						if (stream.is_live)
-							.stream_live LIVE
-						else
-							.stream_offline Offline
 						if (user && user.id == streamer.id)
 							.stream_edit_button Edit
 							if (stream.is_live)
