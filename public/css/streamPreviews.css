@@ -2,16 +2,15 @@
     display: flex;
     flex-wrap: wrap;
     margin: 0 auto;
-    max-width: 1140px;
+    max-width: 1164px;
 }
 
 .stream {
     width: 350px;
-    height: 350px;
-    display: inline-block;
-    flex-direction: row;
-    margin: 30px 10px;
+    /* max-height: 350px; */
+    margin: 30px 17px;
     margin-top: 10px;
+    margin-bottom: 10px;
     border-radius: 40px;
     padding: 40px 0px;
     border: 1px solid transparent;
@@ -20,33 +19,60 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    cursor: pointer;
+    box-sizing: border-box;
+    transition: .2s ease;
 }
 
 .stream:hover {
     border: 1px solid #eee;
+    transform: scale(1.01);
+}
+
+img.streamPreview {
+    min-height: 230px;
+    max-width: 323px;
+    border-radius: 4px;
 }
 
 .streamPreviewContainer {
     border: 1px solid #eee;
     width: 325px;
-    height: 205px;
+    height: 220px !important;
+    box-sizing: border-box;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    border-radius: 4px;
 }
 
 .streamMetaContainer {
     width: 100%;
     max-width: 325px;
     padding: 5px;
+    display: flex;
+    flex-direction: column;
+}
+
+.streamTags {
+    display: flex;
+    overflow: scroll;
 }
 
 .streamTag {
     display: inline-block;
     border-radius: 360px;
     background-color: blue;
-    padding: 2px 10px;
-    font-size: 13px;
+    padding: 4px 10px;
+    font-size: 14px;
     font-weight: bold;
     color: white;
-    margin: 0 2px;
+    margin: 2px 2px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    max-width: 150px;
 }
 
 .streamNameContainer {
@@ -57,19 +83,20 @@
     font-size: 20px;
 }
 
-.streamerProfileContainer {
+.streamer_profile_container_discover {
     display: flex;
     padding: 5px 0;
 }
 
-.streamerProfileImageContainer {
+.streamer_profile_image_container {
     display: inline-block;
 }
 
-.streamerProfileImage {
+.streamer_profile_icon_discover {
     width: 40px;
     height: 40px;
     border-radius: 360px;
+    margin-right: 10px;
     background-color: #eee;
 }
 
@@ -77,12 +104,15 @@
     display: inline-block;
 }
 
-.streamerUsernameContainer {
+.streamer_name_container_discover {
     display: inline-block;
     height: 40px;
-    padding-left: 10px;
+    /* padding-left: 10px; */
 }
 
-.streamerUsername {
+.streamer_username_discover,
+.streamer_firstname_discover,
+.streamer_lastname_discover {
     line-height: 40px;
+    margin-right: 5px;
 }

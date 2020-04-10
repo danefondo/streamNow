@@ -102,13 +102,8 @@ app.get('*', function(req, res, next){
 // Home route
 app.get('/', streamController.getStreams); 
 
-app.get('/discover', function(req, res) {
-    res.render('index');
-});
+app.get('/discover', streamController.getStreams);
 
-app.get('/my-curations', function(req, res) {
-	res.render('MyCurations');
-});
 
 app.get('/successful-registration', function(req, res) {
 	res.render('RegisterSuccess');

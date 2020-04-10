@@ -1,6 +1,8 @@
 const mongoose = require('mongoose');
 let Schema = mongoose.Schema;
 
+const User = require('./user.js');
+
 const stream_schema = new mongoose.Schema({
     stream_name: String,
     stream_description: String,
@@ -13,6 +15,7 @@ const stream_schema = new mongoose.Schema({
     thumbnail_name: String,
     thumbnail_id: String,
     streamer_id: String,
+    streamer: {type: Schema.Types.ObjectId, ref: 'User'},
     stream_live_status: Boolean,
     stream_likes_count: Number,
     users_who_like_stream: [String],

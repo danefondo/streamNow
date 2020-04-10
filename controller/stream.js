@@ -6,7 +6,7 @@ const streamController = {
     async getStreams(req, res) {
         try {
 
-            let streams = await Stream.find({"is_live": true});
+            let streams = await Stream.find({"is_live": true}).populate('streamer').exec();
             if (!streams) {
                 console.log("nooo streams");
                 return res.render('index', {
@@ -63,6 +63,7 @@ const streamController = {
             console.log("user_id", req.user._id);
 
             stream.streamer_id = req.user._id;
+            stream.streamer = req.user._id;
             stream.stream_live_status = true;
             stream.is_live = true;
     
