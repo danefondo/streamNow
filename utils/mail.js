@@ -10,11 +10,11 @@ module.exports = {
 	sendVerificationMail(email, link) {
 		console.log(link, 'mail js file');
 		const data = {
-		  from: 'Costream <noreply@costream.one>',
+		  from: 'Eeter.tv <noreply@eeter.tv>',
 		  to: email,
-		  subject: 'Welcome to Costream',
+		  subject: 'Welcome to Eeter.tv',
 		  html: '',
-		  text: `Verify your email address to get the most of Costream by clicking this link ${link}`
+		  text: `Verify your email address to get the most of Eeter.tv by clicking this link ${link}`
 		};
 		mailgun.messages().send(data, function (error, body) {
 		  console.log(body);
@@ -25,11 +25,11 @@ module.exports = {
 	sendResetMail(email, link) {
 		console.log(link, 'mail js file');
 		const data = {
-		  from: 'Costream <noreply@costream.one>',
+		  from: 'Eeter.tv <noreply@eeter.tv>',
 		  to: email,
-		  subject: 'Password reset to Costream',
+		  subject: 'Password reset to Eeter.tv',
 		  html: '',
-		  text: `To reset your Costream password, click on this link ${link}. The reset link expires in 30 minutes.`
+		  text: `To reset your Eeter.tv password, click on this link ${link}. The reset link expires in 30 minutes.`
 		};
 		mailgun.messages().send(data, function (error, body) {
 		  console.log(body);
