@@ -501,6 +501,10 @@
     font-size: 24px;
 }
 
+.stream_title:hover {
+    color: #888;
+}
+
 .stream_date {
     margin-left: auto;
     /* text-transform: uppercase; */
