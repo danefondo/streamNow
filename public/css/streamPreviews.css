@@ -30,13 +30,13 @@
 }
 
 img.streamPreview {
-    min-height: 230px;
+    min-height: 220px;
     max-width: 323px;
-    border-radius: 4px;
+    border-radius: 22px;
 }
 
 .streamPreviewContainer {
-    border: 1px solid #eee;
+    /* border: 1px solid #eee; */
     width: 325px;
     height: 220px !important;
     box-sizing: border-box;
