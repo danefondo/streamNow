@@ -176,7 +176,7 @@ const imageController = {
                     console.log("Successfully removed image from DB.");
 
                     Stream.findById(req.body.stream_id, function(err, stream) {
-                        if (err) {
+                        if (err || !stream) {
                             return res.status(404).json({
                                 errors: "Stream not found."
                             });

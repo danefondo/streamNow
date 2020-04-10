@@ -8,6 +8,19 @@ $(document).ready(function () {
 
     let coreURL =  'dashboard';
     let uploadData = {};
+    let stream_data = {};
+    let upload_scenario = '';
+
+    /* --------------------------------
+        check if image exists
+    -------------------------------- */
+    function check_image_exists() {
+        let exists = false;
+        if (uploadData.image_exists == true) {
+            exists = true;
+        }
+        return exists;
+    }
 
     /* --------------------------------
         save existing stream
@@ -17,16 +30,18 @@ $(document).ready(function () {
         save_button = $('.save_stream_changes');
         save_button.off('click');
         save_button.on('click', function() {
-            let stream_data = check_inputs_not_empty();
+            check_inputs_not_empty();
             if (stream_data.errors !== true) {
-                stream_data.stream_id = $('.stream_id').attr('data-stream-id');
-                if (uploadData.image_exists == true) {
-                    $('.go_live').text("Uploading thumbnail...");
-                    let state = 'save';
-                    startImageUpload(uploadData, stream_data, state);
-                    // pass image key etc to stream_data to insert into stream 
-                } else {
-                    update_live_stream(stream_data);
+                let stream_id_div = $('.stream_id');
+                stream_data.stream_id = stream_id_div.attr('data-stream-id');
+                if (stream_id_div.length) {
+                    let image_exists = check_image_exists();
+                    if (image_exists) {
+                        upload_scenario = 'save';
+                        startImageUpload()
+                    } else {
+                        update_live_stream();
+                    }
                 }
                 // start_live_modal.show();
                 // populate_confirm_live_modal(stream_data);
@@ -40,7 +55,7 @@ $(document).ready(function () {
     save_stream_changes();
 
 
-    function update_live_stream(stream_data) {
+    function update_live_stream() {
 
         $.ajax({
             url: '/dashboard/updateLiveStream',
@@ -88,7 +103,7 @@ $(document).ready(function () {
     -------------------------------- */
 
 
-    function create_live_stream(stream_data) {
+    function create_live_stream() {
 
         stream_data.date_created = new Date();
 
@@ -115,16 +130,14 @@ $(document).ready(function () {
             let stream_data = check_inputs_not_empty();
             console.log("data", stream_data);
             if (stream_data.errors !== true) {
-                if (uploadData.image_exists == true) {
+                let image_exists = check_image_exists();
+                if (image_exists) {
                     $('.go_live').text("Uploading thumbnail...");
-                    let state = 'create';
-                    startImageUpload(uploadData, stream_data, state);
-                    // pass image key etc to stream_data to insert into stream 
+                    upload_scenario = 'create';
+                    startImageUpload()
                 } else {
-                    create_live_stream(stream_data);
+                    create_live_stream();
                 }
-                // start_live_modal.show();
-                // populate_confirm_live_modal(stream_data);
             } else {
                 // in future, scroll to first error
                 window.scrollTo(0, 0);
@@ -160,15 +173,13 @@ $(document).ready(function () {
     }
     init_start_live_confirm_modal();
 
-    function get_stream_data() {
-        let stream_data = {};
+    function fill_stream_data() {
         stream_data.stream_name = $('.stream_name').val();
         stream_data.stream_description = $('.stream_description').val();
         let tags = $('#input-tags')[0].selectize.items;
         // stringified because server-side ran into problems otherwise;
         stream_data.stream_tags = JSON.stringify(tags);
         stream_data.stream_video_id = $('.stream_video_id_input').val();
-        return stream_data;
     }
 
     function populate_confirm_live_modal(stream_data) {
@@ -213,7 +224,7 @@ $(document).ready(function () {
         $('.inputErrorContainer').hide();
         $('.inputErrorText').text('');
         $('.generalErrorContainer').hide();
-        let stream_data  = get_stream_data();
+        fill_stream_data();
         let errors = false;
         console.log("data", stream_data);
         if (!stream_data.stream_name) {
@@ -263,8 +274,8 @@ $(document).ready(function () {
 			}
         },
         onInitialize: function() {
-            let attr_div = this.$input.attr('data-tags');
-            if (attr_div.length) {
+
+            if (typeof $("#input-tags").data('tags') !== 'undefined') {
                 var tags = JSON.parse(this.$input.attr('data-tags'));
                 var self = this;
                 tags.forEach(function(tag) {
@@ -367,30 +378,16 @@ function enableImageUpload() {
         }
         uploadData.file = file;
         uploadData.image_exists = true;
-
-        // saveFileReferenceSuccess(uploadData, imageBlock);
+        console.log("yo2");
 
     });
 }
 enableImageUpload();
 
-function startImageUpload(uploadData, stream_data, state) {
+function startImageUpload() {
+    console.log("yo3");
     toggleImageTitle();
-    getSignedRequest(uploadData, stream_data, state);
-}
-
-function enableImageDelete() {
-    let removeImage = $('.remove-image');
-    removeImage.off('click');
-    removeImage.on('click', function() {
-        // let obj = this;
-        removeUpload();
-    })
-}
-enableImageDelete();
-
-function disableImageDelete() {
-    $('.remove-image').off('click');
+    getSignedRequest();
 }
 
 function launchUploadingIcon() {
@@ -437,12 +434,48 @@ function readURL(input) {
     };
 
     reader.readAsDataURL(input.files[0]);
-    return 
+    return;
 
   } else {
     console.log("y");
-    removeUpload();
+    removeImage();
   }
+}
+
+function enableImageDelete() {
+    let remove_image = $('.remove-image');
+    remove_image.off('click');
+    remove_image.on('click', function() {
+        if (typeof $(".imageBlock").data('image-key') !== 'undefined') {
+            removeUpload();
+        } else {
+            removeImage();
+        }
+    })
+}
+enableImageDelete();
+
+function removeImage() {
+    let image = $('.imageBlock');
+
+    image.find('.file-upload-image').removeAttr('src');
+
+    $('.image-title').text('');
+
+    $('.file-upload-input').val('')
+
+    $('.file-upload-content').hide();
+    $('.file-upload-content').removeClass('show');
+
+    $('.image-upload-wrap').removeClass('hide');
+    $('.image-upload-wrap').show();
+
+    enableImageDelete();
+    enableImageUpload();
+}
+
+function disableImageDelete() {
+    $('.remove-image').off('click');
 }
 
 function removeUpload() {
@@ -468,21 +501,15 @@ function removeUpload() {
         type:'DELETE',
         url: '/' + coreURL + '/DeleteImage',
         success: function(response) {
+            console.log("Deleted image from database.");
+            removeImage();
             imagePreTitle.toggle();
             imageTitle.toggle();
-            imageRemovingTitle.toggle();        
-            console.log("Deleted image from database.");
+            imageRemovingTitle.toggle();
             image.removeAttr('data-image-key');
             image.removeAttr('data-image-url');
-            image.removeAttr('data-image-name');
-            image.find('.file-upload-image').removeAttr('src');
-            $('.file-upload-input').val('')
-            $('.file-upload-content').hide();
-            $('.file-upload-content').removeClass('show');
-            $('.image-upload-wrap').removeClass('hide');
-            $('.image-upload-wrap').show();
-            disableImageDelete();
-            enableImageUpload();
+            image.removeAttr('data-image-name');  
+            $('.mainImage').attr('id', 'imageArea_');
         },
         error: function(err) {
             enableImageUpload();
@@ -492,7 +519,7 @@ function removeUpload() {
     });
 }
 
-function saveFileReferenceSuccess(uploadData, imageBlock) {
+function saveFileReferenceSuccess(imageBlock) {
     let imageKey = uploadData.fileKey;
     let imageURL = uploadData.fileURL;
     let imageName = uploadData.imageName;
@@ -503,7 +530,8 @@ function saveFileReferenceSuccess(uploadData, imageBlock) {
     enableImageDelete();		
 }
 
-function saveReference(uploadData, stream_data, state) {
+function saveReference() {
+    console.log("yo10", uploadData);
     let imageBlock = uploadData.imageBlock;
     delete uploadData.imageBlock;
     
@@ -516,13 +544,13 @@ function saveReference(uploadData, stream_data, state) {
         success: function(data) {
             console.log("saveref data", data);
             stream_data.thumbnail_id = data.image._id;
-            if (state == "create") {
-                create_live_stream(stream_data);
-            } else if (state == "save") {
-                update_live_stream(stream_data);
+            if (upload_scenario == 'create') {
+                $('.go_live').text("Creating stream...");
+                create_live_stream();
+            } else if (upload_scenario == 'save') {
+                update_live_stream();
             }
-            console.log("yoo");
-            saveFileReferenceSuccess(uploadData, imageBlock);
+            saveFileReferenceSuccess(imageBlock);
         },
         error: function(err) {
             imageError("Could not save file reference.", err);
@@ -534,7 +562,8 @@ function imageError(consoleText, err) {
     console.log(consoleText, err);
 }
 
-function uploadFile(file, signedRequest, url, uploadData, stream_data, state) {
+function uploadFile(file, signedRequest, url) {
+    console.log("yo8");
     $.ajax({
         url: signedRequest,
         type: 'PUT',
@@ -542,7 +571,8 @@ function uploadFile(file, signedRequest, url, uploadData, stream_data, state) {
         contentType: false,
         data: file,
         success: function(data) {
-            saveReference(uploadData, stream_data, state);
+            console.log("yo9");
+            saveReference();
         },
         error: function(err) {
             imageError("Failed to upload file.", err);
@@ -550,12 +580,15 @@ function uploadFile(file, signedRequest, url, uploadData, stream_data, state) {
     })
 }
 
-function getSignedRequest(uploadData, stream_data,  state) {
+function getSignedRequest() {
     // const fileName = file.name + '-' + Date.now().toString();
     // to not need to parse strings or remove spaces, etc:
+
+    console.log("yo4");
     let file = uploadData.file;
     const fileName = Date.now().toString();
     const fileType = file.type;
+    console.log("yo5", file);
 
     $.ajax({
         url: '/' + coreURL + `/sign-s3?file-name=${fileName}&file-type=${file.type}`,
@@ -575,7 +608,9 @@ function getSignedRequest(uploadData, stream_data,  state) {
             stream_data.thumbnail_key = uploadData.fileKey;
             stream_data.thumbnail_url = uploadData.fileURL;
             stream_data.thumbnail_name = uploadData.imageName;
-            uploadFile(file, signedRequest, responseURL, uploadData, stream_data, state);
+            console.log("yo6", stream_data);
+            console.log("yo7", uploadData);
+            uploadFile(file, signedRequest, responseURL);
         },
         error: function(err) {
             imageError("Could not get signed URL.", err);

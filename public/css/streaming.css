@@ -2,6 +2,14 @@
     margin-left: auto;
 }
 
+.livestream_buttons {
+    margin-left: auto;
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    align-self: self-start;
+}
+
 .go_live_button,
 .schedule_stream_button,
 .save_settings {
@@ -104,8 +112,16 @@
     align-items: center;
 }
 
+
 .stream_name_display {
     font-size: 25px;
+    line-height: 30px;
+}
+
+.stream_description_display {
+    max-width: 600px;
+    color: #555;
+    line-height: 21px;
 }
 
 .stream_tag {
@@ -118,6 +134,9 @@
     /* color: #989898;
     color: #1600ff75; */
     color: #000000ad;
+    max-width: 130px;
+    text-overflow: ellipsis;
+    overflow: hidden;
 }
 
 .stream_center_top {
@@ -168,6 +187,7 @@
     transition: .2s ease;
     cursor: pointer;
     color: white;
+    white-space: nowrap;
 }
 
 .stream_edit_button:hover,
@@ -574,9 +594,9 @@
     height: 120px !important;
 }
 
-.padding-90 {
-    padding-top: 90px;
-    padding-bottom: 90px;
+.padding-60 {
+    padding-top: 60px;
+    padding-bottom: 60px;
 }
 
 .no-side-margins {

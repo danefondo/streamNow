@@ -62,7 +62,7 @@ block content
 							if (!user.profile_image_url)
 								form.image-upload-wrap.imageForm.show(action= "/' + coreURL + '/sign-s3" method="POST" enctype= "multipart/form-data")
 									input#file-input.file-upload-input(type='file', name='image', accept='image/jpg')
-									.drag-text.padding-90
+									.drag-text.padding-60
 										button.file-upload-btn(type='button') Upload profile image
 										h3 Or just drag and drop a file
 								.file-upload-content.hide
@@ -79,7 +79,7 @@ block content
 							else
 								form.image-upload-wrap.imageForm.hide(action= "/' + coreURL + '/sign-s3" method="POST" enctype= "multipart/form-data")
 									input#file-input.file-upload-input(type='file', name='image', accept='image/jpg')
-									.drag-text.padding-90
+									.drag-text.padding-60
 										button.file-upload-btn(type='button') Upload profile image
 										h3 Or just drag and drop a file
 								.file-upload-content.show

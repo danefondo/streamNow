@@ -48,22 +48,23 @@ block content
 			.stream_details
 				.stream_details_block
 					.stream_name_display #{stream.stream_name}
-					if (stream.is_live)
-						.stream_live LIVE
-					else
-						.stream_offline Offline
-					if (user && user.id == streamer.id)
-						.stream_edit_button Edit
+					.livestream_buttons
 						if (stream.is_live)
-							.stream_end_button End stream
-					.stream_likes(data-liked= "" + user_like_boolean)
-						.stream_like_button
-							img.stream_like_icon(src= '/images/like_icon.png')
-							span.stream_like_text Likes
-						if (stream.stream_likes_count)
-							.stream_likes_count #{stream.stream_likes_count}
+							.stream_live LIVE
 						else
-							.stream_likes_count 0
+							.stream_offline Offline
+						if (user && user.id == streamer.id)
+							.stream_edit_button Edit
+							if (stream.is_live)
+								.stream_end_button End stream
+						.stream_likes(data-liked= "" + user_like_boolean)
+							.stream_like_button
+								img.stream_like_icon(src= '/images/like_icon.png')
+								span.stream_like_text Likes
+							if (stream.stream_likes_count)
+								.stream_likes_count #{stream.stream_likes_count}
+							else
+								.stream_likes_count 0
 				.stream_details_block
 					.stream_description_display #{stream.stream_description}
 				.stream_details_block
@@ -80,7 +81,7 @@ block content
 				.edit_stream_inputs
 					.stream_input_container.edit_input
 						.stream_input_title Change livestream a name
-						input.stream_input.stream_name(placeholder='Livestream name' value=stream.stream_name)
+						input.stream_input.stream_name(placeholder='Livestream name' value=stream.stream_name max-length='50')
 						.inputErrorContainer
 							.inputErrorText
 					.stream_input_container.edit_input
@@ -106,7 +107,7 @@ block content
 									if (!stream.thumbnail_url)
 										form.image-upload-wrap.imageForm.show(action= "/' + coreURL + '/sign-s3" method="POST" enctype= "multipart/form-data")
 											input#file-input.file-upload-input(type='file', name='image', accept='image/jpg')
-											.drag-text.padding-90
+											.drag-text.padding-60
 												button.file-upload-btn(type='button') Upload custom thumbnail
 												h3 Or just drag and drop a file
 										.file-upload-content.hide
@@ -123,7 +124,7 @@ block content
 									else
 										form.image-upload-wrap.imageForm.hide(action= "/' + coreURL + '/sign-s3" method="POST" enctype= "multipart/form-data")
 											input#file-input.file-upload-input(type='file', name='image', accept='image/jpg')
-											.drag-text.padding-90
+											.drag-text.padding-60
 												button.file-upload-btn(type='button') Upload custom thumbnail
 												h3 Or just drag and drop a file
 										.file-upload-content.show
