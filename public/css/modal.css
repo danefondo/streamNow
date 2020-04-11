@@ -69,7 +69,8 @@
 .inputErrorContainer,
 .generalErrorContainer,
 .coreErrorContainer,
-.inputSuccessContainer {
+.inputSuccessContainer,
+.scheduleErrorContainer {
 	padding: 10px;
 	color: red;
     background-color: transparent;
@@ -80,10 +81,16 @@
     color: green;
 }
 
-.generalErrorContainer {
+.generalErrorContainer,
+.scheduleErrorContainer {
     margin-bottom: 20px;
     padding: 0;
     font-size: 18px;
+}
+
+.scheduleErrorContainer {
+    max-width: 325px;
+    padding: 0px 10px;
 }
 
 .listDetails {

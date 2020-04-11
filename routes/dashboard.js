@@ -33,6 +33,8 @@ router.post('/createLiveStream', ensureAuthenticated, streamController.create_li
 
 router.post('/updateLiveStream', ensureAuthenticated, streamController.update_live_stream);
 
+router.post('/scheduleLiveStream', ensureAuthenticated, streamController.schedule_live_stream);
+
 router.delete('/DeleteImage', ensureAuthenticated, imageController.deleteImage);
 
 router.delete('/DeleteProfileImage', ensureAuthenticated, imageController.deleteProfileImage);

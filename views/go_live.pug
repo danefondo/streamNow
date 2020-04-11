@@ -19,6 +19,8 @@ block content
 			.stream_input_title.inline Schedule for later?
 			img.arrow.hidden(src="/images/up_arrow.png")
 			img.arrow(src="/images/down_arrow.png")
+		.scheduleErrorContainer
+			.scheduleErrorText Please fill in stream details below to schedule a stream.
 		.schedule_container.hidden
 			.schedule_stream_section
 				.stream_input_title Pick date
@@ -31,7 +33,7 @@ block content
 			.schedule_stream_section
 				.stream_input_title Pick time
 				.time_picker
-					input.timepicker(name="time" type="text")
+					input.timepicker(name="time" type="text" placeholder="Choose a time")
 					button.date_picker_button
 						i.fa.fa-clock-o
 				.inputErrorContainer

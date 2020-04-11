@@ -478,6 +478,72 @@ const streamController = {
                 errors: "An unknown error occurred"
             });
         }       
+    },
+
+    async schedule_live_stream(req, res) {
+        try {        
+            let stream = new Stream();
+            let stream_data = req.body;
+
+            if (stream_data.thumbnail_key) {
+                stream.thumbnail_key = stream_data.thumbnail_key;
+            }
+
+            if (stream_data.thumbnail_url) {
+                stream.thumbnail_url = stream_data.thumbnail_url;
+            }
+
+            if (stream_data.thumbnail_name) {
+                stream.thumbnail_name = stream_data.thumbnail_name;
+            }
+            
+            if (stream_data.thumbnail_id) {
+                stream.thumbnail_id = stream_data.thumbnail_id;
+            }
+
+            stream.date_created = stream_data.date_created;
+            stream.stream_name = stream_data.stream_name;
+            stream.stream_description = stream_data.stream_description;
+            stream.stream_video_id = stream_data.stream_video_id;
+
+            let tags = stream_data.stream_tags;
+            tags = JSON.parse(tags);
+
+            for (const tag of tags) {
+                stream.stream_tags.push(tag);
+            }
+
+            console.log("user_id", req.user._id);
+
+            stream.streamer_id = req.user._id;
+            stream.streamer = req.user._id;
+            stream.stream_live_status = true;
+            stream.is_live = true;
+    
+            await stream.save();
+            let stream_id = stream._id;
+
+            let user;
+            user = await User.findById(req.user._id);
+            if (!user) {
+                return res.status(404).json({
+                    errors: "User not found."
+                });
+            }
+            user.is_live = true;
+            user.active_stream_id = stream._id;
+            await user.save();
+
+            res.json({
+                stream: stream,
+                stream_id: stream_id
+            })
+        } catch(error) {
+            console.log(error);
+            res.status(500).json({
+                errors: "An unknown error occurred"
+            });
+        }
     }
 
 }

@@ -128,7 +128,7 @@ $(document).ready(function () {
 
         go_live_button.off('click');
         go_live_button.on('click', function() {
-            stream_data = check_inputs_not_empty();
+            check_inputs_not_empty();
             console.log("data", stream_data);
             if (stream_data.errors !== true) {
                 let image_exists = check_image_exists();
@@ -178,6 +178,7 @@ $(document).ready(function () {
         stream_data.stream_name = $('.stream_name').val();
         stream_data.stream_description = $('.stream_description').val();
         let tags = $('#input-tags')[0].selectize.items;
+        stream_data.temp_tags = tags;
         // stringified because server-side ran into problems otherwise;
         stream_data.stream_tags = JSON.stringify(tags);
         stream_data.stream_video_id = $('.stream_video_id_input').val();
@@ -221,7 +222,7 @@ $(document).ready(function () {
         errorText.text("Cannot be empty.");
     }
 
-    function check_inputs_not_empty() {
+    function check_inputs_not_empty(is_scheduling=0) {
         $('.inputErrorContainer').hide();
         $('.inputErrorText').text('');
         $('.generalErrorContainer').hide();
@@ -240,17 +241,19 @@ $(document).ready(function () {
             console.log(2);
             display_error(input_div);
         }
-        if (stream_data.stream_tags.length == 0) {
+        if (stream_data.temp_tags.length == 0) {
             errors = true;
             let input_div = $('#input-tags');
             console.log(3);
             display_error(input_div);
         }
-        if (!stream_data.stream_video_id) {
-            errors = true;
-            let input_div = $('.stream_video_id_input');
-            console.log(4);
-            display_error(input_div);
+        if (!is_scheduling) {
+            if (!stream_data.stream_video_id) {
+                errors = true;
+                let input_div = $('.stream_video_id_input');
+                console.log(4);
+                display_error(input_div);
+            }
         }
 
         if (errors == true) {
@@ -305,7 +308,6 @@ $(document).ready(function () {
                 interval: 15,
                 minTime: '12:00am',
                 maxTime: '11:55pm',
-                defaultTime: 'now',
                 startTime: '12:00am',
                 dynamic: false,
                 dropdown: true,
@@ -354,20 +356,23 @@ function display_schedule_error(input_div) {
 
 function init_stream_scheduling() {
     let create_event_button = $('.create_event');
-    let start_live_modal = $('.startLiveModal');
 
     create_event_button.off('click');
     create_event_button.on('click', function() {
-        let stream_data = check_inputs_not_empty();
+        populate_schedule_data();
+        check_inputs_not_empty(is_scheduling = true);
+        console.log("data", stream_data);
         console.log("data", schedule_data);
-        if (schedule_data.errors !== true) {
+        if (schedule_data.errors !== true && stream_data.errors !== true) {
             let image_exists = check_image_exists();
             if (image_exists) {
                 $('.go_live').text("Uploading thumbnail...");
-                upload_scenario = 'create';
+                upload_scenario = 'schedule';
                 startImageUpload()
+                console.log("ya", schedule_data);
             } else {
-                create_live_stream();
+                console.log("ye", schedule_data);
+                schedule_live_stream();
             }
         } else {
             // in future, scroll to first error
@@ -376,16 +381,22 @@ function init_stream_scheduling() {
         }
     });
 }
+init_stream_scheduling();
 
-function schedule_stream() {
-
+function schedule_live_stream() {
+    console.log("made it here: ", schedule_data);
+    console.log("made it here: ", stream_data);
+    let joint_data = {};
+    joint_data.schedule_data = schedule_data;
+    joint_data.stream_data = stream_data;
     $.ajax({
         url: '/dashboard/scheduleLiveStream',
         type: 'POST',
-        data: stream_data,
+        data: joint_data,
         success: function(data) {
-            let stream_id = data.stream_id;
-            window.location.href = "/watch/" + stream_id;
+            // let stream_id = data.stream_id;
+            // window.location.href = "/scheduled/" + stream_id;
+            //- watch all peaks ka näitama, lihtsalt et pole veel live-is
         },
         error: function(err) {
             imageError("Could not save file reference.", err);
@@ -396,31 +407,59 @@ function schedule_stream() {
 function populate_schedule_data() {
     $('.inputErrorContainer').hide();
     $('.inputErrorText').text('');
-    $('.generalErrorContainer').hide();
+    $('.scheduleErrorContainer').hide();
     let errors = false;
-    let date = $('[data-toggle="datepicker"]').datepicker('getDate');
+    let date_div = $('[data-toggle="datepicker"]');
+    let date_check = date_div.val();
+    let date = date_div.datepicker('getDate');
 
-    if (!date) {
+    let time_div = $('.timepicker');
+    let time_check = time_div.val();
+    let time = schedule_data.time;
+    let public_status = 'N/A';
+
+    let public_button = $('#radio-one');
+    let unlisted_button = $('#radio-two');
+
+    if (public_button.is(':checked')) {
+        public_status = 'public';
+    }
+
+    if (unlisted_button.is(':checked')) {
+        public_status = 'unlisted';
+    }
+
+    if (!date_check) {
         errors = true;
-        let input_div = $('.picker');
+        let input_div = $('.date_picker');
         console.log(33);
         display_schedule_error(input_div);
     }
     schedule_data.date = date;
 
-    if (!schedule_data.time) {
+    if (!time_check) {
         errors = true;
-        let input_div = $('.timepicker');
+        let input_div = $('.time_picker');
         console.log(44);
         display_schedule_error(input_div);
     }
 
+    if (public_status == 'N/A') {
+        errors = true;
+        let input_div = $('.switch-field');
+        console.log(44);
+        display_schedule_error(input_div);      
+    }
+    schedule_data.public_status = public_status;
+
     if (errors == true) {
-        $('.generalErrorContainer').show();
+        $('.scheduleErrorContainer').show();
         schedule_data.errors = true;
     } else {
         schedule_data.errors = false;
     }
+
+    return;
 }
 
 /* -------------------------------
@@ -644,6 +683,8 @@ function saveReference() {
                 create_live_stream();
             } else if (upload_scenario == 'save') {
                 update_live_stream();
+            } else if (upload_scenario = 'schedule') {
+                schedule_live_stream();
             }
             saveFileReferenceSuccess(imageBlock);
         },
