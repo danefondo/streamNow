@@ -33,6 +33,7 @@ img.streamPreview {
     min-height: 220px;
     max-width: 323px;
     border-radius: 22px;
+    object-fit: cover;
 }
 
 .streamPreviewContainer {

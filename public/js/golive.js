@@ -128,7 +128,7 @@ $(document).ready(function () {
 
         go_live_button.off('click');
         go_live_button.on('click', function() {
-            let stream_data = check_inputs_not_empty();
+            stream_data = check_inputs_not_empty();
             console.log("data", stream_data);
             if (stream_data.errors !== true) {
                 let image_exists = check_image_exists();
@@ -312,14 +312,13 @@ $(document).ready(function () {
                 scrollbar: true,
                 change: function(time) {
                     console.log("time", time);
-                    // the input field
-                    var element = $(this);
-                    // get access to this Timepicker instance
+                    // // the input field
+                    // var element = $(this);
+                    // // get access to this Timepicker instance
                     // let picker = element.timepicker();
 
-                    // let selected_time = element.format(time);
-                    // console.log("time:", selected_time);
-                    // schedule_data.time = selected_time;
+                    let selected_time = time;
+                    schedule_data.time = selected_time;
                 }
             });
         }
@@ -345,6 +344,14 @@ $(document).ready(function () {
     schedule stream
 -------------------------------- */
 
+function display_schedule_error(input_div) {
+    let container = input_div.closest('.schedule_stream_section');
+    let errorContainer = container.find('.inputErrorContainer');
+    let errorText = container.find('.inputErrorText');
+    errorContainer.css('display', 'block');
+    errorText.text("Cannot be empty.");
+}
+
 function init_stream_scheduling() {
     let create_event_button = $('.create_event');
     let start_live_modal = $('.startLiveModal');
@@ -353,7 +360,7 @@ function init_stream_scheduling() {
     create_event_button.on('click', function() {
         let stream_data = check_inputs_not_empty();
         console.log("data", schedule_data);
-        if (stream_data.errors !== true) {
+        if (schedule_data.errors !== true) {
             let image_exists = check_image_exists();
             if (image_exists) {
                 $('.go_live').text("Uploading thumbnail...");
@@ -371,10 +378,9 @@ function init_stream_scheduling() {
 }
 
 function schedule_stream() {
-    stream_data.date_created = new Date();
 
     $.ajax({
-        url: '/dashboard/createLiveStream',
+        url: '/dashboard/scheduleLiveStream',
         type: 'POST',
         data: stream_data,
         success: function(data) {
@@ -388,10 +394,33 @@ function schedule_stream() {
 }
 
 function populate_schedule_data() {
+    $('.inputErrorContainer').hide();
+    $('.inputErrorText').text('');
+    $('.generalErrorContainer').hide();
+    let errors = false;
     let date = $('[data-toggle="datepicker"]').datepicker('getDate');
-    let time =
 
+    if (!date) {
+        errors = true;
+        let input_div = $('.picker');
+        console.log(33);
+        display_schedule_error(input_div);
+    }
     schedule_data.date = date;
+
+    if (!schedule_data.time) {
+        errors = true;
+        let input_div = $('.timepicker');
+        console.log(44);
+        display_schedule_error(input_div);
+    }
+
+    if (errors == true) {
+        $('.generalErrorContainer').show();
+        schedule_data.errors = true;
+    } else {
+        schedule_data.errors = false;
+    }
 }
 
 /* -------------------------------
