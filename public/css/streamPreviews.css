@@ -99,6 +99,7 @@ img.streamPreview {
     border-radius: 360px;
     margin-right: 10px;
     background-color: #eee;
+    object-fit: cover;
 }
 
 .streamerLevelContainer {

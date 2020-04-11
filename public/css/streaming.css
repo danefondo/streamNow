@@ -292,6 +292,7 @@
     margin-right: auto;
     padding: 0px;
     border-radius: 4px;
+    object-fit: cover;
 }
 
 .streamer_profile_icon {
@@ -299,6 +300,7 @@
     margin-right: 10px;
     width: 45px;
     border-radius: 360px;
+    object-fit: cover;
 }
 
 
