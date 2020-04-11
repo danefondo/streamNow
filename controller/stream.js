@@ -300,14 +300,17 @@ const streamController = {
             }
             console.log("boolean", user_like_boolean);
             console.log("following", user_following_boolean);
-            
+
+            let host_name = req.headers.host;
+
             let streamer = user;
             res.render('profile', {
                 video_id: video_id,
                 stream,
                 streamer,
                 user_like_boolean,
-                user_following_boolean
+                user_following_boolean,
+                host_name
             });
         } catch(error) {
             console.log(error);
