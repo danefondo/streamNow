@@ -95,7 +95,7 @@ $(document).ready(function () {
         let player_url = 'https://www.youtube-nocookie.com/embed/' + stream.stream_video_id + '?modestbranding=1&showinfo=0&rel=0&theme=light&color=white'
         player.find('.live_player').attr('src', player_url)
 
-        let chat_url = 'https://www.youtube.com/live_chat?v=' + stream.stream_video_id + '&embed_domain=stream-one.herokuapp.com'
+        let chat_url = 'https://www.youtube.com/live_chat?v=' + stream.stream_video_id + '&embed_domain=' + window.location.host;
         chat.find('.live_chat').attr('src', chat_url)
     }
     

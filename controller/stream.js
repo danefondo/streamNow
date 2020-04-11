@@ -501,10 +501,17 @@ const streamController = {
                 stream.thumbnail_id = stream_data.thumbnail_id;
             }
 
-            stream.date_created = stream_data.date_created;
-            stream.stream_name = stream_data.stream_name;
-            stream.stream_description = stream_data.stream_description;
-            stream.stream_video_id = stream_data.stream_video_id;
+            if (stream_data.stream_name) {
+                stream.stream_name = stream_data.stream_name;
+            }
+
+            if (stream_data.stream_description) {
+                stream.stream_description = stream_data.stream_description;
+            }
+
+            if (stream_data.stream_video_id) {
+                stream.stream_video_id = stream_data.stream_video_id;
+            }
 
             let tags = stream_data.stream_tags;
             tags = JSON.parse(tags);
@@ -517,8 +524,12 @@ const streamController = {
 
             stream.streamer_id = req.user._id;
             stream.streamer = req.user._id;
-            stream.stream_live_status = true;
-            stream.is_live = true;
+            stream.stream_live_status = false;
+            stream.is_live = false;
+            stream.scheduled_for_later = true;
+            stream.scheduled_time = req.body.schedule_data.time;
+            stream.scheduled_date = req.body.schedule_data.date;
+            stream.public_status = req.body.schedule_data.public_status;
     
             await stream.save();
             let stream_id = stream._id;
