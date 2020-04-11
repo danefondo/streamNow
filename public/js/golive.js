@@ -9,6 +9,7 @@ $(document).ready(function () {
     let coreURL =  'dashboard';
     let uploadData = {};
     let stream_data = {};
+    let schedule_data = {};
     let upload_scenario = '';
 
     /* --------------------------------
@@ -297,9 +298,9 @@ $(document).ready(function () {
     // })
 
     function init_timepicker() {
-        let timepicker = $('.timepicker');
-        if (timepicker.length) {
-            timepicker.timepicker({
+        let time_picker = $('.timepicker');
+        if (time_picker.length) {
+            time_picker.timepicker({
                 timeFormat: 'h:mm p',
                 interval: 15,
                 minTime: '12:00am',
@@ -308,7 +309,18 @@ $(document).ready(function () {
                 startTime: '12:00am',
                 dynamic: false,
                 dropdown: true,
-                scrollbar: true
+                scrollbar: true,
+                change: function(time) {
+                    console.log("time", time);
+                    // the input field
+                    var element = $(this);
+                    // get access to this Timepicker instance
+                    // let picker = element.timepicker();
+
+                    // let selected_time = element.format(time);
+                    // console.log("time:", selected_time);
+                    // schedule_data.time = selected_time;
+                }
             });
         }
     }
@@ -318,15 +330,69 @@ $(document).ready(function () {
         date: new Date()
       });
 
-      $('.subArea').on('click', function() {
-          $('.schedule_container').toggleClass('hidden');
-          $(this).toggleClass('margin-10');
-      })
+    $('.subArea').on('click', function() {
+        $('.schedule_container').toggleClass('hidden');
+        $(this).toggleClass('margin-10');
+    })
 
     //   $('.getShit').on('click', function() {
     //     let values = $('#input-tags')[0].selectize.items;
     //       console.log("stuff: ", values);
     //   })
+
+
+/* --------------------------------
+    schedule stream
+-------------------------------- */
+
+function init_stream_scheduling() {
+    let create_event_button = $('.create_event');
+    let start_live_modal = $('.startLiveModal');
+
+    create_event_button.off('click');
+    create_event_button.on('click', function() {
+        let stream_data = check_inputs_not_empty();
+        console.log("data", schedule_data);
+        if (stream_data.errors !== true) {
+            let image_exists = check_image_exists();
+            if (image_exists) {
+                $('.go_live').text("Uploading thumbnail...");
+                upload_scenario = 'create';
+                startImageUpload()
+            } else {
+                create_live_stream();
+            }
+        } else {
+            // in future, scroll to first error
+            window.scrollTo(0, 0);
+            return;
+        }
+    });
+}
+
+function schedule_stream() {
+    stream_data.date_created = new Date();
+
+    $.ajax({
+        url: '/dashboard/createLiveStream',
+        type: 'POST',
+        data: stream_data,
+        success: function(data) {
+            let stream_id = data.stream_id;
+            window.location.href = "/watch/" + stream_id;
+        },
+        error: function(err) {
+            imageError("Could not save file reference.", err);
+        }
+    })
+}
+
+function populate_schedule_data() {
+    let date = $('[data-toggle="datepicker"]').datepicker('getDate');
+    let time =
+
+    schedule_data.date = date;
+}
 
 /* -------------------------------
     image upload

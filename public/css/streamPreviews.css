@@ -115,6 +115,7 @@ img.streamPreview {
 .streamer_lastname_discover {
     line-height: 40px;
     margin-right: 5px;
+    display: inline-block;
 }
 
 .stream_link {

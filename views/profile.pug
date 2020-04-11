@@ -116,21 +116,21 @@ block content
 						.stream_input_container.edit_input
 							.stream_input_title Change custom thumbnail 
 							.entryDetailsGroup.auto-side-margins
-								.mainImage(id= "imageArea_")
-									.file-upload.imageBlock(data-type="mainImage" data-image-key=user.profile_image_key)
-										if (!user.profile_image_url)
+								.mainImage(id= "imageArea_" + stream.thumbnail_id)
+									.file-upload.imageBlock(data-type="mainImage" data-image-key=stream.thumbnail_key)
+										if (!stream.thumbnail_url)
 											form.image-upload-wrap.imageForm.show(action= "/' + coreURL + '/sign-s3" method="POST" enctype= "multipart/form-data")
 												input#file-input.file-upload-input(type='file', name='image', accept='image/jpg')
 												.drag-text.padding-60
 													button.file-upload-btn(type='button') Upload custom thumbnail
 													h3 Or just drag and drop a file
 											.file-upload-content.hide
-												img.file-upload-image(src=user.profile_image_url, alt='your image')
+												img.file-upload-image(src=stream.thumbnail_url, alt='your image')
 												.image-title-wrap
 													button.remove-image(type='button')
 														span.image-pre-title Remove 
-														if (user.profile_image_name && user.profile_image_name.length) 
-															span.image-title #{user.profile_image_name}
+														if (stream.thumbnail_name && stream.thumbnail_name.length) 
+															span.image-title #{stream.thumbnail_name}
 														else
 															span.image-title Untitled Image
 														span.image-uploading-title Uploading image...
@@ -142,12 +142,12 @@ block content
 													button.file-upload-btn(type='button') Upload custom thumbnail
 													h3 Or just drag and drop a file
 											.file-upload-content.show
-												img.file-upload-image(src=user.profile_image_url, alt='your image')
+												img.file-upload-image(src=stream.thumbnail_url, alt='your image')
 												.image-title-wrap
 													button.remove-image(type='button')
 														span.image-pre-title Remove 
-														if (user.profile_image_name && user.profile_image_name.length) 
-															span.image-title #{user.profile_image_name}
+														if (stream.thumbnail_name && stream.thumbnail_name.length) 
+															span.image-title #{stream.thumbnail_name}
 														else
 															span.image-title Untitled Image
 														span.image-uploading-title Uploading image...

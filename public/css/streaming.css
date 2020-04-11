@@ -109,7 +109,7 @@
 .stream_details_block {
     padding: 10px;
     display: flex;
-    align-items: center;
+    align-items: start;
 }
 
 
