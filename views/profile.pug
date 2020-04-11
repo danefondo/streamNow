@@ -161,9 +161,7 @@ block content
 					if (stream.is_live)
 						.sidebar_section_top
 							.hide_chat Hide chat
-						//- iframe.live_chat(width='350px', height='600px', src='https://www.youtube.com/live_chat?v=' + video_id + '&embed_domain=eetertv.com') 
-						#chat-embed-wrapper
-							iframe#chat-embed(referrerPolicy = 'origin' src='https://www.youtube.com/live_chat?v=' + video_id + '&embed_domain=eetertv.com' frameBorder="0")
+						iframe.live_chat(width='350px', height='600px', src='https://www.youtube.com/live_chat?v=' + video_id + '&embed_domain=eetertv.com') 
 
 block scripts
 	script(src='/js/live.js')
