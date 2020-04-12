@@ -45,7 +45,7 @@ block content
 			.player_container
 				if (!stream.is_live)
 					.stream_not_live Stream has ended. Watch recording.
-				iframe.live_player(width='850', height='540', src='https://www.youtube-nocookie.com/embed/' + video_id + '?modestbranding=1&showinfo=0&rel=0&theme=light&color=white', frameborder='0', allow='accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture', allowfullscreen='')
+				iframe.live_player(width='850', height='540', src='https://www.youtube-nocookie.com/embed/' + video_id + '?autoplay=1&modestbranding=1&showinfo=0&rel=0&theme=light&color=white', frameborder='0', allow='accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture', allowfullscreen='')
 			.stream_details
 				.stream_details_block
 					.stream_name_display #{stream.stream_name}

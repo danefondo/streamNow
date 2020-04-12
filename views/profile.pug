@@ -58,7 +58,7 @@ block content
 				.donate_button Support $
 			if (streamer.is_live)
 				.player_container
-					iframe.live_player(width='850', height='540', src='https://www.youtube-nocookie.com/embed/' + video_id + '?modestbranding=1&showinfo=0&rel=0&theme=light&color=white', frameborder='0', allow='accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture', allowfullscreen='')
+					iframe.live_player(width='850', height='540', src='https://www.youtube-nocookie.com/embed/' + video_id + '?autoplay=1&modestbranding=1&showinfo=0&rel=0&theme=light&color=white', frameborder='0', allow='accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture', allowfullscreen='')
 				.stream_details
 					.stream_details_block
 						.stream_name_display #{stream.stream_name}
