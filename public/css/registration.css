@@ -324,8 +324,8 @@ form.signin-form .submit {
 	text-align: center;
 	cursor: pointer;
 	transition: 85ms ease;
-	box-shadow: 4px 4px 0px 0px #1600ffba;
-	background-color: blue;
+	box-shadow: 4px 4px 0px 0px #120088bf;
+	background-color: #120088;
     color: white;
 	/* font-family: 'Lora', serif; */
 	font-family: 'Trebuchet MS', sans-serif;
@@ -369,7 +369,8 @@ form.signin-form .submit {
 }
 
 .landing-nav {
-	background-color: white;
+	/* background-color: white; */
+	background-color: #f7f7fb;
   	padding: 10px 0px;
   	flex-wrap: wrap;
 	display: flex;
