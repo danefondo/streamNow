@@ -60,7 +60,12 @@ img.streamPreview {
 
 .streamTags {
     display: flex;
-    overflow: scroll;
+    /* overflow: scroll; */
+    outline: none;
+    border: 0;
+    border-width: 0px;
+    box-shadow: none;
+    -webkit-appearance: none;
 }
 
 .streamTag {
@@ -77,6 +82,10 @@ img.streamPreview {
     max-width: 150px;
     letter-spacing: 1px;
     text-transform: lowercase;
+    outline: none;
+    border: 0;
+    border-width: 0px;
+    -webkit-appearance: none;
 }
 
 .streamNameContainer {
