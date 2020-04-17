@@ -31,7 +31,7 @@
 
 img.streamPreview {
     min-height: 220px;
-    max-width: 323px;
+    /* max-width: 323px; */
     /* border-radius: 22px; */
     object-fit: cover;
 }
@@ -46,6 +46,8 @@ img.streamPreview {
     justify-content: center;
     flex-direction: column;
     /* border-radius: 4px; */
+    background-color: transparent;
+    box-shadow: 3px 2px 11px 0px rgba(10, 0, 70, 0.42);
 }
 
 .streamMetaContainer {
