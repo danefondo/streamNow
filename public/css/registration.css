@@ -483,15 +483,11 @@ form.signin-form .submit {
 }
 
 .examplesTitle__landingPage {
-    font-size: 70px;
-    background-color: #dfe4ff;
-    width: 800px;
-    border-bottom: 3px solid #333;
-    /* margin-bottom: 50px;
-    margin-left: 125px; */
-    font-style: italic;
+	font-size: 70px;
     font-weight: 600;
+    color: #120088;
     line-height: 60px;
+    padding: 5px;
 }
 
 .notifier__register {
