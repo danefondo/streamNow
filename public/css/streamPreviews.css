@@ -76,6 +76,7 @@ img.streamPreview {
     white-space: nowrap;
     max-width: 150px;
     letter-spacing: 1px;
+    text-transform: lowercase;
 }
 
 .streamNameContainer {
