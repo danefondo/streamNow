@@ -24,9 +24,9 @@
 }
 
 .stream:hover {
-    border: 1px solid #796dff;
+    border: 1px solid #1200882b;
     transform: scale(1.015);
-    background-color: #0000ff0a;
+    background-color: #efeff7;
 }
 
 img.streamPreview {
