@@ -387,19 +387,20 @@ function schedule_live_stream() {
     console.log("made it here: ", schedule_data);
     console.log("made it here: ", stream_data);
     let joint_data = {};
-    joint_data.schedule_data = schedule_data;
-    joint_data.stream_data = stream_data;
+    joint_data.schedule_data = JSON.stringify(schedule_data);
+    joint_data.stream_data = JSON.stringify(stream_data);
     $.ajax({
         url: '/dashboard/scheduleLiveStream',
         type: 'POST',
         data: joint_data,
         success: function(data) {
+            alert("upcoming: ", data.user.upcoming_streams);
             // let stream_id = data.stream_id;
             // window.location.href = "/scheduled/" + stream_id;
             //- watch all peaks ka näitama, lihtsalt et pole veel live-is
         },
         error: function(err) {
-            imageError("Could not save file reference.", err);
+            console.log
         }
     })
 }

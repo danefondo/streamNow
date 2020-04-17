@@ -9,13 +9,18 @@ block content
                 .landingSubtitle Let's unite and keep the human spirit strong during Covid-19.
             a.signupPageLink(href='/accounts/registerForm') Start streaming
             //- img.imageBlockX(src='/images/pablo-sign-in.png')
-        .examplesSection__landingPage
-            .examplesContainer__landingPage
-                .examplesTitle__landingPage Trending right now
-        +streamers(streams)
-    else
+        .tags_area
         .contentArea
             .examplesSection__landingPage
                 .examplesContainer__landingPage
                     .examplesTitle__landingPage Trending right now
+            +featured(featured)
+            +streamers(streams)
+    else
+        .tags_area
+        .contentArea
+            .examplesSection__landingPage
+                .examplesContainer__landingPage
+                    .examplesTitle__landingPage Trending right now
+            +featured(featured)
             +streamers(streams)

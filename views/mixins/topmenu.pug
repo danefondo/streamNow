@@ -3,13 +3,13 @@ mixin topmenu(user=0)
 	if !user
 		.landing-nav
 			.title-container
-				a.logoTitleBlack__generic(href='/') Eeter.tv
+				a.logoTitleBlack__generic(href='/') eeter.tv
 			a.loginPageLink(href='/accounts/loginForm') login
 			a.signUpLinkSimple(href='/accounts/registerForm') sign up
 	else if user
 		.nav-container
 			.title-container
-				a.title-btn(href='/') Eeter.tv
+				a.title-btn(href='/') eeter.tv
 			.navlinks-container
 				a.topNavigationLink__topBar(href= '/discover') Discover
 			.stream_buttons

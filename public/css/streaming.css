@@ -16,13 +16,13 @@
     color: white;
     font-weight: bold;
     padding: 10px 16px;
-    border-radius: 4px;
+    border-radius: 2px;
     margin: 0px 6px;
     box-sizing: border-box;
     margin-bottom: 2px;
     border: 1px solid transparent;
     display: inline-block;
-    background-color: blue;
+    background-color: #130089;
     cursor: pointer;
 }
 
@@ -614,4 +614,135 @@
 .auto-side-margins {
     margin-left: auto;
     margin-right: auto;
+}
+
+/* --------------------------------
+    featured stream
+-------------------------------- */
+
+.featured_stream {
+    display: flex;
+    width: 1200px;
+    flex-direction: row;
+    padding: 60px 50px 60px 50px;
+    align-items: flex-start;
+    border: 1px solid transparent;
+    border-radius: 0px;
+    background-color: #12008808;
+    /* box-shadow: 2px 2px 9px 0px rgba(10, 0, 70, 0.14); */
+    cursor: pointer;
+    box-sizing: border-box;
+    transition: .2s ease-in-out;
+    margin: 30px 17px;
+    margin-top: 10px;
+}
+
+.featured_stream:hover {
+    border: 2px solid #1903a01c;
+    transform: scale(1.015);
+}
+
+.featured_streamPreviewContainer {
+    box-sizing: border-box;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    width: 600px;
+    height: 400px !important;
+    box-shadow: 3px 2px 11px 0px rgba(10, 0, 70, 0.42);
+}
+
+.featured_streamMetaContainer {
+    width: 100%;
+    padding: 5px;
+    display: flex;
+    flex-direction: column;
+    max-width: 467px;
+    margin-left: 49px;
+}
+
+.featured_streamNameContainer {
+    padding: 5px;
+    font-size: 24px;
+    color: #120088;
+}
+
+.featured_streamName {
+    font-size: 38px;
+}
+
+.featured_streamTags {
+    display: flex;
+    overflow: scroll;
+    margin-top: 10px;
+}
+
+.featured_streamer_profile_container_discover {
+    display: flex;
+    padding: 8px 10px;
+    align-items: center;
+    margin-top: 0px;
+}
+
+.featured_streamer_profile_image_container {
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 13px;
+}
+
+.featured_streamer_profile_icon_discover {
+    border-radius: 360px;
+    background-color: #eee;
+    object-fit: cover;
+    width: 30px;
+    height: 30px;
+    border: 2px solid #06014442;
+    opacity: 0.9;
+    margin-right: 0px;
+    box-shadow: 1.5px 1.5px 7px 0px rgba(10, 0, 70, 0.22);
+}
+
+.featured_streamer_name_container_discover {
+    display: inline-block;
+    height: 40px;
+    color: #0a004861;
+    font-weight: 500;
+}
+
+.featured_streamer_firstname_discover,
+.featured_streamer_lastname_discover {
+    line-height: 40px;
+    margin-right: 5px;
+    display: inline-block;
+}
+
+.featured_streamTag {
+    font-size: 16.5px;
+    margin-right: 5.5px;
+    padding: 4px 20px;
+    display: inline-block;
+    border-radius: 2px;
+    background-color: #1500a00a;
+    color: #0f007363;
+    margin: 2px 2px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    max-width: 150px;
+    letter-spacing: 1px;
+}
+
+.featured_streamPreview {
+    object-fit: cover;
+    max-width: 600px;
+    min-height: 400px;
+}
+
+.featured_streamer_description_container_discover {
+    color: #a3a2b5;
+    padding: 10px;
 }

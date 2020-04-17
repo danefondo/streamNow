@@ -2,9 +2,9 @@
   border-radius: 4px;
   padding: 8px 20px;
   box-sizing: border-box;
-  font-size: 19px;
-  font-weight: 600;
-  color: #333;
+  font-size: 21px;
+  font-weight: 500;
+  color: #120088;
 }
 
 .title-btn:hover {
@@ -27,7 +27,7 @@
 }
 
 .topNavigationLink__topBar {
-  color: #333;
+  color: #120088;
   font-weight: bold;
   padding: 10px 16px;
   display: inline-block;
@@ -88,9 +88,10 @@
   flex-flow: row nowrap;
   align-items: center;
 /*  padding: 12px 15px;*/
-  padding: 6px 15px;
-  background-color: #fff;
+  padding: 0px 15px;
+  /* background-color: #fff; */
   /* background-color: #111d23; */
+  background-color: #b1f6ff00;
   height: 60px;
 }
 

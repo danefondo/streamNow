@@ -20,6 +20,7 @@ const stream_schema = new mongoose.Schema({
     stream_likes_count: Number,
     users_who_like_stream: [String],
     is_live: Boolean,
+    is_featured: Boolean,
     scheduled_for_later: Boolean,
     scheduled_date: Date,
     scheduled_time: String,

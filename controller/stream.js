@@ -15,8 +15,19 @@ const streamController = {
             }
             console.log("sttreams", streams);
 
+            let featured_streams = await Stream.find({"is_featured": true}).populate('streamer').exec();
+            if (!streams) {
+                console.log("nooo streams");
+                return res.render('index', {
+                    error: "Couldn't get featured streams"
+                });
+            }
+            let featured = featured_streams[0];
+            console.log("feat", featured);
+
             res.render('index', {
-                streams: streams
+                streams: streams,
+                featured: featured
             });
 
         } catch(error) {
@@ -483,7 +494,12 @@ const streamController = {
     async schedule_live_stream(req, res) {
         try {        
             let stream = new Stream();
-            let stream_data = req.body;
+
+
+            let stream_data = JSON.parse(req.body.stream_data);
+            let schedule_data = JSON.parse(req.body.schedule_data);
+
+            console.log("body", req.body);
 
             if (stream_data.thumbnail_key) {
                 stream.thumbnail_key = stream_data.thumbnail_key;
@@ -513,11 +529,25 @@ const streamController = {
                 stream.stream_video_id = stream_data.stream_video_id;
             }
 
-            let tags = stream_data.stream_tags;
-            tags = JSON.parse(tags);
+            if (stream_data.stream_tags) {
+                let tags = stream_data.stream_tags;
+                tags = JSON.parse(tags);
+    
+                for (const tag of tags) {
+                    stream.stream_tags.push(tag);
+                }
+            }
 
-            for (const tag of tags) {
-                stream.stream_tags.push(tag);
+            if (schedule_data.time) {
+                stream.scheduled_time = req.body.schedule_data.time;
+            }
+
+            if (schedule_data.date) {
+                stream.scheduled_date = req.body.schedule_data.date;
+            }
+
+            if (schedule_data.public_status) {
+                stream.public_status = req.body.schedule_data.public_status
             }
 
             console.log("user_id", req.user._id);
@@ -527,9 +557,6 @@ const streamController = {
             stream.stream_live_status = false;
             stream.is_live = false;
             stream.scheduled_for_later = true;
-            stream.scheduled_time = req.body.schedule_data.time;
-            stream.scheduled_date = req.body.schedule_data.date;
-            stream.public_status = req.body.schedule_data.public_status;
     
             await stream.save();
             let stream_id = stream._id;
@@ -541,13 +568,14 @@ const streamController = {
                     errors: "User not found."
                 });
             }
-            user.is_live = true;
-            user.active_stream_id = stream._id;
+            user.is_live = false;
+            user.upcoming_streams.push(stream_id);
             await user.save();
 
             res.json({
                 stream: stream,
-                stream_id: stream_id
+                stream_id: stream_id,
+                user: user
             })
         } catch(error) {
             console.log(error);

@@ -56,7 +56,7 @@ block content
 								img.streamer_follow_icon(src= '/images/follow_icon.png')
 							.streamer_follow_state Follow
 				.donate_button Support $
-			if (streamer.is_live)
+			if (streamer.is_live && stream)
 				.player_container
 					iframe.live_player(width='850', height='540', src='https://www.youtube-nocookie.com/embed/' + video_id + '?autoplay=1&modestbranding=1&showinfo=0&rel=0&theme=light&color=white', frameborder='0', allow='accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture', allowfullscreen='')
 				.stream_details
@@ -85,7 +85,7 @@ block content
 						.stream_tags_display
 							each tag in stream.stream_tags
 								.stream_tag #{tag}
-			if (streamer.is_live)
+			if (streamer && streamer.is_live && stream)
 				.edit_stream_details
 					.stream_details_block
 						if (user && user.id == streamer.id)
@@ -159,7 +159,7 @@ block content
 		.section_right
 			if (user.is_live)
 				.player_sidebar_container
-					if (stream.is_live)
+					if (stream && stream.is_live)
 						.sidebar_section_top
 							.hide_chat Hide chat
 						iframe.live_chat(width='350px', height='600px', src='https://www.youtube.com/live_chat?v=' + video_id + '&embed_domain=' + host_name) 
