@@ -1562,7 +1562,7 @@ a {
     position: absolute;
     width: 3px;
     height: 28px;
-    background-color: #120088;
+    /* background-color: #120088; */
     left: 0px;
     top: 50%;
     transform: translateY(-50%);
