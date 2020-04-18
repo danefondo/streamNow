@@ -744,6 +744,7 @@
 }
 
 .featured_streamer_description_container_discover {
-    color: #a3a2b5;
+    /* color: #a3a2b5; */
+    color: #514f7a;
     padding: 10px;
 }
