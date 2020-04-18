@@ -674,7 +674,7 @@
 
 .featured_streamTags {
     display: flex;
-    overflow: scroll;
+    /* overflow: scroll; */
     margin-top: 10px;
 }
 
