@@ -1,0 +1,46 @@
+mixin footer(lang=0)
+	if (!lang || lang == 0)
+		.footer
+			.footer_sections
+				.footer_section
+					.footer_about About
+				.footer_section
+					.footer_privacy Privacy policy
+				.footer_section
+					.footer_terms Terms of service
+				.footer_section
+					.footer_contact Contact us
+				.footer_section.right
+					.rights_reserved All rights reserved.
+				.footer_section.right
+					.copyrights Copyright © 2020 Eeter.tv
+	else if (lang == "EST")
+		.footer
+			.footer_sections
+				.footer_section
+					.footer_about Meist
+				.footer_section
+					.footer_privacy Privaatsus
+				.footer_section
+					.footer_terms Tingimused
+				.footer_section
+					.footer_contact Kontakt
+				.footer_section.right
+					.rights_reserved Kõik õigused kaitstud.
+				.footer_section.right
+					.copyrights © 2020 Eeter.tv
+	else if (lang == "ENG")
+		.footer
+			.footer_sections
+				.footer_section
+					.footer_about About
+				.footer_section
+					.footer_privacy Privacy policy
+				.footer_section
+					.footer_terms Terms of service
+				.footer_section
+					.footer_contact Contact us
+				.footer_section.right
+					.rights_reserved All rights reserved.
+				.footer_section.right
+					.copyrights Copyright © 2020 Eeter.tv

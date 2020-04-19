@@ -8,6 +8,7 @@
 
 .registrationBlock__registerPage {
 	margin: 0 auto;
+	margin-bottom: 40px;
 }
 
 .registration-form {
@@ -49,7 +50,7 @@
 .register-button {
 	margin-left: 2px;
 	margin-right: 20px;
-	border-radius: 40px;
+	border-radius: 4px;
 	padding: 12px;
 	font-weight: 600;
 	width: 170px;
@@ -58,9 +59,9 @@
 	font-size: 20px;
 	cursor: pointer;
 	transition: 85ms ease;
-	box-shadow: 3px 3px 0px 0px #4458ff;
+	box-shadow: 3px 3px 0px 0px #120088bf;
     border: none;
-	background-color: #1600ff;
+	background-color: #120088;
     color: white;
 	/* font-family: 'Lora', serif; */
 	font-family: 'Trebuchet MS', sans-serif;
@@ -70,15 +71,14 @@
 
 .register-button:hover {
 	transform: scale(1.01);
-    background-color: #152229;
+    background-color: #100269;
     color: white;
-	border-radius: 3px;
-	box-shadow: 3px 3px 0px 0px #19191985;
+	border-radius: 4px;
 }
 
 .register-button:disabled {
 	cursor: not-allowed;
-    background-color: #4458ff !important;
+    background-color: #302a52 !important;
 }
 
 .form-groups {
@@ -115,7 +115,7 @@
 }
 
 .input__registration:focus {
-	border-left: 3px solid #1600ff;
+	border-left: 3px solid #120088;
 }
 
 .input__registration:focus::placeholder {
@@ -131,6 +131,7 @@
 	border-bottom-left-radius: 3px;
 	border-bottom-right-radius: 3px;
 }
+
 
 .login-button,
 .signup-button,
@@ -178,6 +179,7 @@
 
 .signin-form {
 	margin-top: 200px;
+	margin-bottom: 40px;
 }
 
 .form__forgotPass,
@@ -217,16 +219,15 @@
 	transition: .2s ease-in-out !important;
 	margin-top: 5px !important;
 	padding: 10px !important;
-	background-color: #1600ff !important;
-	box-shadow: 3px 3px 0px 0px #4458ff;
+	background-color: #120088 !important;
+	box-shadow: 3px 3px 0px 0px #120088bf;
 }
 
 .login-button:hover,
 .forgotPass-button:hover,
 .button__resetPass:hover,
 .button__generic:hover {
-	background-color: #152229 !important;
-	box-shadow: 3px 3px 0px 0px #19191985;
+	background-color: #100269 !important;
 }
 
 .button__generic {
@@ -289,15 +290,15 @@ form.signin-form .submit {
 	height: 100%;
 /*    border-radius: 3px;*/
     box-sizing: border-box;
-    font-weight: 600;
+    font-weight: 500;
 	cursor: pointer;
 	border-radius: 40px;
 }
 
 .signUpLinkSimple {
 	color: #fff;
-	background-color: blue;
-	box-shadow: 3px 3px 0px 0px #4458ff;
+	background-color: #120088;
+	box-shadow: 3px 3px 0px 0px #120088bf;
 }
 
 .loginPageLink {
@@ -307,7 +308,7 @@ form.signin-form .submit {
 }
 
 .signUpLinkSimple:hover {
-	background-color: #152229;
+	background-color: #100269;
 }
 
 .loginPageLink:hover {
@@ -315,12 +316,12 @@ form.signin-form .submit {
 }
 
 .signupPageLink {
-	margin-top: 20px;
+	margin-top: 40px;
 /*	border-radius: 3px;*/
 /*	padding: 0px 2px;*/
 	padding: 8px 16px;
 	font-weight: 600;
-	width: 350px;
+	width: 380px;
 	text-align: center;
 	cursor: pointer;
 	transition: 85ms ease;
@@ -333,13 +334,15 @@ form.signin-form .submit {
     margin-left: 25px;
     /* text-transform: lowercase; */
 	display: block;
-	border-radius: 40px;
+	border-radius: 4px;
+	margin-left: auto;
+	margin-right: auto;
 }
 
 .signupPageLink:hover {
     transform: scale(1.01);
 /*	background-color: #7e57c2;*/
-	background-color: #152229;
+	background-color: #100269;
     color: white;
 /*    border-radius: 3px;*/
 }
@@ -348,9 +351,13 @@ form.signin-form .submit {
 .landingTitleP2 {
   font-size: 90px;
   font-weight: 600;
-  font-style: italic;
+  /* font-style: italic; */
   max-width: 825px;
   display: inline-block;
+}
+
+.landingTitleP1 {
+  font-size: 100px;
 }
 
 .landingTitleP2 {
@@ -359,13 +366,15 @@ form.signin-form .submit {
 }
 
 .landingSubtitle {
-	font-size: 30px;
+	font-size: 28px;
 	font-weight: 400;
-	color: #656565;
-	font-style: italic;
-	max-width: 700px;
+	color: #868686;
+	/* font-style: italic; */
+	max-width: 800px;
 	margin-left: 10px;
 	margin-top: 15px;
+	margin-left: auto;
+    margin-right: auto;
 }
 
 .landing-nav {
@@ -391,7 +400,8 @@ form.signin-form .submit {
 }
 
 .logoTitleBlack__generic {
-	color: #333;
+	color: #120088;
+	font-weight: 500;
 }
 
 .logoTitleBlack__generic:hover {
@@ -408,7 +418,7 @@ form.signin-form .submit {
 
 .title__landingPage {
 	margin: auto;
-	text-align: left;
+	text-align: center;
 	padding: 20px;
 	padding-left: 0px;
 	/* padding-top: 110px; */

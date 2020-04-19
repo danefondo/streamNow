@@ -2,6 +2,7 @@ include images/profileIcon
 include mixins/topmenu
 include mixins/streamers
 include mixins/featured
+include mixins/footer
 
 doctype html
 html
@@ -26,6 +27,7 @@ html
 		block header
 
 	body
+		-var lang = 'EST';
 		- var coreURL = 'dashboard';
 		+topmenu(user)
 		block heading
@@ -34,7 +36,7 @@ html
 			block scripts
 			script(src='/js/main.js')
 			script(src='/js/topbar__dropdown.js')
-		.footer
+		+footer(lang)
 
 
 
