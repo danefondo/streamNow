@@ -46,6 +46,10 @@ body {
   color: #9c9cab;
 }
 
+.footer_section:hover {
+  color: #9c9cab91;
+}
+
 .right {
   float: right;
 }
@@ -133,6 +137,7 @@ div, p {
 .flex {
   display: flex;
 }
+
 
 /*
 ============================

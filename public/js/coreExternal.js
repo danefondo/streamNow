@@ -1,4 +1,4 @@
-$(document).ready(function () {	
+$(document).ready(function() {	
 
 
 	let emailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,20})+$/;

@@ -109,6 +109,23 @@ app.get('/successful-registration', function(req, res) {
 	res.render('RegisterSuccess');
 });
 
+app.get('/about', function(req, res) {
+	res.render('about');
+});
+
+app.get('/privacy', function(req, res) {
+	res.render('privacy');
+});
+
+app.get('/terms', function(req, res) {
+	res.render('terms');
+});
+
+app.get('/contact', function(req, res) {
+	res.render('contact');
+});
+
+
 
 /*====== ROUTE FILES ======*/
 let accounts = require('./routes/accounts');

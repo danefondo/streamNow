@@ -17,13 +17,13 @@ mixin footer(lang=0)
 	else if (lang == "EST")
 		.footer
 			.footer_sections
-				.footer_section
+				a.footer_section(href="/about")
 					.footer_about Meist
-				.footer_section
+				a.footer_section(href="/privacy")
 					.footer_privacy Privaatsus
-				.footer_section
+				a.footer_section(href="/terms")
 					.footer_terms Tingimused
-				.footer_section
+				a.footer_section(href="/contact")
 					.footer_contact Kontakt
 				.footer_section.right
 					.rights_reserved Kõik õigused kaitstud.
@@ -32,13 +32,13 @@ mixin footer(lang=0)
 	else if (lang == "ENG")
 		.footer
 			.footer_sections
-				.footer_section
+				a.footer_section(href="/about")
 					.footer_about About
-				.footer_section
+				a.footer_section(href="/privacy")
 					.footer_privacy Privacy policy
-				.footer_section
+				a.footer_section(href="/terms")
 					.footer_terms Terms of service
-				.footer_section
+				a.footer_section(href="/contact")
 					.footer_contact Contact us
 				.footer_section.right
 					.rights_reserved All rights reserved.
