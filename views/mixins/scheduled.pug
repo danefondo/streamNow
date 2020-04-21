@@ -1,0 +1,47 @@
+mixin scheduled(streams=0)
+        .streams
+            each stream in streams
+                a.stream(href="/watch/" + stream.id)
+                    .streamPreviewContainer
+                        if (stream.thumbnail_url)
+                            img.streamPreview(src= stream.thumbnail_url)
+                        else if (stream.stream_video_id)
+                            //- To get youtube thumbnail: https://stackoverflow.com/questions/2068344/how-do-i-get-a-youtube-video-thumbnail-from-the-youtube-api
+                            img.streamPreview(src="https://img.youtube.com/vi/" + stream.stream_video_id +"/hqdefault.jpg")
+                        else
+                            .streamPreview
+                        .live
+                        .viewerCount
+                    .streamMetaContainer
+                        .streamNameContainer
+                            if (stream.stream_name)
+                                .streamName #{stream.stream_name}
+                            else
+                                .streamName Untitled stream
+                        .streamTags
+                            if (stream.stream_tags)
+                                each tag in stream.stream_tags
+                                    .streamTag #{tag}
+                        .streamer_profile_container_discover
+                            .streamer_profile_image_container
+                                if (stream.streamer)
+                                    if (stream.streamer.profile_image_url)
+                                        img.streamer_profile_icon_discover(src= stream.streamer.profile_image_url)
+                                    else
+                                        img.streamer_profile_icon_discover(src="/images/profile_icon.png")
+                                else
+                                    img.streamer_profile_icon_discover(src="/images/profile_icon.png")
+                            .streamerLevelContainer
+                                .streamerStar
+                                .streamerLevel
+                                .verifiedSign.hidden
+                            .streamer_name_container_discover
+                                if (stream.streamer)
+                                    if (stream.streamer.firstname)
+                                        p.streamer_firstname_discover #{stream.streamer.firstname}
+                                        if (stream.streamer.lastname)
+                                            p.streamer_lastname_discover #{stream.streamer.lastname}
+                                    else if (stream.streamer.username)
+                                        p.streamer_username_discover #{stream.streamer.username}
+                                else
+                                    p.streamer_username_discover Nameless Magician

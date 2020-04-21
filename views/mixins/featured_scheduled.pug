@@ -1,0 +1,46 @@
+mixin featured_scheduled(featured=0)
+		a.featured_stream(href="/watch/" + featured.id)
+			.featured_streamPreviewContainer
+				if (featured.thumbnail_url)
+					img.featured_streamPreview(src= featured.thumbnail_url)
+				else if (featured.stream_video_id)
+					//- To get youtube thumbnail: https://stackoverflow.com/questions/2068344/how-do-i-get-a-youtube-video-thumbnail-from-the-youtube-api
+					img.featured_streamPreview(src="https://img.youtube.com/vi/" + featured.stream_video_id +"/hqdefault.jpg")
+				else
+					.streamPreview
+				.live
+				.viewerCount
+			.featured_streamMetaContainer
+				.featured_streamNameContainer
+					if (featured.stream_name)
+						.featured_streamName #{featured.stream_name}
+					else
+						.featured_streamName Untitled stream
+				.featured_streamTags
+					if (featured.stream_tags)
+						each tag in featured.stream_tags
+							.featured_streamTag #{tag}
+				.featured_streamer_profile_container_discover
+					.featured_streamer_profile_image_container
+						if (featured.streamer)
+							if (featured.streamer.profile_image_url)
+								img.featured_streamer_profile_icon_discover(src= featured.streamer.profile_image_url)
+							else
+								img.featured_streamer_profile_icon_discover(src="/images/profile_icon.png")
+						else
+							img.featured_streamer_profile_icon_discover(src="/images/profile_icon.png")
+					.featured_streamer_name_container_discover
+						if (featured.streamer)
+							if (featured.streamer.firstname)
+								p.featured_streamer_firstname_discover #{featured.streamer.firstname}
+								if (featured.streamer.lastname)
+									p.featured_streamer_lastname_discover #{featured.streamer.lastname}
+							else if (featured.streamer.username)
+								p.featured_streamer_username_discover #{featured.streamer.username}
+						else
+							p.featured_streamer_username_discover Nameless Magician
+				.featured_streamer_description_container_discover
+					if (featured.streamer)
+						if (featured.stream_description)
+							p #{featured.stream_description}
+				.div Registreeri vaatama

@@ -1,0 +1,12 @@
+mixin scheduled_streams
+	.tags_area
+	.contentArea
+		.examplesSection__landingPage
+			.examplesContainer__landingPage
+				if (featured)
+					if (featured.is_live)
+						.examplesTitle__landingPage Currently live
+					else
+						.examplesTitle__landingPage Next up
+		+featured_live(featured)
+		+scheduled(streams)

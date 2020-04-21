@@ -1,4 +1,4 @@
-mixin featured(featured=0)
+mixin featured_live(featured=0)
 		a.featured_stream(href="/watch/" + featured.id)
 			.featured_streamPreviewContainer
 				if (featured.thumbnail_url)
@@ -43,3 +43,4 @@ mixin featured(featured=0)
 					if (featured.streamer)
 						if (featured.stream_description)
 							p #{featured.stream_description}
+				.watch_now Watch now

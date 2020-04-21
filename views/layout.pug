@@ -1,7 +1,9 @@
 include images/profileIcon
 include mixins/topmenu
 include mixins/streamers
-include mixins/featured
+include mixins/scheduled
+include mixins/featured_live
+include mixins/featured_scheduled
 
 -var lang = 'EST';
 
@@ -9,16 +11,19 @@ if (!lang)
 	include eng/footer
 	include eng/login
 	include eng/live_streams
+	include eng/scheduled_streams
 	include eng/landing
 else if (lang == "EST")
 	include est/footer
 	include est/login
 	include est/live_streams
+	include est/scheduled_streams
 	include est/landing
 else if (lang == "ENG")
 	include eng/footer
 	include eng/login
 	include eng/live_streams
+	include eng/scheduled_streams
 	include eng/landing
 
 doctype html

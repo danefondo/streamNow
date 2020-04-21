@@ -1,0 +1,12 @@
+mixin scheduled_streams
+	.tags_area
+	.contentArea
+		.examplesSection__landingPage
+			.examplesContainer__landingPage
+				if (featured)
+					if (featured.is_live)
+						.examplesTitle__landingPage Hetkel laivis
+					else
+						.examplesTitle__landingPage Järgmisena
+		+featured_live(featured)
+		+scheduled(streams)

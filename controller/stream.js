@@ -16,7 +16,7 @@ const streamController = {
             console.log("sttreams", streams);
 
             let featured_streams = await Stream.find({"is_featured": true}).populate('streamer').exec();
-            if (!streams) {
+            if (!featured_streams) {
                 console.log("nooo streams");
                 return res.render('index', {
                     error: "Couldn't get featured streams"
@@ -41,29 +41,32 @@ const streamController = {
     async getScheduledStreams(req, res) {
         try {
 
-            let streams = await Stream.find({"is_live": true}).populate('streamer').exec();
+            let streams = await Stream.find({"is_scheduled": true}).populate('streamer').exec();
             if (!streams) {
                 console.log("nooo streams");
-                return res.render('index', {
+                return res.render('scheduled', {
                     error: "Couldn't get streams"
                 });
             }
             console.log("sttreams", streams);
 
             let featured_streams = await Stream.find({"is_featured": true}).populate('streamer').exec();
-            if (!streams) {
-                console.log("nooo streams");
-                return res.render('index', {
-                    error: "Couldn't get featured streams"
-                });
+            if (!featured_streams) {
+                console.log("Couldn't get featured streams");
             }
             let featured = featured_streams[0];
             console.log("feat", featured);
 
-            res.render('index', {
-                streams: streams,
-                featured: featured
-            });
+            if (featured) {
+                res.render('scheduled', {
+                    streams: streams,
+                    featured: featured
+                });
+            } else {
+                res.render('scheduled', {
+                    streams: streams
+                });
+            }
 
         } catch(error) {
             console.log(error);
