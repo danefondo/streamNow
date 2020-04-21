@@ -16,11 +16,10 @@ const stream_schema = new mongoose.Schema({
     thumbnail_id: String,
     streamer_id: String,
     streamer: {type: Schema.Types.ObjectId, ref: 'User'},
-    stream_live_status: Boolean,
     stream_likes_count: Number,
     users_who_like_stream: [String],
     is_live: Boolean,
-    scheduled_for_later: Boolean,
+    is_scheduled: Boolean,
     scheduled_date: Date,
     scheduled_time: String,
     public_status: String

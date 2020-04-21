@@ -38,6 +38,41 @@ const streamController = {
         }
     },
 
+    async getScheduledStreams(req, res) {
+        try {
+
+            let streams = await Stream.find({"is_live": true}).populate('streamer').exec();
+            if (!streams) {
+                console.log("nooo streams");
+                return res.render('index', {
+                    error: "Couldn't get streams"
+                });
+            }
+            console.log("sttreams", streams);
+
+            let featured_streams = await Stream.find({"is_featured": true}).populate('streamer').exec();
+            if (!streams) {
+                console.log("nooo streams");
+                return res.render('index', {
+                    error: "Couldn't get featured streams"
+                });
+            }
+            let featured = featured_streams[0];
+            console.log("feat", featured);
+
+            res.render('index', {
+                streams: streams,
+                featured: featured
+            });
+
+        } catch(error) {
+            console.log(error);
+            res.status(500).json({
+                errors: "An unknown error occurred"
+            });
+        }
+    },
+
     async create_live_stream(req, res) {
         try {        
             let stream = new Stream();
@@ -75,7 +110,6 @@ const streamController = {
 
             stream.streamer_id = req.user._id;
             stream.streamer = req.user._id;
-            stream.stream_live_status = true;
             stream.is_live = true;
     
             await stream.save();
@@ -554,9 +588,8 @@ const streamController = {
 
             stream.streamer_id = req.user._id;
             stream.streamer = req.user._id;
-            stream.stream_live_status = false;
             stream.is_live = false;
-            stream.scheduled_for_later = true;
+            stream.is_scheduled = true;
     
             await stream.save();
             let stream_id = stream._id;

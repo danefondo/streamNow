@@ -62,7 +62,7 @@ textarea { resize: none; }
 }
 
 .stream_input:focus {
-	border-left: 3px solid #1600ff;
+	border-left: 3px solid #120088;
 }
 
 .stream_input_title {

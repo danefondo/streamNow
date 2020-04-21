@@ -104,6 +104,8 @@ app.get('/', streamController.getStreams);
 
 app.get('/discover', streamController.getStreams);
 
+app.get('/scheduled', streamController.getScheduledStreams)
+
 
 app.get('/successful-registration', function(req, res) {
 	res.render('RegisterSuccess');

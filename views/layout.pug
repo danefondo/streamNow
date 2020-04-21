@@ -2,7 +2,24 @@ include images/profileIcon
 include mixins/topmenu
 include mixins/streamers
 include mixins/featured
-include mixins/footer
+
+-var lang = 'EST';
+
+if (!lang)
+	include eng/footer
+	include eng/login
+	include eng/live_streams
+	include eng/landing
+else if (lang == "EST")
+	include est/footer
+	include est/login
+	include est/live_streams
+	include est/landing
+else if (lang == "ENG")
+	include eng/footer
+	include eng/login
+	include eng/live_streams
+	include eng/landing
 
 doctype html
 html
@@ -27,7 +44,6 @@ html
 		block header
 
 	body
-		-var lang = 'EST';
 		- var coreURL = 'dashboard';
 		+topmenu(user)
 		block heading
@@ -36,7 +52,7 @@ html
 			block scripts
 			script(src='/js/main.js')
 			script(src='/js/topbar__dropdown.js')
-		+footer(lang)
+		+footer
 
 
 

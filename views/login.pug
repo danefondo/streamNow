@@ -1,18 +1,14 @@
 extends layout
 
+//- if (!lang)
+//- 	include eng/login
+//- else if (lang == "EST")
+//- 	include est/login
+//- else if (lang == "ENG")
+//- 	include eng/login
+
 block content
-	.account-manager 
-		form.signin-form(method='POST')
-			.inputErrorContainer
-				.inputErrorText
-			.login-title Log in
-			input.login-input(name='username' type='text' placeholder='Username or email' autocomplete="off") 
-			input.login-input(name='password' type='password' placeholder='Password' autocomplete="off")
-			a.forgotPass(href='/accounts/forgotPass') Forgot your password?
-			.submit
-				input.login-button(type='submit' value='Log in')
-			.successMessage Password has been successfully changed. Log in.
-			a.accountExists__registerPage(href='/accounts/registerForm') Or create account
+	+login
 block scripts
 	script(src='/js/login.js')
 

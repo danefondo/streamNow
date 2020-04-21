@@ -8,6 +8,7 @@
 
 */
 
+
 @import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css");
 @import url('https://fonts.googleapis.com/css?family=Chakra+Petch');
 
@@ -46,7 +47,7 @@ body {
   color: #9c9cab;
 }
 
-.footer_section:hover {
+a.footer_section:hover {
   color: #9c9cab91;
 }
 
