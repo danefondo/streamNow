@@ -107,11 +107,13 @@ $(document).ready(function () {
     function create_live_stream() {
 
         stream_data.date_created = new Date();
-
+        stream_data.is_live = true;
+        console.log(stream_data);
         $.ajax({
             url: '/dashboard/createLiveStream',
             type: 'POST',
-            data: stream_data,
+            contentType: "application/json",
+            data: JSON.stringify(stream_data),
             success: function(data) {
                 let stream_id = data.stream_id;
                 window.location.href = "/watch/" + stream_id;
@@ -180,7 +182,7 @@ $(document).ready(function () {
         let tags = $('#input-tags')[0].selectize.items;
         stream_data.temp_tags = tags;
         // stringified because server-side ran into problems otherwise;
-        stream_data.stream_tags = JSON.stringify(tags);
+        stream_data.stream_tags = tags;
         stream_data.stream_video_id = $('.stream_video_id_input').val();
     }
 
@@ -385,14 +387,18 @@ init_stream_scheduling();
 
 function schedule_live_stream() {
     console.log("made it here: ", schedule_data);
-    console.log("made it here: ", stream_data);
-    let joint_data = {};
-    joint_data.schedule_data = JSON.stringify(schedule_data);
-    joint_data.stream_data = JSON.stringify(stream_data);
+    debugger;
+    //console.log("made it here: ", stream_data);
+    let joint_data = {...schedule_data, ...stream_data};
+    joint_data.is_scheduled = true;
+    schedule_data.date.setHours(schedule_data.time.getHours())
+    schedule_data.date.setMinutes(schedule_data.time.getMinutes())
+    joint_data.scheduled_time = schedule_data.date;
     $.ajax({
         url: '/dashboard/scheduleLiveStream',
         type: 'POST',
-        data: joint_data,
+        contentType: "application/json",
+        data: JSON.stringify(joint_data),
         success: function(data) {
             alert("upcoming: ", data.user.upcoming_streams);
             // let stream_id = data.stream_id;

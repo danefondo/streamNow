@@ -32,17 +32,6 @@ block content
 								p.streamer_last_name #{streamer.lastname}
 						else
 							p.streamer_username #{streamer.username}
-				.links
-					if (user.fb_link)
-						.fb_link fb
-					if (user.insta_link)
-						.insta_link ig
-					if (user.yt_link)
-						.yt_link yt
-					if (user.twitter_link)
-						.twitter_link tw
-					if (user.website_link)
-						.website_link wb
 				//- CHANGE THIS BELOW, ADD '!' so that only visitors see follow button
 				//- IF STREAM NO LONGER LIVE, SAY SO.
 				if (user && streamer.id !== user.id)
@@ -79,6 +68,8 @@ block content
 									.stream_likes_count #{stream.stream_likes_count}
 								else
 									.stream_likes_count 0
+							.share_buttons
+								.share_options Share
 					.stream_details_block
 						.stream_description_display #{stream.stream_description}
 					.stream_details_block

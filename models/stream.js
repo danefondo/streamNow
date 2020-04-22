@@ -21,8 +21,8 @@ const stream_schema = new mongoose.Schema({
     is_live: Boolean,
     is_scheduled: Boolean,
     is_featured: Boolean,
-    scheduled_date: Date,
-    scheduled_time: String,
+    has_gone_live: Boolean,
+    scheduled_time: Date,
     public_status: String
 });
 

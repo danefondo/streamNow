@@ -1,65 +1,76 @@
 mixin profile_stats(stream, streamer)
-    .streamer_profile_container
-        if (streamer)
-            .streamer_stats
-                if (streamer.profile_image_url)
-                    img.streamer_profile_image(src= streamer.profile_image_url)
-                else if (user)
-                    if (user.id == streamer.id)
-                        .add_profile_image_section + Add profile image
-                if (streamer.description)
-                    .streamer_about
-                        .streamer_about_title About streamer
-                        .streamer_description #{streamer.description}
-                        if (user)
-                            if (streamer.id == user.id)
-                                .streamer_description_edit Edit
-                else if (user)
-                    if (user.id == streamer.id)
-                        .streamer_about.hidden
-                            .streamer_about_title About streamer
-                            .streamer_description #{streamer.description}
-                            if (streamer.id == user.id)
-                                .streamer_description_edit.hidden Edit
-                        .add_about_section + Add about section
-                .streamer_followings
-                    p.streamer_count #{streamer.followers.length} Followers
-                    p.streamer_count #{streamer.following.length} Following
-                    p.streamer_count #{streamer.previous_streams.length} Streams done
-                    //- p.streamer_count #{streamerr.total_views_count} Views
-                .streamer_upcoming
-                    if (streamer.upcoming_streams > 0)
-                        .upcoming Next stream on Friday 5PM
-                    else
-                        .upcoming No upcoming streams planned
-            .streams_container
-                p.upcoming_streams_title Upcoming streams
-                .upcoming_streams_container
-                    .upcoming_streams
-                        if (streamer.upcoming_streams.length > 0)
-                            each stream in streamer.upcoming_streams
-                                .upcoming_stream stream
-                                    .upcoming_stream_details
-                                        if (stream.stream_name)
-                                            a.stream_title(href="/watch/" + stream.id) #{stream.stream_name}
-                                        else
-                                            a.stream_title(href="/watch/" + stream.id) Untitled stream
-                        else
-                            .no_upcoming_streams
-                                .no_streams_text User has no upcoming streams.
-                .previous_streams_container
-                    .previous_streams
-                        p.previous_streams_title Previous streams
-                        if (streamer.previous_streams.length > 0)
-                            each stream in streamer.previous_streams
-                                .previous_stream
-                                    .previous_stream_details
-                                        if (stream.stream_name)
-                                            a.stream_title(href="/watch/" + stream.id) #{stream.stream_name}
-                                        else
-                                            a.stream_title(href="/watch/" + stream.id) Untitled stream
-                                        .stream_date April 4
-                                    iframe.live_player(width='550', height='331', src='https://www.youtube-nocookie.com/embed/' + stream.stream_video_id + '?modestbranding=1&showinfo=0&rel=0&theme=light&color=white', frameborder='0', allow='accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture', allowfullscreen='')
-                        else
-                            .no_previous_streams
-                                .no_streams_text User has no previous streams.
+	.streamer_profile_container
+		if (streamer)
+			.streamer_stats
+				if (streamer.profile_image_url)
+					img.streamer_profile_image(src= streamer.profile_image_url)
+				else if (user)
+					if (user.id == streamer.id)
+						.add_profile_image_section + Add profile image
+				.links
+					if (user.fb_link)
+						img.fb_link.social_link(src="/images/facebook.png")
+					if (user.insta_link)
+						img.insta_link.social_link
+					if (user.yt_link)
+						img.yt_link.social_link
+					if (user.twitter_link)
+						img.twitter_link.social_link
+					if (user.website_link)
+						img.website_link.social_link
+				if (streamer.description)
+					.streamer_about
+						.streamer_about_title About streamer
+						.streamer_description #{streamer.description}
+						if (user)
+							if (streamer.id == user.id)
+								.streamer_description_edit Edit
+				else if (user)
+					if (user.id == streamer.id)
+						.streamer_about.hidden
+							.streamer_about_title About streamer
+							.streamer_description #{streamer.description}
+							if (streamer.id == user.id)
+								.streamer_description_edit.hidden Edit
+						.add_about_section + Add about section
+				.streamer_followings
+					p.streamer_count #{streamer.followers.length} Followers
+					p.streamer_count #{streamer.following.length} Following
+					p.streamer_count #{streamer.previous_streams.length} Streams done
+					//- p.streamer_count #{streamerr.total_views_count} Views
+				.streamer_upcoming
+					if (streamer.upcoming_streams > 0)
+						.upcoming Next stream on Friday 5PM
+					else
+						.upcoming No upcoming streams planned
+			.streams_container
+				p.upcoming_streams_title Upcoming streams
+				.upcoming_streams_container
+					.upcoming_streams
+						if (streamer.upcoming_streams.length > 0)
+							each stream in streamer.upcoming_streams
+								.upcoming_stream stream
+									.upcoming_stream_details
+										if (stream.stream_name)
+											a.stream_title(href="/watch/" + stream.id) #{stream.stream_name}
+										else
+											a.stream_title(href="/watch/" + stream.id) Untitled stream
+						else
+							.no_upcoming_streams
+								.no_streams_text User has no upcoming streams.
+				.previous_streams_container
+					.previous_streams
+						p.previous_streams_title Previous streams
+						if (streamer.previous_streams.length > 0)
+							each stream in streamer.previous_streams
+								.previous_stream
+									.previous_stream_details
+										if (stream.stream_name)
+											a.stream_title(href="/watch/" + stream.id) #{stream.stream_name}
+										else
+											a.stream_title(href="/watch/" + stream.id) Untitled stream
+										.stream_date April 4
+									iframe.live_player(width='550', height='331', src='https://www.youtube-nocookie.com/embed/' + stream.stream_video_id + '?modestbranding=1&showinfo=0&rel=0&theme=light&color=white', frameborder='0', allow='accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture', allowfullscreen='')
+						else
+							.no_previous_streams
+								.no_streams_text User has no previous streams.

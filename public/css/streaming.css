@@ -176,7 +176,8 @@
 }
 
 .stream_edit_button,
-.stream_end_button {
+.stream_end_button,
+.share_options {
     padding: 10px 16px;
     font-size: 17px;
     display: inline-block;
@@ -191,8 +192,13 @@
     font-weight: bold;
 }
 
+.share_options {
+    font-weight: 400;
+}
+
 .stream_edit_button:hover,
-.stream_end_button:hover {
+.stream_end_button:hover,
+.share_options:hover {
     color: #aaa;
 }
 

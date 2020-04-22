@@ -29,7 +29,7 @@ router.post('/saveFileReference', ensureAuthenticated, imageController.saveFileR
 
 router.post('/saveProfileImageReference', ensureAuthenticated, imageController.saveProfileImageReference);
 
-router.post('/createLiveStream', ensureAuthenticated, streamController.create_live_stream);
+router.post('/createLiveStream', ensureAuthenticated, streamController.schedule_live_stream);
 
 router.post('/updateLiveStream', ensureAuthenticated, streamController.update_live_stream);
 
