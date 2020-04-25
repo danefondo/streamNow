@@ -62,6 +62,8 @@ router.get('/profile', ensureAuthenticated, function(req, res) {
 
 /*====== Access control  ======*/
 function ensureAuthenticated(req, res, next){
+  console.log("user", req.user)
+  console.log("user is authenticated", req.isAuthenticated())
   if(req.isAuthenticated()){
   	console.log("Authentication successful.");
     return next();

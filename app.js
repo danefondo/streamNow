@@ -8,7 +8,7 @@ const enforce = require('express-sslify');
 const passport = require('passport');
 const config = require('./config/database');
 const MongoStore = require('connect-mongo')(session);
-
+const cors = require('cors');
 
 const streamController = require('./controller/stream');
 
@@ -60,7 +60,8 @@ app.locals.basedir = path.join(__dirname, 'views');
 // Body parser middleware
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-
+// note:: to be removed
+app.use(cors())
 // Set Public Folder
 app.use(express.static(path.join(__dirname, 'public')));
 
@@ -98,6 +99,8 @@ app.get('*', function(req, res, next){
 
 
 /*====== ROUTES ======*/
+// api routes
+app.get('/api/v1/streams', streamController.fetchStreams); 
 
 // Home route
 app.get('/', streamController.getStreams); 

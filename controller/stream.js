@@ -1,8 +1,53 @@
 let Stream = require('../models/stream');
 let User = require('../models/user');
-
+const moment = require('moment');
 const streamController = {
+    async fetchStreams(req, res) {
+        let query = {"is_live": true}
+        if (req.query.scheduled) {
+            const date = req.query.date ? new Date(req.query.date) : new Date();
+            const anotherDate = new Date();
+            query = {
+                is_scheduled: true,
+                scheduled_time: {
+                    $gte: date,
+                    $lte: anotherDate.setDate(date.getDate() + 5),
+                }
+            }
+        }
+        console.log(query)
+        try {
+            let streams = await Stream.find(query).populate('streamer').sort({ scheduled_time: 1 }).exec();
+            if (!streams) {
+                console.log("nooo streams");
+                return res.render('index', {
+                    error: "Couldn't get streams"
+                });
+            }
+            console.log("sttreams", streams);
 
+            let featured_streams = await Stream.find({"is_featured": true}).populate('streamer').exec();
+            if (!featured_streams) {
+                console.log("nooo streams");
+                return res.render('index', {
+                    error: "Couldn't get featured streams"
+                });
+            }
+            let featured = featured_streams[0];
+            console.log("feat", featured);
+
+            res.status(200).json({
+                streams: streams,
+                featured: featured
+            });
+
+        } catch(error) {
+            console.log(error);
+            res.status(500).json({
+                errors: "An unknown error occurred"
+            });
+        }
+    },
     async getStreams(req, res) {
         try {
 
@@ -41,7 +86,22 @@ const streamController = {
     async getScheduledStreams(req, res) {
         try {
 
-            let streams = await Stream.find({"is_scheduled": true}).populate('streamer').sort({ scheduled_time: -1 }).exec();
+            let today = new Date();
+            let tomorrow = new Date();
+            tomorrow.setDate(tomorrow.getDate() + 1);
+            let day3 = new Date();
+            day3.setDate(tomorrow.getDate() + 1);
+            let day4 = new Date();
+            day4.setDate(day3.getDate() + 1);
+            let day5 = new Date();
+            day5.setDate(day4.getDate() + 1);
+
+            let streams = await Stream.find({
+                "is_scheduled": true,
+                scheduled_time: {
+                    $gte: today,
+                    $lte: day5
+                }}).populate('streamer').sort({ scheduled_time: -1 }).exec();
             if (!streams) {
                 console.log("nooo streams");
                 return res.render('scheduled', {
@@ -56,6 +116,36 @@ const streamController = {
             }
             let featured = featured_streams[0];
             console.log("feat", featured);
+
+            // let today = new Date();
+            // let today = moment().startOf('day')
+            
+            // get all scheduled before date (date =  today + 4)
+
+            // for each stream, if stream.date == today, add
+            // for each stream if stream.date == today + 1, add 
+
+            let datedStreams = {
+                today: [],
+                tomorrow: [],
+                next3: [],
+                next4: [],
+                next5: []
+            };
+
+            function compareDates(date1, date2) {
+                let boolean = Math.floor(date1.getTime() / 86400000) == Math.floor(date2.getTime() / 86400000);
+
+                return boolean;
+            }
+
+            for (i=0; i<5; i++) {
+                streams.forEach(function(stream) {
+                    let stream_date = stream.scheduled_time;
+                    compareDates(today, stream_date);
+                    // if (stream.)
+                })
+            }
 
             let data = {
                 streams
@@ -527,6 +617,7 @@ const streamController = {
     },
 
     async schedule_live_stream(req, res) {
+        console.log("got here")
         try { 
             console.log(JSON.stringify(req.body, null, 2))
             //let stream_data = req.body.stream_data;

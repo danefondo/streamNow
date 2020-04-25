@@ -272,40 +272,6 @@ $(document).ready(function() {
 			- on fail, remove disabled, change text value, show error
 			*/
 
-			// $.ajax({
-			// 	data: {
-			// 		email,
-			// 		username,
-			// 		password,
-			// 		passcheck
-			// 	},
-			// 	type: 'POST',
-			// 	url: '/browse/curatas/' + spaceId + '/addLike',
-			// 	success: function(response) {
-			// 		// set site count to match db count in case more people have liked it
-			// 		likeCountContainer.text(response.newCount);
-			// 	},
-			// 	error: function(err) {
-			// 		likeCount = likeCount - 1;
-			// 		likeCountContainer.text(likeCount);
-			// 		// display error message
-			// 	}
-			// });
-
-			// validate form
-				// does email pass validation
-				// does username pass validation
-				// do passwords match & pass basic validation
-			// if not
-				// display error box
-					// display relevant errors
-			// grab form
-			// access server
-			// check server if
-				// username is unique && sanitized
-				// email is unique && sanitized
-
-				// if not, simply display as one of the errors
 		})
 	}
 	initRegisterAccount()
