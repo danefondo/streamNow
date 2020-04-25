@@ -1,0 +1,611 @@
+/*! CSS Used from: https://www.eeter.tv/css/reset.css */
+html,
+body,
+div,
+p,
+a,
+img,
+ul,
+li,
+nav {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+nav {
+  display: block;
+}
+body {
+  line-height: 1;
+}
+ul {
+  list-style: none;
+}
+/*! CSS Used from: https://www.eeter.tv/css/main.css */
+* {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+html {
+  height: 100%;
+}
+body {
+  font-family: "Trebuchet MS", sans-serif;
+  background-color: #ffffff;
+  overscroll-behavior-y: none;
+  min-height: 100%;
+}
+.footer {
+  padding: 20px;
+  padding-left: 40px;
+  background-color: #f7f7fb;
+}
+.footer_section {
+  display: inline-block;
+  margin-right: 20px;
+  color: #9c9cab;
+}
+a.footer_section:hover {
+  color: #9c9cab91;
+}
+.right {
+  float: right;
+}
+a {
+  color: #333;
+  text-decoration: none;
+}
+p {
+  white-space: normal;
+}
+div,
+p {
+  display: block;
+}
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  max-width: 100%;
+  height: 100%;
+  min-height: calc(100vh - 116px);
+}
+[class*="entypo-"]:before {
+  font-family: "entypo", sans-serif;
+  margin: 0 8px 0 0;
+  width: 24px;
+  text-align: center;
+  display: inline-block;
+  border: none;
+}
+.Dropdown-profile,
+.Dropdown-nav li .NavLinkX {
+  background-color: white;
+  display: block;
+  height: 28px;
+  padding: 8px;
+}
+.DropdownX {
+  cursor: pointer;
+  margin-right: 15px;
+  overflow: hidden;
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
+  border-bottom-left-radius: 4px;
+  border-bottom-right-radius: 4px;
+}
+.Dropdown-profile {
+  position: relative;
+  background-color: transparent;
+}
+.Dropdown-profile .Photo {
+  background: transparent;
+  display: inline-block;
+  vertical-align: middle;
+  border-top-left-radius: 2px;
+  border-top-right-radius: 2px;
+  border-bottom-left-radius: 2px;
+  border-bottom-right-radius: 2px;
+  height: 28px;
+  width: 28px;
+}
+.Dropdown-profile:hover {
+  background-color: #f5f5f5;
+}
+.Dropdown-nav {
+  visibility: hidden;
+  opacity: 0;
+  width: 185px;
+  z-index: 9998 !important;
+  background-color: white;
+  box-shadow: 0px 3px 6px 0px rgba(0, 0, 0, 0.2);
+  margin-top: 10px;
+  position: absolute;
+  overflow: hidden;
+  transition: all 0.3s;
+  border-radius: 4px;
+}
+.SettingsNav {
+  right: 20px;
+}
+.Dropdown-nav ul {
+  list-style: none;
+  padding: 0;
+  background-color: white;
+  margin-block-start: 0.5em;
+  margin-block-end: 0.5em;
+  padding-inline-start: 12px;
+  padding-inline-end: 12px;
+}
+.Dropdown-nav li {
+  position: relative;
+}
+.Dropdown-nav li a {
+  color: #666;
+  -webkit-transition: color 0.3s ease;
+  -moz-transition: color 0.3s ease;
+  transition: all 0.3s;
+}
+.Dropdown-nav li a:before {
+  content: "";
+  position: absolute;
+  width: 3px;
+  height: 28px;
+  left: 0px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: none;
+}
+.Dropdown-nav li a:hover:before {
+  display: block;
+}
+.Dropdown-nav li a:hover {
+  color: #1e323c;
+}
+.Dropdown-nav li .OptionLink {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  height: 22px;
+  font-size: 18px;
+  margin: auto;
+  z-index: 5;
+}
+.Dropdown-nav li .NavLinkX {
+  line-height: 32px;
+}
+.entypo-logout {
+  border-top: 1px solid #eee;
+}
+.hidden {
+  display: none !important;
+}
+/*! CSS Used from: https://www.eeter.tv/css/registration.css */
+.examplesSection__landingPage {
+  width: 100%;
+}
+.examplesContainer__landingPage {
+  width: 1116px;
+  margin: 0 auto;
+  margin-bottom: 30px;
+}
+.examplesTitle__landingPage {
+  font-size: 70px;
+  font-weight: 600;
+  color: #120088;
+  line-height: 60px;
+  padding: 5px;
+}
+/*! CSS Used from: https://www.eeter.tv/css/navigation.css */
+.title-btn {
+  border-radius: 4px;
+  padding: 8px 20px;
+  box-sizing: border-box;
+  font-size: 21px;
+  font-weight: 500;
+  color: #120088;
+}
+.title-btn:hover {
+  color: #777;
+}
+.topNavigationLink__topBar {
+  border-radius: 4px;
+  padding: 12px 16px;
+  margin: 0px 6px;
+  box-sizing: border-box;
+  margin-bottom: 0px;
+  border: 1px solid transparent;
+}
+.topNavigationLink__topBar {
+  color: #120088;
+  font-weight: bold;
+  padding: 10px 16px;
+  display: inline-block;
+}
+.topNavigationLink__topBar:hover {
+  background-color: #f5f5f5;
+}
+.nav-container {
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  padding: 0px 15px;
+  background-color: #b1f6ff00;
+  height: 60px;
+}
+.nav-container a {
+  text-decoration: none;
+}
+.logout-container {
+  display: flex;
+  justify-content: flex-end;
+  margin-left: 10px;
+}
+.title-container {
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  margin-right: 15px;
+}
+/*! CSS Used from: https://www.eeter.tv/css/streamPreviews.css */
+.streams {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0 auto;
+  max-width: 1164px;
+}
+.stream {
+  width: 350px;
+  margin: 30px 17px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  border-radius: 2px;
+  padding: 40px 0px;
+  border: 1px solid transparent;
+  background-color: transparent;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+  box-sizing: border-box;
+  transition: 0.2s ease-in-out;
+}
+.stream:hover {
+  border: 1px solid #12008869;
+  transform: scale(1.015);
+  background-color: #efeff7;
+}
+img.streamPreview {
+  min-height: 220px;
+  object-fit: cover;
+}
+.streamPreviewContainer {
+  width: 325px;
+  height: 220px !important;
+  box-sizing: border-box;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  background-color: transparent;
+  box-shadow: 3px 2px 11px 0px rgba(10, 0, 70, 0.42);
+}
+.streamMetaContainer {
+  width: 100%;
+  max-width: 325px;
+  padding: 5px;
+  display: flex;
+  flex-direction: column;
+}
+.streamTags {
+  display: flex;
+  outline: none;
+  border: 0;
+  border-width: 0px;
+  box-shadow: none;
+  -webkit-appearance: none;
+}
+.streamTag {
+  display: inline-block;
+  border-radius: 2px;
+  background-color: #1500a00a;
+  padding: 4px 10px;
+  font-size: 14px;
+  color: #0f007363;
+  margin: 2px 2px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  max-width: 150px;
+  letter-spacing: 1px;
+  text-transform: lowercase;
+  outline: none;
+  border: 0;
+  border-width: 0px;
+  -webkit-appearance: none;
+}
+.streamNameContainer {
+  padding: 8px 5px 5px 4px;
+}
+.streamName {
+  font-size: 24px;
+}
+.streamer_profile_container_discover {
+  display: flex;
+  padding: 8px 10px;
+}
+.streamer_profile_image_container {
+  display: inline-block;
+}
+.streamer_profile_icon_discover {
+  width: 40px;
+  height: 40px;
+  border-radius: 360px;
+  margin-right: 10px;
+  background-color: #eee;
+  object-fit: cover;
+}
+.streamerLevelContainer {
+  display: inline-block;
+}
+.streamer_name_container_discover {
+  display: inline-block;
+  height: 40px;
+  color: #0a004861;
+}
+.streamer_username_discover,
+.streamer_firstname_discover,
+.streamer_lastname_discover {
+  line-height: 40px;
+  margin-right: 5px;
+  display: inline-block;
+}
+/*! CSS Used from: https://www.eeter.tv/css/responsive.css */
+@media screen and (max-width: 480px) {
+  body {
+    max-width: 480px;
+  }
+  .nav-container {
+    padding: 10px 0px;
+    flex-wrap: wrap;
+  }
+  .title-container {
+    width: 100%;
+    margin-bottom: 10px;
+    padding-left: 5px;
+  }
+  .navlinks-container {
+    margin-left: 10px;
+  }
+  .topNavigationLink__topBar {
+    padding: 10px 6px;
+    margin: 0px 4px;
+  }
+  .Dropdown-profile {
+    padding: 4px;
+  }
+  .Dropdown-nav {
+    right: 12px;
+    width: 94%;
+    margin: 15px auto;
+  }
+}
+@media screen and (max-width: 935px) and (min-width: 481px) {
+  body {
+    max-width: 935px;
+  }
+}
+@media screen and (max-width: 920px) and (min-width: 481px) {
+  body {
+    max-width: 920px;
+  }
+}
+@media screen and (max-width: 885px) and (min-width: 481px) {
+  body {
+    max-width: 885px;
+  }
+}
+@media screen and (max-width: 830) and (min-width: 481px) {
+  body {
+    max-width: 830;
+  }
+}
+@media screen and (max-width: 835px) and (min-width: 700px) {
+  body {
+    max-width: 835px;
+  }
+}
+@media screen and (max-width: 700px) and (min-width: 481px) {
+  body {
+    max-width: 700px;
+  }
+}
+/*! CSS Used from: https://www.eeter.tv/css/streaming.css */
+.stream_buttons {
+  margin-left: auto;
+}
+.go_live_button {
+  color: white;
+  font-weight: bold;
+  padding: 10px 16px;
+  border-radius: 2px;
+  margin: 0px 6px;
+  box-sizing: border-box;
+  margin-bottom: 2px;
+  border: 1px solid transparent;
+  display: inline-block;
+  background-color: #130089;
+  cursor: pointer;
+}
+.go_live_button {
+  margin-top: 8px;
+  margin-bottom: 8px;
+  margin-right: 8px;
+}
+.go_live_button:hover {
+  background-color: #120088bd;
+}
+.nav-container {
+  padding-top: 0px;
+}
+.featured_stream {
+  display: flex;
+  width: 1200px;
+  flex-direction: row;
+  padding: 60px 50px 60px 50px;
+  align-items: flex-start;
+  border: 1px solid transparent;
+  border-radius: 0px;
+  background-color: #12008808;
+  cursor: pointer;
+  box-sizing: border-box;
+  transition: 0.2s ease-in-out;
+  margin: 30px 17px;
+  margin-top: 10px;
+}
+.featured_stream:hover {
+  border: 2px solid #1903a01c;
+  transform: scale(1.015);
+}
+.featured_streamPreviewContainer {
+  box-sizing: border-box;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  width: 600px;
+  height: 400px !important;
+  box-shadow: 3px 2px 11px 0px rgba(10, 0, 70, 0.42);
+}
+.featured_streamMetaContainer {
+  width: 100%;
+  padding: 5px;
+  display: flex;
+  flex-direction: column;
+  max-width: 467px;
+  margin-left: 49px;
+}
+.featured_streamNameContainer {
+  padding: 5px;
+  font-size: 24px;
+  color: #120088;
+}
+.featured_streamName {
+  font-size: 38px;
+}
+.featured_streamTags {
+  display: flex;
+  margin-top: 10px;
+}
+.featured_streamer_profile_container_discover {
+  display: flex;
+  padding: 8px 10px;
+  align-items: center;
+  margin-top: 0px;
+}
+.featured_streamer_profile_image_container {
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 13px;
+}
+.featured_streamer_profile_icon_discover {
+  border-radius: 360px;
+  background-color: #eee;
+  object-fit: cover;
+  width: 30px;
+  height: 30px;
+  border: 2px solid #06014442;
+  opacity: 0.9;
+  margin-right: 0px;
+  box-shadow: 1.5px 1.5px 7px 0px rgba(10, 0, 70, 0.22);
+}
+.featured_streamer_name_container_discover {
+  display: inline-block;
+  height: 40px;
+  color: #0a004861;
+  font-weight: 500;
+}
+.featured_streamer_firstname_discover,
+.featured_streamer_lastname_discover {
+  line-height: 40px;
+  margin-right: 5px;
+  display: inline-block;
+}
+.featured_streamTag {
+  font-size: 16.5px;
+  margin-right: 5.5px;
+  padding: 4px 20px;
+  display: inline-block;
+  border-radius: 2px;
+  background-color: #1500a00a;
+  color: #0f007363;
+  margin: 2px 2px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  max-width: 150px;
+  letter-spacing: 1px;
+  text-transform: lowercase;
+}
+.featured_streamPreview {
+  object-fit: cover;
+  max-width: 600px;
+  min-height: 400px;
+}
+.featured_streamer_description_container_discover {
+  color: #514f7a;
+  padding: 10px;
+}
+/*! CSS Used from: https://www.eeter.tv/css/content.css */
+.contentArea {
+  margin: 50px auto 50px auto;
+}
+
+input:focus {
+  outline: none;
+}
+input {
+  width: 100%;
+  padding: 16px;
+  box-sizing: border-box;
+  border: none;
+  border-radius: 0;
+  background-color: #fff;
+  font-family: "Trebuchet MS", sans-serif;
+}
+h1 {
+  font-size: 24px;
+  font-weight: 600;
+}
+h2 {
+  font-size: 20px;
+  font-weight: 600;
+}
+input[type="submit"] {
+  background-color: #120088;
+  color: white;
+  font-family: "Trebuchet MS", sans-serif;
+  transition: 0.2s ease-in-out !important;
+}
+input[type="submit"]:hover {
+  background-color: #100269;
+  color: white;
+  border-radius: 3px;
+}
+a {
+  color: #333;
+  text-decoration: none;
+}
+div {
+  display: block;
+}
+.inline {
+  display: inline-block;
+}

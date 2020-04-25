@@ -1,0 +1,143 @@
+{
+    "home": {
+        "caption": "Live now",
+        "landing-title-core": "Share your ",
+        "landing-title-changing-1": "talents.",
+        "landing-title-changing-2": "skills.",
+        "landing-title-changing-3": "passions.",
+        "subtitle": "Join us to educate and entertain your fellow humans during Covid-19.",
+        "join": "Start streaming"
+    },
+    "scheduled": {
+        "caption": "Upcoming streams",
+        "featured_caption": "Featured Stream",
+        "live_now": "Live now",
+        "next": "Next up",
+        "featured": "Featured"
+    },
+    "register": {
+        "create": "Create account",
+        "creating": "Creating account"
+    },
+    "nav": {
+        "scheduled": "Upcoming",
+        "discover": "Discover",
+        "go-live": "Go live",
+        "profile": "Profile",
+        "settings": "Settings",
+        "logout": "Logout"
+    },
+    "streams": {
+        "watch": "Watch now",
+        "register": "Register for event"
+    },
+    "stream": {
+        "live": "LIVE",
+        "offline": "Offline"
+    },
+    "footer": {
+        "about": "About",
+        "privacy": "Privacy policy",
+        "terms": "Terms of service",
+        "contact": "Contact",
+        "rights": "All rights reserved."
+    },
+    "scheduling": {
+        "schedule-later": "Schedule for later?",
+        "pick-date": "Pick a date to stream",
+        "pick-time": "What time do you want to start?",
+        "placeholder-pickdate": "Pick date",
+        "placeholder-picktime": "Choose time",
+        "privacy": "Privacy",
+        "category": "What's the essence of your stream?",
+        "category-placeholder": "Pick a category",
+        "public": "Public",
+        "unlisted": "Unlisted",
+        "create-event": "Create event",
+        "give-name": "Give your livestream a name",
+        "name-placeholder": "Your livestream name",
+        "give-desc": "What's your livestream about?",
+        "desc-placeholder": "Briefly describe your livestream",
+        "add-tags": "Add tags",
+        "tags-placeholder": "Write a tag",
+        "add-youtube-id": "YouTube video ID",
+        "youtube-placeholder": "e.g. NMPqo3XiOUg",
+        "upload-thumbnail": "Upload custom thumbnail (optional)",
+        "thumbnail-instruction": "Upload custom thumbnail",
+        "instruction-help": "Or just drag and drop a file",
+        "go-live": "Go live",
+        "creating-stream": "Creating stream..."
+    },
+    "settings": {
+        "settings-title": "Account settings",
+        "verify-message": "Please verify your email address",
+        "name-title": "What's your name?",
+        "first-name": "First name",
+        "name-placeholder": "This' what they call me",
+        "last-name": "Last name",
+        "lastname-placeholder": "Dr. Strange",
+        "save-name": "Save name",
+        "desc-title": "Now how about a description!",
+        "desc-placeholder": "Genius, billionaire, playbooy, philanthropist",
+        "save-desc": "Save description",
+        "profile-pic-title": "How about a profile picture?",
+        "img-upload-instruction": "Upload profile image",
+        "instruction-help": "Or just drag and drop a file",
+        "uploading-thumbnail": "Uploading thumbnail...",
+        "social-title": "Let's add some social media!",
+        "website": "Website",
+        "save-social": "Save social media links",
+        "username-title": "Change your username",
+        "username-placeholder": "That cool user handle",
+        "save-username": "Save username",
+        "change-email": "Change your email",
+        "email-placeholder": "example@cool.com",
+        "save-email": "Save email",
+        "change-pass": "Change your password",
+        "new-pass": "New password",
+        "confirm-new-pass": "Confirm password",
+        "save-pass": "Save password",
+        "confirm-newpass-title": "Enter your current password",
+        "confirm-newpass-tagline": "Verify it's you",
+        "current-pass": "Your current password",
+        "cancel-newpass": "Cancel",
+        "confirm-newpass": "Change",
+        "pass-match-fail": "Passwords don't match!",
+        "pass-empty-fail": "Passwords can't be empty!",
+        "pass-short-fail": "Password must be at least 8 characters long!",
+        "delete-acc-title": "Delete your account",
+        "delete-acc-desc": "Deleting your account will permanently and irreversably delete all your streams, stream data and profile details and history. Deleting your account will cancel any memberships you have.",
+        "delete-acc-btn": "Delete accoount",
+        "delete-acc-confirm-title": "Are you sure you want to delete your account?",
+        "delete-acc-confirm-desc": "Your account will be permanently deleted and you will lose ownership and access to all your existing content.",
+        "delete-cancel": "Cancel",
+        "delete-confirm": "Delete",
+        "acc-del-fail": "Failed to delete account. Refresh and try again.",
+        "error-empty": "Cannot be empty!",
+        "error-occurred": "An error has occurred"
+    },
+    "profile": {
+        "add-profile-pic": "+ Add profile image",
+        "add-about": "+ Add about section",
+        "followers": "Followers",
+        "following": "Following",
+        "streams-done": "Streams done",
+        "no-streams": "No upcoming streams planned",
+        "prev-streams": "Previous streams",
+        "next-streams": "Upcoming streams",
+        "no-prev-streams": "User has not done a stream yet.",
+        "no-upcoming-streams": "User has no scheduled streams."
+    },
+    "watch": {
+        "follow": "Follow",
+        "hide-chat": "Hide chat",
+        "support": "Support",
+        "live": "LIVE",
+        "share": "Share",
+        "likes": "Likes"
+    },
+    "form": {
+        "empty": "Cannot be empty",
+        "wrong": "Something went wrong, our team is looking into it"
+    }
+}
