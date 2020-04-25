@@ -57,7 +57,7 @@ app.use(bodyParser.json());
 app.use(cors({origin: 'http://localhost:8080'}))
 
 // Set Public Folder
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'client/dist/')));
 
 // Passport Config
 require('./config/passport')(passport);
