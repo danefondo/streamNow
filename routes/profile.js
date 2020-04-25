@@ -14,7 +14,9 @@ const validator = require('../controller/validator')
 
 const streamController = require('../controller/stream');
 
-router.get('/:userId', streamController.getStreamer);
+// allow user to proceed to next middleware even if not logged in
+const checkAuthenticated = passport.authenticate('jwt', { session: false })
+router.get('/:userId', checkAuthenticated, streamController.getStreamer);
 
 
 /*====== Access control  ======*/

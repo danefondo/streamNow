@@ -10,7 +10,13 @@ const router = express.Router();
 
 const streamController = require('../controller/stream');
 
-router.post('/:streamId/updateLikes', streamController.updateLikes);
+const ensureAuthenticated = passport.authenticate('jwt', { session: false });
+
+router.get('/', streamController.fetchStreams); 
+
+router.get('/:streamId', streamController.showStream);
+
+router.post('/:streamId/updateLikes', ensureAuthenticated, streamController.updateLikes);
 
 router.post('/:streamId/followUnfollow', streamController.followUnfollow);
 
@@ -18,7 +24,7 @@ router.post('/:streamId/endStream', ensureAuthenticated, streamController.endStr
 
 
 /*====== Access control  ======*/
-function ensureAuthenticated(req, res, next){
+/*function ensureAuthenticated(req, res, next){
   if(req.isAuthenticated()){
   	console.log("Authentication successful.");
     return next();
@@ -26,6 +32,6 @@ function ensureAuthenticated(req, res, next){
   	console.log("Authentication failed.");
     res.redirect(302, '/');
   }
-}
+}*/
 
 module.exports = router;

@@ -15,34 +15,18 @@ const streamController = {
                 }
             }
         }
-        console.log(query)
         try {
             let streams = await Stream.find(query).populate('streamer').sort({ scheduled_time: 1 }).exec();
-            if (!streams) {
-                console.log("nooo streams");
-                return res.render('index', {
-                    error: "Couldn't get streams"
-                });
-            }
-            console.log("sttreams", streams);
-
             let featured_streams = await Stream.find({"is_featured": true}).populate('streamer').exec();
-            if (!featured_streams) {
-                console.log("nooo streams");
-                return res.render('index', {
-                    error: "Couldn't get featured streams"
-                });
-            }
             let featured = featured_streams[0];
-            console.log("feat", featured);
-
+            if (!streams.length) {
+                return res.status(404);
+            }
             res.status(200).json({
                 streams: streams,
                 featured: featured
             });
-
         } catch(error) {
-            console.log(error);
             res.status(500).json({
                 errors: "An unknown error occurred"
             });
@@ -58,7 +42,7 @@ const streamController = {
                     error: "Couldn't get streams"
                 });
             }
-            console.log("sttreams", streams);
+            // console.log("sttreams", streams);
 
             let featured_streams = await Stream.find({"is_featured": true}).populate('streamer').exec();
             if (!featured_streams) {
@@ -68,7 +52,7 @@ const streamController = {
                 });
             }
             let featured = featured_streams[0];
-            console.log("feat", featured);
+            // console.log("feat", featured);
 
             res.render('index', {
                 streams: streams,
@@ -238,34 +222,13 @@ const streamController = {
             }
 
             let stream_data = req.body;
-
-            if (stream_data.thumbnail_key) {
-                stream.thumbnail_key = stream_data.thumbnail_key;
-            }
-
-            if (stream_data.thumbnail_url) {
-                stream.thumbnail_url = stream_data.thumbnail_url;
-            }
-
-            if (stream_data.thumbnail_name) {
-                stream.thumbnail_name = stream_data.thumbnail_name;
-            }
-            
-            if (stream_data.thumbnail_id) {
-                stream.thumbnail_id = stream_data.thumbnail_id;
-            }
-
+            stream.thumbnail_key = stream_data.thumbnail_key;
+            stream.thumbnail_url = stream_data.thumbnail_url;
+            stream.thumbnail_name = stream_data.thumbnail_name;
             stream.stream_name = stream_data.stream_name;
             stream.stream_description = stream_data.stream_description;
             stream.stream_video_id = stream_data.stream_video_id;
-
-            let tags = stream_data.stream_tags;
-            tags = JSON.parse(tags);
-
-            stream.stream_tags = [];
-            for (const tag of tags) {
-                stream.stream_tags.push(tag);
-            }
+            stream.stream_tags = stream_data.stream_tags;
 
             console.log("user_id", req.user._id);
 
@@ -358,8 +321,8 @@ const streamController = {
 
 
             let visitor;
-            let user_like_boolean = "N/A";
-            let user_following_boolean = "N/A";
+            let user_like_boolean = false;
+            let user_following_boolean = false;
             if (req.isAuthenticated()) {
                 visitor = await User.findById(req.user._id);
                 if (!visitor) {
@@ -375,7 +338,7 @@ const streamController = {
             
             let host_name = req.headers.host;
 
-            res.render('watch', {
+            res.status(200).json({
                 video_id: video_id,
                 stream,
                 streamer,
@@ -398,7 +361,6 @@ const streamController = {
 
             let user;
             user = await User.findById(user_id).populate('previous_streams').populate('upcoming_streams').exec();
-            console.log("userrr", user);
 
             let stream;
             let stream_id;
@@ -419,9 +381,9 @@ const streamController = {
             let streamer_following_count = user.following.length;
 
             let visitor;
-            let user_like_boolean = "N/A";
-            let user_following_boolean = "N/A";
-            if (req.isAuthenticated()) {
+            let user_like_boolean = false;
+            let user_following_boolean = false;
+            if (req.user) {
                 visitor = await User.findById(req.user._id);
                 if (!visitor) {
                     return res.status(404).json({
@@ -434,13 +396,13 @@ const streamController = {
                 }
                 user_following_boolean = visitor.following.includes(user_id);
             }
-            console.log("boolean", user_like_boolean);
-            console.log("following", user_following_boolean);
+            //console.log("boolean", user_like_boolean);
+            //console.log("following", user_following_boolean);
 
             let host_name = req.headers.host;
 
             let streamer = user;
-            res.render('profile', {
+            res.status(200).json({
                 video_id: video_id,
                 stream,
                 streamer,
@@ -458,12 +420,11 @@ const streamController = {
 
     async updateLikes(req, res) {
         try {      
-
             console.log("reached this");
 
             // if not user, then cancel (for oh so clever frontend check bypassers)
-            if (!req.isAuthenticated()) {
-                return res.status(500).json({
+            if (!req.user) {
+                return res.status(401).json({
                     errors: "No authenticated user present who could add a like"
                 });
             }
@@ -478,7 +439,7 @@ const streamController = {
             }
 
             if (req.user._id == stream.streamer_id) {
-                return res.status(500).json({
+                return res.status(400).json({
                     errors: "Cannot like your own stream."
                 });
             }
@@ -617,9 +578,7 @@ const streamController = {
     },
 
     async schedule_live_stream(req, res) {
-        console.log("got here")
         try { 
-            console.log(JSON.stringify(req.body, null, 2))
             //let stream_data = req.body.stream_data;
             //let schedule_data = req.body.schedule_data;
             //schedule_data.scheduled_time = new Date();
@@ -677,7 +636,7 @@ const streamController = {
                 stream.public_status = req.body.schedule_data.public_status
             }*/
 
-            console.log("user_id", req.user._id);
+            // console.log("user_id", req.user._id);
 
             stream.streamer_id = req.user._id;
             stream.streamer = req.user._id;
@@ -694,7 +653,13 @@ const streamController = {
                     errors: "User not found."
                 });
             }
-            user.is_live = false;
+            if (req.body.is_live) {
+                user.is_live = true;
+                user.active_stream_id = stream._id;
+            } else {
+                user.is_live = false;
+                user.active_stream_id = null;
+            }
             user.upcoming_streams.push(stream_id);
             await user.save();
 

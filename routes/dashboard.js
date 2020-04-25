@@ -21,25 +21,25 @@ const validator = require('../controller/validator')
 const imageController = require('../controller/image');
 const streamController = require('../controller/stream');
 
-router.get('/sign-s3', ensureAuthenticated, imageController.signS3);
+router.get('/sign-s3', imageController.signS3);
 
-router.post('/UploadSingleImage', ensureAuthenticated, imageController.uploadSingleImage);
+router.post('/UploadSingleImage', imageController.uploadSingleImage);
 
-router.post('/saveFileReference', ensureAuthenticated, imageController.saveFileReference);
+// router.post('/saveFileReference', imageController.saveFileReference);
 
-router.post('/saveProfileImageReference', ensureAuthenticated, imageController.saveProfileImageReference);
+router.post('/saveProfileImageReference', imageController.saveProfileImageReference);
 
-router.post('/createLiveStream', ensureAuthenticated, streamController.schedule_live_stream);
+router.post('/createLiveStream', streamController.schedule_live_stream);
 
-router.post('/updateLiveStream', ensureAuthenticated, streamController.update_live_stream);
+router.post('/updateLiveStream', streamController.update_live_stream);
 
-router.post('/scheduleLiveStream', ensureAuthenticated, streamController.schedule_live_stream);
+router.post('/scheduleLiveStream', streamController.schedule_live_stream);
 
-router.delete('/DeleteImage', ensureAuthenticated, imageController.deleteImage);
+router.delete('/DeleteImage', imageController.deleteImage);
 
-router.delete('/DeleteProfileImage', ensureAuthenticated, imageController.deleteProfileImage);
+router.delete('/DeleteProfileImage', imageController.deleteProfileImage);
 
-router.get('/settings', ensureAuthenticated, function(req, res) {
+router.get('/settings', function(req, res) {
 
 	res.render('user__accountSettings', {
     settings: true
@@ -47,13 +47,13 @@ router.get('/settings', ensureAuthenticated, function(req, res) {
 
 })
 
-router.get('/golive', ensureAuthenticated, function(req, res) {
+router.get('/golive', function(req, res) {
 
 	res.render('go_live');
 
 })
 
-router.get('/profile', ensureAuthenticated, function(req, res) {
+router.get('/profile', function(req, res) {
 
 	res.render('profile');
 
@@ -61,16 +61,17 @@ router.get('/profile', ensureAuthenticated, function(req, res) {
 
 
 /*====== Access control  ======*/
-function ensureAuthenticated(req, res, next){
-  console.log("user", req.user)
-  console.log("user is authenticated", req.isAuthenticated())
-  if(req.isAuthenticated()){
-  	console.log("Authentication successful.");
-    return next();
-  } else {
-  	console.log("Authentication failed.");
-    res.redirect(302, '/');
-  }
-}
+// function ensureAuthenticated(req, res, next){
+//   passport.authenticate('jwt', {session: false})
+//   console.log("user", req.user)
+//   // console.log("user is authenticated", req.isAuthenticated())
+//   // if(req.isAuthenticated()){
+//   // 	console.log("Authentication successful.");
+//   //   return next();
+//   // } else {
+//   // 	console.log("Authentication failed.");
+//   //   res.redirect(302, '/');
+//   // }
+// }
 
 module.exports = router;
