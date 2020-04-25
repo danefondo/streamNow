@@ -97,7 +97,7 @@
             class="live_chat"
             width="350px"
             height="600px"
-            :src="'https://www.youtube.com/live_chat?v=' + stream.video_id + '&amp;embed_domain=' + hostName"
+            :src="'https://www.youtube.com/live_chat?v=' + stream.stream_video_id + '&amp;embed_domain=' + hostName"
           ></iframe>
         </div>
       </div>
@@ -169,7 +169,7 @@ export default {
       return this.streamer._id === auth.isAuthenticated()._id;
     },
     videoUrl() {
-      return `https://www.youtube-nocookie.com/embed/${this.stream.video_id}?autoplay=1&amp;modestbranding=1&amp;showinfo=0&amp;rel=0&amp;theme=light&amp;color=white`;
+      return `https://www.youtube-nocookie.com/embed/${this.stream.stream_video_id}?autoplay=1&amp;modestbranding=1&amp;showinfo=0&amp;rel=0&amp;theme=light&amp;color=white`;
     }
   }
 };
