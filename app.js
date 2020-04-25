@@ -109,17 +109,15 @@ app.use(passport.initialize());
 let accounts = require('./routes/accounts');
 let dashboard = require('./routes/dashboard');
 let profile = require('./routes/profile');
-// let watch = require('./routes/watch');
 let streams = require('./routes/streams');
 app.use('/accounts', accounts);
 app.use('/dashboard', passport.authenticate('jwt', { session: false }), dashboard);
 app.use('/profile', profile);
-// app.use('/watch', watch);
 app.use('/streams', streams);
 
-// app.get('*', function(req, res) {
-//   res.render('404');
-// });
+app.get('*', function(req, res) {
+  res.sendFile(path.join(__dirname, 'client/dist/index.html'))
+});
 //comment
 
 

@@ -9,7 +9,9 @@
   "scripts": {
     "start": "node app.js",
     "dev": "nodemon app.js",
-    "prod": "NODE_ENV=production node app.js"
+    "client:install": "cd client && npm install && npm install --only=dev",
+    "client:build": "npm run client:install && cd client && npm run build",
+    "prod": "npm run client:build && NODE_ENV=production node app.js"
   },
   "author": "ElysiumOne",
   "license": "ISC",
