@@ -217,7 +217,7 @@ export default {
 .stream_details_block {
   padding: 10px;
   display: flex;
-  align-items: start;
+  align-items: flex-start;
 }
 
 .stream_end_button:hover {
