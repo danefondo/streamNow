@@ -45,8 +45,11 @@
       </div>
     </div>
     <ImageUpload v-model="image" :uploading="uploadingImage" />
-    <div @click="submit()" :disabled="submitting" class="go_live">
-      {{ submitting ? $t('scheduling.creating-stream') : $t('scheduling.go-live') }}</div>
+    <div
+      @click="submit('live')"
+      :disabled="submitting"
+      class="go_live"
+    >{{ submitting === 'live' ? $t('scheduling.creating-stream') : $t('scheduling.go-live') }}</div>
     <div @click="toggle" class="subArea">
       <div class="stream_input_title inline">Schedule for later?</div>
       <img v-if="!isScheduledOpened" class="arrow" src="../assets/images/down_arrow.png" />
@@ -64,8 +67,8 @@
             <i class="fa fa-calendar"></i>
           </button>
         </div>
-        <div class="inputErrorContainer">
-          <div class="inputErrorText"></div>
+        <div v-if="dateEmpty && !date" class="inputErrorContainer">
+          <div class="inputErrorText">{{ $t("form.empty") }}</div>
         </div>
       </div>
       <div class="schedule_stream_section">
@@ -82,23 +85,38 @@
             <i class="fa fa-clock-o"></i>
           </button>
         </div>
-        <div class="inputErrorContainer">
-          <div class="inputErrorText"></div>
+        <div v-if="timeEmpty && !time" class="inputErrorContainer">
+          <div class="inputErrorText">{{ $t("form.empty") }}</div>
         </div>
       </div>
       <div class="schedule_stream_section">
         <div class="stream_input_title">Privacy</div>
         <div class="switch-field">
-          <input id="radio-one" type="radio" name="switch-one" value="public" checked />
+          <input
+            id="radio-one"
+            type="radio"
+            v-model="public_status"
+            name="switch-one"
+            value="public"
+            checked
+          />
           <label for="radio-one">Public</label>
-          <input id="radio-two" type="radio" name="switch-one" value="unlisted" />
+          <input
+            id="radio-two"
+            type="radio"
+            v-model="public_status"
+            name="switch-one"
+            value="unlisted"
+          />
           <label for="radio-two">Unlisted</label>
         </div>
         <div class="inputErrorContainer">
           <div class="inputErrorText"></div>
         </div>
       </div>
-      <div class="create_event">Create event</div>
+      <div @click="submit('schedule')" class="create_event">
+        {{ submitting === 'schedule' ? $t('scheduling.creating-stream') : 'Create Event' }}
+      </div>
     </div>
   </div>
 </template>
@@ -120,7 +138,7 @@ export default {
     return {
       isScheduledOpened: false,
       date: new Date(),
-      time: new Date(),
+      time: "",
       name: "",
       description: "",
       tags: [],
@@ -131,18 +149,25 @@ export default {
       nameEmpty: false,
       descriptionEmpty: false,
       videoIdEmpty: false,
+      dateEmpty: false,
+      timeEmpty: false,
       submitting: false,
       image: null,
-      uploadingImage: false
+      uploadingImage: false,
+      public_status: "public",
     };
   },
   methods: {
     toggle() {
       this.isScheduledOpened = !this.isScheduledOpened;
     },
-    async submit() {
+    async submit(type) {
       let isOneorMoreEmtpy = false;
-      ["name", "description", "tags", "videoId"].forEach(each => {
+      const requiredFields = ["name", "description", "tags", "videoId"];
+      if (type === "schedule") {
+        requiredFields.push("time")
+      }
+      requiredFields.forEach(each => {
         if (!this[each].length) {
           isOneorMoreEmtpy = true;
           this[`${each}Empty`] = true;
@@ -152,18 +177,30 @@ export default {
         return;
       }
       try {
-        this.submitting = true;
+        this.submitting = type;
         let streamData = {
           stream_name: this.name,
           stream_description: this.description,
           stream_tags: this.tags,
           stream_video_id: this.videoId,
-          is_live: true
+          is_live: type === "live" ? true : false,
+          is_scheduled: type === "schedule" ? true : false
         };
-        if (this.image) {
-          streamData = { ...streamData, ...await this.uploadImage() };
+        if (type === "schedule") {
+          const dateTime = this.date;
+          const time = this.time.split(":");
+          dateTime.setHours(time[0]);
+          dateTime.setMinutes(time[1]);
+          streamData.scheduled_time = dateTime;
+          streamData.public_status = this.public_status
         }
-        const result = await axios.post(`dashboard/createLiveStream`, streamData);
+        if (this.image) {
+          streamData = { ...streamData, ...(await this.uploadImage()) };
+        }
+        const result = await axios.post(
+          `dashboard/createLiveStream`,
+          streamData
+        );
         this.$router.push(`/watch/${result.data.stream_id}`);
       } catch (error) {
         this.error = true;
@@ -178,19 +215,19 @@ export default {
       );
       const response = result.returnData;
       await fetch(response.signedRequest, {
-        method: 'PUT',
+        method: "PUT",
         body: this.image.file,
         headers: {
-          'Content-Type': this.image.file.type,
-          'processData': false,
+          "Content-Type": this.image.file.type,
+          processData: false
         }
       });
       return Promise.resolve({
         thumbnail_key: result.fileName,
         thumbnail_url: response.url,
         thumbnail_name: this.stream_name
-      })
-    },
+      });
+    }
   }
 };
 </script>

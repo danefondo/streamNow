@@ -3,7 +3,7 @@ let User = require('../models/user');
 const moment = require('moment');
 const streamController = {
     async fetchStreams(req, res) {
-        let query = {"is_live": true}
+        let query = { "is_live": true }
         if (req.query.scheduled) {
             const date = req.query.date ? new Date(req.query.date) : new Date();
             const anotherDate = new Date();
@@ -17,7 +17,7 @@ const streamController = {
         }
         try {
             let streams = await Stream.find(query).populate('streamer').sort({ scheduled_time: 1 }).exec();
-            let featured_streams = await Stream.find({"is_featured": true}).populate('streamer').exec();
+            let featured_streams = await Stream.find({ "is_featured": true }).populate('streamer').exec();
             let featured = featured_streams[0];
             if (!streams.length) {
                 return res.status(404);
@@ -26,7 +26,7 @@ const streamController = {
                 streams: streams,
                 featured: featured
             });
-        } catch(error) {
+        } catch (error) {
             res.status(500).json({
                 errors: "An unknown error occurred"
             });
@@ -35,7 +35,7 @@ const streamController = {
     async getStreams(req, res) {
         try {
 
-            let streams = await Stream.find({"is_live": true}).populate('streamer').exec();
+            let streams = await Stream.find({ "is_live": true }).populate('streamer').exec();
             if (!streams) {
                 console.log("nooo streams");
                 return res.render('index', {
@@ -44,7 +44,7 @@ const streamController = {
             }
             // console.log("sttreams", streams);
 
-            let featured_streams = await Stream.find({"is_featured": true}).populate('streamer').exec();
+            let featured_streams = await Stream.find({ "is_featured": true }).populate('streamer').exec();
             if (!featured_streams) {
                 console.log("nooo streams");
                 return res.render('index', {
@@ -59,7 +59,7 @@ const streamController = {
                 featured: featured
             });
 
-        } catch(error) {
+        } catch (error) {
             console.log(error);
             res.status(500).json({
                 errors: "An unknown error occurred"
@@ -85,7 +85,8 @@ const streamController = {
                 scheduled_time: {
                     $gte: today,
                     $lte: day5
-                }}).populate('streamer').sort({ scheduled_time: -1 }).exec();
+                }
+            }).populate('streamer').sort({ scheduled_time: -1 }).exec();
             if (!streams) {
                 console.log("nooo streams");
                 return res.render('scheduled', {
@@ -94,7 +95,7 @@ const streamController = {
             }
             console.log("sttreams", streams);
 
-            let featured_streams = await Stream.find({"is_featured": true}).populate('streamer').exec();
+            let featured_streams = await Stream.find({ "is_featured": true }).populate('streamer').exec();
             if (!featured_streams) {
                 console.log("Couldn't get featured streams");
             }
@@ -103,7 +104,7 @@ const streamController = {
 
             // let today = new Date();
             // let today = moment().startOf('day')
-            
+
             // get all scheduled before date (date =  today + 4)
 
             // for each stream, if stream.date == today, add
@@ -123,8 +124,8 @@ const streamController = {
                 return boolean;
             }
 
-            for (i=0; i<5; i++) {
-                streams.forEach(function(stream) {
+            for (i = 0; i < 5; i++) {
+                streams.forEach(function (stream) {
                     let stream_date = stream.scheduled_time;
                     compareDates(today, stream_date);
                     // if (stream.)
@@ -139,7 +140,7 @@ const streamController = {
             }
             res.render('scheduled', data);
 
-        } catch(error) {
+        } catch (error) {
             console.log(error);
             res.status(500).json({
                 errors: "An unknown error occurred"
@@ -148,7 +149,7 @@ const streamController = {
     },
 
     async create_live_stream(req, res) {
-        try {        
+        try {
             let stream = new Stream();
             let stream_data = req.body;
 
@@ -163,7 +164,7 @@ const streamController = {
             if (stream_data.thumbnail_name) {
                 stream.thumbnail_name = stream_data.thumbnail_name;
             }
-            
+
             if (stream_data.thumbnail_id) {
                 stream.thumbnail_id = stream_data.thumbnail_id;
             }
@@ -185,7 +186,7 @@ const streamController = {
             stream.streamer_id = req.user._id;
             stream.streamer = req.user._id;
             stream.is_live = true;
-    
+
             await stream.save();
             let stream_id = stream._id;
 
@@ -204,7 +205,7 @@ const streamController = {
                 stream: stream,
                 stream_id: stream_id
             })
-        } catch(error) {
+        } catch (error) {
             console.log(error);
             res.status(500).json({
                 errors: "An unknown error occurred"
@@ -213,7 +214,7 @@ const streamController = {
     },
 
     async update_live_stream(req, res) {
-        try {        
+        try {
             let stream = await Stream.findById(req.body.stream_id);
             if (!stream) {
                 return res.status(404).json({
@@ -232,13 +233,13 @@ const streamController = {
 
             console.log("user_id", req.user._id);
 
-    
+
             await stream.save();
 
             res.json({
                 stream: stream
             })
-        } catch(error) {
+        } catch (error) {
             console.log(error);
             res.status(500).json({
                 errors: "An unknown error occurred"
@@ -281,7 +282,7 @@ const streamController = {
                 stream: stream
             })
 
-        } catch(error) {
+        } catch (error) {
             console.log(error);
             res.status(500).json({
                 errors: "An unknown error occurred"
@@ -290,7 +291,7 @@ const streamController = {
     },
 
     async showStream(req, res) {
-        try {        
+        try {
 
             let stream_id = req.params.streamId;
 
@@ -323,7 +324,7 @@ const streamController = {
             let visitor;
             let user_like_boolean = false;
             let user_following_boolean = false;
-            if (req.isAuthenticated()) {
+            if (req.user) {
                 visitor = await User.findById(req.user._id);
                 if (!visitor) {
                     return res.status(404).json({
@@ -333,9 +334,7 @@ const streamController = {
                 user_like_boolean = visitor.liked_streams_ids.includes(stream_id);
                 user_following_boolean = visitor.following.includes(stream.streamer_id);
             }
-            console.log("boolean", user_like_boolean);
-            console.log("following", user_following_boolean);
-            
+
             let host_name = req.headers.host;
 
             res.status(200).json({
@@ -346,16 +345,16 @@ const streamController = {
                 user_following_boolean,
                 host_name
             });
-        } catch(error) {
+        } catch (error) {
             console.log(error);
             res.status(500).json({
                 errors: "An unknown error occurred"
             });
-        }       
+        }
     },
 
     async getStreamer(req, res) {
-        try {        
+        try {
 
             let user_id = req.params.userId;
 
@@ -390,7 +389,7 @@ const streamController = {
                         errors: "User that seemed to be logged in was no longer found."
                     });
                 }
-                
+
                 if (user.is_live && stream_id) {
                     user_like_boolean = visitor.liked_streams_ids.includes(stream_id);
                 }
@@ -410,18 +409,16 @@ const streamController = {
                 user_following_boolean,
                 host_name
             });
-        } catch(error) {
+        } catch (error) {
             console.log(error);
             res.status(500).json({
                 errors: "An unknown error occurred"
             });
-        }  
+        }
     },
 
     async updateLikes(req, res) {
-        try {      
-            console.log("reached this");
-
+        try {
             // if not user, then cancel (for oh so clever frontend check bypassers)
             if (!req.user) {
                 return res.status(401).json({
@@ -466,7 +463,7 @@ const streamController = {
                 user.liked_streams_ids.pull(stream_id);
 
             } else {
-                 // if undefined and not even zero, make it one
+                // if undefined and not even zero, make it one
                 if (!stream.stream_likes_count) {
                     stream.stream_likes_count = 1;
                 } else if (stream.stream_likes_count == 0 || stream.stream_likes_count > 0) {
@@ -485,62 +482,44 @@ const streamController = {
                 stream: stream,
                 stream_likes_count
             })
-        
-        } catch(error) {
+
+        } catch (error) {
             console.log(error);
             res.status(500).json({
                 errors: "An unknown error occurred"
             });
-        }       
+        }
     },
 
     async followUnfollow(req, res) {
-        try {      
-
-            console.log("reached following");
-
+        try {
             // if not user, then cancel (for oh so clever frontend check bypassers)
-            if (!req.isAuthenticated()) {
-                return res.status(500).json({
-                    errors: "No authenticated user present who could follow a streamer"
-                });
-            }
-
             let stream_id = req.params.streamId;
-
             let stream = await Stream.findById(stream_id);
             if (!stream) {
                 return res.status(404).json({
                     errors: "Stream not found."
                 });
             }
-
             if (req.user._id == stream.streamer_id) {
-                return res.status(500).json({
+                return res.status(400).json({
                     errors: "Cannot follow yourself."
                 });
             }
-
             // check if user has already liked it or not, based on that choose action
-
             let user = await User.findById(req.user._id);
             if (!user) {
                 return res.status(404).json({
                     errors: "User not found."
                 });
             }
-
             let streamer_id = stream.streamer_id
             let user_following_boolean = user.following.includes(streamer_id);
-
             if (user_following_boolean == true) {
-
                 user.following.pull(streamer_id);
             } else {
-
                 user.following.push(streamer_id);
             }
-
             await user.save();
 
             let streamer = await User.findById(streamer_id);
@@ -549,42 +528,35 @@ const streamController = {
                     errors: "User not found."
                 });
             }
-
             let streamer_followers_boolean = streamer.followers.includes(user._id);
-
             if (streamer_followers_boolean == true) {
-
                 streamer.followers.pull(user._id);
             } else {
-
                 streamer.followers.push(user._id);
             }
-
             await streamer.save();
-
             // let stream_followers_count = stream.stream_followers_count;
-
             res.json({
                 stream: stream,
                 streamer: streamer
             })
-        
-        } catch(error) {
+
+        } catch (error) {
             console.log(error);
             res.status(500).json({
                 errors: "An unknown error occurred"
             });
-        }       
+        }
     },
 
     async schedule_live_stream(req, res) {
-        try { 
+        try {
             //let stream_data = req.body.stream_data;
             //let schedule_data = req.body.schedule_data;
             //schedule_data.scheduled_time = new Date();
 
 
-            let stream = new Stream(req.body);
+            let stream = new Stream({ ...req.body, stream_likes_count: 0 });
 
 
             /*if (stream_data.thumbnail_key) {
@@ -642,7 +614,7 @@ const streamController = {
             stream.streamer = req.user._id;
             //stream.is_live = false;
             //stream.is_scheduled = true;
-    
+
             await stream.save();
             let stream_id = stream._id;
 
@@ -668,7 +640,7 @@ const streamController = {
                 stream_id: stream_id,
                 user: user
             })
-        } catch(error) {
+        } catch (error) {
             console.log(error);
             res.status(500).json({
                 errors: "An unknown error occurred"
