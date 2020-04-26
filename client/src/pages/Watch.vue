@@ -87,7 +87,7 @@
             </div>
           </div>
           <div class="stream_details_block">
-            <div class="stream_description_display">{{ stream.stream_description }}</div>
+            <div class="stream_description_display" v-html="stream.stream_description"></div>
           </div>
           <div class="stream_details_block">
             <div class="stream_tags_display">
