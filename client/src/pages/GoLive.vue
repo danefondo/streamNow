@@ -203,7 +203,7 @@ export default {
         );
         this.$router.push(`/watch/${result.data.stream_id}`);
         if (type === "live") {
-          this.$emit("updateLive", true)
+          this.$emit("updateLive", true, result.data.stream_id)
         }
       } catch (error) {
         window.scrollTo(0, 0);

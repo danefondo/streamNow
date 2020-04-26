@@ -6,9 +6,8 @@ export default {
             if (localStorage.token && jwtDecode(localStorage.token)) {
                 // check expiry
                 const user = jwtDecode(localStorage.token).user;
-                if (localStorage.isLive && localStorage.isLive !== "false") {
-                    user.is_live = localStorage.isLive
-                }
+                user.is_live = localStorage.isLive
+                user.active_stream_id = localStorage.active_stream_id
                 return user;
             }
         } catch(error) {

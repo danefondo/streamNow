@@ -41,13 +41,19 @@ export default {
       }
       this.user = details.user;
     },
-    updateLive(status) {
+    updateLive(status, streamId) {
       if (!status) {
         localStorage.removeItem('isLive')
+        localStorage.removeItem('active_stream_id')
+        this.user.is_live = false;
+        this.user.active_stream_id = "";
       } else {
         localStorage.isLive = status;
+        localStorage.active_stream_id = streamId;
+        this.user.is_live = status;
+        this.user.active_stream_id = streamId;
       }
-      this.user.is_live = status;
+      
     }
   }
 };
