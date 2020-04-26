@@ -4,6 +4,7 @@ import { BASE_PATH } from "../constants"
 export const setAuth = (token, redirect = true) => {
     if (!token) {
         localStorage.removeItem('token');
+        localStorage.removeItem('isLive');
         delete axios.defaults.headers.common.Authorization;
     }
     if (redirect) {

@@ -33,7 +33,6 @@
 
 <script>
 import axios from 'axios';
-import { setAuth } from '../config/axios';
 
 export default {
   name: "Login",
@@ -57,7 +56,7 @@ export default {
         });
         this.error = '';
         this.success = true;
-        setAuth(response.data.token, true);
+        this.$emit("update", response.data);
         setTimeout(() => {
           this.$router.push('/');
         }, 1000);

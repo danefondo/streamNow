@@ -170,6 +170,7 @@ export default {
       await axios.post(`streams/${this.stream._id}/endStream`);
       this.showModal = false;
       this.stream.is_live = false;
+      this.$emit("updateLive", false);
     }
   },
   computed: {

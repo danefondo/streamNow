@@ -5,7 +5,11 @@ export default {
         try {
             if (localStorage.token && jwtDecode(localStorage.token)) {
                 // check expiry
-                return jwtDecode(localStorage.token).user;
+                const user = jwtDecode(localStorage.token).user;
+                if (localStorage.isLive) {
+                    user.is_live = localStorage.isLive
+                }
+                return user;
             }
         } catch(error) {
             return false;

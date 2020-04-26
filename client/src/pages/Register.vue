@@ -96,7 +96,6 @@
 <script>
 import axios from "axios";
 import Success from "../components/Success";
-import { setAuth } from '../config/axios';
 
 export default {
   name: "Register",
@@ -132,7 +131,7 @@ export default {
         });
         this.errors = [];
         this.success = true;
-        setAuth(response.data.token, true);
+        this.$emit("update", response.data);
       } catch (error) {
         if (error.response.status === 422) {
           this.errors = error.response.data.errors;
