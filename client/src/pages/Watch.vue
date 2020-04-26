@@ -200,7 +200,7 @@ export default {
       if (this.stream.platform_status.includes("facebook")) {
         return `https://www.facebook.com/video/embed?video_id=${this.stream.stream_video_id}`;
       } else if (this.stream.platform_status.includes("twitch")) {
-        return this.stream.stream_video_link;
+        return `https://player.twitch.tv/?channel=${this.stream.stream_video_id}`
       }
       return `https://www.youtube-nocookie.com/embed/${this.stream.stream_video_id}?autoplay=1&amp;modestbranding=1&amp;showinfo=0&amp;rel=0&amp;theme=light&amp;color=white`;
     },

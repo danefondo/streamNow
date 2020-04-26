@@ -17,7 +17,7 @@
 <!-- - Success page -->
 <!-- + Profile link / same component -->
 <!-- + Profile not working (especially new) -->
-- Get video ID from video link
+<!-- - Get video ID from video link -->
 
 ** 
 - new databse
@@ -51,6 +51,7 @@
 - Add 'Watch streams' to success page instead of view streams
 - Change all text to i18 text
 - Add custom thumbnail replacement if no thumbnail exists in youtube or manually set
+- Change goLive link input example from id to link
 
 ** ABOUT PAGE **
 - Create custom about page
@@ -60,27 +61,26 @@
 - Rich text editor for video descriptions (CKEDITOR5)
 - Select whether stream preview is with YouTube, Facebook, Twitch at Go Live & Edit stream
 - Disable scheduling streams if email not verified
-- Schedule streams
+<!-- - Schedule streams -->
 - View single scheduled stream
 - Edit scheduled streams
 - Delete streams
 - Go live with scheduled stream
 - View my scheduled streams
-- Viewer count
+- Viewer count icon overlay
 
 ** PROFILE PAGE **
-- Social media buttons
-- Profile separated from main live stream
+<!-- - Social media buttons -->
+<!-- - Profile separated from main live stream -->
 - On clicking profile, do show live stream on the top
 
 ** WATCH PAGE **
-- If stream doesn't exist, say that this kind of stream doesn't exist
+- If stream doesn't exist, say that this kind of stream doesn't exist AND EDIT ERROR PAGE
 - Support button
 - Share buttons
 - View more button for longer descriptions
 - Currently viewing stream count
 - Total views count
-- Creator social media buttons
 - Socket.io live chatroom-box
 - Only owner should be able to end stream
 - Only owner should be able to edit stream
@@ -102,7 +102,12 @@
 - Custom confirmation message
 - Email collection
 
+
+
 # NEXT WEEK
+
+** Protection **
+- Prevent unauthorized changes and display page/component saying 'not authorized'
 
 ** PAYWALL FOR EVENTS **
 - Buy access to an event (access code?)

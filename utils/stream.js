@@ -13,7 +13,8 @@ const getVideoId = (platform, videoLink) => {
     if (platform.includes("youtu")) {
         return getYoutubeId(videoLink);
     } else if (platform.includes("twitch")) {
-        return videoLink.split("=")[1];
+        const videoParts = videoLink.split("/")
+        return videoParts[videoParts.length - 1];
     } else if (platform.includes("facebook")) {
         const videoParts = videoLink.split("/")
         return videoParts[videoParts.length - 1];
