@@ -53,6 +53,7 @@
     <template v-else>
       <div class="stream_buttons">
         <router-link class="go_live_button" to="/register">Register</router-link>
+        <router-link class="go_live_button" to="/login">Login</router-link>
       </div>
     </template>
   </div>

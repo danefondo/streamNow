@@ -9,6 +9,7 @@ import EditStream from "./pages/EditStream";
 import About from "./pages/About";
 import Privacy from "./pages/Privacy";
 import Terms from "./pages/Terms";
+import VerifyUser from "./pages/VerifyUser";
 import Contact from "./pages/Contact";
 import Profile from "./pages/Profile";
 import ResetPass from "./pages/ResetPass";
@@ -37,6 +38,7 @@ const routes = [
   { path: "/discover", component: Home },
   { path: "/login", component: Login, name: "Login" },
   { path: "/register", component: Register },
+  { path: "/verify/:token", component: VerifyUser, name: "Verify" },
   { path: "/about", component: About },
   { path: "/privacy", component: Privacy },
   { path: "/terms", component: Terms },
@@ -54,10 +56,11 @@ const router = new VueRouter({
   routes,
 });
 
+const noReAuth = ["Login", "Verify"]
 router.beforeEach((to, from, next) => {
   if (to.meta.requireAuthentication && !auth.isAuthenticated()) {
     next({ name: "Login" });
-  } else if (to.name === "Login" && auth.isAuthenticated()) {
+  } else if (noReAuth.includes(to.name) && auth.isAuthenticated()) {
     next("/");
   } else {
     next();

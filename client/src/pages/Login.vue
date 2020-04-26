@@ -57,7 +57,7 @@ export default {
         });
         this.error = '';
         this.success = true;
-        setAuth(response.data.token);
+        setAuth(response.data.token, true);
         setTimeout(() => {
           this.$router.push('/');
         }, 1000);
