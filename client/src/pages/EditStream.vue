@@ -23,12 +23,7 @@
           </div>
           <div class="stream_input_container edit_input">
             <div class="stream_input_title">Change livestream description</div>
-            <textarea
-              v-model="description"
-              class="stream_input stream_description"
-              placeholder="Describe your livestream"
-            >Lehe täielikum funktsionaalsus lastakse peagi laivi.
-        </textarea>
+            <ckeditor  :editor="editor" v-model="description"></ckeditor>
             <div v-if="descriptionEmpty && !description" class="inputErrorContainer">
               <div class="inputErrorText">{{ $t("form.empty") }}</div>
             </div>
@@ -62,6 +57,7 @@
 <script>
 import InputTag from "vue-input-tag";
 import axios from "axios";
+import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import auth from "../config/auth";
 import ImageUpload from "../components/ImageUpload";
 
@@ -73,6 +69,7 @@ export default {
   },
   data() {
     return {
+      editor: ClassicEditor,
       isScheduledOpened: false,
       streamId: null,
       date: new Date(),

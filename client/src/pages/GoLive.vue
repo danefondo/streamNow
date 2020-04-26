@@ -17,11 +17,7 @@
     </div>
     <div class="stream_input_container">
       <div class="stream_input_title">What's your livestream about?</div>
-      <textarea
-        v-model="description"
-        class="stream_input stream_description"
-        placeholder="Briefly describe your livestream"
-      ></textarea>
+      <ckeditor  :editor="editor" v-model="description"></ckeditor>
       <div v-if="descriptionEmpty && !description" class="inputErrorContainer">
         <div class="inputErrorText">{{ $t("form.empty") }}</div>
       </div>
@@ -123,6 +119,7 @@
 
 <script>
 import axios from "axios";
+import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import Datepicker from "vuejs-datepicker";
 import InputTag from "vue-input-tag";
 import ImageUpload from "../components/ImageUpload";
@@ -132,10 +129,11 @@ export default {
   components: {
     Datepicker,
     InputTag,
-    ImageUpload
+    ImageUpload,
   },
   data() {
     return {
+      editor: ClassicEditor,
       isScheduledOpened: false,
       date: new Date(),
       time: "",
@@ -286,5 +284,8 @@ div {
 .auto-side-margins {
   margin-left: auto;
   margin-right: auto;
+}
+.ck-content {
+  height: 200px;
 }
 </style>
