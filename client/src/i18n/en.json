@@ -126,7 +126,9 @@
         "prev-streams": "Previous streams",
         "next-streams": "Upcoming streams",
         "no-prev-streams": "User has not done a stream yet.",
-        "no-upcoming-streams": "User has no scheduled streams."
+        "no-upcoming-streams": "User has no scheduled streams.",
+        "about-streamer":  "About streamer",
+        "edit-about": "Edit"
     },
     "watch": {
         "follow": "Follow",

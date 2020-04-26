@@ -65,7 +65,6 @@ export default {
       }
       this.streams[date].push(eachStream);
     });
-    // loop through data.streams
   }
 };
 </script>

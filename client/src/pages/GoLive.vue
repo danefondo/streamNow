@@ -34,7 +34,7 @@
       </div>
     </div>
     <div class="stream_input_container">
-      <div class="stream_input_title">YouTube video ID</div>
+      <div class="stream_input_title">Add video ID or link (YouTube, Facebook, Twitch)</div>
       <input
         v-model="videoId"
         class="stream_input stream_video_id_input"
@@ -154,7 +154,7 @@ export default {
       submitting: false,
       image: null,
       uploadingImage: false,
-      public_status: "public",
+      public_status: "public"
     };
   },
   methods: {

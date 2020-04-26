@@ -4,20 +4,24 @@
 
 ** To be fixed **
 - Go live button
+- Success page
+- Profile link / same component
+- Profile not working (especially new)
+- Get video ID from video link
 
 *Questions:
 - Do I have to change every req.user._id and is there an equivalently convenient way to get this?
 
 ** WATCH PAGE **
-- If LoggedIn && User==Owner
-    - Show edit stream button
-    - Show end stream button
-    - Disable liking video
-    - Don't show follow
-- Make like button work
-- Make follow button work
++ If LoggedIn && User==Owner
+    + Show edit stream button
+    + Show end stream button
+    + Disable liking video
+    + Don't show follow
++ Make like button work
++ Make follow button work
 - Make autoscroll name-bar work
-- If stream has ended, show it has ended
++ If stream has ended, show it has ended
 
 
 ** PROFILE **

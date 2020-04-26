@@ -657,6 +657,7 @@ textarea {
 }
 .stream_input_container {
   margin-bottom: 40px !important;
+  max-width: 325px;
 }
 .stream_input {
   width: 200px;
@@ -680,6 +681,7 @@ textarea {
 }
 .stream_input_title {
   font-size: 20px;
+  line-height: 22px;
 }
 /*! CSS Used from: https://www.eeter.tv/css/modal.css */
 .big-content-wrapper {

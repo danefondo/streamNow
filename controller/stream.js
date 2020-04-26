@@ -359,7 +359,16 @@ const streamController = {
             let user_id = req.params.userId;
 
             let user;
-            user = await User.findById(user_id).populate('previous_streams').sort({ scheduled_time: 1 }).populate('upcoming_streams').sort({ scheduled_time: 1 }).exec();
+            user = await User.findById(user_id).populate({
+                path: 'previous_streams',
+                populate: {
+                    path: 'streamer'}
+                }).sort({ scheduled_time: 1 }).populate({
+                    path: 'upcoming_streams',
+                    populate: {
+                        path: 'streamer'
+                    }
+                }).sort({ scheduled_time: 1 }).exec();
 
             let stream;
             let stream_id;

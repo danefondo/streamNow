@@ -17,35 +17,61 @@
       <div class="section_center">
         <div class="stream_center_top">
           <div v-if="streamer" class="stream_owner">
-            <img class="streamer_profile_icon" :src="getProfileIcon" />
+            <!-- <img class="streamer_profile_icon" :src="getProfileIcon" /> -->
+            <p class="streamer_first_name">{{streamer.firstname || streamer.username}}</p>
             <p
-                class="streamer_first_name"
-            >{{streamer.firstname || streamer.username}}</p>
-            <p
-                v-if="streamer.firstname && streamer.lastname"
-                class="streamer_last_name"
+              v-if="streamer.firstname && streamer.lastname"
+              class="streamer_last_name"
             >{{ streamer.lastname }}</p>
           </div>
-          <div class="donate_button">Support $</div>
         </div>
         <div class="streamer_profile_container">
           <div class="streamer_stats">
-            <img class="streamer_profile_image" src="https://curata.s3.amazonaws.com/1586454443289" />
+            <img
+              v-if="streamer.profile_image_url"
+              class="streamer_profile_image"
+              :src="streamer.profile_image_url"
+            />
+            <router-link
+              to="/dashboard/settings"
+              v-if="!streamer.profile_image_url && user._id == streamer._id"
+              class="add_about_section"
+            >{{$t("profile.add-about")}}</router-link>
             <div v-if="streamer" class="links">
-              <a :href="streamer.fb_link">
+              <a v-if="streamer.fb_link" :href="streamer.fb_link">
                 <img class="fb_link social_link" src="../assets/images/facebook.png" />
               </a>
-              <img class="website_link social_link" />
+              <a v-if="streamer.insta_link" :href="streamer.insta_link">
+                <img class="insta_link social_link" src="../assets/images/instagram.png" />
+              </a>
+              <a v-if="streamer.yt_link" :href="streamer.yt_link">
+                <img class="yt_link social_link" src="../assets/images/youtube.png" />
+              </a>
+              <a v-if="streamer.twitter_link" :href="streamer.twitter_link">
+                <img class="insta_link social_link" src="../assets/images/twitter.png" />
+              </a>
+              <a v-if="streamer.website_link" :href="streamer.website_link">
+                <img class="website_link social_link" />
+              </a>
             </div>
-            <div class="streamer_about">
-              <div class="streamer_about_title">About streamer</div>
-              <div class="streamer_description">I make code.</div>
-              <div class="streamer_description_edit">Edit</div>
+            <div v-if="streamer.description" class="streamer_about">
+              <div class="streamer_about_title">{{$t("profile.about-streamer")}}</div>
+              <div class="streamer_description">{{streamer.description}}</div>
+              <router-link
+                v-if="streamer.description && user._id == streamer._id"
+                to="/dashboard/settings"
+                class="streamer_description_edit"
+              >Edit</router-link>
             </div>
+            <router-link
+              to="/dashboard/settings"
+              v-if="!streamer.description && user._id == streamer._id"
+              class="add_about_section"
+            >{{$t("profile.add-about")}}</router-link>
             <div class="streamer_followings">
-              <p class="streamer_count">2 Followers</p>
-              <p class="streamer_count">1 Following</p>
-              <p class="streamer_count">9 Streams done</p>
+              <p class="streamer_count">{{streamer.followers.length}} Followers</p>
+              <p class="streamer_count">{{streamer.following.length}} Following</p>
+              <p class="streamer_count">{{streamer.previous_streams.length}} Streams done</p>
             </div>
             <div class="streamer_upcoming">
               <div class="upcoming">No upcoming streams planned</div>
@@ -55,156 +81,24 @@
             <p class="upcoming_streams_title">{{$t("profile.next-streams")}}</p>
             <div class="upcoming_streams_container">
               <div v-if="streamer.upcoming_streams.length" class="upcoming_streams">
-                <UpcomingStream v-for="stream in streamer.upcoming_streams" :key="stream._id" :stream="stream" />
+                <ProfileStream
+                  v-for="stream in streamer.upcoming_streams"
+                  :key="stream._id"
+                  :stream="stream"
+                />
               </div>
               <div v-else class="no_upcoming_streams">
                 <div class="no_streams_text">{{$("profile.no_streams")}}</div>
               </div>
             </div>
+            <p class="previous_streams_title">Previous streams</p>
             <div class="previous_streams_container">
               <div class="previous_streams">
-                <p class="previous_streams_title">Previous streams</p>
-                <div class="previous_stream">
-                  <div class="previous_stream_details">
-                    <a class="stream_title" href="/watch/5e8f5b0148648600177ab1e6">Let us do It Live</a>
-                    <div class="stream_date">April 4</div>
-                  </div>
-                  <iframe
-                    class="live_player"
-                    width="550"
-                    height="331"
-                    src="https://www.youtube-nocookie.com/embed/Ue0xaq1Q-B4?modestbranding=1&amp;showinfo=0&amp;rel=0&amp;theme=light&amp;color=white"
-                    frameborder="0"
-                    allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-                    allowfullscreen
-                  ></iframe>
-                </div>
-                <div class="previous_stream">
-                  <div class="previous_stream_details">
-                    <a class="stream_title" href="/watch/5e9124065dba2d839418b4f8">Mr Bean Is Back!</a>
-                    <div class="stream_date">April 4</div>
-                  </div>
-                  <iframe
-                    class="live_player"
-                    width="550"
-                    height="331"
-                    src="https://www.youtube-nocookie.com/embed/Ue0xaq1Q-B4?modestbranding=1&amp;showinfo=0&amp;rel=0&amp;theme=light&amp;color=white"
-                    frameborder="0"
-                    allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-                    allowfullscreen
-                  ></iframe>
-                </div>
-                <div class="previous_stream">
-                  <div class="previous_stream_details">
-                    <a class="stream_title" href="/watch/5e91549106b7600017cf416b">Space Stream</a>
-                    <div class="stream_date">April 4</div>
-                  </div>
-                  <iframe
-                    class="live_player"
-                    width="550"
-                    height="331"
-                    src="https://www.youtube-nocookie.com/embed/EEIk7gwjgIM?modestbranding=1&amp;showinfo=0&amp;rel=0&amp;theme=light&amp;color=white"
-                    frameborder="0"
-                    allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-                    allowfullscreen
-                  ></iframe>
-                </div>
-                <div class="previous_stream">
-                  <div class="previous_stream_details">
-                    <a
-                      class="stream_title"
-                      href="/watch/5e91af6d59bf610017585fa0"
-                    >Let's Do Yoga Together!</a>
-                    <div class="stream_date">April 4</div>
-                  </div>
-                  <iframe
-                    class="live_player"
-                    width="550"
-                    height="331"
-                    src="https://www.youtube-nocookie.com/embed/RUToCjzmxVM?modestbranding=1&amp;showinfo=0&amp;rel=0&amp;theme=light&amp;color=white"
-                    frameborder="0"
-                    allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-                    allowfullscreen
-                  ></iframe>
-                </div>
-                <div class="previous_stream">
-                  <div class="previous_stream_details">
-                    <a
-                      class="stream_title"
-                      href="/watch/5e91b4bae1f5d900174e89f7"
-                    >Let's Do Yoga Together!</a>
-                    <div class="stream_date">April 4</div>
-                  </div>
-                  <iframe
-                    class="live_player"
-                    width="550"
-                    height="331"
-                    src="https://www.youtube-nocookie.com/embed/RUToCjzmxVM?modestbranding=1&amp;showinfo=0&amp;rel=0&amp;theme=light&amp;color=white"
-                    frameborder="0"
-                    allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-                    allowfullscreen
-                  ></iframe>
-                </div>
-                <div class="previous_stream">
-                  <div class="previous_stream_details">
-                    <a class="stream_title" href="/watch/5e9f12f1e088b609cb876db5">dfdfgdg</a>
-                    <div class="stream_date">April 4</div>
-                  </div>
-                  <iframe
-                    class="live_player"
-                    width="550"
-                    height="331"
-                    src="https://www.youtube-nocookie.com/embed/egdgrgt349?modestbranding=1&amp;showinfo=0&amp;rel=0&amp;theme=light&amp;color=white"
-                    frameborder="0"
-                    allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-                    allowfullscreen
-                  ></iframe>
-                </div>
-                <div class="previous_stream">
-                  <div class="previous_stream_details">
-                    <a class="stream_title" href="/watch/5ea34e7b7b9ea8001745a54e">StreamTtest</a>
-                    <div class="stream_date">April 4</div>
-                  </div>
-                  <iframe
-                    class="live_player"
-                    width="550"
-                    height="331"
-                    src="https://www.youtube-nocookie.com/embed/test?modestbranding=1&amp;showinfo=0&amp;rel=0&amp;theme=light&amp;color=white"
-                    frameborder="0"
-                    allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-                    allowfullscreen
-                  ></iframe>
-                </div>
-                <div class="previous_stream">
-                  <div class="previous_stream_details">
-                    <a class="stream_title" href="/watch/5ea363487b9ea8001745a550">sddsfds</a>
-                    <div class="stream_date">April 4</div>
-                  </div>
-                  <iframe
-                    class="live_player"
-                    width="550"
-                    height="331"
-                    src="https://www.youtube-nocookie.com/embed/sdfsdfsdf?modestbranding=1&amp;showinfo=0&amp;rel=0&amp;theme=light&amp;color=white"
-                    frameborder="0"
-                    allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-                    allowfullscreen
-                  ></iframe>
-                </div>
-                <div class="previous_stream">
-                  <div class="previous_stream_details">
-                    <a class="stream_title" href="/watch/5ea36d8a7b9ea8001745a553">test</a>
-                    <div class="stream_date">April 4</div>
-                  </div>
-                  <iframe
-                    class="live_player"
-                    width="550"
-                    height="331"
-                    src="https://www.youtube-nocookie.com/embed/test?modestbranding=1&amp;showinfo=0&amp;rel=0&amp;theme=light&amp;color=white"
-                    frameborder="0"
-                    allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-                    allowfullscreen
-                  ></iframe>
-                </div>
+                <ProfileStream
+                  v-for="stream in streamer.previous_streams"
+                  :key="stream._id"
+                  :stream="stream"
+                />
               </div>
             </div>
           </div>
@@ -216,9 +110,10 @@
 </template>
 
 <script>
+import auth from "../config/auth";
 import axios from "axios";
 import profileIcon from "../assets/images/profile_icon.png";
-import UpcomingStream from "../components/UpcomingStream";
+import ProfileStream from "../components/ProfileStream";
 
 export default {
   name: "Profile",
@@ -227,11 +122,11 @@ export default {
       showModal: false,
       streamer: null,
       stream: null,
-      hostName: null,
+      hostName: null
     };
   },
   components: {
-    UpcomingStream
+    ProfileStream
   },
   mounted() {
     this.getStream();
@@ -250,12 +145,67 @@ export default {
         return this.streamer.profile_image_url;
       }
       return profileIcon;
+    },
+    user() {
+      return auth.isAuthenticated();
     }
   }
 };
 </script>
 
 <style>
+/*----------------------
+  About streamer
+----------------------*/
+
+.streamer_description {
+  margin-left: 5px;
+}
+
+.streamer_description_edit {
+  margin-top: 12px;
+  padding: 5px 16px;
+  font-size: 17px;
+  display: inline-block;
+  background-color: #e4e4e4;
+  border-radius: 3px;
+  margin-right: 15px;
+  text-align: center;
+  transition: 0.2s ease;
+  cursor: pointer;
+  white-space: nowrap;
+  font-weight: bold;
+  margin-left: 130px;
+}
+
+.streamer_description_edit:hover {
+  background-color: #eee;
+}
+
+.add_about_section,
+.add_profile_image_section {
+  padding: 23px 20px;
+  background-color: #f7f7f7;
+  border-radius: 4px;
+  width: 200px;
+  font-weight: bold;
+  margin-top: 10px;
+  margin-bottom: 20px;
+  font-size: 20px;
+  color: #333;
+  cursor: pointer;
+  display: block;
+}
+
+.add_about_section:hover,
+.add_profile_image_section:hover {
+  background-color: #f1f1f1;
+}
+
+.streams_container {
+  margin-left: 80px;
+}
+
 .social_link {
   height: 25px;
 }
@@ -372,7 +322,7 @@ p {
 }
 .streamer_first_name,
 .streamer_last_name {
-  font-size: 22px;
+  font-size: 27px;
   display: inline;
   margin-right: 5px;
 }
@@ -442,47 +392,48 @@ p {
   margin-bottom: 10px;
 }
 .streamer_profile_container {
-  margin-top: 80px;
+  margin-top: 14px;
   margin-bottom: 50px;
   display: flex;
 }
 .upcoming_streams_container {
-  margin-left: 30px;
   align-items: center;
   display: flex;
   height: auto;
   flex: 1;
-  margin: 0 0 0 30px;
   overflow-y: auto;
-  width: 630px;
+  width: 900px;
 }
 .previous_streams_container {
-  margin-left: 30px;
-  margin-top: 40px;
+  width: 900px;
 }
 .previous_streams,
 .upcoming_streams {
-  width: 630px;
+  width: 900px;
   box-sizing: border-box;
-  padding: 20px;
+  /* padding: 20px; */
   padding-top: 0px;
   border-radius: 4px;
 }
 .upcoming_streams {
   display: flex;
+  padding: 10px 0px;
 }
+
+.previous_streams {
+  display: flex;
+  flex-wrap: wrap;
+}
+
 .previous_streams_title,
 .upcoming_streams_title {
   padding: 5px;
   font-weight: bold;
   color: #333;
-  margin-bottom: 15px;
-  font-size: 32px;
-}
-.upcoming_streams_title {
-  margin-left: 30px;
+  font-size: 45px;
   padding-left: 24px;
 }
+
 .previous_stream,
 .upcoming_stream {
   margin-top: 40px;

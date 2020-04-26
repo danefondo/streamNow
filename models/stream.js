@@ -23,7 +23,8 @@ const stream_schema = new mongoose.Schema({
     is_featured: Boolean,
     has_gone_live: Boolean,
     scheduled_time: Date,
-    public_status: String
+    public_status: String,
+    platform_status: String
 });
 
 const Stream = module.exports = mongoose.model('Stream', stream_schema);
