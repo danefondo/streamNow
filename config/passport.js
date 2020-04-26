@@ -18,7 +18,7 @@ module.exports = function (passport) {
       } else {
         let query = { email: username };
 
-        User.findOne(query, function (err, user) {
+        User.findOne(query).select('+password').exec(function (err, user) {
           if (err) throw err;
           if (!user) {
             return done(null, false, { message: 'No user found' });
@@ -63,7 +63,6 @@ module.exports = function (passport) {
     secretOrKey: process.env.SECRET
   },
     function (jwtPayload, cb) {
-      console.log('payload', jwtPayload)
       //find the user in db if needed. This functionality may be omitted if you store everything you'll need in JWT payload.
       return cb(null, jwtPayload.user);
     }

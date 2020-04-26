@@ -1,9 +1,9 @@
 const express = require('express');
-const bodyParser = require('body-parser');
 const router = express.Router();
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const passport = require('passport');
+const auth = require('../config/auth')
 // Bring in User Model
 let User = require('../models/user');
 // const mail = require('../utils/mail');
@@ -25,7 +25,7 @@ router.post('/checkUnique', accountController.checkUnique);
 router.post('/register', validator.register, accountController.register);
 
 //token verification
-router.get('/verify/:verificationToken', function(req, res, next) {
+router.get('/verify/:verificationToken', function (req, res, next) {
 	const { verificationToken } = req.params;
 	User.findOne({ verificationToken }, (verifyError, theUser) => {
 		if (verifyError) {
@@ -39,7 +39,7 @@ router.get('/verify/:verificationToken', function(req, res, next) {
 		theUser.verifiedStatus = true;
 		theUser.save((err, savedUser) => {
 			const tokenUser = { username: savedUser.username, _id: savedUser._id, is_live: savedUser.is_live }
-			const token = jwt.sign({ user: tokenUser }, process.env.SECRET, { 
+			const token = jwt.sign({ user: tokenUser }, process.env.SECRET, {
 				expiresIn: '1d',
 			});
 			return res.json({ user: theUser, token, message: "Your email has been verified" });
@@ -48,42 +48,35 @@ router.get('/verify/:verificationToken', function(req, res, next) {
 });
 
 // Login
-router.post('/login', function(req, res, next){
-  passport.authenticate('local', { session: false }, function(err, user, info) {
-  	if (err) { return next(err) }
-  	if (!user) {
-  		return res.status(401).send({ error: "Your username and/or password is incorrect." });
-  	}
-  	req.login(user, { session: false }, function(err) {
+router.post('/login', function (req, res, next) {
+	passport.authenticate('local', { session: false }, function (err, user, info) {
 		if (err) { return next(err) }
-		const theUser = { username: user.username, _id: user._id, is_live: user.is_live }
-		const token = jwt.sign({ user: theUser }, process.env.SECRET, { 
-			expiresIn: '1d',
+		if (!user) {
+			return res.status(401).send({ error: "Your username and/or password is incorrect." });
+		}
+		req.login(user, { session: false }, function (err) {
+			if (err) { return next(err) }
+			const theUser = { username: user.username, _id: user._id, is_live: user.is_live }
+			const token = jwt.sign({ user: theUser }, process.env.SECRET, {
+				expiresIn: '1d',
+			});
+			return res.json({ user: theUser, token });
 		});
-		return res.json({ user: theUser, token });
-  	});
-  })(req, res, next);
+	})(req, res, next);
 });
 
-// Logout
-router.get('/logout', function(req, res) {
-	req.logout();
-	console.log('You are logged out');
-	res.redirect('/');
-});
+router.post('/updateName', auth.ensureAuthenticated, accountController.updateName);
 
-router.post('/updateName', ensureAuthenticated, accountController.updateName);
+router.post('/updateDescription', auth.ensureAuthenticated, accountController.updateDescription);
 
-router.post('/updateDescription', ensureAuthenticated, accountController.updateDescription);
+router.post('/updateUsername', auth.ensureAuthenticated, validator.check_username, accountController.updateUsername);
 
-router.post('/updateUsername', ensureAuthenticated, validator.check_username, accountController.updateUsername);
+router.post('/updateEmail', validator.check_email, auth.ensureAuthenticated, accountController.updateEmail);
 
-router.post('/updateEmail', validator.check_email, accountController.updateEmail);
-
-router.post('/updateSocial', ensureAuthenticated, accountController.updateSocial);
+router.post('/updateSocial', auth.ensureAuthenticated, accountController.updateSocial);
 
 
-router.post('/updatePassword', function(req, res) {
+router.post('/updatePassword', auth.ensureAuthenticated, async function (req, res) {
 	const newPassword = req.body.password;
 	const oldPassword = req.body.currentpass;
 	const confirmPassword = req.body.passconfirm;
@@ -92,78 +85,60 @@ router.post('/updatePassword', function(req, res) {
 	let fail = "Wrong password.";
 	let samePassFail = "New password must be different.";
 
-	const hashedPass = req.user.password;
-	console.log("hashed", hashedPass);
-	console.log("old", oldPassword);
+	const user = await User.findById(req.user._id).select('+password');
 
-	let match = bcrypt.compareSync(oldPassword, hashedPass);
-
+	let match = bcrypt.compareSync(oldPassword, user.password);
+	
 	if (match == true) {
 		// check that new pass is not the same as old pass
 		if (oldPassword !== newPassword) {
 			// hash newPassword
-			bcrypt.genSalt(10, function(err, salt) {
+			bcrypt.genSalt(10, function (err, salt) {
 				console.log("Inside bcrypt function.")
-				bcrypt.hash(newPassword, salt, function(err, hash) {
-					if(err) {
+				bcrypt.hash(newPassword, salt, function (err, hash) {
+					if (err) {
 						console.log(err);
 					}
 					console.log("Hashing password.")
-					User.findById(req.user._id, function(err, user) {
-						user.password = hash;
-
-						user.save(function(err, updatedUser) {
-							if(err) {
-								return console.log("Password change failed: ", err);
-							} else {
-								console.log('Password successfully changed.');
-								res.status(200).json({success: success});
-							}
-						});
-					})
+					user.password = hash;
+					user.save(function (err, updatedUser) {
+						if (err) {
+							return console.log("Password change failed: ", err);
+						} else {
+							console.log('Password successfully changed.');
+							res.status(200).json({ message: success });
+						}
+					});
 				});
 			});
 		} else {
-			return res.status(500).json({message: samePassFail})
+			return res.status(400).json({ message: samePassFail })
 		}
 	} else {
 		// Passwords did not match
-		return res.status(500).json({message: fail})
+		return res.status(400).json({ message: fail })
 	}
 })
 
 
 router.post('/sendResetPass', validator.forgotPass, accountController.sendResetPass);
 
-router.get('/reset/:token', async function(req, res) {
+router.get('/reset/:token', async function (req, res) {
 	if (req.isAuthenticated()) {
-	    res.redirect('/');
-	 } else {
-	 	const user = await User.findOne({
+		res.redirect('/');
+	} else {
+		const user = await User.findOne({
 			resetToken: req.params.token
 		});
 
-    	res.render('pass__reset', {
-    		valid: !!user && Date.now() < user.resetTokenExpires
-    	});
-	 }
+		res.render('pass__reset', {
+			valid: !!user && Date.now() < user.resetTokenExpires
+		});
+	}
 })
-
 
 router.post('/reset/', validator.reset, accountController.resetPassword)
 
-router.delete('/deleteAccount', ensureAuthenticated, accountController.deleteAccount);
-
-/*====== Access control  ======*/
-function ensureAuthenticated(req, res, next){
-	if(req.isAuthenticated()){
-		console.log("Authentication successful.");
-	  return next();
-	} else {
-		console.log("Authentication failed.");
-	  res.redirect(302, '/');
-	}
-}
-
+router.delete('/deleteAccount', auth.ensureAuthenticated, accountController.deleteAccount);
 
 module.exports = router;

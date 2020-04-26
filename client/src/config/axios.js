@@ -1,7 +1,7 @@
 import axios from "axios" // eslint-disable-line
 import { BASE_PATH } from "../constants"
 
-export const setAuth = (token, redirect) => {
+export const setAuth = (token, redirect = true) => {
     if (!token) {
         localStorage.removeItem('token');
         delete axios.defaults.headers.common.Authorization;

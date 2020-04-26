@@ -1,139 +1,102 @@
 <template>
-  <div class="settings">
-    <div class="modal__changePassword">
+  <div v-if="user" class="settings">
+    <div v-if="showPasswordModal" class="modal__changePassword">
       <div class="modalBackground__changePassword"></div>
       <div class="deleteModal">
         <div class="content-wrapper">
-          <div class="msg-title">Enter your current password</div>
-          <div class="msg-body">Verify it's you.</div>
+          <div class="msg-title">{{ $t("settings.confirm-newpass-title") }}</div>
+          <div class="msg-body">{{ $t("settings.confirm-newpass-tagline") }}</div>
           <input
+            v-model="currentpass"
             class="stream_input"
             placeholder="Your current password"
             type="password"
-            data-field="currentpass"
           />
           <div class="passwordChangeErrorNotifier__accountSettings">
             <div class="passwordChangeError__accountSettings"></div>
           </div>
           <div class="action-group modifiedActionGroup">
-            <div class="cancelChangePassword button-outline">CANCEL</div>
-            <div class="confirmChangePassword button-filled">CHANGE</div>
+            <div @click="showPasswordModal = false" class="cancelChangePassword button-outline">{{ $t("settings.cancel-newpass") }}</div>
+            <div @click="changePassword" class="confirmChangePassword button-filled">{{ $t("settings.confirm-newpass") }}</div>
           </div>
         </div>
       </div>
     </div>
-    <div class="modal__deleteAccount">
+    <div v-if="showDeleteModal" class="modal__deleteAccount">
       <div class="modalBackground__deleteAccount"></div>
       <div class="deleteModal">
         <div class="content-wrapper">
-          <div class="msg-title">Are you sure you want to delete your account?</div>
+          <div class="msg-title">{{ $t("settings.delete-acc-confirm-title") }}</div>
           <div
             class="msg-body"
-          >Your account will be permanently deleted and you will lose ownership and access to all your existing content.</div>
+          >{{ $t("settings.delete-acc-confirm-desc") }}</div>
           <div class="action-group">
-            <div class="cancelPermaDeleteAccount button-outline">CANCEL</div>
-            <div class="confirmPermaDeleteAccount button-filled">DELETE</div>
+            <div @click="showDeleteModal=false" class="cancelPermaDeleteAccount button-outline">{{ $t("settings.delete-cancel") }}</div>
+            <div @click="deleteAccount" class="confirmPermaDeleteAccount button-filled">{{ $t("settings.delete-confirm") }}</div>
           </div>
         </div>
       </div>
     </div>
     <div class="curataContainer sideNavMargin">
-      <div class="pageTitle__accountSettings">Account settings</div>
-      <div class="user_not_verified">
-        <p class="not_verified_message">Please verify your email address.</p>
+      <div class="pageTitle__accountSettings">{{ $t("settings.settings-title") }}</div>
+      <div v-if="!user.verifiedStatus" class="user_not_verified">
+        <p class="not_verified_message">{{ $t("settings.verify-message") }}</p>
       </div>
       <div class="success_content">
-        <div class="generalErrorContainer">
-          <div class="generalErrorText">Please fill all required empty fields.</div>
+        <div v-if="error" class="generalErrorContainer">
+          <div class="generalErrorText">{{ $t("fill-empty-fields") }}</div>
         </div>
         <div class="settings_section">
-          <div class="success_input_title">What's your name?</div>
+          <div class="success_input_title">{{ $t("settings.name-title") }}</div>
           <div class="pass_section">
-            <div class="pass_field">First name</div>
+            <div class="pass_field">{{ $t("settings.first-name") }}</div>
             <input
+              v-model="user.firstname"
               class="stream_input stream_name"
-              placeholder="This' what they call me"
-              data-field="firstname"
-              value="Robert"
+              :placeholder="$t('settings.name-placeholder')"
             />
           </div>
           <div class="pass_section">
             <div class="pass_field">Last name</div>
             <input
+              v-model="user.lastname"
               class="stream_input stream_name"
-              placeholder="Dr. Strange"
-              data-field="lastname"
-              value="Foenix"
+              :placeholder="$t('settings.lastname-placeholder')"
             />
           </div>
-          <div class="inputErrorContainer">
-            <div class="inputErrorText"></div>
+          <div v-if="nameError && !user.firstname && !user.lastname" class="inputErrorContainer">
+            <div class="inputErrorText">{{ nameError }}</div>
           </div>
-          <div class="inputSuccessContainer">
-            <div class="inputSuccessText"></div>
+          <div v-if="!nameError && nameSuccess" class="inputSuccessContainer">
+            <div class="inputSuccessText">{{ nameSuccess }}</div>
           </div>
-          <div class="save_name_button">Save name</div>
+          <div @click="saveName" class="save_name_button">{{ $t("settings.save-name") }}</div>
         </div>
         <div class="settings_section">
-          <div class="success_input_title">Now how about a description!</div>
+          <div class="success_input_title">{{ $t("settings.desc-title") }}</div>
           <textarea
+            v-model="user.description"
             class="stream_input stream_description height-120"
-            placeholder="Genius, billionaire, playboy, philanthropist"
-            data-field="description"
-          >I make code.</textarea>
-          <div class="inputErrorContainer">
-            <div class="inputErrorText"></div>
+            :placeholder="$t('settings.desc-placeholder')"
+          ></textarea>
+          <div v-if="descriptionError && !user.description" class="inputErrorContainer">
+            <div class="inputErrorText">{{ descriptionError }}</div>
           </div>
-          <div class="inputSuccessContainer">
-            <div class="inputSuccessText"></div>
+          <div v-if="descriptionSuccess" class="inputSuccessContainer">
+            <div class="inputSuccessText">{{ descriptionSuccess }}</div>
           </div>
-          <div class="save_description_button">Save description</div>
+          <div
+            @click="saveDescription"
+            class="save_description_button"
+          >{{ $t("settings.save-desc") }}</div>
         </div>
         <div class="settings_section">
-          <div class="success_input_title">How about a profile picture?</div>
-          <div class="entryDetailsGroup auto-side-margins">
-            <div class="mainImage" id="imageArea_">
-              <div
-                class="file-upload imageBlock"
-                data-type="mainImage"
-                data-image-key="1586454443289"
-              >
-                <form
-                  class="image-upload-wrap imageForm hide"
-                  action="/' + coreURL + '/sign-s3"
-                  method="POST"
-                  enctype="multipart/form-data"
-                >
-                  <input
-                    class="file-upload-input"
-                    id="file-input"
-                    type="file"
-                    name="image"
-                    accept="image/jpg"
-                  />
-                  <div class="drag-text padding-60">
-                    <button class="file-upload-btn" type="button">Upload profile image</button>
-                    <h3>Or just drag and drop a file</h3>
-                  </div>
-                </form>
-                <div class="file-upload-content show">
-                  <img
-                    class="file-upload-image"
-                    src="https://curata.s3.amazonaws.com/1586454443289"
-                    alt="your image"
-                  />
-                  <div class="image-title-wrap">
-                    <button class="remove-image" type="button">
-                      <span class="image-pre-title">Remove</span>
-                      <span class="image-title">alien.JPG</span>
-                      <span class="image-uploading-title">Uploading image...</span>
-                      <span class="image-removing-title">Removing image...</span>
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+          <ImageUpload
+            :caption="$t('settings.profile-pic-title')"
+            v-model="image"
+            :uploading="uploadingImage"
+            @change="uploadImage"
+          />
           <div class="inputErrorContainer">
             <div class="inputErrorText"></div>
           </div>
@@ -142,125 +105,121 @@
           </div>
         </div>
         <div class="settings_section">
-          <div class="success_input_title">Let's add some social media!</div>
+          <div class="success_input_title">{{ $t("settings.social-title") }}</div>
           <div class="pass_section">
-            <div class="pass_field">Website</div>
+            <div class="pass_field">{{ $t("settings.website") }}</div>
             <input
+              v-model="user.website_link"
               class="stream_input stream_name"
               placeholder="www.myswag.com"
-              data-field="website"
-              value="http://www.swag.com"
             />
           </div>
           <div class="pass_section">
             <div class="pass_field">Facebook</div>
             <input
+              v-model="user.fb_link"
               class="stream_input stream_name"
               placeholder="www.facebook.com"
-              data-field="facebook"
-              value="http://facebook.com"
             />
           </div>
           <div class="pass_section">
             <div class="pass_field">Twitter</div>
             <input
+              v-model="user.twitter_link"
               class="stream_input stream_name"
               placeholder="www.twitter.com"
-              data-field="twitter"
             />
           </div>
           <div class="pass_section">
             <div class="pass_field">YouTube</div>
             <input
+              v-model="user.yt_link"
               class="stream_input stream_name"
               placeholder="www.youtube.com"
-              data-field="youtube"
             />
           </div>
           <div class="pass_section">
             <div class="pass_field">Instagram</div>
             <input
+              v-model="user.insta_link"
               class="stream_input stream_name"
               placeholder="www.instagram.com"
-              data-field="instagram"
             />
           </div>
-          <div class="inputErrorContainer">
-            <div class="inputErrorText"></div>
+          <div v-if="socialError" class="inputErrorContainer">
+            <div class="inputErrorText">{{ socialError }}</div>
           </div>
-          <div class="inputSuccessContainer">
-            <div class="inputSuccessText"></div>
+          <div v-if="socialSuccess" class="inputSuccessContainer">
+            <div class="inputSuccessText">{{ socialSuccess }}</div>
           </div>
-          <div class="save_social_button">Save social media links</div>
+          <div @click="saveSocialLinks" class="save_social_button">{{ $t("settings.save-social") }}</div>
         </div>
         <div class="settings_section">
-          <div class="success_input_title">Change your username</div>
+          <div class="success_input_title">{{ $t("settings.username-title") }}</div>
           <input
+            v-model="user.username"
             class="stream_input stream_name"
-            placeholder="That cool user handle"
-            value="robertfoenix"
-            data-field="username"
+            :placeholder="$t('settings.username-placeholder')"
           />
-          <div class="inputErrorContainer">
-            <div class="inputErrorText"></div>
+          <div v-if="usernameError" class="inputErrorContainer">
+            <div class="inputErrorText">{{ usernameError }}</div>
           </div>
-          <div class="inputSuccessContainer">
-            <div class="inputSuccessText"></div>
+          <div v-if="usernameSuccess" class="inputSuccessContainer">
+            <div class="inputSuccessText">{{ usernameSuccess }}</div>
           </div>
-          <div class="save_username_button">Save username</div>
+          <div @click="saveUsername" class="save_username_button">{{ $t("settings.save-username") }}</div>
         </div>
         <div class="settings_section">
-          <div class="success_input_title">Change your email</div>
+          <div class="success_input_title">{{ $t("settings.change-email") }}</div>
           <input
+            v-model="user.email"
             class="stream_input stream_name"
             placeholder="example@cool.com"
-            value="robertfoenix@gmail.com"
-            data-field="email"
           />
-          <div class="inputErrorContainer">
-            <div class="inputErrorText"></div>
+          <div v-if="emailError" class="inputErrorContainer">
+            <div class="inputErrorText">{{ emailError }}</div>
           </div>
-          <div class="inputSuccessContainer">
-            <div class="inputSuccessText"></div>
+          <div v-if="emailSuccess" class="inputSuccessContainer">
+            <div class="inputSuccessText">{{ emailSuccess }}</div>
           </div>
-          <div class="save_email_button">Save email</div>
+          <div @click="saveEmail" class="save_email_button">{{ $t('settings.save-email') }}</div>
         </div>
         <div class="settings_section">
-          <div class="success_input_title">Change your password</div>
+          <div class="success_input_title">{{ $t("settings.change-pass") }}</div>
           <div class="pass_section">
-            <div class="pass_field">New password</div>
+            <div class="pass_field">{{ $t("settings.new-pass") }}</div>
             <input
+              v-model="password"
               class="stream_input stream_name"
               placeholder="**********"
               type="password"
-              data-field="password"
             />
           </div>
           <div class="pass_section">
-            <div class="pass_field">Confirm password</div>
+            <div class="pass_field">{{ $t("settings.confirm-new-pass") }}</div>
             <input
+              v-model="passconfirm"
               class="stream_input stream_name"
               placeholder="**********"
               type="password"
-              data-field="passconfirm"
             />
           </div>
-          <div class="inputErrorContainer">
-            <div class="inputErrorText"></div>
+          <div v-if="passwordError" class="inputErrorContainer">
+            <div class="inputErrorText">{{ passwordError }}</div>
           </div>
-          <div class="inputSuccessContainer">
-            <div class="inputSuccessText"></div>
+          <div v-if="passwordSuccess" class="inputSuccessContainer">
+            <div class="inputSuccessText">{{ passwordSuccess }}</div>
           </div>
-          <div class="save_pass_button">Save password</div>
+          <div @click="togglePasswordModal" class="save_pass_button">{{ $t("settings.save-pass") }}</div>
         </div>
         <div class="settings_delete_section">
-          <div class="success_input_title">Delete your account</div>
+          <div class="success_input_title">{{ $t("settings.delete-acc-title") }}</div>
           <div class="section__accountSettings deleteAccount__accountSettings">
             <div
               class="deleteAccountText"
-            >Deleting your account will permanently and irreversably delete all your streams, stream data and profile details and history. Deleting your account will cancel any memberships you have.</div>
-            <div class="deleteAccountButton">
-              <p class="deleteAccountButtonText">Delete account</p>
+            >{{ $t("settings.delete-acc-desc") }}</div>
+            <div @click="showDeleteModal=true" class="deleteAccountButton">
+              <p class="deleteAccountButtonText">{{ $t("settings.delete-acc-btn") }}</p>
             </div>
           </div>
         </div>
@@ -270,8 +229,196 @@
 </template>
 
 <script>
+import axios from "axios";
+import auth from "../config/auth";
+import ImageUpload from "../components/ImageUpload";
+
 export default {
-  name: "Settings"
+  name: "Settings",
+  components: {
+    ImageUpload
+  },
+  data() {
+    return {
+      user: null,
+      error: false,
+      nameError: null,
+      nameSuccess: null,
+      descriptionError: null,
+      descriptionSuccess: null,
+      uploadingImage: false,
+      image: null,
+      socialError: null,
+      socialSuccess: null,
+      usernameError: null,
+      usernameSuccess: null,
+      emailError: null,
+      emailSuccess: null,
+      currentpass: "",
+      password: "",
+      passconfirm: "",
+      showPasswordModal: false,
+      passwordError: null,
+      passwordSuccess: null,
+      showDeleteModal: false
+    };
+  },
+  computed: {
+    loggedInUser() {
+      return auth.isAuthenticated();
+    }
+  },
+  async mounted() {
+    try {
+      const response = await axios.get(`/profile/${this.loggedInUser._id}`);
+      this.user = response.data.streamer;
+      if (this.user.profile_image_url) {
+        this.image = {
+          preview: this.user.profile_image_url
+        };
+      }
+    } catch (error) {
+      alert("Something went wrong, we are working on it");
+    }
+  },
+  methods: {
+    async saveName() {
+      if (!this.user.firstname || !this.user.lastname) {
+        this.nameError = this.$t("settings.fill-empty-fields");
+        return (this.nameSuccess = null);
+      }
+      try {
+        const { data } = await axios.post("/accounts/updateName", this.user);
+        this.nameSuccess = data.message;
+        this.nameError = null;
+      } catch ({ response }) {
+        this.nameError = response.data.message;
+        this.nameSuccess = null;
+      }
+    },
+    async saveDescription() {
+      if (!this.user.description) {
+        this.descriptionError = this.$t("settings.fill-empty-fields");
+        return (this.descriptionSuccess = null);
+      }
+      try {
+        const { data } = await axios.post(
+          "/accounts/updateDescription",
+          this.user
+        );
+        this.descriptionSuccess = data.message;
+        this.descriptionError = null;
+      } catch ({ response }) {
+        this.descriptionError = response.data.message;
+        this.descriptionSuccess = null;
+      }
+    },
+    async saveUsername() {
+      if (!this.user.username) {
+        this.usernameError = this.$t("settings.fill-empty-fields");
+        return (this.usernameSuccess = null);
+      }
+      try {
+        const { data } = await axios.post(
+          "/accounts/updateUsername",
+          this.user
+        );
+        this.usernameSuccess = data.message;
+        this.usernameError = null;
+      } catch ({ response }) {
+        if (response.status === 422) {
+          this.usernameSuccess = null;
+          return this.usernameError = response.data.errors[0].msg
+        }
+        this.usernameError = response.data.message;
+      }
+    },
+    async saveEmail() {
+      if (!this.user.email) {
+        this.emailError = this.$t("settings.fill-empty-fields");
+        return (this.emailSuccess = null);
+      }
+      try {
+        const { data } = await axios.post(
+          "/accounts/updateEmail",
+          this.user
+        );
+        this.emailSuccess = data.message;
+        this.emailError = null;
+      } catch ({ response }) {
+        if (response.status === 422) {
+          this.emailSuccess = null;
+          return this.emailError = response.data.errors[0].msg
+        }
+        this.emailError = response.data.message;
+      }
+    },
+    async saveSocialLinks() {
+      try {
+        const { data } = await axios.post("/accounts/updateSocial", this.user);
+        this.socialSuccess = data.message;
+        this.socialError = null;
+      } catch ({ response }) {
+        this.socialError = response.data.message;
+        this.socialSuccess = null;
+      }
+    },
+    async uploadImage(image) {
+      this.image = image;
+      if (!this.image) {
+        return await axios.delete("/dashboard/DeleteProfileImage");
+      }
+      this.uploadingImage = true;
+      const fileName = Date.now().toString();
+      const { data: result } = await axios.get(
+        `/dashboard/sign-s3?file-name=${fileName}&file-type=${this.image.file.type}`
+      );
+      const response = result.returnData;
+      await fetch(response.signedRequest, {
+        method: "PUT",
+        body: this.image.file,
+        headers: {
+          "Content-Type": this.image.file.type,
+          processData: false
+        }
+      });
+      await axios.post("/dashboard/saveProfileImageReference", {
+        fileKey: result.fileName,
+        fileURL: response.url,
+        imageName: result.fileName
+      });
+    },
+    togglePasswordModal() {
+      if (!this.password || !this.passconfirm) {
+        return this.passwordError = this.$t("settings.fill-empty-fields");
+      } else if (this.password !== this.passconfirm) {
+        return this.passwordError = this.$t("settings.password_match_error");
+      }
+      this.passwordError = false;
+      this.showPasswordModal = true
+    },
+    async changePassword() {
+      try {
+        const { data } = await axios.post("/accounts/updatePassword", {
+          password: this.password,
+          currentpass: this.currentpass,
+          passconfirm: this.passconfirm,
+        });
+        this.passwordSuccess = data.message;
+        this.passwordError = null;
+      } catch ({ response }) {
+        this.passwordError = response.data.message;
+        this.passwordSuccess = null;
+      } finally {
+        this.showPasswordModal = false;
+        this.currentpass = "";
+      }
+    },
+    async deleteAccount() {
+      await axios.delete('/accounts/deleteAccount');
+      auth.logout();
+    }
+  }
 };
 </script>
 
@@ -340,10 +487,6 @@ p {
 }
 .hide {
   display: none !important;
-}
-.modal__deleteAccount,
-.modal__changePassword {
-  display: none;
 }
 .success_input_title {
   font-size: 20px;

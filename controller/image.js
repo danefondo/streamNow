@@ -248,7 +248,6 @@ const imageController = {
                                 console.log("7");
 								return console.log("User save failed: ", err);
 							} else {
-                                console.log("User successfully updated: ", user);
                                 console.log("6");
                                 res.status(200).end();
 							}

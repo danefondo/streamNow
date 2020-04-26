@@ -1,6 +1,6 @@
 <template>
   <div class="stream_input_container">
-    <div class="stream_input_title">Upload custom thumbnail (optional)</div>
+    <div class="stream_input_title image-caption">{{ caption }}</div>
     <div class="entryDetailsGroup auto-side-margins">
       <div class="mainImage" id="imageArea_">
         <div class="file-upload imageBlock" data-type="mainImage">
@@ -60,6 +60,10 @@ export default {
           type: Boolean,
           default: false,
       },
+      caption: {
+        type: String,
+        default: "Upload custom thumbnail (optional)"
+      }
   },
   data() {
     return {
@@ -92,6 +96,9 @@ export default {
 </script>
 
 <style>
+.image-caption {
+  text-align: center;
+}
 .file-upload {
   background-color: #fbfbfb;
   box-sizing: border-box;
