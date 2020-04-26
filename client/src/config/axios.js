@@ -1,12 +1,14 @@
 import axios from "axios" // eslint-disable-line
 import { BASE_PATH } from "../constants"
 
-export const setAuth = (token) => {
+export const setAuth = (token, redirect) => {
     if (!token) {
         localStorage.removeItem('token');
         delete axios.defaults.headers.common.Authorization;
     }
-    window.location.replace('/')
+    if (redirect) {
+        window.location.replace('/')
+    }
     localStorage.setItem("token", token);
     axios.defaults.headers.common.Authorization = `Bearer ${token}`
 }

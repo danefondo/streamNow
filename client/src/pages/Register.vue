@@ -96,7 +96,7 @@
 <script>
 import axios from "axios";
 import Success from "../components/Success";
-import { BASE_PATH } from "../constants";
+import { setAuth } from '../config/axios';
 
 export default {
   name: "Register",
@@ -124,7 +124,7 @@ export default {
       this.submitting = true;
       try {
         const { email, username, password, passwordCheck } = this;
-        await axios.post(`${BASE_PATH}/accounts/register`, {
+        const response = await axios.post(`/accounts/register`, {
           email,
           username,
           password,
@@ -132,6 +132,7 @@ export default {
         });
         this.errors = [];
         this.success = true;
+        setAuth(response.data.token, true);
       } catch (error) {
         if (error.response.status === 422) {
           this.errors = error.response.data.errors;

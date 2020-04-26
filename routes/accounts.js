@@ -38,14 +38,11 @@ router.get('/verify/:verificationToken', function(req, res, next) {
 		}
 		theUser.verifiedStatus = true;
 		theUser.save((err, savedUser) => {
-			console.log('user verified');
-			req.login(savedUser, function (err) {
-        		if ( ! err ){
-            		res.redirect('/successful-registration');
-        		} else {
-            		//handle error
-        		}
-    		});
+			const tokenUser = { username: savedUser.username, _id: savedUser._id, is_live: savedUser.is_live }
+			const token = jwt.sign({ user: tokenUser }, process.env.SECRET, { 
+				expiresIn: '1d',
+			});
+			return res.json({ user: theUser, token, message: "Your email has been verified" });
 		})
 	});
 });

@@ -1,4 +1,5 @@
 const { validationResult } = require('express-validator');
+const jwt = require('jsonwebtoken');
 let User = require('../models/user');
 let Image = require('../models/image');
 let Stream = require('../models/stream');
@@ -8,9 +9,9 @@ const mail = require('../utils/mail');
 const aws = require('aws-sdk');
 
 aws.config.update({
-    accessKeyId: "AKIARKLMM5TMEHGOSNJC",
-    secretAccessKey: "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",
-    region: "us-east-1" 
+	accessKeyId: "AKIARKLMM5TMEHGOSNJC",
+	secretAccessKey: "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",
+	region: "us-east-1"
 });
 
 const s3 = new aws.S3();
@@ -20,7 +21,7 @@ const accountController = {
 	checkIfUserWithValueExists(field, value) {
 		// for checking whether various information, such as username or email give results to detect whether the email is already used or not
 		return new Promise((resolve, reject) => {
-			User.findOne({[field]: value}, function(err, user) {
+			User.findOne({ [field]: value }, function (err, user) {
 				if (err) {
 					return reject(err);
 				}
@@ -29,7 +30,7 @@ const accountController = {
 		})
 	},
 
-	async checkUnique (req, res) {
+	async checkUnique(req, res) {
 		let value = req.body.value;
 		let field = req.body.field;
 		console.log('value', value, field);
@@ -47,7 +48,7 @@ const accountController = {
 				fail: fail,
 				message: message
 			});
-		} catch(error) {
+		} catch (error) {
 			console.log(error);
 			res.json({
 				message: "An error occurred, we're fixing this now"
@@ -59,7 +60,7 @@ const accountController = {
 		const errors = validationResult(req);
 		if (!errors.isEmpty()) {
 			console.log('errors')
-		    return res.status(422).json({ errors: errors.array() });
+			return res.status(422).json({ errors: errors.array() });
 		}
 		const email = req.body.email;
 		const username = req.body.username;
@@ -80,27 +81,17 @@ const accountController = {
 				password,
 				dateCreated
 			});
-			console.log("Stored user in variable.")
-			const link = `${req.protocol}://${req.get('host')}/accounts/verify/${verificationToken}`;
-
+			const link = `${req.protocol}://${req.get('host')}/verify/${verificationToken}`;
 			const hash = await accountUtil.hashPassword(newUser.password);
-			console.log("Hashing password.")
 			newUser.password = hash;
-			console.log("About to create user.")
 			await newUser.save();
-			console.log('Not stuck yet 3.')
-			console.log('You are now registered and can log in', verificationToken);
 			mail.sendVerificationMail(email, link);
-			req.login(newUser, function (err) {
-        		if ( ! err ){
-            		res.json({
-            			redirectURL: '/successful-registration'
-            		})
-        		} else {
-            		//handle error
-        		}
-    		});
-		} catch(err) {
+			const theUser = { username: newUser.username, _id: newUser._id }
+			const token = jwt.sign({ user: theUser }, process.env.SECRET, {
+				expiresIn: '1d',
+			});
+			return res.status(200).json({ user: theUser, token });
+		} catch (err) {
 			console.log(err);
 		}
 	},
@@ -110,7 +101,7 @@ const accountController = {
 		const errors = validationResult(req);
 		if (!errors.isEmpty()) {
 			console.log('errors')
-		    return res.status(422).json({ err: errors.array()[0].msg });
+			return res.status(422).json({ err: errors.array()[0].msg });
 		}
 		try {
 			const user = await User.findOne({
@@ -132,7 +123,7 @@ const accountController = {
 			res.status(200).json({
 				message: 'Password reset was successful, please login'
 			});
-		} catch(error) {
+		} catch (error) {
 			console.log(error);
 			res.status(500).json({
 				message: 'An error occurred'
@@ -144,7 +135,7 @@ const accountController = {
 		const errors = validationResult(req);
 		if (!errors.isEmpty()) {
 			console.log('errors')
-		    return res.status(422).json({ message: errors.array()[0].msg });
+			return res.status(422).json({ message: errors.array()[0].msg });
 		}
 
 		try {
@@ -167,7 +158,7 @@ const accountController = {
 			res.status(200).json({
 				message: 'A password reset link has been sent to the email address you entered.'
 			})
-		} catch(err) {
+		} catch (err) {
 			console.log(err);
 			res.status(500).json({
 				message: 'An error occurred, please try again later.'
@@ -180,52 +171,52 @@ const accountController = {
 		try {
 			let user_id = req.user._id;
 
-            if (!user_id) {
-                return res.status(404).json({
-                    errors: "User id missing."
-                });
+			if (!user_id) {
+				return res.status(404).json({
+					errors: "User id missing."
+				});
 			}
-			
-			User.deleteOne({_id: user_id}).exec(function(err, removed) {
-				if (err)  {
+
+			User.deleteOne({ _id: user_id }).exec(function (err, removed) {
+				if (err) {
 					return console.log("Failed to delete account: ", err);
 				}
 				console.log("Successfully deleted account.");
 
 			})
 
-            let images = await Image.find({"streamer_id": user_id});
-            const imageKeys = [];
-            images.forEach(function(image) {
-                // Pull image reference from curataFiles
-                console.log("One imageId to remove: ", image);
+			let images = await Image.find({ "streamer_id": user_id });
+			const imageKeys = [];
+			images.forEach(function (image) {
+				// Pull image reference from curataFiles
+				console.log("One imageId to remove: ", image);
 
-                imageKeys.push({
-                    Key: '' + image.imageKey
-                })
+				imageKeys.push({
+					Key: '' + image.imageKey
+				})
 			});
-			
-            if (imageKeys.length) {
-                s3.deleteObjects({
-                Bucket: S3_BUCKET,
-                Delete: {
-                    Objects: imageKeys
-                }
-                }, function (err, data) {
-                    if (err) {
-                        console.log("Error: ", err);
-                    } else {
-                        console.log("Successfully deleted image from AWS.");
-                    }
-                })
-            }
 
-			await Image.deleteMany({ "streamer_id": user_id});
+			if (imageKeys.length) {
+				s3.deleteObjects({
+					Bucket: S3_BUCKET,
+					Delete: {
+						Objects: imageKeys
+					}
+				}, function (err, data) {
+					if (err) {
+						console.log("Error: ", err);
+					} else {
+						console.log("Successfully deleted image from AWS.");
+					}
+				})
+			}
+
+			await Image.deleteMany({ "streamer_id": user_id });
 			console.log("Associated images successfully removed.");
 
-			await Stream.deleteMany({ "streamer_id": user_id});
+			await Stream.deleteMany({ "streamer_id": user_id });
 			console.log("Associated streams successfully removed.");
-			
+
 			//- pull your id from everyone's following/followers list
 			//- remove user like & comments?
 			req.logout();
@@ -234,11 +225,11 @@ const accountController = {
 				message: "Removed."
 			})
 
-		} catch(err) {
+		} catch (err) {
 			console.log(err);
 			res.status(500).json({
 				message: 'An error occurred, please try again later.'
-			});			
+			});
 		}
 	},
 
@@ -246,7 +237,7 @@ const accountController = {
 		try {
 			const firstname = req.body.first_name;
 			const lastname = req.body.last_name;
-		
+
 
 			let user = await User.findById(req.user._id);
 			user.firstname = firstname;
@@ -258,11 +249,11 @@ const accountController = {
 				message: 'Name successfully changed!'
 			})
 
-		}  catch(err) {
+		} catch (err) {
 			console.log(err);
 			res.status(500).json({
 				message: 'An error occurred, please try again later.'
-			});			
+			});
 		}
 	},
 
@@ -279,11 +270,11 @@ const accountController = {
 				message: 'Description successfully changed!'
 			})
 
-		}  catch(err) {
+		} catch (err) {
 			console.log(err);
 			res.status(500).json({
 				message: 'An error occurred, please try again later.'
-			});			
+			});
 		}
 	},
 
@@ -305,11 +296,11 @@ const accountController = {
 				message: 'Username successfully changed!'
 			})
 
-		}  catch(err) {
+		} catch (err) {
 			console.log(err);
 			res.status(500).json({
 				message: 'An error occurred, please try again later.'
-			});			
+			});
 		}
 	},
 
@@ -328,7 +319,7 @@ const accountController = {
 			user.verifiedStatus = false;
 			user.verificationToken = verificationToken;
 
-			const link = `${req.protocol}://${req.get('host')}/accounts/verify/${verificationToken}`;
+			const link = `${req.protocol}://${req.get('host')}/verify/${verificationToken}`;
 
 			await user.save();
 
@@ -338,11 +329,11 @@ const accountController = {
 				message: 'Email successfully changed!'
 			})
 
-		}  catch(err) {
+		} catch (err) {
 			console.log(err);
 			res.status(500).json({
 				message: 'An error occurred, please try again later.'
-			});			
+			});
 		}
 	},
 
@@ -358,7 +349,7 @@ const accountController = {
 
 			if (website) {
 				let websiteParsed = (website.indexOf('://') === -1) ? 'http://' + website : website;
-				user.website_link = websiteParsed;user.website_link = websiteParsed;
+				user.website_link = websiteParsed; user.website_link = websiteParsed;
 			}
 			if (facebook) {
 				let facebookParsed = (facebook.indexOf('://') === -1) ? 'http://' + facebook : facebook;
@@ -383,11 +374,11 @@ const accountController = {
 				message: 'Social media links successfully saved!'
 			})
 
-		}  catch(err) {
+		} catch (err) {
 			console.log(err);
 			res.status(500).json({
 				message: 'An error occurred, please try again later.'
-			});			
+			});
 		}
 	}
 
