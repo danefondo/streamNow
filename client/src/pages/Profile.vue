@@ -88,10 +88,10 @@
                 />
               </div>
               <div v-else class="no_upcoming_streams">
-                <div class="no_streams_text">{{$("profile.no_streams")}}</div>
+                <div class="no_streams_text">{{$t("profile.no-streams")}}</div>
               </div>
             </div>
-            <p class="previous_streams_title">Previous streams</p>
+            <p v-if="streamer.previous_streams.length" class="previous_streams_title">Previous streams</p>
             <div class="previous_streams_container">
               <div class="previous_streams">
                 <ProfileStream
@@ -148,6 +148,12 @@ export default {
     },
     user() {
       return auth.isAuthenticated();
+    }
+  },
+  watch: {
+    $route() {
+      this.streamer = null;
+      this.getStream();
     }
   }
 };
