@@ -69,6 +69,16 @@ export default {
       isOpened: false
     };
   },
+  props: {
+    isAuthenticated: {
+      type: Boolean,
+      required: true,
+    },
+    user: {
+      type: Object,
+      required: true,
+    }
+  },
   mounted() {
     document.addEventListener("click", this.onClick);
   },
@@ -79,12 +89,6 @@ export default {
     myProfile() {
       return `/profile/${auth.isAuthenticated()._id}`;
     },
-    isAuthenticated() {
-      return !!auth.isAuthenticated();
-    },
-    user() {
-      return auth.isAuthenticated();
-    }
   },
   methods: {
     toggleDropdown() {

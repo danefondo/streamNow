@@ -122,10 +122,10 @@
 </template>
 
 <script>
+import axios from "axios";
 import Datepicker from "vuejs-datepicker";
 import InputTag from "vue-input-tag";
 import ImageUpload from "../components/ImageUpload";
-import axios from "axios";
 
 export default {
   name: "GoLive",
@@ -202,6 +202,9 @@ export default {
           streamData
         );
         this.$router.push(`/watch/${result.data.stream_id}`);
+        if (type === "live") {
+          this.$emit("updateLive", true)
+        }
       } catch (error) {
         this.error = true;
         this.submitting = false;

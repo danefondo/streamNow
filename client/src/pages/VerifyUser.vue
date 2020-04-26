@@ -9,7 +9,6 @@
 
 <script>
 import axios from "axios";
-import { setAuth } from '../config/axios';
 
 export default {
   name: "VerifyUser",
@@ -25,9 +24,7 @@ export default {
         `/accounts/verify/${this.$route.params.token}`
       );
       this.message = data.message;
-      setTimeout(() => {
-          setAuth(data.token, true);
-      }, 1000)
+      this.$emit("update", data);
     } catch ({ response }) {
       this.message = response.data.message;
     } finally {

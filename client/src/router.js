@@ -37,7 +37,7 @@ const routes = [
   },
   { path: "/discover", component: Home },
   { path: "/login", component: Login, name: "Login" },
-  { path: "/register", component: Register },
+  { path: "/register", component: Register, name: "Register" },
   { path: "/verify/:token", component: VerifyUser, name: "Verify" },
   { path: "/about", component: About },
   { path: "/privacy", component: Privacy },
@@ -60,7 +60,7 @@ const router = new VueRouter({
   routes,
 });
 
-const noReAuth = ["Login", "Verify"]
+const noReAuth = ["Login", "Verify", "Register"]
 router.beforeEach((to, from, next) => {
   if (to.meta.requireAuthentication && !auth.isAuthenticated()) {
     next({ name: "Login" });
