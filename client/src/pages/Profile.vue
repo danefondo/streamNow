@@ -36,7 +36,7 @@
               to="/dashboard/settings"
               v-if="!streamer.profile_image_url && user._id == streamer._id"
               class="add_about_section"
-            >{{$t("profile.add-about")}}</router-link>
+            >{{$t("profile.add-profile-pic")}}</router-link>
             <div v-if="streamer" class="links">
               <a v-if="streamer.fb_link" :href="streamer.fb_link" class="social_link">
                 <img class="fb_link" src="../assets/images/facebook.png" />
@@ -72,9 +72,6 @@
               <p class="streamer_count">{{streamer.followers.length}} Followers</p>
               <p class="streamer_count">{{streamer.following.length}} Following</p>
               <p class="streamer_count">{{streamer.previous_streams.length}} Streams done</p>
-            </div>
-            <div class="streamer_upcoming">
-              <div class="upcoming">No upcoming streams planned</div>
             </div>
           </div>
           <div class="streams_container">

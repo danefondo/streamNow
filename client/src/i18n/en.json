@@ -23,6 +23,7 @@
         "scheduled": "Upcoming",
         "discover": "Discover",
         "go-live": "Go live",
+        "is-live": "You're live",
         "profile": "Profile",
         "settings": "Settings",
         "logout": "Logout"
@@ -116,7 +117,9 @@
         "delete-confirm": "Delete",
         "acc-del-fail": "Failed to delete account. Refresh and try again.",
         "error-empty": "Cannot be empty!",
-        "error-occurred": "An error has occurred"
+        "error-occurred": "An error has occurred",
+        "resend-verif-message": "Resend verification email",
+        "verif-sent": "Verification email sent"
     },
     "profile": {
         "add-profile-pic": "+ Add profile image",

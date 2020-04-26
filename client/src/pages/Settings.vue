@@ -41,6 +41,8 @@
       <div class="pageTitle__accountSettings">{{ $t("settings.settings-title") }}</div>
       <div v-if="!user.verifiedStatus" class="user_not_verified">
         <p class="not_verified_message">{{ $t("settings.verify-message") }}</p>
+        <a @click="resendVerif" v-if="!verifSent" class="resend_verif_message">{{ $t("settings.resend-verif-message") }}</a>
+        <a v-if="verifSent" class="resend_verif_message">{{ $t("settings.verif-sent") }}</a>
       </div>
       <div class="success_content">
         <div v-if="error" class="generalErrorContainer">
@@ -260,7 +262,8 @@ export default {
       showPasswordModal: false,
       passwordError: null,
       passwordSuccess: null,
-      showDeleteModal: false
+      showDeleteModal: false,
+      verifSent: false,
     };
   },
   computed: {
@@ -353,6 +356,10 @@ export default {
         this.emailError = response.data.message;
       }
     },
+    sendVerif() {
+      //- Maybe should be async once 
+
+    },
     async saveSocialLinks() {
       try {
         const { data } = await axios.post("/accounts/updateSocial", this.user);
@@ -423,6 +430,12 @@ export default {
 </script>
 
 <style>
+
+.resend_verif_message {
+  line-height: 23px;
+  color: darkblue;
+}
+
 .settings {
   display: flex;
   flex-wrap: wrap;

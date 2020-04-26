@@ -9,6 +9,7 @@
     </div>
     <template v-if="isAuthenticated">
       <div class="stream_buttons">
+        <router-link v-if="user.is_live" class="go_live_button" :to="'/watch/' +active_stream_id">{{ $t("nav.is-live") }}</router-link>
         <router-link v-if="!user.is_live" class="go_live_button" to="/dashboard/golive">{{ $t("nav.go-live") }}</router-link>
       </div>
       <div class="logout-container">
