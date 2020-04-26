@@ -2,6 +2,9 @@
 
 *** VUE.JS RECONSTRUCTIONS ***
 
+** To be fixed **
+- Go live button
+
 *Questions:
 - Do I have to change every req.user._id and is there an equivalently convenient way to get this?
 

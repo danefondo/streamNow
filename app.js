@@ -64,11 +64,6 @@ require('./config/passport')(passport);
 // Passport Middleware
 app.use(passport.initialize());
 
-// app.get('*', function(req, res, next){
-//   res.locals.user = req.user || null;
-//   next();
-// });
-
 
 
 /*====== ROUTES ======*/

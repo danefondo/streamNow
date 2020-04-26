@@ -13,27 +13,26 @@
         </div>
       </div>
     </div>
-    <div class="user_check" data-user-id="5e770037c84aaa1088d5315c"></div>
-    <div v-if="stream" class="streaming_area">
+    <div v-if="streamer" class="streaming_area">
       <div class="section_center">
         <div class="stream_center_top">
-          <div v-if="stream.streamer" class="stream_owner">
-            <img class="streamer_profile_icon" src="https://curata.s3.amazonaws.com/1586454443289" />
+          <div v-if="streamer" class="stream_owner">
+            <img class="streamer_profile_icon" :src="getProfileIcon" />
             <p
                 class="streamer_first_name"
-            >{{stream.streamer.firstname || stream.streamer.username}}</p>
+            >{{streamer.firstname || streamer.username}}</p>
             <p
-                v-if="stream.streamer.firstname && stream.streamer.lastname"
+                v-if="streamer.firstname && streamer.lastname"
                 class="streamer_last_name"
-            >{{ stream.streamer.lastname }}</p>
+            >{{ streamer.lastname }}</p>
           </div>
           <div class="donate_button">Support $</div>
         </div>
         <div class="streamer_profile_container">
           <div class="streamer_stats">
             <img class="streamer_profile_image" src="https://curata.s3.amazonaws.com/1586454443289" />
-            <div v-if="stream.streamer" class="links">
-              <a :href="stream.streamer.fb_link">
+            <div v-if="streamer" class="links">
+              <a :href="streamer.fb_link">
                 <img class="fb_link social_link" src="../assets/images/facebook.png" />
               </a>
               <img class="website_link social_link" />
@@ -53,87 +52,13 @@
             </div>
           </div>
           <div class="streams_container">
-            <p class="upcoming_streams_title">Upcoming streams</p>
+            <p class="upcoming_streams_title">{{$t("profile.next-streams")}}</p>
             <div class="upcoming_streams_container">
-              <div class="upcoming_streams">
-                <div class="upcoming_stream">
-                  stream
-                  <div class="upcoming_stream_details">
-                    <a class="stream_title" href="/watch/5e9845ee972cc0581d6d5453">ewrwe</a>
-                  </div>
-                </div>
-                <div class="upcoming_stream">
-                  stream
-                  <div class="upcoming_stream_details">
-                    <a class="stream_title" href="/watch/5e9eb90b891f2117d45cb4e3">MonkeyTime</a>
-                  </div>
-                </div>
-                <div class="upcoming_stream">
-                  stream
-                  <div class="upcoming_stream_details">
-                    <a class="stream_title" href="/watch/5e9f66cd1859bd34051e278d">test</a>
-                  </div>
-                </div>
-                <div class="upcoming_stream">
-                  stream
-                  <div class="upcoming_stream_details">
-                    <a class="stream_title" href="/watch/5e9f6767c24b1a344b8463ad">test</a>
-                  </div>
-                </div>
-                <div class="upcoming_stream">
-                  stream
-                  <div class="upcoming_stream_details">
-                    <a class="stream_title" href="/watch/5e9f695db176313541147860">Untitled stream</a>
-                  </div>
-                </div>
-                <div class="upcoming_stream">
-                  stream
-                  <div class="upcoming_stream_details">
-                    <a class="stream_title" href="/watch/5e9f6f52a8bb7337c3ae117b">testt</a>
-                  </div>
-                </div>
-                <div class="upcoming_stream">
-                  stream
-                  <div class="upcoming_stream_details">
-                    <a
-                      class="stream_title"
-                      href="/watch/5e9f6f64a8bb7337c3ae117c"
-                    >Learn How To Create Your Own Workout Routine</a>
-                  </div>
-                </div>
-                <div class="upcoming_stream">
-                  stream
-                  <div class="upcoming_stream_details">
-                    <a class="stream_title" href="/watch/5e9f6f77a8bb7337c3ae117d">3333</a>
-                  </div>
-                </div>
-                <div class="upcoming_stream">
-                  stream
-                  <div class="upcoming_stream_details">
-                    <a
-                      class="stream_title"
-                      href="/watch/5ea22f4c1aad0f00175e72c6"
-                    >How To Setup Your Morning Routine</a>
-                  </div>
-                </div>
-                <div class="upcoming_stream">
-                  stream
-                  <div class="upcoming_stream_details">
-                    <a class="stream_title" href="/watch/5ea34e7b7b9ea8001745a54e">StreamTtest</a>
-                  </div>
-                </div>
-                <div class="upcoming_stream">
-                  stream
-                  <div class="upcoming_stream_details">
-                    <a class="stream_title" href="/watch/5ea363487b9ea8001745a550">sddsfds</a>
-                  </div>
-                </div>
-                <div class="upcoming_stream">
-                  stream
-                  <div class="upcoming_stream_details">
-                    <a class="stream_title" href="/watch/5ea36d8a7b9ea8001745a553">test</a>
-                  </div>
-                </div>
+              <div v-if="streamer.upcoming_streams.length" class="upcoming_streams">
+                <UpcomingStream v-for="stream in streamer.upcoming_streams" :key="stream._id" :stream="stream" />
+              </div>
+              <div v-else class="no_upcoming_streams">
+                <div class="no_streams_text">{{$("profile.no_streams")}}</div>
               </div>
             </div>
             <div class="previous_streams_container">
@@ -292,6 +217,8 @@
 
 <script>
 import axios from "axios";
+import profileIcon from "../assets/images/profile_icon.png";
+import UpcomingStream from "../components/UpcomingStream";
 
 export default {
   name: "Profile",
@@ -303,6 +230,9 @@ export default {
       hostName: null,
     };
   },
+  components: {
+    UpcomingStream
+  },
   mounted() {
     this.getStream();
   },
@@ -312,6 +242,14 @@ export default {
       this.stream = data.stream;
       this.streamer = data.streamer;
       this.hostName = data.host_name;
+    }
+  },
+  computed: {
+    getProfileIcon() {
+      if (this.streamer.profile_image_url) {
+        return this.streamer.profile_image_url;
+      }
+      return profileIcon;
     }
   }
 };

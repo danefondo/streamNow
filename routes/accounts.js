@@ -59,7 +59,7 @@ router.post('/login', function(req, res, next){
   	}
   	req.login(user, { session: false }, function(err) {
 		if (err) { return next(err) }
-		const theUser = { username: user.username, _id: user._id }
+		const theUser = { username: user.username, _id: user._id, is_live: user.is_live }
 		const token = jwt.sign({ user: theUser }, process.env.SECRET, { 
 			expiresIn: '1d',
 		});

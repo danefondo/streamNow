@@ -19,7 +19,7 @@
       <div class="section_center">
         <div class="stream_center_top">
           <div class="stream_owner">
-            <img class="streamer_profile_icon" :src="streamer.profile_image_url" />
+            <img class="streamer_profile_icon" :src="getProfileIcon" />
             <p
               v-if="streamer"
               class="streamer_first_name"
@@ -110,6 +110,7 @@ import axios from "axios";
 import auth from "../config/auth";
 import FollowingIcon from "../assets/images/following_icon.png";
 import FollowIcon from "../assets/images/follow_icon.png";
+import profileIcon from "../assets/images/profile_icon.png";
 
 export default {
   name: "Watch",
@@ -174,6 +175,12 @@ export default {
     },
     videoUrl() {
       return `https://www.youtube-nocookie.com/embed/${this.stream.stream_video_id}?autoplay=1&amp;modestbranding=1&amp;showinfo=0&amp;rel=0&amp;theme=light&amp;color=white`;
+    },
+    getProfileIcon() {
+      if (this.streamer.profile_image_url) {
+        return this.streamer.profile_image_url;
+      }
+      return profileIcon;
     }
   }
 };

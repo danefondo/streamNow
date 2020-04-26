@@ -9,7 +9,7 @@
     </div>
     <template v-if="isAuthenticated">
       <div class="stream_buttons">
-        <router-link class="go_live_button" to="/dashboard/golive">Mine laivi</router-link>
+        <router-link v-if="!user.is_live" class="go_live_button" to="/dashboard/golive">{{ $t("nav.go-live") }}</router-link>
       </div>
       <div class="logout-container">
         <div
@@ -80,6 +80,9 @@ export default {
     },
     isAuthenticated() {
       return !!auth.isAuthenticated();
+    },
+    user() {
+      return auth.isAuthenticated();
     }
   },
   methods: {
