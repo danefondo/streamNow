@@ -38,7 +38,7 @@ module.exports = function (passport) {
     } else {
       let query = { username: username };
 
-      User.findOne(query, function (err, user) {
+      User.findOne(query).select('+password').exec( function (err, user) {
         console.log(`Login error: ${err}`)
         if (err) throw err;
         if (!user) {
