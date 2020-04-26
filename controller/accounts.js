@@ -297,6 +297,25 @@ const accountController = {
 		}
 	},
 
+	async resendEmailVerification(req, res) {
+		try {
+			const verificationToken = await accountUtil.generateToken();
+			let user = await User.findById(req.user._id);
+			user.verificationToken = verificationToken;
+	
+			const link = `${req.protocol}://${req.get('host')}/verify/${verificationToken}`;
+			const email = user.email;
+			
+			await user.save();
+	
+			mail.sendVerificationMail(email, link);
+			res.status(200).json({ message: 'Email verification resent!' })
+		} catch (err) {
+			console.log(err);
+			res.status(500).json({ message: 'An error occurred, please try again later.' });
+		}
+	},
+
 	async updateEmail(req, res) {
 		const errors = validationResult(req);
 		if (!errors.isEmpty()) {

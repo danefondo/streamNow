@@ -41,8 +41,9 @@
       <div class="pageTitle__accountSettings">{{ $t("settings.settings-title") }}</div>
       <div v-if="!user.verifiedStatus" class="user_not_verified">
         <p class="not_verified_message">{{ $t("settings.verify-message") }}</p>
-        <a @click="resendVerif" v-if="!verifSent" class="resend_verif_message">{{ $t("settings.resend-verif-message") }}</a>
-        <a v-if="verifSent" class="resend_verif_message">{{ $t("settings.verif-sent") }}</a>
+        <a @click="resendVerification" v-if="!verificationSent" class="resend_verif_message">{{ $t("settings.resend-verif-message") }}</a>
+        <p v-if="verificationSent && !verificationSendError" class="resend_verif_success">{{ $t("settings.verif-sent") }}</p>
+        <a v-if="verificationSendError" class="resend_verif_fail">{{ $t("settings.verif-sent-fail") }}</a>
       </div>
       <div class="success_content">
         <div v-if="error" class="generalErrorContainer">
@@ -263,7 +264,8 @@ export default {
       passwordError: null,
       passwordSuccess: null,
       showDeleteModal: false,
-      verifSent: false,
+      verificationSent: false,
+      verificationSendError: false,
     };
   },
   computed: {
@@ -356,9 +358,14 @@ export default {
         this.emailError = response.data.message;
       }
     },
-    sendVerif() {
-      //- Maybe should be async once 
+    async resendVerification() {
+      try {
+        const { data } = await axios.post("/accounts/updateEmail", this.user);
 
+        this.verificationSent = true;
+      } catch ({ response }) {
+        this.verificationSendError = true;
+      }
     },
     async saveSocialLinks() {
       try {
@@ -431,7 +438,9 @@ export default {
 
 <style>
 
-.resend_verif_message {
+.resend_verif_message,
+.resend_verif_success,
+.resend_verif_fail {
   line-height: 23px;
   color: darkblue;
 }

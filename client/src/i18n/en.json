@@ -119,7 +119,8 @@
         "error-empty": "Cannot be empty!",
         "error-occurred": "An error has occurred",
         "resend-verif-message": "Resend verification email",
-        "verif-sent": "Verification email sent"
+        "verif-sent": "Verification email sent",
+        "verif-sent-fail": "Email didn't send. Try again."
     },
     "profile": {
         "add-profile-pic": "+ Add profile image",
