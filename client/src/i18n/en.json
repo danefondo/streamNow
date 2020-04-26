@@ -71,6 +71,7 @@
     "settings": {
         "settings-title": "Account settings",
         "verify-message": "Please verify your email address",
+        "fill-empty-fields": "Please fill all required empty fields.",
         "name-title": "What's your name?",
         "first-name": "First name",
         "name-placeholder": "This' what they call me",
@@ -102,6 +103,7 @@
         "current-pass": "Your current password",
         "cancel-newpass": "Cancel",
         "confirm-newpass": "Change",
+        "password_match_error": "Passwords did not match",
         "pass-match-fail": "Passwords don't match!",
         "pass-empty-fail": "Passwords can't be empty!",
         "pass-short-fail": "Password must be at least 8 characters long!",

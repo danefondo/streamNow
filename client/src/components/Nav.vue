@@ -39,7 +39,7 @@
                 <a class="entypo-plus OptionLink" href="#"></a>
               </li>
               <li>
-                <a class="entypo-archive NavLinkX" href="/dashboard/settings">Settings</a>
+                <router-link class="entypo-archive NavLinkX" to="/dashboard/settings">Settings</router-link>
                 <a class="entypo-plus OptionLink" href="#"></a>
               </li>
               <li>
@@ -103,7 +103,6 @@ export default {
     },
     logout() {
       auth.logout();
-      window.location.replace("/");
     }
   }
 };

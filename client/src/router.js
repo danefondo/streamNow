@@ -46,7 +46,11 @@ const routes = [
   { path: "/profile/:id", component: Profile },
   { path: "/reset", component: ResetPass },
   { path: "/accounts/forgotPass", component: ForgotPass },
-  { path: "/dashboard/settings", component: Settings },
+  {
+    path: "/dashboard/settings", component: Settings, meta: {
+      requireAuthentication: true,
+    },
+  },
   { path: "/error404", component: Error404 },
   { path: "/", component: Home },
 ];

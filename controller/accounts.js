@@ -235,20 +235,13 @@ const accountController = {
 
 	async updateName(req, res) {
 		try {
-			const firstname = req.body.first_name;
-			const lastname = req.body.last_name;
-
-
 			let user = await User.findById(req.user._id);
-			user.firstname = firstname;
-			user.lastname = lastname;
-
+			user.firstname = req.body.firstname;
+			user.lastname = req.body.lastname;
 			await user.save();
-
 			res.status(200).json({
 				message: 'Name successfully changed!'
 			})
-
 		} catch (err) {
 			console.log(err);
 			res.status(500).json({
