@@ -1,5 +1,6 @@
 let Stream = require('../models/stream');
 let User = require('../models/user');
+const streamUtils = require('../utils/stream')
 const moment = require('moment');
 const streamController = {
     async fetchStreams(req, res) {
@@ -230,7 +231,9 @@ const streamController = {
             stream.thumbnail_name = stream_data.thumbnail_name;
             stream.stream_name = stream_data.stream_name;
             stream.stream_description = stream_data.stream_description;
-            stream.stream_video_id = stream_data.stream_video_id;
+            stream.stream_video_link = stream_data.stream_video_link;
+            stream.platform_status = streamUtils.getPlatform(req.body.stream_video_link);
+            stream.stream_video_id = streamUtils.getVideoId(stream.platform_status, req.body.stream_video_link)
             stream.stream_tags = stream_data.stream_tags;
 
             console.log("user_id", req.user._id);
@@ -565,7 +568,8 @@ const streamController = {
 
             stream.streamer_id = req.user._id;
             stream.streamer = req.user._id;
-
+            stream.platform_status = streamUtils.getPlatform(req.body.stream_video_link);
+            stream.stream_video_id = streamUtils.getVideoId(stream.platform_status, req.body.stream_video_link)
             await stream.save();
             let stream_id = stream._id;
 

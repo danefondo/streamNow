@@ -206,6 +206,7 @@ export default {
           this.$emit("updateLive", true)
         }
       } catch (error) {
+        window.scrollTo(0, 0);
         this.error = true;
         this.submitting = false;
       }

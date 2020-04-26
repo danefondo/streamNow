@@ -41,7 +41,7 @@
             </div>
           </div>
           <div class="stream_input_container edit_input">
-            <div class="stream_input_title">Change YouTube video ID</div>
+            <div class="stream_input_title">Change video link</div>
             <input
               v-model="videoLink"
               class="stream_input stream_video_id_input"
@@ -60,10 +60,10 @@
 </template>
 
 <script>
-import InputTag from 'vue-input-tag';
-import axios from 'axios';
-import auth from '../config/auth'
-import ImageUpload from '../components/ImageUpload';
+import InputTag from "vue-input-tag";
+import axios from "axios";
+import auth from "../config/auth";
+import ImageUpload from "../components/ImageUpload";
 
 export default {
   name: "EditStream",
@@ -106,16 +106,18 @@ export default {
       this.name = stream.stream_name;
       this.description = stream.stream_description;
       this.tags = stream.stream_tags;
-      this.videoLink = stream.stream_video_id;
+      this.videoLink = stream.stream_video_link;
       this.thumbnailKey = stream.thumbnail_key;
       this.thumbnailUrl = stream.thumbnail_url;
       this.thumbnailName = stream.thumbnail_name;
       this.streamId = stream._id;
-      this.image = {
-        preview: stream.thumbnail_url
-      };
+      if (stream.thumbnail_url) {
+        this.image = {
+          preview: stream.thumbnail_url
+        };
+      }
       if (streamer._id !== auth.isAuthenticated()._id) {
-          this.$router.push(`/watch/${this.streamId}`)
+        this.$router.push(`/watch/${this.streamId}`);
       }
     },
     toggle() {
@@ -145,7 +147,7 @@ export default {
           thumbnail_url: this.thumbnailUrl,
           thumbnail_name: this.thumbnailName
         };
-        if (this.image.file) {
+        if (this.image && this.image.file) {
           await this.uploadImage();
           streamData = {
             ...streamData,
