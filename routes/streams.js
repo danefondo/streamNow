@@ -1,31 +1,19 @@
 const express = require('express');
-const bodyParser = require('body-parser');
-const path = require('path');
-const assert = require('assert');
-const mongoose = require('mongoose');
-const passport = require('passport');
-mongoose.Promise = Promise;
+const auth = require('../config/auth');
 
 const router = express.Router();
 
 const streamController = require('../controller/stream');
 
-router.post('/:streamId/updateLikes', streamController.updateLikes);
+router.get('/', streamController.fetchStreams); 
 
-router.post('/:streamId/followUnfollow', streamController.followUnfollow);
+router.get('/:streamId', auth.checkAuthenticated, streamController.showStream);
 
-router.post('/:streamId/endStream', ensureAuthenticated, streamController.endStream);
+router.post('/:streamId/updateLikes', auth.checkAuthenticated, streamController.updateLikes);
 
+router.post('/:streamId/followUnfollow', auth.checkAuthenticated, streamController.followUnfollow);
 
-/*====== Access control  ======*/
-function ensureAuthenticated(req, res, next){
-  if(req.isAuthenticated()){
-  	console.log("Authentication successful.");
-    return next();
-  } else {
-  	console.log("Authentication failed.");
-    res.redirect(302, '/');
-  }
-}
+router.post('/:streamId/endStream', auth.ensureAuthenticated, streamController.endStream);
+
 
 module.exports = router;

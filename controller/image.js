@@ -88,31 +88,31 @@ const imageController = {
         }
     },
 
-    async saveFileReference(req, res) {
-        try {        
-            let image = new Image();
-            image.imageKey = req.body.fileKey;
-            image.imageURL = req.body.fileURL;
-            image.imageName = req.body.imageName;
-            image.streamer_id = req.user._id;
+    // async saveFileReference(req, res) {
+    //     try {        
+    //         let image = new Image();
+    //         image.imageKey = req.body.fileKey;
+    //         image.imageURL = req.body.fileURL;
+    //         image.imageName = req.body.imageName;
+    //         image.streamer_id = req.user._id;
     
-            await image.save();
-            let image_id = image._id;
+    //         await image.save();
+    //         let image_id = image._id;
 
-            res.json({
-                image: image,
-                imageKey: req.body.fileKey,
-                imageURL: req.body.fileURL,
-                imageName: req.body.imageName,
-                image_id: image_id
-            })
-        } catch(error) {
-            console.log(error);
-            res.status(500).json({
-                errors: "An unknown error occurred"
-            });
-        }
-    },
+    //         res.json({
+    //             image: image,
+    //             imageKey: req.body.fileKey,
+    //             imageURL: req.body.fileURL,
+    //             imageName: req.body.imageName,
+    //             image_id: image_id
+    //         })
+    //     } catch(error) {
+    //         console.log(error);
+    //         res.status(500).json({
+    //             errors: "An unknown error occurred"
+    //         });
+    //     }
+    // },
 
     async saveProfileImageReference(req, res) {
         try {        

@@ -2,13 +2,13 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const router = express.Router();
 const bcrypt = require('bcryptjs');
-const path = require('path');
+const jwt = require('jsonwebtoken');
 const passport = require('passport');
 // Bring in User Model
 let User = require('../models/user');
-const mail = require('../utils/mail');
+// const mail = require('../utils/mail');
 const accountController = require('../controller/accounts');
-const accountUtil = require('../utils/account')
+// const accountUtil = require('../utils/account')
 const validator = require('../controller/validator');
 
 // Generate token
@@ -52,16 +52,18 @@ router.get('/verify/:verificationToken', function(req, res, next) {
 
 // Login
 router.post('/login', function(req, res, next){
-  passport.authenticate('local', function(err, user, info) {
+  passport.authenticate('local', { session: false }, function(err, user, info) {
   	if (err) { return next(err) }
-  	if (!user) { 
+  	if (!user) {
   		return res.status(401).send({ error: "Your username and/or password is incorrect." });
-  		// return res.json({ error: "Your username and/or password is incorrect."});
   	}
-  	req.logIn(user, function(err) {
-  		if (err) { return next(err) }
-  		return res.status(200).send({ redirectURL: '/'});
-  		// return res.redirect('/');
+  	req.login(user, { session: false }, function(err) {
+		if (err) { return next(err) }
+		const theUser = { username: user.username, _id: user._id }
+		const token = jwt.sign({ user: theUser }, process.env.SECRET, { 
+			expiresIn: '1d',
+		});
+		return res.json({ user: theUser, token });
   	});
   })(req, res, next);
 });
@@ -133,32 +135,6 @@ router.post('/updatePassword', function(req, res) {
 	}
 })
 
-// Login page
-router.get('/loginForm', function(req, res, next) {
-  if (req.isAuthenticated()) {
-    res.redirect('/');
-  } else {
-    res.render('login');
-  }
-});
-
-// Register page
-router.get('/registerForm', function(req, res, next) {
-  if (req.isAuthenticated()) {
-    res.redirect('/');
-  } else {
-    res.render('register');
-  }
-});
-
-// Reigster page
-router.get('/forgotPass', function(req, res, next) {
-  if (req.isAuthenticated()) {
-    res.redirect('/');
-  } else {
-    res.render('pass__forgot');
-  }
-});
 
 router.post('/sendResetPass', validator.forgotPass, accountController.sendResetPass);
 

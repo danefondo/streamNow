@@ -1,0 +1,173 @@
+textarea { resize: none; }
+
+.contentArea {
+    margin: 50px auto 50px auto;
+}
+
+.success_content {
+    margin: 50px auto 0px auto;
+    max-width: 325px;
+}
+
+.subArea {
+    padding: 20px;
+    background-color: #f7f7f7;
+    margin-top: 20px;
+    margin-bottom: 30px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+}
+
+.subArea:hover {
+    background-color: #f1f1f1;
+}
+
+.subArea .stream_input_title {
+    font-weight: bold;
+    color: #444;
+}
+
+.stream_input_container {
+    margin-bottom: 40px !important;
+}
+
+.settings_delete_section {
+    max-width: 325px;
+    margin: 0 auto;
+}
+
+.settings_section {
+    margin-bottom: 50px !important;
+}
+
+.stream_input {
+	width: 200px;
+	border-radius: 3px;
+	border: 1px solid #eee;
+	margin-right: 16px;
+	padding: 10px;
+
+	margin-left: auto;
+	margin-right: auto;
+	width: 325px;
+	padding: 15px !important;
+	display: block !important;
+	font-size: 18px !important;
+    box-shadow: 4px 5px 0px 0px #e6e6e6;
+    margin-top: 15px;
+    box-sizing: border-box;
+    /* font-family: 'Lora', serif; */
+    font-family: 'Trebuchet MS', sans-serif;
+}
+
+.stream_input:focus {
+	border-left: 3px solid #120088;
+}
+
+.stream_input_title {
+    font-size: 20px;
+}
+
+.go_live,
+.create_event {
+    color: white;
+    font-weight: bold;
+    padding: 10px 16px;
+    border-radius: 2px;
+    box-sizing: border-box;
+    border: 1px solid transparent;
+    display: inline-block;
+    background-color: #120088;
+    cursor: pointer;
+    width: 100%;
+    text-align: center;
+    font-size: 20px;
+    transition: .2s ease;
+}
+
+.go_live:hover,
+.create_event:hover {
+    background-color: #120088bd;
+    color: white;
+}
+
+.schedule_container {
+    border-radius: 4px;
+    background-color: #f9f9f9;
+    padding: 15px;
+    margin-bottom: 30px;
+}
+
+.arrow {
+    height: 15px;
+    margin-left: auto;
+    margin-right: 5px;
+}
+
+.schedule_stream_section {
+    margin-bottom: 25px;
+}
+
+/* -------------------------
+    radio buttons
+------------------------- */
+
+
+.switch-field {
+	display: flex;
+	margin-top: 15px;
+	overflow: hidden;
+}
+
+.switch-field input {
+	position: absolute !important;
+	clip: rect(0, 0, 0, 0);
+	height: 1px;
+	width: 1px;
+	border: 0;
+	overflow: hidden;
+}
+
+.switch-field label {
+	background-color: #fff;
+	color: #333;
+    font-size: 14px;
+    font-weight: bold;
+	line-height: 1;
+	text-align: center;
+	padding: 12px 22px;
+	margin-right: -1px;
+	/* border: 1px solid rgba(0, 0, 0, 0.2);
+	box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.3), 0 1px rgba(255, 255, 255, 0.1); */
+    transition: all 0.1s ease-in-out;
+    border: 1px solid #ececec;
+    /* border-left: none; */
+}
+
+.switch-field label:hover {
+	cursor: pointer;
+}
+
+.switch-field input:checked + label {
+    background-color: #171717;
+    color: white;
+    box-shadow: none;
+    border: 1px solid transparent;
+}
+
+#radio-one:checked {
+    border-right: none;
+}
+
+#radio-two:checked {
+    border-left: none;
+}
+
+.switch-field label:first-of-type {
+	border-radius: 4px 0 0 4px;
+}
+
+.switch-field label:last-of-type {
+	border-radius: 0 4px 4px 0;
+}
