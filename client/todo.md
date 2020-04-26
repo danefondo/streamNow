@@ -5,8 +5,8 @@
 ** To be fixed **
 - Go live button
 - Success page
-- Profile link / same component
-- Profile not working (especially new)
++ Profile link / same component
++ Profile not working (especially new)
 - Get video ID from video link
 
 *Questions:

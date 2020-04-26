@@ -331,7 +331,13 @@ p {
 }
 .stream_owner {
   display: flex;
-  align-items: center;
+    align-items: center;
+    padding: 8px 10px 8px 10px;
+    border-radius: 2px;
+    cursor: pointer;
+}
+.stream_owner:hover {
+  background-color: #f7f7f7;
 }
 .stream_center_top {
   display: flex;

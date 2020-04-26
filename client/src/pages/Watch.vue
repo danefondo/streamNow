@@ -18,7 +18,7 @@
     <div class="streaming_area">
       <div class="section_center">
         <div class="stream_center_top">
-          <div class="stream_owner">
+          <router-link :to="'/profile/' +streamer._id" class="stream_owner">
             <img class="streamer_profile_icon" :src="getProfileIcon" />
             <p
               v-if="streamer"
@@ -31,7 +31,7 @@
               {{
               streamer.lastname }}
             </p>
-          </div>
+          </router-link>
           <div @click="follow" v-if="!owner" class="streamer_follow" :class="{followingBg: userFollowing}">
             <div class="streamer_follow_button">
               <img class="streamer_follow_icon" :src="userFollowing ? FollowingIcon  : FollowIcon" />
@@ -65,6 +65,9 @@
                 @click="showModal = true"
                 class="stream_end_button margin-left-auto"
               >End stream</div>
+              <div class="share_buttons">
+                <div class="share_options">Share</div>
+              </div>
               <div @click="likeStream" class="stream_likes" :class="{userLiked}">
                 <div class="stream_like_button">
                   <img class="stream_like_icon" src="../assets/images/like_icon.png" />
@@ -442,6 +445,7 @@ p {
 .stream_end_button,
 .share_options {
   padding: 10px 16px;
+  padding-top: 11px;
   font-size: 17px;
   display: inline-block;
   background-color: #f7f7f7;
@@ -453,10 +457,6 @@ p {
   /* color: white; */
   white-space: nowrap;
   font-weight: bold;
-}
-
-.share_options {
-  font-weight: 400;
 }
 
 .stream_edit_button:hover,
@@ -479,10 +479,10 @@ p {
 }
 .player_container {
   margin-right: 50px;
-  margin-top: 2%;
+  margin-top: 1.3%;
 }
 .player_sidebar_container {
-  margin-top: 2%;
+  margin-top: 1.3%;
   margin-right: 10px;
 }
 .sidebar_section_top {
@@ -499,7 +499,13 @@ p {
 }
 .stream_owner {
   display: flex;
-  align-items: center;
+    align-items: center;
+    padding: 8px 10px 8px 10px;
+    border-radius: 2px;
+    cursor: pointer;
+}
+.stream_owner:hover {
+  background-color: #f7f7f7;
 }
 .stream_details {
   max-width: 850px;
@@ -513,6 +519,7 @@ p {
 .stream_name_display {
   font-size: 25px;
   line-height: 30px;
+  max-width: 500px;
 }
 .stream_description_display {
   max-width: 600px;
@@ -536,20 +543,28 @@ p {
   align-items: center;
   max-width: 865;
 }
-.stream_live {
-  padding: 6px 12px;
-  border-radius: 3px;
-  font-size: 17px;
-  display: inline-block;
-  color: #ca1b0e;
-  background-color: #f7f7f7;
-  font-weight: bold;
-  margin-left: 15px;
-  border-radius: 3px;
-  margin-right: 15px;
-  text-align: center;
-  cursor: default;
+.stream_live,
+.stream_offline {
+    padding: 6px 12px;
+    border-radius: 3px;
+    font-size: 17px;
+    display: inline-block;
+    /* background-color: #ff0000d4; */
+    color: #ca1b0e;
+    /* color: #1600ff; */
+    background-color: #f7f7f7;
+    font-weight: bold;
+    margin-left: 15px;
+    border-radius: 3px;
+    margin-right: 15px;
+    text-align: center;
+    cursor: default;
 }
+
+.stream_offline {
+    color: #555;
+}
+
 .stream_likes {
   margin-left: auto;
   margin-right: 20px;
