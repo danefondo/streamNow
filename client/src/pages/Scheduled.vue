@@ -1,5 +1,5 @@
 <template>
-  <NotFoundStream v-if="!loading && !Object.keys(streams).length" />
+  <NoScheduledStreams v-if="!loading && !Object.keys(streams).length" />
   <div v-else class="contentArea">
     <div class="discovery_section">
       <div class="examplesSection__landingPage">
@@ -41,7 +41,7 @@ import axios from "axios";
 import Featured from "../components/Featured";
 import { BASE_PATH } from "../constants";
 import Stream from "../components/Stream";
-import NotFoundStream from "../components/NotFoundStream";
+import NoScheduledStreams from "../components/NoScheduledStreams";
 
 export default {
   name: "Scheduled",
@@ -55,7 +55,7 @@ export default {
   components: {
     Stream,
     Featured,
-    NotFoundStream,
+    NoScheduledStreams,
   },
   async mounted() {
     try {

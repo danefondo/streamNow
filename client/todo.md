@@ -49,6 +49,8 @@
 ** GENERAL **
 - Make upcoming / previous with dates to navigate more easily
 - Add 'Watch streams' to success page instead of view streams
+- Change all text to i18 text
+- Add custom thumbnail replacement if no thumbnail exists in youtube or manually set
 
 ** ABOUT PAGE **
 - Create custom about page

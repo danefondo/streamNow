@@ -1,15 +1,15 @@
 <template>
   <section class="hero-content block-marg">
     <div class="container cont-840 align-center wrapper-404">
-      <h1 class="page-title">{{$t("404.404")}}</h1>
+      <h1 class="page-title">{{$t("scheduled.oops")}}</h1>
 
-      <h2 class="sub-head">{{$t("404.not-found")}}</h2>
+      <h2 class="sub-head">{{$t("scheduled.no-scheduled")}}</h2>
 
       <div class="short-desc">
-        <p>
-          {{$t("404.not-found-help-1")}}
-          <br />{{$t("404.not-found-help-2")}}
-          <router-link to="/contact">{{$t("404.contact-us")}}</router-link> {{$t("404.not-found-help-3")}}
+        <p>{{$t("scheduled.check-back")}}</p>
+        <p class="schedule_it">
+          {{$t("scheduled.or")}}
+          <router-link to="/dashboard/golive">{{$t("scheduled.schedule-stream")}}</router-link>
         </p>
       </div>
     </div>
@@ -18,12 +18,15 @@
 
 <script>
 export default {
-  name: "Error404"
+  name: "NoScheduledStreams"
 };
 </script>
 
 <style scoped>
 @media all {
+  .schedule_it {
+    font-size: 18px;
+  }
   *,
   *::before,
   *::after {

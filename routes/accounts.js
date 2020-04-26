@@ -30,11 +30,11 @@ router.get('/verify/:verificationToken', function (req, res, next) {
 	User.findOne({ verificationToken }, (verifyError, theUser) => {
 		if (verifyError) {
 			console.log('DB error', verifyError);
-			return res.status(500).send({ message: "An error occurred" });
+			return res.status(500).send({ message: "verification.error-occurred" });
 		}
 		if (!theUser) {
 			console.log('Please ensure you have created an account');
-			return res.status(401).send({ message: "Please ensure you have an account" });
+			return res.status(401).send({ message: "verification.ensure-account" });
 		}
 		theUser.verifiedStatus = true;
 		theUser.save((err, savedUser) => {
@@ -42,7 +42,7 @@ router.get('/verify/:verificationToken', function (req, res, next) {
 			const token = jwt.sign({ user: tokenUser }, process.env.SECRET, {
 				expiresIn: '1d',
 			});
-			return res.json({ user: theUser, token, message: "Your email has been verified" });
+			return res.json({ user: theUser, token, message: "verification.verified" });
 		})
 	});
 });
