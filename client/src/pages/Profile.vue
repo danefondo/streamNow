@@ -38,20 +38,20 @@
               class="add_about_section"
             >{{$t("profile.add-about")}}</router-link>
             <div v-if="streamer" class="links">
-              <a v-if="streamer.fb_link" :href="streamer.fb_link">
-                <img class="fb_link social_link" src="../assets/images/facebook.png" />
+              <a v-if="streamer.fb_link" :href="streamer.fb_link" class="social_link">
+                <img class="fb_link" src="../assets/images/facebook.png" />
               </a>
-              <a v-if="streamer.insta_link" :href="streamer.insta_link">
-                <img class="insta_link social_link" src="../assets/images/instagram.png" />
+              <a v-if="streamer.insta_link" :href="streamer.insta_link" class="social_link">
+                <img class="insta_link" src="../assets/images/instagram.png" />
               </a>
-              <a v-if="streamer.yt_link" :href="streamer.yt_link">
-                <img class="yt_link social_link" src="../assets/images/youtube.png" />
+              <a v-if="streamer.yt_link" :href="streamer.yt_link" class="social_link">
+                <img class="yt_link" src="../assets/images/youtube.png" />
               </a>
-              <a v-if="streamer.twitter_link" :href="streamer.twitter_link">
-                <img class="insta_link social_link" src="../assets/images/twitter.png" />
+              <a v-if="streamer.twitter_link" :href="streamer.twitter_link" class="social_link">
+                <img class="insta_link" src="../assets/images/twitter.png" />
               </a>
-              <a v-if="streamer.website_link" :href="streamer.website_link">
-                <img class="website_link social_link" />
+              <a v-if="streamer.website_link" :href="streamer.website_link" class="social_link">
+                <img class="website_link" src="../assets/images/website.png" />
               </a>
             </div>
             <div v-if="streamer.description" class="streamer_about">
@@ -91,7 +91,10 @@
                 <div class="no_streams_text">{{$t("profile.no-streams")}}</div>
               </div>
             </div>
-            <p v-if="streamer.previous_streams.length" class="previous_streams_title">Previous streams</p>
+            <p
+              v-if="streamer.previous_streams.length"
+              class="previous_streams_title"
+            >Previous streams</p>
             <div class="previous_streams_container">
               <div class="previous_streams">
                 <ProfileStream
@@ -164,6 +167,26 @@ export default {
   About streamer
 ----------------------*/
 
+.fb_link,
+.twitter_link,
+.yt_link,
+.insta_link,
+.website_link {
+  height: 25px;
+}
+
+.social_link {
+    display: inline-block;
+    margin-right: 4px;
+    margin-top: 2px;
+    padding: 2px 4px;
+    border-radius: 4px;
+}
+
+.social_link:hover {
+  background-color: #eee;
+}
+
 .streamer_description {
   margin-left: 5px;
 }
@@ -212,9 +235,6 @@ export default {
   margin-left: 80px;
 }
 
-.social_link {
-  height: 25px;
-}
 .profile {
   display: flex;
   flex-wrap: wrap;
@@ -337,10 +357,10 @@ p {
 }
 .stream_owner {
   display: flex;
-    align-items: center;
-    padding: 8px 10px 8px 10px;
-    border-radius: 2px;
-    cursor: pointer;
+  align-items: center;
+  padding: 8px 10px 8px 10px;
+  border-radius: 2px;
+  cursor: pointer;
 }
 .stream_owner:hover {
   background-color: #f7f7f7;
@@ -367,7 +387,7 @@ p {
 }
 .streamer_profile_image {
   display: block;
-  margin-bottom: 30px;
+  margin-bottom: 6px;
   height: 240px;
   width: 240px;
   margin-left: auto;

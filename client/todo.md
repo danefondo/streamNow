@@ -9,26 +9,25 @@
 + Profile not working (especially new)
 - Get video ID from video link
 
+** 
+- new databse
+
+**
+- if new video goes live, make owner's other videos offline
+
 *Questions:
-- Do I have to change every req.user._id and is there an equivalently convenient way to get this?
+<!-- - Do I have to change every req.user._id and is there an equivalently convenient way to get this? -->
 
 ** WATCH PAGE **
-+ If LoggedIn && User==Owner
+<!-- + If LoggedIn && User==Owner
     + Show edit stream button
     + Show end stream button
     + Disable liking video
     + Don't show follow
 + Make like button work
 + Make follow button work
++ If stream has ended, show it has ended -->
 - Make autoscroll name-bar work
-+ If stream has ended, show it has ended
-
-
-** PROFILE **
-- Make autoscroll name bar work
-
-** SETTINGS ** 
-- 
 
 ** GENERAL **
 - Change all <a> links to router-links with to:link
