@@ -41,10 +41,9 @@
       <div class="pageTitle__accountSettings">{{ $t("settings.settings-title") }}</div>
       <div v-if="!user.verifiedStatus" class="user_not_verified">
         <p class="not_verified_message">{{ $t("settings.verify-message") }}</p>
-        <!-- @click="resendVerification" -->
-        <a v-if="!verificationSent" class="resend_verif_message">{{ $t("settings.resend-verif-message") }}</a>
+        <a @click="resendVerification" v-if="!verificationSent" class="resend_verif_message">{{ $t("settings.resend-verif-message") }}</a>
         <p v-if="verificationSent && !verificationSendError" class="resend_verif_success">{{ $t("settings.verif-sent") }}</p>
-        <a v-if="verificationSendError" class="resend_verif_fail">{{ $t("settings.verif-sent-fail") }}</a>
+        <a @click="resendVerification" v-if="verificationSent && verificationSendError" class="resend_verif_fail">{{ $t("settings.verif-sent-fail") }}</a>
       </div>
       <div class="success_content">
         <div v-if="error" class="generalErrorContainer">
@@ -101,12 +100,12 @@
             :uploading="uploadingImage"
             @change="uploadImage"
           />
-          <div class="inputErrorContainer">
+          <!--<div class="inputErrorContainer">
             <div class="inputErrorText"></div>
           </div>
           <div class="inputSuccessContainer">
             <div class="inputSuccessText"></div>
-          </div>
+          </div>-->
         </div>
         <div class="settings_section">
           <div class="success_input_title">{{ $t("settings.social-title") }}</div>
@@ -359,15 +358,15 @@ export default {
         this.emailError = response.data.message;
       }
     },
-    // async resendVerification() {
-    //   try {
-    //     const { data } = await axios.post("/accounts/updateEmail", this.user);
-
-    //     this.verificationSent = true;
-    //   } catch ({ response }) {
-    //     this.verificationSendError = true;
-    //   }
-    // },
+    async resendVerification() {
+      try {
+        await axios.post("/accounts/resendEmailVerification", this.user);
+        this.verificationSendError = false;
+        return this.verificationSent = true;
+      } catch ({ response }) {
+        this.verificationSendError = true;
+      }
+    },
     async saveSocialLinks() {
       try {
         const { data } = await axios.post("/accounts/updateSocial", this.user);
@@ -444,6 +443,12 @@ export default {
 .resend_verif_fail {
   line-height: 23px;
   color: darkblue;
+}
+
+.resend_verif_message:hover,
+.resend_verif_fail:hover {
+  cursor: pointer;
+  color: #00008bc2;
 }
 
 .settings {
@@ -666,7 +671,7 @@ p {
   font-weight: bold;
   font-size: 16px;
   margin: 0 auto;
-  background-color: blue;
+  background-color: #130088;
   margin-top: 20px;
 }
 .save_pass_button:hover,

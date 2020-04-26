@@ -17,6 +17,7 @@ import ForgotPass from "./pages/ForgotPass";
 import Settings from "./pages/Settings";
 import Error404 from "./pages/Error404";
 import auth from "./config/auth";
+import VideoManager from "./pages/VideoManager";
 
 const routes = [
   { path: "/scheduled", component: Scheduled },
@@ -35,6 +36,13 @@ const routes = [
       requireAuthentication: true,
     },
   },
+  {
+    path: "/dashboard/streams",
+    component: VideoManager,
+    meta: {
+      requireAuthentication: true,
+    },
+  },
   { path: "/discover", component: Home },
   { path: "/login", component: Login, name: "Login" },
   { path: "/register", component: Register, name: "Register" },
@@ -47,12 +55,14 @@ const routes = [
   { path: "/reset", component: ResetPass },
   { path: "/accounts/forgotPass", component: ForgotPass },
   {
-    path: "/dashboard/settings", component: Settings, meta: {
+    path: "/dashboard/settings",
+    component: Settings,
+    meta: {
       requireAuthentication: true,
     },
   },
-  { path: "/error404", component: Error404 },
   { path: "/", component: Home },
+  { path: "*", component: Error404 },
 ];
 
 const router = new VueRouter({
@@ -60,7 +70,7 @@ const router = new VueRouter({
   routes,
 });
 
-const noReAuth = ["Login", "Verify", "Register"]
+const noReAuth = ["Login", "Register"];
 router.beforeEach((to, from, next) => {
   if (to.meta.requireAuthentication && !auth.isAuthenticated()) {
     next({ name: "Login" });

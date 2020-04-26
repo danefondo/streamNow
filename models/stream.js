@@ -8,6 +8,7 @@ const stream_schema = new mongoose.Schema({
     stream_description: String,
     stream_tags: [String],
     stream_video_id: String,
+    stream_video_link: String,
     date_created: Date,
     end_date: Date,
     thumbnail_key: String,

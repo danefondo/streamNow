@@ -86,7 +86,7 @@ const accountController = {
 			newUser.password = hash;
 			await newUser.save();
 			mail.sendVerificationMail(email, link);
-			const theUser = { username: newUser.username, _id: newUser._id }
+			const theUser = { username: newUser.username, _id: newUser._id, is_live: false }
 			const token = jwt.sign({ user: theUser }, process.env.SECRET, {
 				expiresIn: '1d',
 			});

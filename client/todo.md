@@ -2,11 +2,21 @@
 
 *** VUE.JS RECONSTRUCTIONS ***
 
+** Notes from website **
+<!-- - Email verification doesn't work (maybe because host 3000 and doesn't work on 8080, will try again Live) -->
+- Heroku app crashed?
+<!-- - Showing 'You're live' when not, no link though -->
+<!-- - Needs 404 page -->
+
+** need help with **
+- infinite scroll
+
 ** To be fixed **
-- Go live button
-- Success page
-+ Profile link / same component
-+ Profile not working (especially new)
+<!-- - Settings page notification area under image, can it be removed (it is taking space) -->
+<!-- - Go live button -->
+<!-- - Success page -->
+<!-- + Profile link / same component -->
+<!-- + Profile not working (especially new) -->
 - Get video ID from video link
 
 ** 
@@ -16,6 +26,7 @@
 - if new video goes live, make owner's other videos offline
 
 *Questions:
+- Is 'is_verified' always available? I need it for nav + go_live page
 <!-- - Do I have to change every req.user._id and is there an equivalently convenient way to get this? -->
 
 ** WATCH PAGE **
@@ -35,8 +46,9 @@
 
 *** FEATURES PROMISED BY SUNDAY-MONDAY ***
 
-** GENERAL ** 
-- Fix
+** GENERAL **
+- Make upcoming / previous with dates to navigate more easily
+- Add 'Watch streams' to success page instead of view streams
 
 ** ABOUT PAGE **
 - Create custom about page
@@ -60,6 +72,7 @@
 - On clicking profile, do show live stream on the top
 
 ** WATCH PAGE **
+- If stream doesn't exist, say that this kind of stream doesn't exist
 - Support button
 - Share buttons
 - View more button for longer descriptions
@@ -115,3 +128,7 @@
 + Setup binding smarter by abstracting active/not active check into method
 + Changed footer <a> links to router-links
 + Changed all 'hrefs' to 'to:"/link"' for footer links
+
+
+# changes to en.json
+- resend-verif-message

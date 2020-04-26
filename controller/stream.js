@@ -20,7 +20,9 @@ const streamController = {
             let featured_streams = await Stream.find({ "is_featured": true }).populate('streamer').exec();
             let featured = featured_streams[0];
             if (!streams.length) {
-                return res.status(404);
+                return res.status(404).json({
+                    message: "No stream found"
+                });
             }
             res.status(200).json({
                 streams: streams,
@@ -297,8 +299,8 @@ const streamController = {
 
             let stream = await Stream.findById(stream_id);
             if (!stream) {
-                return res.render('stream_not_found', {
-                    error: "Stream not found."
+                return res.status(404).json({
+                    message: "Stream not found"
                 });
             }
 
@@ -346,7 +348,6 @@ const streamController = {
                 host_name
             });
         } catch (error) {
-            console.log(error);
             res.status(500).json({
                 errors: "An unknown error occurred"
             });
@@ -560,69 +561,10 @@ const streamController = {
 
     async schedule_live_stream(req, res) {
         try {
-            //let stream_data = req.body.stream_data;
-            //let schedule_data = req.body.schedule_data;
-            //schedule_data.scheduled_time = new Date();
-
-
             let stream = new Stream({ ...req.body, stream_likes_count: 0 });
-
-
-            /*if (stream_data.thumbnail_key) {
-                stream.thumbnail_key = stream_data.thumbnail_key;
-            }
-
-            if (stream_data.thumbnail_url) {
-                stream.thumbnail_url = stream_data.thumbnail_url;
-            }
-
-            if (stream_data.thumbnail_name) {
-                stream.thumbnail_name = stream_data.thumbnail_name;
-            }
-            
-            if (stream_data.thumbnail_id) {
-                stream.thumbnail_id = stream_data.thumbnail_id;
-            }
-
-            if (stream_data.stream_name) {
-                stream.stream_name = stream_data.stream_name;
-            }
-
-            if (stream_data.stream_description) {
-                stream.stream_description = stream_data.stream_description;
-            }
-
-            if (stream_data.stream_video_id) {
-                stream.stream_video_id = stream_data.stream_video_id;
-            }
-
-            if (stream_data.stream_tags) {
-                let tags = stream_data.stream_tags;
-                tags = JSON.parse(tags);
-    
-                for (const tag of tags) {
-                    stream.stream_tags.push(tag);
-                }
-            }
-
-            if (schedule_data.time) {
-                stream.scheduled_time = req.body.schedule_data.time;
-            }
-
-            if (schedule_data.date) {
-                stream.scheduled_date = req.body.schedule_data.date;
-            }
-
-            if (schedule_data.public_status) {
-                stream.public_status = req.body.schedule_data.public_status
-            }*/
-
-            // console.log("user_id", req.user._id);
 
             stream.streamer_id = req.user._id;
             stream.streamer = req.user._id;
-            //stream.is_live = false;
-            //stream.is_scheduled = true;
 
             await stream.save();
             let stream_id = stream._id;
@@ -649,6 +591,31 @@ const streamController = {
                 stream_id: stream_id,
                 user: user
             })
+        } catch (error) {
+            console.log(error);
+            res.status(500).json({
+                errors: "An unknown error occurred"
+            });
+        }
+    },
+
+    async getAllUserStreams(req, res) {
+        try {
+
+            let userId = req.user._id;
+
+            let streams = await Stream.find({ "_id": userId }).exec();
+            if (!streams) {
+                console.log("nooo streams");
+                return res.status(404).json({
+                    errors: "User not found."
+                });
+            }
+
+            res.status(200).json({
+                streams: streams,
+            });
+
         } catch (error) {
             console.log(error);
             res.status(500).json({

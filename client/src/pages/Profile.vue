@@ -412,6 +412,7 @@ p {
   background-color: #f7f7f7;
   border-radius: 4px;
   width: 200px;
+  margin-top: 20px;
 }
 .streamer_count {
   padding: 5px;

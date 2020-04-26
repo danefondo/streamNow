@@ -1,5 +1,6 @@
 <template>
-  <div v-if="stream" class="watch">
+  <NotFoundStream v-if="streamNotFound" />
+  <div v-else-if="stream" class="watch">
     <div class="stream_id" data-stream-id="5e91425bd877200ca0862a81"></div>
     <div v-if="showModal" class="confirm_end_modal">
       <div class="confirm_modal_background"></div>
@@ -32,7 +33,12 @@
               streamer.lastname }}
             </p>
           </router-link>
-          <div @click="follow" v-if="!owner" class="streamer_follow" :class="{followingBg: userFollowing}">
+          <div
+            @click="follow"
+            v-if="!owner"
+            class="streamer_follow"
+            :class="{followingBg: userFollowing}"
+          >
             <div class="streamer_follow_button">
               <img class="streamer_follow_icon" :src="userFollowing ? FollowingIcon  : FollowIcon" />
             </div>
@@ -41,7 +47,10 @@
           <div class="donate_button">Support $</div>
         </div>
         <div class="player_container">
-          <div v-if="!stream.is_live && !stream.is_scheduled" class="stream_not_live">Stream has ended. Watch recording.</div>
+          <div
+            v-if="!stream.is_live && !stream.is_scheduled"
+            class="stream_not_live"
+          >Stream has ended. Watch recording.</div>
           <iframe
             class="live_player"
             width="850"
@@ -114,9 +123,13 @@ import auth from "../config/auth";
 import FollowingIcon from "../assets/images/following_icon.png";
 import FollowIcon from "../assets/images/follow_icon.png";
 import profileIcon from "../assets/images/profile_icon.png";
+import NotFoundStream from "../components/NotFoundStream"
 
 export default {
   name: "Watch",
+  components: {
+    NotFoundStream
+  },
   data() {
     return {
       stream: null,
@@ -126,7 +139,8 @@ export default {
       userFollowing: null,
       FollowingIcon,
       FollowIcon,
-      showModal: false
+      showModal: false,
+      streamNotFound: false,
     };
   },
   mounted() {
@@ -134,12 +148,17 @@ export default {
   },
   methods: {
     async getStream() {
-      const { data } = await axios.get(`/streams/${this.$route.params.id}`);
-      this.stream = data.stream;
-      this.streamer = data.streamer;
-      this.hostName = data.host_name;
-      this.userLiked = data.user_like_boolean;
-      this.userFollowing = data.user_following_boolean;
+      try {
+        const { data } = await axios.get(`/streams/${this.$route.params.id}`);
+        this.stream = data.stream;
+        this.streamer = data.streamer;
+        this.hostName = data.host_name;
+        this.userLiked = data.user_like_boolean;
+        this.streamNotFound = false;
+        this.userFollowing = data.user_following_boolean;
+      } catch (error) {
+        this.streamNotFound = true;
+      }
     },
     async likeStream() {
       if (this.owner) {
@@ -161,7 +180,7 @@ export default {
     },
     follow() {
       this.userFollowing = !this.userFollowing;
-      axios.post(`/streams/${this.stream._id}/followUnfollow`)
+      axios.post(`/streams/${this.stream._id}/followUnfollow`);
     },
     editStream() {
       this.$router.push(`/edit/${this.stream._id}`);
@@ -185,6 +204,11 @@ export default {
         return this.streamer.profile_image_url;
       }
       return profileIcon;
+    }
+  },
+  watch: {
+    $route() {
+      this.getStream();
     }
   }
 };
@@ -500,10 +524,10 @@ p {
 }
 .stream_owner {
   display: flex;
-    align-items: center;
-    padding: 8px 10px 8px 10px;
-    border-radius: 2px;
-    cursor: pointer;
+  align-items: center;
+  padding: 8px 10px 8px 10px;
+  border-radius: 2px;
+  cursor: pointer;
 }
 .stream_owner:hover {
   background-color: #f7f7f7;
@@ -546,24 +570,24 @@ p {
 }
 .stream_live,
 .stream_offline {
-    padding: 6px 12px;
-    border-radius: 3px;
-    font-size: 17px;
-    display: inline-block;
-    /* background-color: #ff0000d4; */
-    color: #ca1b0e;
-    /* color: #1600ff; */
-    background-color: #f7f7f7;
-    font-weight: bold;
-    margin-left: 15px;
-    border-radius: 3px;
-    margin-right: 15px;
-    text-align: center;
-    cursor: default;
+  padding: 6px 12px;
+  border-radius: 3px;
+  font-size: 17px;
+  display: inline-block;
+  /* background-color: #ff0000d4; */
+  color: #ca1b0e;
+  /* color: #1600ff; */
+  background-color: #f7f7f7;
+  font-weight: bold;
+  margin-left: 15px;
+  border-radius: 3px;
+  margin-right: 15px;
+  text-align: center;
+  cursor: default;
 }
 
 .stream_offline {
-    color: #555;
+  color: #555;
 }
 
 .stream_likes {

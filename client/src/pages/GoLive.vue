@@ -34,13 +34,13 @@
       </div>
     </div>
     <div class="stream_input_container">
-      <div class="stream_input_title">Add video ID or link (YouTube, Facebook, Twitch)</div>
+      <div class="stream_input_title">Add video link (YouTube, Facebook, Twitch)</div>
       <input
-        v-model="videoId"
+        v-model="videoLink"
         class="stream_input stream_video_id_input"
         placeholder="e.g. NMPqo3XiOUg"
       />
-      <div v-if="videoIdEmpty && !videoId" class="inputErrorContainer">
+      <div v-if="videoLinkEmpty && !videoLink" class="inputErrorContainer">
         <div class="inputErrorText">{{ $t("form.empty") }}</div>
       </div>
     </div>
@@ -142,13 +142,13 @@ export default {
       name: "",
       description: "",
       tags: [],
-      videoId: "",
+      videoLink: "",
       error: "",
       scheduleError: "",
       tagsEmpty: false,
       nameEmpty: false,
       descriptionEmpty: false,
-      videoIdEmpty: false,
+      videoLinkEmpty: false,
       dateEmpty: false,
       timeEmpty: false,
       submitting: false,
@@ -163,7 +163,7 @@ export default {
     },
     async submit(type) {
       let isOneorMoreEmtpy = false;
-      const requiredFields = ["name", "description", "tags", "videoId"];
+      const requiredFields = ["name", "description", "tags", "videoLink"];
       if (type === "schedule") {
         requiredFields.push("time")
       }
@@ -182,7 +182,7 @@ export default {
           stream_name: this.name,
           stream_description: this.description,
           stream_tags: this.tags,
-          stream_video_id: this.videoId,
+          stream_video_link: this.videoLink,
           is_live: type === "live" ? true : false,
           is_scheduled: type === "schedule" ? true : false
         };

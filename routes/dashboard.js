@@ -12,6 +12,8 @@ mongoose.Promise = Promise;
 
 const config = require('../config/aws');
 
+const auth = require('../config/auth')
+
 const router = express.Router();
 
 let User = require('../models/user');
@@ -46,6 +48,8 @@ router.get('/settings', function(req, res) {
   });
 
 })
+
+router.get('/streams', auth.ensureAuthenticated, streamController.getAllUserStreams);
 
 router.get('/golive', function(req, res) {
 

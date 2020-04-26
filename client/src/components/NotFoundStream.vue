@@ -18,7 +18,7 @@
 
 <script>
 export default {
-  name: "Error404"
+  name: "NotFoundStream"
 };
 </script>
 

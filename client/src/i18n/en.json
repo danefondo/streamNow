@@ -147,5 +147,12 @@
     "form": {
         "empty": "Cannot be empty",
         "wrong": "Something went wrong, our team is looking into it"
+    },
+    "404": {
+        "not-found": "Oh no! That page wasn’t found",
+        "not-found-help-1": "We can’t seem to find the page you’re looking for. Try going",
+        "not-found-help-2": "back to the previous page or",
+        "contact-us": "contact us",
+        "not-found-help-3": "for help."
     }
 }

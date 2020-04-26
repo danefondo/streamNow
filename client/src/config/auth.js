@@ -6,7 +6,7 @@ export default {
             if (localStorage.token && jwtDecode(localStorage.token)) {
                 // check expiry
                 const user = jwtDecode(localStorage.token).user;
-                if (localStorage.isLive) {
+                if (localStorage.isLive && localStorage.isLive !== "false") {
                     user.is_live = localStorage.isLive
                 }
                 return user;

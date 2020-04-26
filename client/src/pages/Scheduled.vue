@@ -1,13 +1,16 @@
 <template>
-  <div class="contentArea">
+  <NotFoundStream v-if="!loading && !Object.keys(streams).length" />
+  <div v-else class="contentArea">
     <div class="discovery_section">
       <div class="examplesSection__landingPage">
         <div class="examplesContainer__landingPage">
-          <div v-if="!loading" class="examplesTitle__landingPage">
-            {{ featured.is_live ? $t('scheduled.live_now') : $t('scheduled.next_up') }}</div>
+          <div
+            v-if="!loading"
+            class="examplesTitle__landingPage"
+          >{{ featured.is_live ? $t('scheduled.live_now') : $t('scheduled.next_up') }}</div>
         </div>
       </div>
-      <Featured v-if="featured" :featured="featured" />    
+      <Featured v-if="featured" :featured="featured" />
     </div>
     <div class="discovery_section">
       <div class="examplesSection__landingPage">
@@ -20,7 +23,11 @@
           <div class="dateGroup" v-for="(eachDateGroup, eachDate) in streams" :key="eachDate">
             <div class="dateGroupTitle">{{ eachDate }}</div>
             <div class="streamGroup">
-              <Stream v-for="eachStream in eachDateGroup" :key="eachStream._id" :stream="eachStream" />
+              <Stream
+                v-for="eachStream in eachDateGroup"
+                :key="eachStream._id"
+                :stream="eachStream"
+              />
             </div>
           </div>
         </div>
@@ -34,6 +41,7 @@ import axios from "axios";
 import Featured from "../components/Featured";
 import { BASE_PATH } from "../constants";
 import Stream from "../components/Stream";
+import NotFoundStream from "../components/NotFoundStream";
 
 export default {
   name: "Scheduled",
@@ -41,30 +49,33 @@ export default {
     return {
       featured: null,
       streams: {},
-      loading: true,
+      loading: true
     };
   },
   components: {
     Stream,
-    Featured
+    Featured,
+    NotFoundStream,
   },
   async mounted() {
-    const { data } = await axios.get(
-      `${BASE_PATH}/streams?scheduled=true`
-    );
-    this.featured = data.featured;
-    this.loading = false;
-    data.streams.forEach(eachStream => {
-      const options = { weekday: "long", month: "long", day: "numeric" };
-      let date = new Date(eachStream.scheduled_time).toLocaleDateString(
-        "et-EE",
-        options
-      );
-      if (!this.streams[date]) {
-        this.streams[date] = [];
-      }
-      this.streams[date].push(eachStream);
-    });
+    try {
+      const { data } = await axios.get(`${BASE_PATH}/streams?scheduled=true`);
+      this.featured = data.featured;
+      this.loading = false;
+      data.streams.forEach(eachStream => {
+        const options = { weekday: "long", month: "long", day: "numeric" };
+        let date = new Date(eachStream.scheduled_time).toLocaleDateString(
+          "et-EE",
+          options
+        );
+        if (!this.streams[date]) {
+          this.streams[date] = [];
+        }
+        this.streams[date].push(eachStream);
+      });
+    } catch (error) {
+      this.loading = false;
+    }
   }
 };
 </script>

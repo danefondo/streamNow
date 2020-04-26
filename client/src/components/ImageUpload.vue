@@ -29,8 +29,8 @@
             <img :src="value && value.preview" class="file-upload-image" alt="your image" />
             <div class="image-title-wrap">
               <button @click="remove" class="remove-image" type="button">
-                <span class="image-pre-title">Remove</span>
-                <span class="image-title">{{ fileName }}</span>
+                <span class="image-pre-title">Remove </span>
+                <span class="image-title">{{ fileName || "image"}}</span>
                 <span v-show="uploading" class="image-uploading-title">Uploading image...</span>
                 <!--<span class="image-removing-title">Removing image...</span>-->
               </button>

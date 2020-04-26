@@ -43,12 +43,12 @@
           <div class="stream_input_container edit_input">
             <div class="stream_input_title">Change YouTube video ID</div>
             <input
-              v-model="videoId"
+              v-model="videoLink"
               class="stream_input stream_video_id_input"
               placeholder="e.g. NMPqo3XiOUg"
               value="Ue0xaq1Q-B4"
             />
-            <div v-if="videoIdEmpty && !videoId" class="inputErrorContainer">
+            <div v-if="videoLinkEmpty && !videoLink" class="inputErrorContainer">
               <div class="inputErrorText">{{ $t("form.empty") }}</div>
             </div>
           </div>
@@ -80,13 +80,13 @@ export default {
       name: "",
       description: "",
       tags: [],
-      videoId: "",
+      videoLink: "",
       error: "",
       scheduleError: "",
       tagsEmpty: false,
       nameEmpty: false,
       descriptionEmpty: false,
-      videoIdEmpty: false,
+      videoLinkEmpty: false,
       submitting: false,
       image: null,
       uploadingImage: false,
@@ -106,7 +106,7 @@ export default {
       this.name = stream.stream_name;
       this.description = stream.stream_description;
       this.tags = stream.stream_tags;
-      this.videoId = stream.stream_video_id;
+      this.videoLink = stream.stream_video_id;
       this.thumbnailKey = stream.thumbnail_key;
       this.thumbnailUrl = stream.thumbnail_url;
       this.thumbnailName = stream.thumbnail_name;
@@ -123,7 +123,7 @@ export default {
     },
     async editStream() {
       let isOneorMoreEmtpy = false;
-      ["name", "description", "tags", "videoId"].forEach(each => {
+      ["name", "description", "tags", "videoLink"].forEach(each => {
         if (!this[each].length) {
           isOneorMoreEmtpy = true;
           this[`${each}Empty`] = true;
@@ -139,7 +139,7 @@ export default {
           stream_name: this.name,
           stream_description: this.description,
           stream_tags: this.tags,
-          stream_video_id: this.videoId,
+          stream_video_link: this.videoLink,
           is_live: true,
           thumbnail_key: this.thumbnailKey,
           thumbnail_url: this.thumbnailUrl,

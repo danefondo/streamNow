@@ -79,6 +79,8 @@ router.post('/updateUsername', auth.ensureAuthenticated, validator.check_usernam
 
 router.post('/updateEmail', validator.check_email, auth.ensureAuthenticated, accountController.updateEmail);
 
+router.post('/resendEmailVerification', auth.ensureAuthenticated, accountController.resendEmailVerification);
+
 router.post('/updateSocial', auth.ensureAuthenticated, accountController.updateSocial);
 
 

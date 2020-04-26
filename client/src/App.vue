@@ -42,8 +42,12 @@ export default {
       this.user = details.user;
     },
     updateLive(status) {
+      if (!status) {
+        localStorage.removeItem('isLive')
+      } else {
+        localStorage.isLive = status;
+      }
       this.user.is_live = status;
-      localStorage.isLive = status;
     }
   }
 };
