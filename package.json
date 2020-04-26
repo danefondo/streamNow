@@ -10,7 +10,7 @@
     "dev": "run-p dev:server dev:client",
     "dev:server": "nodemon app.js",
     "dev:client": "cd client && npm run serve",
-    "heroku:postinstall": "npm install --only=dev --prefix client && npm install --prefix client && npm run build --prefix client",
+    "postinstall": "npm install --only=dev --prefix client && npm install --prefix client && npm run build --prefix client",
     "start": "node app.js"
   },
   "author": "ElysiumOne",
