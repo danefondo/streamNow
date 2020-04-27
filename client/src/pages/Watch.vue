@@ -454,6 +454,8 @@ export default {
   cursor: pointer;
   transition: 0.1s ease;
   margin-bottom: 15px;
+  max-width: 600px;
+  box-sizing: border-box;
 }
 .register_email_watch_button {
   max-width: 560px;
