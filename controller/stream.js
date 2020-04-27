@@ -14,7 +14,7 @@ const streamController = {
                 is_scheduled: true,
                 scheduled_time: {
                     $gte: date,
-                    $lte: anotherDate.setDate(date.getDate() + 5),
+                    $lte: anotherDate.setDate(date.getDate() + 20),
                 }
             }
         }
@@ -247,7 +247,6 @@ const streamController = {
                 stream: stream
             })
         } catch (error) {
-            console.log(error);
             res.status(500).json({
                 errors: "An unknown error occurred"
             });

@@ -10,6 +10,9 @@ const getYoutubeId = (url) => {
  }
 
 const getVideoId = (platform, videoLink) => {
+    if (!platform) {
+        return null;
+    }
     if (platform.includes("youtu")) {
         return getYoutubeId(videoLink);
     } else if (platform.includes("twitch")) {
