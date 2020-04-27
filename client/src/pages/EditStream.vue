@@ -4,7 +4,10 @@
       <div class="edit_stream_details">
         <div class="stream_details_block">
           <div @click="editStream" class="save_stream_changes">Save changes</div>
-          <router-link :to="`/watch/${streamId}`" class="cancel_stream_changes">Cancel</router-link>
+          <router-link
+            :to="$route.query.manage ? '/dashboard/streams' :`/watch/${streamId}`"
+            class="cancel_stream_changes"
+          >Cancel</router-link>
           <!-- <div class="stream_end_button margin-left-auto">End stream</div> -->
         </div>
         <div class="edit_stream_inputs">
@@ -23,7 +26,7 @@
           </div>
           <div class="stream_input_container edit_input">
             <div class="stream_input_title">Change livestream description</div>
-            <ckeditor  :editor="editor" v-model="description"></ckeditor>
+            <ckeditor :editor="editor" v-model="description" :config="editorConfig"></ckeditor>
             <div v-if="descriptionEmpty && !description" class="inputErrorContainer">
               <div class="inputErrorText">{{ $t("form.empty") }}</div>
             </div>
@@ -57,7 +60,7 @@
 <script>
 import InputTag from "vue-input-tag";
 import axios from "axios";
-import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+import DecoupledEditor from '@ckeditor/ckeditor5-build-decoupled-document';
 import auth from "../config/auth";
 import ImageUpload from "../components/ImageUpload";
 
@@ -69,7 +72,7 @@ export default {
   },
   data() {
     return {
-      editor: ClassicEditor,
+      editor: DecoupledEditor,
       isScheduledOpened: false,
       streamId: null,
       date: new Date(),
@@ -89,7 +92,11 @@ export default {
       uploadingImage: false,
       thumbnailKey: null,
       thumbnailUrl: null,
-      thumbnailName: null
+      thumbnailName: null,
+      isLive: null,
+      editorConfig: {
+        toolbar: ["bold", "italic", "|" ,"bulletedList", "numberedList", "Link", "blockQuote"]
+      }
     };
   },
   mounted() {
@@ -107,6 +114,7 @@ export default {
       this.thumbnailKey = stream.thumbnail_key;
       this.thumbnailUrl = stream.thumbnail_url;
       this.thumbnailName = stream.thumbnail_name;
+      this.isLive = stream.is_live;
       this.streamId = stream._id;
       if (stream.thumbnail_url) {
         this.image = {
@@ -122,12 +130,16 @@ export default {
     },
     async editStream() {
       let isOneorMoreEmtpy = false;
-      ["name", "description", "tags", "videoLink"].forEach(each => {
-        if (!this[each].length) {
+      ["name", "description", "tags"].forEach(each => {
+        if (!this[each] || !this[each].length) {
           isOneorMoreEmtpy = true;
           this[`${each}Empty`] = true;
         }
       });
+      if (this.isLive && !this.videoLink) {
+        isOneorMoreEmtpy = true;
+        this.videoLinkEmpty = true;
+      }
       if (isOneorMoreEmtpy) {
         return;
       }
@@ -139,7 +151,7 @@ export default {
           stream_description: this.description,
           stream_tags: this.tags,
           stream_video_link: this.videoLink,
-          is_live: true,
+          is_live: this.isLive,
           thumbnail_key: this.thumbnailKey,
           thumbnail_url: this.thumbnailUrl,
           thumbnail_name: this.thumbnailName
@@ -161,6 +173,9 @@ export default {
           };
         }
         await axios.post(`dashboard/updateLiveStream`, streamData);
+        if (this.$route.query.manage) {
+          return this.$router.push(`/dashboard/streams`);
+        }
         this.$router.push(`/watch/${this.streamId}`);
       } catch (error) {
         this.error = true;
@@ -214,11 +229,11 @@ export default {
 }
 
 .stream_details_block {
-    padding: 10px;
-    display: flex;
-    /* justify-content: center; */
-    width: 325px;
-    margin: 0 auto;
+  padding: 10px;
+  display: flex;
+  /* justify-content: center; */
+  width: 325px;
+  margin: 0 auto;
 }
 
 .stream_end_button:hover {

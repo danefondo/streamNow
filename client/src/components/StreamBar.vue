@@ -1,9 +1,7 @@
 <template>
-  <a
+  <div
     class="stream all"
-    v-if="activetab === 'all' || activetab == getStreamState(stream)"
-    :href="'/watch/'+stream._id"
-  >
+    v-if="activetab === 'all' || activetab == getStreamState(stream)">
     <div v-if="stream.is_scheduled" class="streamDateMeta">
       <div class="streamDate">{{ getStreamDate(stream) + ' /'}}</div>
     </div>
@@ -17,7 +15,7 @@
     </div>
     <div class="streamMetaContainer">
       <div class="streamNameContainer">
-        <div class="streamName">{{stream.stream_name || "Untitled stream"}}</div>
+        <router-link :to="'/watch/'+stream._id" class="streamName">{{stream.stream_name || "Untitled stream"}}</router-link>
       </div>
       <div class="streamTags">
         <div v-for="(tag, index) in stream.stream_tags" :key="index" class="streamTag">{{tag}}</div>
@@ -29,7 +27,7 @@
         <div @click="editStream" class="edit_stream">Edit</div>
       </div>
     </div>
-  </a>
+  </div>
 </template>
 
 <script>
@@ -88,7 +86,7 @@ export default {
       this.$emit("updateLive", true, this.stream)
     },
     editStream() {
-      this.$router.push(`/edit/${this.stream._id}`);
+      this.$router.push(`/edit/${this.stream._id}?manage=1`);
     },
   }
 };
@@ -101,6 +99,11 @@ export default {
   align-items: flex-start;
   padding: 20px 10px;
   position: relative;
+  cursor: default;
+}
+
+.streamName:hover {
+  text-decoration: underline;
 }
 
 .streamPreviewContainer {

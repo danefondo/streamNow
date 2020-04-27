@@ -17,7 +17,7 @@
     </div>
     <div class="stream_input_container">
       <div class="stream_input_title">What's your livestream about?</div>
-      <ckeditor  :editor="editor" v-model="description"></ckeditor>
+      <ckeditor  :editor="editor" v-model="description" :config="editorConfig"></ckeditor>
       <div v-if="descriptionEmpty && !description" class="inputErrorContainer">
         <div class="inputErrorText">{{ $t("form.empty") }}</div>
       </div>
@@ -119,7 +119,7 @@
 
 <script>
 import axios from "axios";
-import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+import DecoupledEditor from '@ckeditor/ckeditor5-build-decoupled-document';
 import Datepicker from "vuejs-datepicker";
 import InputTag from "vue-input-tag";
 import ImageUpload from "../components/ImageUpload";
@@ -133,7 +133,10 @@ export default {
   },
   data() {
     return {
-      editor: ClassicEditor,
+      editor: DecoupledEditor,
+      editorConfig: {
+        toolbar: ["bold", "italic", "|" ,"bulletedList", "numberedList", "Link", "blockQuote"]
+      },
       isScheduledOpened: false,
       date: new Date(),
       time: "",

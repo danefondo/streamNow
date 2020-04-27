@@ -1,12 +1,11 @@
 <template>
   <div
     ref="dropdown"
-    @click="toggleDropdown()"
-    class="share_options"
+    class="share-dropdown"
     :class="{'is-expanded': isOpened}"
   >
-    Share
-    <nav class="Dropdown-nav SettingsNav">
+    <div class="share_options" @click="toggleDropdown()">Share</div>
+    <nav class="Dropdown-nav SettingsNav share-links">
       <ul class="Dropdown-group">
         <li>
           <a :href="buildFbShare" class="entypo-newspaper NavLinkX">Facebook</a>
@@ -17,7 +16,7 @@
           <a class="entypo-plus OptionLink" href="#"></a>
         </li>
         <li>
-          <div @click="copyLink()" class="entypo-archive NavLinkX">Link</div>
+          <div @click="copyLink()" class="entypo-archive NavLinkX copylink">{{ linkText }}</div>
           <a class="entypo-plus OptionLink" href="#"></a>
         </li>
       </ul>
@@ -31,7 +30,8 @@ export default {
   props: ["stream"],
   data() {
     return {
-      isOpened: false
+      isOpened: false,
+      linkText: "Copy Link",
     };
   },
   mounted() {
@@ -62,6 +62,10 @@ export default {
         input.select();
         var result = document.execCommand('copy');
         document.body.removeChild(input);
+        this.linkText = "Copied!";
+        setTimeout(() => {
+            this.linkText = "Copy Link";
+        }, 2000)
         return result;
     }
   },
@@ -82,7 +86,20 @@ export default {
 </script>
 
 <style>
-.share_options.is-expanded nav {
+
+.copylink {
+    color: #666;
+    -webkit-transition: color 0.3s ease;
+    -moz-transition: color 0.3s ease;
+    transition: all 0.3s;
+    cursor: pointer;
+}
+
+.copylink:hover {
+    color :#1e323c;
+}
+
+.share-dropdown.is-expanded nav {
   visibility: visible;
   opacity: 1;
 }
@@ -101,15 +118,19 @@ export default {
   border-bottom-right-radius: 4px;
 }
 
-.share_options.is-expanded nav {
-  visibility: visible;
-  opacity: 1;
+.share_dropdown.is-expanded .MenuIcon-line:nth-child(1) {
+  top: 50%;
+}
+.share_dropdown.is-expanded .MenuIcon-line:nth-child(3) {
+  top: 50%;
 }
 
-.share_options.is-expanded .MenuIcon-line:nth-child(1) {
-  top: 50%;
+.share-dropdown {
+    position: relative;
 }
-.share_options.is-expanded .MenuIcon-line:nth-child(3) {
-  top: 50%;
+
+.share-links {
+    position: absolute;
+    right: -100px;
 }
 </style>
