@@ -275,7 +275,7 @@ export default {
   },
   async mounted() {
     try {
-      const response = await axios.get(`/profile/${this.loggedInUser._id}`);
+      const response = await axios.get(`/profile/user/${this.loggedInUser._id}`);
       this.user = response.data.streamer;
       if (this.user.profile_image_url) {
         this.image = {

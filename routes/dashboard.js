@@ -1,24 +1,11 @@
 const express = require('express');
-const bodyParser = require('body-parser');
-// const multer  = require('multer');
-// const multerS3 = require('multer-s3');
-const aws = require('aws-sdk');
-const path = require('path');
-const assert = require('assert');
 const mongoose = require('mongoose');
-const passport = require('passport');
-const { validationResult } = require('express-validator');
 mongoose.Promise = Promise;
 
-const config = require('../config/aws');
 
 const auth = require('../config/auth')
 
 const router = express.Router();
-
-let User = require('../models/user');
-let ExpiredUser = require('../models/expiredAccount');
-const validator = require('../controller/validator')
 
 const imageController = require('../controller/image');
 const streamController = require('../controller/stream');
@@ -26,8 +13,6 @@ const streamController = require('../controller/stream');
 router.get('/sign-s3', imageController.signS3);
 
 router.post('/UploadSingleImage', imageController.uploadSingleImage);
-
-// router.post('/saveFileReference', imageController.saveFileReference);
 
 router.post('/saveProfileImageReference', imageController.saveProfileImageReference);
 

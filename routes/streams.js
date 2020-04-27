@@ -1,6 +1,5 @@
 const express = require('express');
 const auth = require('../config/auth');
-const validator = require('../controller/validator');
 
 const router = express.Router();
 
@@ -19,3 +18,4 @@ router.post('/:streamId/endStream', auth.ensureAuthenticated, streamController.e
 router.post('/:streamId/register', auth.checkAuthenticated, streamController.signUpForVideo);
 
 module.exports = router;
+
