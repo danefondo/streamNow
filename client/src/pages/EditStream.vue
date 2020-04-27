@@ -61,6 +61,67 @@
             </div>
           </div>
           <ImageUpload v-model="image" :uploading="uploadingImage" />
+          <div v-if="!isLive" class="schedule_container">
+            <div class="schedule_stream_section">
+              <div class="stream_input_title">{{ $t("golive.pick-date") }}</div>
+              <div class="date_picker">
+                <datepicker v-model="date" name="date"></datepicker>
+                <button class="date_picker_button">
+                  <i class="fa fa-calendar"></i>
+                </button>
+              </div>
+              <div v-if="dateEmpty && !date" class="inputErrorContainer">
+                <div class="inputErrorText">{{ $t("form.empty") }}</div>
+              </div>
+            </div>
+            <div class="schedule_stream_section">
+              <div class="stream_input_title">{{ $t("golive.pick-time") }}</div>
+              <div class="time_picker">
+                <input
+                  v-model="time"
+                  class="timepicker"
+                  name="time"
+                  type="time"
+                  placeholder="Choose a time"
+                />
+                <button class="date_picker_button">
+                  <i class="fa fa-clock-o"></i>
+                </button>
+              </div>
+              <div v-if="timeEmpty && !time" class="inputErrorContainer">
+                <div class="inputErrorText">{{ $t("form.empty") }}</div>
+              </div>
+            </div>
+            <div class="schedule_stream_section">
+              <div class="stream_input_title">{{ $t("golive.privacy") }}</div>
+              <div class="switch-field">
+                <input
+                  id="radio-one"
+                  type="radio"
+                  v-model="public_status"
+                  name="switch-one"
+                  value="public"
+                  checked
+                />
+                <label for="radio-one">{{ $t("golive.public") }}</label>
+                <input
+                  id="radio-two"
+                  type="radio"
+                  v-model="public_status"
+                  name="switch-one"
+                  value="unlisted"
+                />
+                <label for="radio-two">{{ $t("golive.unlisted") }}</label>
+              </div>
+              <div class="inputErrorContainer">
+                <div class="inputErrorText"></div>
+              </div>
+            </div>
+            <div
+              @click="editStream"
+              class="create_event"
+            >{{ submitting === 'schedule' ? $t('scheduling.creating-stream') : 'Create Event' }}</div>
+          </div>
         </div>
       </div>
     </div>
@@ -71,6 +132,7 @@
 import InputTag from "vue-input-tag";
 import axios from "axios";
 import DecoupledEditor from "@ckeditor/ckeditor5-build-decoupled-document";
+import Datepicker from "vuejs-datepicker";
 import auth from "../config/auth";
 import ImageUpload from "../components/ImageUpload";
 
@@ -78,7 +140,8 @@ export default {
   name: "EditStream",
   components: {
     InputTag,
-    ImageUpload
+    ImageUpload,
+    Datepicker
   },
   data() {
     return {
@@ -86,8 +149,10 @@ export default {
       limit: 3,
       isScheduledOpened: false,
       streamId: null,
-      date: new Date(),
-      time: new Date(),
+      date: "",
+      dateEmpty: "",
+      time: "",
+      timeEmpty: false,
       name: "",
       description: "",
       tags: [],
@@ -105,6 +170,7 @@ export default {
       thumbnailUrl: null,
       thumbnailName: null,
       isLive: null,
+      public_status: "public",
       editorConfig: {
         placeholder: this.$t("editstream.change-desc"),
         removePlugins: [
@@ -146,6 +212,11 @@ export default {
       this.thumbnailUrl = stream.thumbnail_url;
       this.thumbnailName = stream.thumbnail_name;
       this.isLive = stream.is_live;
+      this.date = new Date(stream.scheduled_time);
+      const hours = this.date.getHours() || "00";
+      const minutes = this.date.getMinutes() || "00";
+      this.time = `${hours}:${minutes}`
+      this.public_status = stream.public_status;
       this.streamId = stream._id;
       if (stream.thumbnail_url) {
         this.image = {
@@ -161,21 +232,24 @@ export default {
     },
     async editStream() {
       let isOneorMoreEmtpy = false;
-      ["name", "description", "tags"].forEach(each => {
+      const requiredFields = ["name", "description", "tags"];
+      if (this.isLive) {
+        requiredFields.push("videoLink")
+      } else {
+        requiredFields.push("time");
+      }
+      requiredFields.forEach(each => {
         if (!this[each] || !this[each].length) {
           isOneorMoreEmtpy = true;
           this[`${each}Empty`] = true;
         }
       });
-      if (this.isLive && !this.videoLink) {
-        isOneorMoreEmtpy = true;
-        this.videoLinkEmpty = true;
-      }
       if (isOneorMoreEmtpy) {
         return;
       }
       try {
         this.submitting = true;
+        
         let streamData = {
           stream_id: this.streamId,
           stream_name: this.name,
@@ -185,8 +259,16 @@ export default {
           is_live: this.isLive,
           thumbnail_key: this.thumbnailKey,
           thumbnail_url: this.thumbnailUrl,
-          thumbnail_name: this.thumbnailName
+          thumbnail_name: this.thumbnailName,
         };
+        if (!this.isLive) {
+          const dateTime = this.date;
+          const time = this.time.split(":");
+          dateTime.setHours(time[0]);
+          dateTime.setMinutes(time[1]);
+          streamData.scheduled_time = dateTime;
+          streamData.public_status = this.public_status;
+        }
         if (this.image && this.image.file) {
           await this.uploadImage();
           streamData = {
@@ -254,14 +336,14 @@ export default {
 }
 
 .vue-input-tag-wrapper .input-tag {
-    color: unset !important;
-    cursor: default !important;
-    margin: 9px 7px 3px 0 !important;
-    padding: 5px 6px !important;
-    background: #f2f2f2 !important;
-    font-size: 20px !important;
-    border: 0 solid #d0d0d0 !important;
-    display: inline-block !important;
+  color: unset !important;
+  cursor: default !important;
+  margin: 9px 7px 3px 0 !important;
+  padding: 5px 6px !important;
+  background: #f2f2f2 !important;
+  font-size: 20px !important;
+  border: 0 solid #d0d0d0 !important;
+  display: inline-block !important;
 }
 
 .vue-input-tag-wrapper .input-tag .remove {

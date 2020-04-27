@@ -16,6 +16,7 @@ router.post('/:streamId/followUnfollow', auth.checkAuthenticated, streamControll
 router.post('/:streamId/endStream', auth.ensureAuthenticated, streamController.endStream);
 
 router.post('/:streamId/register', auth.checkAuthenticated, streamController.signUpForVideo);
+router.post('/golive/:streamId', auth.ensureAuthenticated, streamController.goLive);
 
 module.exports = router;
 

@@ -199,6 +199,7 @@ export default {
       let isOneorMoreEmtpy = false;
       const requiredFields = ["name", "description", "tags", "videoLink"];
       if (type === "schedule") {
+        requiredFields.pop();
         requiredFields.push("time");
       }
       requiredFields.forEach(each => {

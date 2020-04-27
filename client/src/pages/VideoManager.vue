@@ -9,8 +9,8 @@
             class="msg-body"
           >{{ $t("streamManager.delete-acc-confirm-desc") }}</div>
           <div class="action-group">
-            <div @click="showGoLiveModal=false" class="cancelPermaDeleteAccount button-outline">{{ $t("streamManager.cancel-go-live") }}</div>
-            <div @click="deleteAccount" class="confirmPermaDeleteAccount button-filled">{{ $t("streamManager.go-live") }}</div>
+            <div @click="cancelModal" class="cancelPermaDeleteAccount button-outline">{{ $t("streamManager.cancel-go-live") }}</div>
+            <div @click="goLive" class="confirmPermaDeleteAccount button-filled">{{ $t("streamManager.go-live") }}</div>
           </div>
         </div>
       </div>
@@ -48,6 +48,7 @@
         :key="stream._id"
         :stream="stream"
         :activetab="activetab"
+        @initiateGoLive="initiateGoLive"
       />
     </div>
   </div>
@@ -66,6 +67,7 @@ export default {
       streams: {},
       activetab: "all",
       showGoLiveModal: false,
+      streamToGoLive: null,
     };
   },
   components: {
@@ -73,13 +75,30 @@ export default {
     ManagerNoStreams
   },
   async mounted() {
-    axios.get("/dashboard/golive");
+    // axios.get("/dashboard/golive");
     const { data } = await axios.get("/dashboard/streams");
     this.streams = data.streams;
   },
   methods: {
     makeSelected: function(event) {
       event.target.classList.add("manager-selected");
+    },
+    initiateGoLive(streamId) {
+      this.streamToGoLive = streamId;
+      this.showGoLiveModal = true;
+    },
+    async goLive() {
+      try {
+        await axios.post(`/streams/golive/${this.streamToGoLive}`);
+        this.$emit("updateLive", this.streamToGoLive);
+        this.$router.push(`/watch/${this.streamToGoLive}`);
+      } catch (error) {
+        alert(error.response.data.message);
+      }
+    },
+    cancelModal() {
+      this.streamToGoLive = null;
+      this.showGoLiveModal = false;
     }
   }
 };

@@ -23,7 +23,7 @@
       <div class="stream-controller">
         <div v-if="stream.is_live" class="is_live">{{$t("watch.live")}}</div>
         <div v-if="!stream.is_live && !stream.is_scheduled" class="is_previous">{{$t("watch.previous")}}</div>
-        <div v-if="stream.is_scheduled" class="take_live">{{$t("streamManager.go-live")}}</div>
+        <div @click="$emit('initiateGoLive', stream._id)" v-if="stream.is_scheduled" class="take_live">{{$t("streamManager.go-live")}}</div>
         <div @click="editStream" class="edit_stream">{{$t("streamManager.edit")}}</div>
       </div>
     </div>
@@ -54,7 +54,6 @@ export default {
     getStreamTime(stream) {
       let time;
       if (stream.is_scheduled && stream.scheduled_time) {
-        console.log(stream.scheduled_time);
         time = stream.scheduled_time;
         time = new Date(time);
         const options = { hour: "2-digit", minute: "2-digit" };
@@ -81,9 +80,6 @@ export default {
       } else {
         return "previous";
       }
-    },
-    goLive() {
-      this.$emit("updateLive", true, this.stream)
     },
     editStream() {
       this.$router.push(`/edit/${this.stream._id}?manage=1`);

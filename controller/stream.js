@@ -234,9 +234,11 @@ const streamController = {
             stream.stream_name = stream_data.stream_name;
             stream.stream_description = stream_data.stream_description;
             stream.stream_video_link = stream_data.stream_video_link;
-            stream.platform_status = streamUtils.getPlatform(req.body.stream_video_link);
-            stream.stream_video_id = streamUtils.getVideoId(stream.platform_status, req.body.stream_video_link)
+            stream.platform_status = streamUtils.getPlatform(stream_data.stream_video_link);
+            stream.stream_video_id = streamUtils.getVideoId(stream.platform_status, stream_data.stream_video_link)
             stream.stream_tags = stream_data.stream_tags;
+            stream.scheduled_time = stream_data.scheduled_time;
+            stream.public_status = stream_data.public_status;
 
             console.log("user_id", req.user._id);
 
@@ -615,7 +617,47 @@ const streamController = {
             });
         }
     },
+    async goLive(req, res) {
+        try {
+            let stream = await Stream.findById(req.params.streamId);
+            if (!stream) {
+                return res.status(404).json({
+                    errors: "Stream not found."
+                });
+            }
 
+            console.log("yo  made it");
+            if (!stream.is_live) {
+                stream.is_live = true;
+                stream.is_scheduled = false;
+            }
+
+            await stream.save();
+
+            let user;
+            user = await User.findById(req.user._id);
+            if (!user) {
+                return res.status(404).json({
+                    errors: "User not found."
+                });
+            }
+            user.is_live = true;
+            user.active_stream_id = stream._id;
+            user.current_stream_url = stream.stream_video_link;
+            user.current_stream_thumbnail = stream.stream_thumbnail_url;
+            await user.save();
+
+            res.status(200).json({
+                stream: stream
+            })
+
+        } catch (error) {
+            console.log(error);
+            res.status(500).json({
+                errors: "An unknown error occurred"
+            });
+        }
+    },
     async schedule_live_stream(req, res) {
         try {
             let stream = new Stream({ ...req.body, stream_likes_count: 0 });
