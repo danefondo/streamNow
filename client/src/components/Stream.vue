@@ -1,5 +1,5 @@
 <template>
-  <a class="stream" :href="'/watch/'+stream._id">
+  <router-link class="stream" :to="'/watch/'+stream._id">
     <div class="streamPreviewContainer">
       <img class="streamPreview" :src="thumbnail" />
       <div v-if="stream.is_scheduled" class="streamPreviewMeta">
@@ -35,7 +35,7 @@
         </div>
       </div>
     </div>
-  </a>
+  </router-link>
 </template>
 
 <script>
