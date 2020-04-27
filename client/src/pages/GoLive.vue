@@ -17,14 +17,25 @@
     </div>
     <div class="stream_input_container">
       <div class="stream_input_title">What's your livestream about?</div>
-      <ckeditor  :editor="editor" v-model="description" :config="editorConfig" class="unreset ckspecial"></ckeditor>
+      <ckeditor
+        :editor="editor"
+        v-model="description"
+        :config="editorConfig"
+        class="unreset ckspecial"
+      ></ckeditor>
       <div v-if="descriptionEmpty && !description" class="inputErrorContainer">
         <div class="inputErrorText">{{ $t("form.empty") }}</div>
       </div>
     </div>
     <div class="stream_input_container">
       <div class="stream_input_title">Add tags (max 3)</div>
-      <input-tag v-model="tags" :limit="limit" id="input-tags" type="text" placeholder="Write a tag" />
+      <input-tag
+        v-model="tags"
+        :limit="limit"
+        id="input-tags"
+        type="text"
+        placeholder="Write a tag"
+      />
       <div v-if="tagsEmpty && !tags.length" class="inputErrorContainer">
         <div class="inputErrorText">{{ $t("form.empty") }}</div>
       </div>
@@ -110,16 +121,17 @@
           <div class="inputErrorText"></div>
         </div>
       </div>
-      <div @click="submit('schedule')" class="create_event">
-        {{ submitting === 'schedule' ? $t('scheduling.creating-stream') : 'Create Event' }}
-      </div>
+      <div
+        @click="submit('schedule')"
+        class="create_event"
+      >{{ submitting === 'schedule' ? $t('scheduling.creating-stream') : 'Create Event' }}</div>
     </div>
   </div>
 </template>
 
 <script>
 import axios from "axios";
-import DecoupledEditor from '@ckeditor/ckeditor5-build-decoupled-document';
+import DecoupledEditor from "@ckeditor/ckeditor5-build-decoupled-document";
 import Datepicker from "vuejs-datepicker";
 import InputTag from "vue-input-tag";
 import ImageUpload from "../components/ImageUpload";
@@ -129,15 +141,33 @@ export default {
   components: {
     Datepicker,
     InputTag,
-    ImageUpload,
+    ImageUpload
   },
   data() {
     return {
       editor: DecoupledEditor,
       editorConfig: {
-        placeholder: 'Intrigue your audience',
-        removePlugins: [ 'FontSize', 'MediaEmbed', 'insertTable', 'Heading', 'alignment', 'Undo', 'Redo', 'FontFamily', 'highlight' ],
-        toolbar: ["bold", "italic", "|" ,"bulletedList", "numberedList", "Link", "blockQuote"]
+        placeholder: "Intrigue your audience",
+        removePlugins: [
+          "FontSize",
+          "MediaEmbed",
+          "insertTable",
+          "Heading",
+          "alignment",
+          "Undo",
+          "Redo",
+          "FontFamily",
+          "highlight"
+        ],
+        toolbar: [
+          "bold",
+          "italic",
+          "|",
+          "bulletedList",
+          "numberedList",
+          "Link",
+          "blockQuote"
+        ]
       },
       isScheduledOpened: false,
       date: new Date(),
@@ -169,7 +199,7 @@ export default {
       let isOneorMoreEmtpy = false;
       const requiredFields = ["name", "description", "tags", "videoLink"];
       if (type === "schedule") {
-        requiredFields.push("time")
+        requiredFields.push("time");
       }
       requiredFields.forEach(each => {
         if (!this[each].length) {
@@ -196,7 +226,7 @@ export default {
           dateTime.setHours(time[0]);
           dateTime.setMinutes(time[1]);
           streamData.scheduled_time = dateTime;
-          streamData.public_status = this.public_status
+          streamData.public_status = this.public_status;
         }
         if (this.image) {
           streamData = { ...streamData, ...(await this.uploadImage()) };
@@ -207,7 +237,7 @@ export default {
         );
         this.$router.push(`/watch/${result.data.stream_id}`);
         if (type === "live") {
-          this.$emit("updateLive", true, result.data.stream_id)
+          this.$emit("updateLive", true, result.data.stream_id);
         }
       } catch (error) {
         window.scrollTo(0, 0);
@@ -241,6 +271,50 @@ export default {
 </script>
 
 <style>
+.date_picker input {
+  max-width: 285px !important;
+  width: 285px !important;
+  border-radius: 3px;
+  border: 1px solid #eee;
+  margin-right: 16px;
+  padding: 10px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 15px !important;
+  display: block !important;
+  font-size: 18px !important;
+  box-shadow: 4px 5px 0px 0px #e6e6e6;
+  margin-top: 15px;
+  box-sizing: border-box;
+  font-family: "Trebuchet MS", sans-serif;
+}
+
+.date_picker input:focus {
+  border-left: 3px solid #120088;
+}
+
+.timepicker {
+  max-width: 285px !important;
+  width: 285px !important;
+  border-radius: 3px;
+  border: 1px solid #eee;
+  margin-right: 16px;
+  padding: 10px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 15px !important;
+  display: block !important;
+  font-size: 18px !important;
+  box-shadow: 4px 5px 0px 0px #e6e6e6;
+  margin-top: 15px;
+  box-sizing: border-box;
+  font-family: "Trebuchet MS", sans-serif;
+}
+
+.timepicker:focus {
+  border-left: 3px solid #120088;
+}
+
 /*! CSS Used from: https://www.eeter.tv/css/main.css */
 .ckspecial {
   outline: none !important;

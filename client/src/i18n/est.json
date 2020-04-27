@@ -123,11 +123,23 @@
         "no-upcoming-streams": "User has no scheduled streams."
     },
     "watch": {
-        "follow": "Järgi",
-        "hide-chat": "Peida chat",
-        "support": "Toeta",
-        "live": "LIVE",
+        "follow": "Hakka järgima",
+        "following": "Järgin",
+        "hide-chat": "Hide chat",
+        "support": "TOETA €",
+        "live": "EETRIS",
         "share": "Jaga",
-        "likes": "Meeldib"
+        "likes": "Meeldimised",
+        "confirm-end": "Kinnita lõpetamine?",
+        "end-stream": "Lõpeta striimimine",
+        "cancel-end-stream": "Tühista",
+        "register-to-watch": "Registreeri vaatajaks",
+        "register-watch": "Pane mind kirja",
+        "stream-has-ended": "Striim on lõppenud. Vaata järele. ",
+        "edit": "Muuda",
+        "successful-register": "Oled edukalt vaatajaks registreeritud",
+        "enter-valid-email": "Sisesta korralik meiliaadress",
+        "already-registered": "Oled juba vaatajaks registreerinud.",
+        "cannot-like-own-video": "Ei saa ennast kiita"
     }
 }
