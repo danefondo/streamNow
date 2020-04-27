@@ -152,12 +152,12 @@
               :class="[stream.is_live ? 'stream_live' : 'stream_offline']"
             >{{ stream.is_live ? $t('stream.live') : $t('stream.offline') }}</div>
             <div class="livestream_buttons">
-              <div v-if="owner" @click="editStream" class="stream_edit_button">{{$("watch.edit")}}</div>
+              <div v-if="owner" @click="editStream" class="stream_edit_button">{{$t("watch.edit")}}</div>
               <div
                 v-if="owner && stream.is_live && !stream.is_scheduled"
                 @click="showModal = true"
                 class="stream_end_button margin-left-auto"
-              >{{$("watch.end-stream")}}</div>
+              >{{$t("watch.end-stream")}}</div>
               <ShareDropdown :stream="stream" />
               <div @click="likeStream" class="stream_likes" :class="{userLiked}">
                 <div class="stream_like_button">
