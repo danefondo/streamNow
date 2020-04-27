@@ -18,12 +18,20 @@
     <div class="user_check" data-user-id="5e770037c84aaa1088d5315c"></div>
     <div class="streaming_area">
       <div v-if="stream.is_scheduled" class="register_block">
-        <div class="register_text">Register to watch</div>
-        <div class="register_email_block">
+        <div v-if="!isAuthenticated" class="register_text">Register to watch</div>
+        <div v-if="!isAuthenticated" class="register_email_block">
           <input class="watch_register_input" />
+          <div class="register_email_watch_button">Register</div>
+        </div>
+        <div v-if="isAuthenticated" class="register_watch_button">Register to watch</div>
+      </div>
+      <div v-if="!stream.is_live" class="section_center">
+        <div class="scheduled_stream_container">
+          <div class="scheduled_stream_name">{{ stream.stream_name}}</div>
+          <div class="scheduled_stream_description" v-html="stream.stream_description"></div>
         </div>
       </div>
-      <div class="section_center">
+      <div v-if="stream.is_live" class="section_center">
         <div class="stream_center_top">
           <router-link :to="'/profile/' +streamer._id" class="stream_owner">
             <img class="streamer_profile_icon" :src="getProfileIcon" />
@@ -146,11 +154,15 @@ export default {
       FollowingIcon,
       FollowIcon,
       showModal: false,
-      streamNotFound: false
+      streamNotFound: false,
+      isAuthenticated: false
     };
   },
   mounted() {
     this.getStream();
+    if (auth.isAuthenticated()) {
+      this.isAuthenticated = true;
+    }
   },
   methods: {
     async getStream() {
@@ -239,21 +251,46 @@ export default {
 }
 
 .watch_register_input {
-width: 200px;
-    border-radius: 3px;
-    border: 1px solid #eee;
-    margin-right: 16px;
-    padding: 10px;
-    margin-left: auto;
-    margin-right: auto;
-    width: 600px;
-    padding: 15px !important;
-    display: block !important;
-    font-size: 28px !important;
-    box-shadow: 4px 5px 0px 0px #e6e6e6;
-    margin-top: 15px;
-    box-sizing: border-box;
-    font-family: "Trebuchet MS", sans-serif;
+  width: 200px;
+  border-radius: 3px;
+  border: 1px solid #eee;
+  margin-right: 16px;
+  padding: 10px;
+  margin-left: auto;
+  margin-right: auto;
+  width: 600px;
+  padding: 15px !important;
+  display: block !important;
+  font-size: 28px !important;
+  /* box-shadow: 4px 5px 0px 0px #e6e6e6; */
+  margin-top: 15px;
+  box-sizing: border-box;
+  font-family: "Trebuchet MS", sans-serif;
+}
+
+.register_watch_button,
+.register_email_watch_button {
+  text-align: center;
+  margin-top: 20px;
+  padding: 20px;
+  font-size: 28px;
+  border-radius: 3px;
+  margin-left: auto;
+  margin-right: auto;
+  color: white;
+  max-width: 300px;
+  background-color: #ca4c2f;
+  cursor: pointer;
+  transition: 0.1s ease;
+}
+.register_email_watch_button {
+  max-width: 560px;
+}
+
+.register_watch_button:hover,
+.register_email_watch_button:hover {
+  background-color: #ca4c2fcf;
+  transform: scale(1.02);
 }
 .watch {
   display: flex;

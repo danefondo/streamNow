@@ -31,7 +31,7 @@
         </div>
       </div>
       <div class="featured_streamer_description_container_discover">
-        <p>{{featured.stream_description}}</p>
+        <p v-html="featured.stream_description"></p>
       </div>
       <!--  if is live, show  'watch now !-->
       <div v-if="featured.is_live" class="watch_now">Watch now</div>
