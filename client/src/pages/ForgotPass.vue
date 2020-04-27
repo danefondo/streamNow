@@ -4,23 +4,23 @@
       <div class="inputErrorContainer">
         <div class="inputErrorText"></div>
       </div>
-      <div class="login-title">Forgot your password?</div>
+      <div class="login-title">{{ $t("forgot.forgot-title") }}</div>
       <div
         class="subtitle__forgotPass"
-      >Enter the email address you used to create your account. We will send you a link to reset your password. You may need to check your spam folder.</div>
+      >{{ $t("forgot.forgot-help") }}</div>
       <input
         v-model="email"
         class="login-input"
         name="email"
         type="text"
-        placeholder="Email address"
+        :placeholder="$t('forgot.email')"
         autocomplete="off"
       />
       <div class="submit">
         <input class="forgotPass-button" type="submit" value="Submit" />
       </div>
       <div v-if="message" class="successMessage">{{ message }}</div>
-      <router-link class="accountExists__registerPage" to="/login">Login instead.</router-link>
+      <router-link class="accountExists__registerPage" to="/login">{{ $t("forgot.login-instead") }}</router-link>
     </form>
   </div>
 </template>

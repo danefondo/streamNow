@@ -3,20 +3,20 @@
     <div class="section_center">
       <div class="edit_stream_details">
         <div class="stream_details_block">
-          <div @click="editStream" class="save_stream_changes">Save changes</div>
+          <div @click="editStream" class="save_stream_changes">{{ $t("editstream.save") }}</div>
           <router-link
             :to="$route.query.manage ? '/manage-streams' :`/watch/${streamId}`"
             class="cancel_stream_changes"
-          >Cancel</router-link>
+          >{{ $t("editstream.cancel") }}</router-link>
           <!-- <div class="stream_end_button margin-left-auto">End stream</div> -->
         </div>
         <div class="edit_stream_inputs">
           <div class="stream_input_container edit_input">
-            <div class="stream_input_title">Change livestream a name</div>
+            <div class="stream_input_title">{{ $t("editstream.change-name") }}</div>
             <input
               v-model="name"
               class="stream_input stream_name"
-              placeholder="Livestream name"
+              :placeholder="$t('editstream.name-holder')"
               value="Ajutine täitesisu, leht valmimisel"
               max-length="50"
             />
@@ -25,7 +25,7 @@
             </div>
           </div>
           <div class="stream_input_container edit_input">
-            <div class="stream_input_title">Change livestream description</div>
+            <div class="stream_input_title">{{ $t("editstream.change-desc") }}</div>
             <ckeditor
               :editor="editor"
               v-model="description"
@@ -37,25 +37,24 @@
             </div>
           </div>
           <div class="stream_input_container edit_input">
-            <div class="stream_input_title">Change tags (max 3)</div>
+            <div class="stream_input_title">{{ $t("editstream.change-tags") }}</div>
             <input-tag
               v-model="tags"
               :limit="limit"
               id="input-tags"
               type="text"
-              placeholder="Write a tag"
+              :placeholder="$t('editstream.tags-holder')"
             />
             <div v-if="tagsEmpty && !tags.length" class="inputErrorContainer">
               <div class="inputErrorText">{{ $t("form.empty") }}</div>
             </div>
           </div>
           <div class="stream_input_container edit_input">
-            <div class="stream_input_title">Change video link</div>
+            <div class="stream_input_title">{{ $t("editstream.change-video-link") }}</div>
             <input
               v-model="videoLink"
               class="stream_input stream_video_id_input"
-              placeholder="e.g. NMPqo3XiOUg"
-              value="Ue0xaq1Q-B4"
+              :placeholder="$t('editstream.video-placeholder')"
             />
             <div v-if="videoLinkEmpty && !videoLink" class="inputErrorContainer">
               <div class="inputErrorText">{{ $t("form.empty") }}</div>
@@ -107,7 +106,7 @@ export default {
       thumbnailName: null,
       isLive: null,
       editorConfig: {
-        placeholder: "Intrigue your audience",
+        placeholder: this.$t("editstream.change-desc"),
         removePlugins: [
           "FontSize",
           "MediaEmbed",

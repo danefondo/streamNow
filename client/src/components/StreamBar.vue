@@ -21,10 +21,10 @@
         <div v-for="(tag, index) in stream.stream_tags" :key="index" class="streamTag">{{tag}}</div>
       </div>
       <div class="stream-controller">
-        <div v-if="stream.is_live" class="is_live">LIVE</div>
-        <div v-if="!stream.is_live && !stream.is_scheduled" class="is_previous">Previous</div>
-        <div v-if="stream.is_scheduled" class="take_live">Go live</div>
-        <div @click="editStream" class="edit_stream">Edit</div>
+        <div v-if="stream.is_live" class="is_live">{{$t("watch.live")}}</div>
+        <div v-if="!stream.is_live && !stream.is_scheduled" class="is_previous">{{$t("watch.previous")}}</div>
+        <div v-if="stream.is_scheduled" class="take_live">{{$t("streamManager.go-live")}}</div>
+        <div @click="editStream" class="edit_stream">{{$t("streamManager.edit")}}</div>
       </div>
     </div>
   </div>

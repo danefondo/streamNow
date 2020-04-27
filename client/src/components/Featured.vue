@@ -7,7 +7,7 @@
     </div>
     <div class="featured_streamMetaContainer">
       <div class="featured_streamNameContainer">
-        <div class="featured_streamName">{{featured.stream_name || "Untitled"}}</div>
+        <div class="featured_streamName">{{featured.stream_name}}</div>
       </div>
       <div class="featured_streamTags">
         <div
@@ -34,8 +34,8 @@
         <p v-html="featured.stream_description"></p>
       </div>
       <!--  if is live, show  'watch now !-->
-      <div v-if="featured.is_live" class="watch_now">Watch now</div>
-      <div v-if="featured.is_scheduled" class="watch_now">Register to watch</div>
+      <div v-if="featured.is_live" class="watch_now">{{$t("streams.watch")}}</div>
+      <div v-if="featured.is_scheduled" class="watch_now">{{$t("streams.register")}}</div>
       <!--  if is scheduled, show  'register for event' -->
       <!--  if is scheduled/live && has_price show 'Get ticket $price' -->
     </div>

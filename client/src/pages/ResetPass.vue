@@ -4,14 +4,14 @@
       <div class="inputErrorContainer">
         <div class="inputErrorText"></div>
       </div>
-      <div class="form__title">Reset password</div>
-      <div class="subtitle__resetPass">Enter your new password.</div>
+      <div class="form__title">{{ $t("reset-pass.reset-title") }}</div>
+      <div class="subtitle__resetPass">{{ $t("reset-pass.reset-help") }}</div>
       <input
         v-model="password"
         class="input__general"
         name="password"
         type="password"
-        placeholder="New password"
+        :placeholder="$t('reset-pass.new-pass')"
         autocomplete="off"
       />
       <input
@@ -19,7 +19,7 @@
         class="input__general"
         name="passcheck"
         type="password"
-        placeholder="Confirm password"
+        :placeholder="$t('reset-pass.confirm-pass')"
         autocomplete="off"
       />
       <div class="submit">
@@ -50,7 +50,7 @@ export default {
   methods: {
     async resetPassword() {
       if (!this.password || this.password != this.confirmPassword) {
-        return (this.message = "Passwords are required and they must match");
+        return (this.message = this.$t('reset-pass.pass-required'));
       }
       try {
         const { data } = await axios.post("/accounts/reset", {

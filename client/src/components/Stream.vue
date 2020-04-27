@@ -10,7 +10,7 @@
     </div>
     <div class="streamMetaContainer">
       <div class="streamNameContainer">
-        <div class="streamName">{{stream.stream_name || "Untitled stream"}}</div>
+        <div class="streamName">{{stream.stream_name}}</div>
       </div>
       <div class="streamTags">
         <div v-for="(tag, index) in stream.stream_tags" :key="index" class="streamTag">{{tag}}</div>

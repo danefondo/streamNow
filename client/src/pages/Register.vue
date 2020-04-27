@@ -2,8 +2,8 @@
   <Success v-if="success" />
   <div v-else class="registrationBlock__registerPage">
     <div class="titleBlock__registerPage">
-      <h1 class="title__registerPage">Join Eeter.tv</h1>
-      <div class="subtitle__registerPage">...and start broadcasting today.</div>
+      <h1 class="title__registerPage">{{ $t("register.join-title")}}</h1>
+      <div class="subtitle__registerPage">{{ $t("register.join-tagline")}}</div>
     </div>
     <div class="registration-form">
       <form class="form-register" method="POST" @submit.prevent="register()">
@@ -30,7 +30,7 @@
               class="input__registration"
               name="username"
               type="text"
-              placeholder="Username"
+              :placeholder="$t('register.username')"
               autocomplete="falsess"
             />
             <div class="inputErrorContainer">
@@ -43,7 +43,7 @@
               class="input__registration inline passwordInput"
               name="password"
               :type="passwordType ? 'password' : 'text'"
-              placeholder="Password (at least 8 characters)"
+              :placeholder="$t('register.pass')"
               autocomplete="off"
             />
             <div class="showPassContainer">
@@ -63,7 +63,7 @@
               class="input__registration last-input passwordInput"
               name="passcheck"
               :type="passwordCheckType ? 'password' : 'text'"
-              placeholder="Confirm password"
+              :placeholder="$t('register.confirm-pass')"
               autocomplete="off"
             />
             <div class="showPassContainer">
@@ -86,7 +86,7 @@
             :value="submitting ? $t('register.creating') : $t('register.create')"
           />
 
-          <router-link class="accountExists__registerPage" to="/login">Already have an account?</router-link>
+          <router-link class="accountExists__registerPage" to="/login">{{ $t("register.already-have-account")}}</router-link>
         </div>
       </form>
     </div>

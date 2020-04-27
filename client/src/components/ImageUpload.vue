@@ -21,17 +21,17 @@
               @change="imageChange"
             />
             <div class="drag-text padding-60">
-              <button class="file-upload-btn" type="button">Upload custom thumbnail</button>
-              <h3>Or just drag and drop a file</h3>
+              <button class="file-upload-btn" type="button">{{$t("scheduling.thumbnail-instruction")}}</button>
+              <h3>{{$t("scheduling.instruction-helpl")}}</h3>
             </div>
           </form>
           <div v-show="value" class="file-upload-content">
             <img :src="value && value.preview" class="file-upload-image" alt="your image" />
             <div class="image-title-wrap">
               <button @click="remove" class="remove-image" type="button">
-                <span class="image-pre-title">Remove </span>
-                <span class="image-title">{{ fileName || "image"}}</span>
-                <span v-show="uploading" class="image-uploading-title">Uploading image...</span>
+                <span class="image-pre-title">{{$t("scheduling.remove-img")}} </span>
+                <span class="image-title">{{ fileName || $t("scheduling.image")}}</span>
+                <span v-show="uploading" class="image-uploading-title">{{$t("scheduling.uploading-img")}}</span>
                 <!--<span class="image-removing-title">Removing image...</span>-->
               </button>
             </div>
@@ -61,16 +61,20 @@ export default {
           default: false,
       },
       caption: {
-        type: String,
-        default: "Upload custom thumbnail"
+        type: String
       }
   },
   data() {
     return {
-      fileName: ""
+      fileName: "",
+      capt: this.setCapt()
     };
   },
   methods: {
+    setCapt() {
+      let capt = this.$t("scheduling.thumbnail-instruction");
+      return capt;
+    },
     imageChange({ target }) {
       const file = target.files[0];
       if (file) {

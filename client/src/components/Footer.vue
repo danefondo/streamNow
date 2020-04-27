@@ -2,22 +2,22 @@
   <div class="footer">
     <div class="footer_sections">
       <router-link to="/about" class="footer_section">
-        <div class="footer_about">Meist</div>
+        <div class="footer_about">{{$t("footer.about")}}</div>
       </router-link>
       <router-link to="/privacy" class="footer_section">
-        <div class="footer_privacy">Privaatsus</div>
+        <div class="footer_privacy">{{$t("footer.privacy")}}</div>
       </router-link>
       <router-link to="/terms" class="footer_section">
-        <div class="footer_terms">Tingimused</div>
+        <div class="footer_terms">{{$t("footer.terms")}}</div>
       </router-link>
       <router-link to="/contact" class="footer_section">
-        <div class="footer_contact">Kontakt</div>
+        <div class="footer_contact">{{$t("footer.contact")}}</div>
      </router-link>
       <div class="footer_section right">
-        <div class="rights_reserved">Kõik õigused kaitstud.</div>
+        <div class="rights_reserved">{{$t("footer.rights")}}</div>
       </div>
       <div class="footer_section right">
-        <div class="copyrights">© 2020 Eeter.tv</div>
+        <div class="copyrights">{{$t("footer.copyright")}}</div>
       </div>
     </div>
   </div>

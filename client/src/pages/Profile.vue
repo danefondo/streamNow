@@ -4,10 +4,10 @@
       <div class="confirm_modal_background"></div>
       <div class="confirm_modal">
         <div class="big-content-wrapper">
-          <div class="confirm_modal_title">Confirm end stream?</div>
+          <div class="confirm_modal_title">{{ $t("profile.confirm-end-stream")}}</div>
           <div class="end_stream_actions">
-            <div class="end_stream_confirm">End stream</div>
-            <div @click="showModal = false" class="cancel_end_stream">Cancel</div>
+            <div class="end_stream_confirm">{{ $t("profile.end-stream")}}</div>
+            <div @click="showModal = false" class="cancel_end_stream">{{ $t("profile.cancel")}}</div>
           </div>
           <div class="end_stream_fail_message"></div>
         </div>
@@ -69,9 +69,9 @@
               class="add_about_section"
             >{{$t("profile.add-about")}}</router-link>
             <div class="streamer_followings">
-              <p class="streamer_count">{{streamer.followers.length}} Followers</p>
-              <p class="streamer_count">{{streamer.following.length}} Following</p>
-              <p class="streamer_count">{{streamer.previous_streams.length}} Streams done</p>
+              <p class="streamer_count">{{streamer.followers.length + " " + $t("profile.followers")}}</p>
+              <p class="streamer_count">{{streamer.following.length + " " + $t("profile.following")}}</p>
+              <p class="streamer_count">{{streamer.previous_streams.length + " " + $t("profile.streams-done")}}</p>
             </div>
           </div>
           <div class="streams_container">

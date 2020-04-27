@@ -4,7 +4,7 @@
       <router-link class="title-btn" to="/">eeter.tv</router-link>
     </div>
     <div class="navlinks-container">
-      <router-link class="topNavigationLink__topBar" to="/scheduled">Kava</router-link>
+      <router-link class="topNavigationLink__topBar" to="/scheduled">{{$t("nav.scheduled")}}</router-link>
       <!-- <router-link class="topNavigationLink__topBar" to="/discover">Avasta</router-link> -->
     </div>
     <template v-if="isAuthenticated">
@@ -36,19 +36,19 @@
           <nav class="Dropdown-nav SettingsNav">
             <ul class="Dropdown-group">
               <li>
-                <router-link class="entypo-newspaper NavLinkX" :to="myProfile">Profile</router-link>
+                <router-link class="entypo-newspaper NavLinkX" :to="myProfile">{{$t("nav.profile")}}</router-link>
                 <a class="entypo-plus OptionLink" href="#"></a>
               </li>
               <li>
-                <router-link class="entypo-archive NavLinkX" to="/manage-streams">Manage streams</router-link>
+                <router-link class="entypo-archive NavLinkX" to="/manage-streams">{{$t("nav.manage-streams")}}</router-link>
                 <a class="entypo-plus OptionLink" href="#"></a>
               </li>
               <li>
-                <router-link class="entypo-archive NavLinkX" to="/settings">Settings</router-link>
+                <router-link class="entypo-archive NavLinkX" to="/settings">{{$t("nav.settings")}}</router-link>
                 <a class="entypo-plus OptionLink" href="#"></a>
               </li>
               <li>
-                <a class="entypo-logout NavLinkX" @click="logout">Logout</a>
+                <a class="entypo-logout NavLinkX" @click="logout">{{$t("nav.logout")}}</a>
               </li>
             </ul>
           </nav>
@@ -57,8 +57,8 @@
     </template>
     <template v-else>
       <div class="stream_buttons">
-        <router-link class="go_live_button" to="/register">Register</router-link>
-        <router-link class="go_live_button" to="/login">Login</router-link>
+        <router-link class="go_live_button" to="/register">{{$t("nav.register")}}</router-link>
+        <router-link class="go_live_button" to="/login">{{$t("nav.login")}}</router-link>
       </div>
     </template>
   </div>

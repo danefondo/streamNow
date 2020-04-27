@@ -4,19 +4,19 @@
       <router-link
         to="/about"
         :class="[checkActive('about'), 'topNavigationLink__topBar']"
-      >Meist</router-link>
+      >{{$t("footer.about")}}</router-link>
       <router-link
         to="/privacy"
         :class="[checkActive('privacy'), 'topNavigationLink__topBar']"
-      >Privaatsus</router-link>
+      >{{$t("footer.privacy")}}</router-link>
       <router-link
         to="/terms"
         :class="[checkActive('terms'), 'topNavigationLink__topBar']"
-      >Tingimused</router-link>
+      >{{$t("footer.terms")}}</router-link>
       <router-link
         to="/contact"
         :class="[checkActive('contact'), 'topNavigationLink__topBar']"
-      >Kontakt</router-link>
+      >{{$t("footer.contact")}}</router-link>
     </div>
   </div>
 </template>

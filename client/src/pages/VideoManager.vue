@@ -16,8 +16,8 @@
       </div>
     </div>
     <div class="manager-header">
-      <h1 class="manager-title">Stream Manager</h1>
-      <p class="manager-tagline">Manage all your streams from here. Quickly go live or end streams.</p>
+      <h1 class="manager-title">{{ $t("streamManager.manager-title") }}</h1>
+      <p class="manager-tagline">{{ $t("streamManager.manager-tagline") }}</p>
     </div>
     <div class="manager-switch">
       <div

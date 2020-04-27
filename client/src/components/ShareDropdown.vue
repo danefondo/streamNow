@@ -4,7 +4,7 @@
     class="share-dropdown"
     :class="{'is-expanded': isOpened}"
   >
-    <div class="share_options" @click="toggleDropdown()">Share</div>
+    <div class="share_options" @click="toggleDropdown()">{{$t("watch.share")}}</div>
     <nav class="Dropdown-nav SettingsNav share-links">
       <ul class="Dropdown-group">
         <li>

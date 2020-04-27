@@ -4,13 +4,13 @@
       <div v-if="error" class="inputErrorContainer">
         <div class="inputErrorText">{{ error }}</div>
       </div>
-      <div class="login-title">Logi sisse</div>
+      <div class="login-title">{{$t("login.login-title")}}</div>
       <input
         v-model="username"
         class="login-input"
         name="username"
         type="text"
-        placeholder="Username or email"
+        :placeholder="$t('login.username-email')"
         autocomplete="off"
       />
       <input
@@ -18,15 +18,15 @@
         class="login-input"
         name="password"
         type="password"
-        placeholder="Password"
+        :placeholder="$t('login.login-pass')"
         autocomplete="off"
       />
-      <router-link class="forgotPass" to="/forgotpassword">Unustasid parooli?</router-link>
+      <router-link class="forgotPass" to="/forgotpassword">{{$t("login.forgot-pass")}}</router-link>
       <div class="submit">
         <input :disabled="submitting" class="login-button" type="submit" value="Log in" />
       </div>
-      <div v-if="success" class="successMessage">Parool on edukalt muudetud. Logi sisse.</div>
-      <router-link class="accountExists__registerPage" to="/register">Või loo kasutaja</router-link>
+      <div v-if="success" class="successMessage">{{$t("login.pass-success")}}</div>
+      <router-link class="accountExists__registerPage" to="/register">{{$t("login.or-create-account")}}</router-link>
     </form>
   </div>
 </template>

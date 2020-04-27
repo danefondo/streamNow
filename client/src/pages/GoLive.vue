@@ -4,11 +4,11 @@
       <div class="generalErrorText">{{ $t("form.wrong") }}</div>
     </div>
     <div class="stream_input_container">
-      <div class="stream_input_title">Give your livestream a name</div>
+      <div class="stream_input_title">{{ $t("golive.give-name") }}</div>
       <input
         v-model="name"
         class="stream_input stream_name"
-        placeholder="Your livestream name"
+        :placeholder="$t('golive.name-holder')"
         max-length="50"
       />
       <div v-if="nameEmpty && !name" class="inputErrorContainer">
@@ -16,7 +16,7 @@
       </div>
     </div>
     <div class="stream_input_container">
-      <div class="stream_input_title">What's your livestream about?</div>
+      <div class="stream_input_title">{{ $t("golive.give-desc") }}</div>
       <ckeditor
         :editor="editor"
         v-model="description"
@@ -28,20 +28,20 @@
       </div>
     </div>
     <div class="stream_input_container">
-      <div class="stream_input_title">Add tags (max 3)</div>
+      <div class="stream_input_title">{{ $t("golive.give-tags") }}</div>
       <input-tag
         v-model="tags"
         :limit="limit"
         id="input-tags"
         type="text"
-        placeholder="Write a tag"
+        :placeholder="$t('golive.tags-holder')"
       />
       <div v-if="tagsEmpty && !tags.length" class="inputErrorContainer">
         <div class="inputErrorText">{{ $t("form.empty") }}</div>
       </div>
     </div>
     <div class="stream_input_container">
-      <div class="stream_input_title">Add video link (YouTube, Facebook, Twitch)</div>
+      <div class="stream_input_title">{{ $t("golive.give-video") }}</div>
       <input
         v-model="videoLink"
         class="stream_input stream_video_id_input"
@@ -58,16 +58,16 @@
       class="go_live"
     >{{ submitting === 'live' ? $t('scheduling.creating-stream') : $t('scheduling.go-live') }}</div>
     <div @click="toggle" class="subArea">
-      <div class="stream_input_title inline">Schedule for later?</div>
+      <div class="stream_input_title inline">{{ $t("golive.later") }}</div>
       <img v-if="!isScheduledOpened" class="arrow" src="../assets/images/down_arrow.png" />
       <img v-else class="arrow" src="../assets/images/up_arrow.png" />
     </div>
     <div v-if="scheduleError" class="scheduleErrorContainer">
-      <div class="scheduleErrorText">Please fill in stream details below to schedule a stream.</div>
+      <div class="scheduleErrorText">{{ $t("golive.fill-in") }}</div>
     </div>
     <div class="schedule_container" :class="{hidden: !isScheduledOpened}">
       <div class="schedule_stream_section">
-        <div class="stream_input_title">Pick date</div>
+        <div class="stream_input_title">{{ $t("golive.pick-date") }}</div>
         <div class="date_picker">
           <datepicker v-model="date" name="date"></datepicker>
           <button class="date_picker_button">
@@ -79,7 +79,7 @@
         </div>
       </div>
       <div class="schedule_stream_section">
-        <div class="stream_input_title">Pick time</div>
+        <div class="stream_input_title">{{ $t("golive.pick-time") }}</div>
         <div class="time_picker">
           <input
             v-model="time"
@@ -97,7 +97,7 @@
         </div>
       </div>
       <div class="schedule_stream_section">
-        <div class="stream_input_title">Privacy</div>
+        <div class="stream_input_title">{{ $t("golive.privacy") }}</div>
         <div class="switch-field">
           <input
             id="radio-one"
@@ -107,7 +107,7 @@
             value="public"
             checked
           />
-          <label for="radio-one">Public</label>
+          <label for="radio-one">{{ $t("golive.public") }}</label>
           <input
             id="radio-two"
             type="radio"
@@ -115,7 +115,7 @@
             name="switch-one"
             value="unlisted"
           />
-          <label for="radio-two">Unlisted</label>
+          <label for="radio-two">{{ $t("golive.unlisted") }}</label>
         </div>
         <div class="inputErrorContainer">
           <div class="inputErrorText"></div>
