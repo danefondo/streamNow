@@ -135,6 +135,7 @@ export default {
     return {
       editor: DecoupledEditor,
       editorConfig: {
+        placeholder: 'Intrigue your audience',
         removePlugins: [ 'FontSize', 'MediaEmbed', 'insertTable', 'Heading', 'alignment', 'Undo', 'Redo', 'FontFamily', 'highlight' ],
         toolbar: ["bold", "italic", "|" ,"bulletedList", "numberedList", "Link", "blockQuote"]
       },

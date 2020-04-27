@@ -100,6 +100,7 @@ export default {
       thumbnailName: null,
       isLive: null,
       editorConfig: {
+        placeholder: 'Intrigue your audience',
         removePlugins: [
           "FontSize",
           "MediaEmbed",
