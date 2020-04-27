@@ -8,11 +8,11 @@
     <nav class="Dropdown-nav SettingsNav share-links">
       <ul class="Dropdown-group">
         <li>
-          <a :href="buildFbShare" class="entypo-newspaper NavLinkX">Facebook</a>
+          <a :href="buildFbShare" target="_blank" class="entypo-newspaper NavLinkX">Facebook</a>
           <a class="entypo-plus OptionLink" href="#"></a>
         </li>
         <li>
-          <a :href="buildTwitterShare" class="entypo-archive NavLinkX">Twitter</a>
+          <a :href="buildTwitterShare" target="_blank" class="entypo-archive NavLinkX">Twitter</a>
           <a class="entypo-plus OptionLink" href="#"></a>
         </li>
         <li>
