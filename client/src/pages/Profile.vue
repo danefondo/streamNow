@@ -133,7 +133,7 @@ export default {
   },
   methods: {
     async getStream() {
-      const { data } = await axios.get(`/profile/${this.$route.params.id}`);
+      const { data } = await axios.get(`/profile/user/${this.$route.params.id}`);
       this.stream = data.stream;
       this.streamer = data.streamer;
       this.hostName = data.host_name;
