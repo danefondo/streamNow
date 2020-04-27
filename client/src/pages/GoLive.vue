@@ -34,7 +34,7 @@
       <input
         v-model="videoLink"
         class="stream_input stream_video_id_input"
-        placeholder="e.g. NMPqo3XiOUg"
+        :placeholder="$t('scheduling.link-placeholder')"
       />
       <div v-if="videoLinkEmpty && !videoLink" class="inputErrorContainer">
         <div class="inputErrorText">{{ $t("form.empty") }}</div>

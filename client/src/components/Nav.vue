@@ -40,6 +40,10 @@
                 <a class="entypo-plus OptionLink" href="#"></a>
               </li>
               <li>
+                <router-link class="entypo-archive NavLinkX" to="/dashboard/streams">Manage streams</router-link>
+                <a class="entypo-plus OptionLink" href="#"></a>
+              </li>
+              <li>
                 <router-link class="entypo-archive NavLinkX" to="/dashboard/settings">Settings</router-link>
                 <a class="entypo-plus OptionLink" href="#"></a>
               </li>

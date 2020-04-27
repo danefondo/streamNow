@@ -42,21 +42,26 @@
 
 ** GENERAL **
 - Change all <a> links to router-links with to:link
+- PROPER EMAILS SENT TO USERSS
 
 
 *** FEATURES PROMISED BY SUNDAY-MONDAY ***
 
 ** GENERAL **
 - Make upcoming / previous with dates to navigate more easily
-- Add 'Watch streams' to success page instead of view streams
+<!-- - Add 'Watch streams' to success page instead of streams list -->
 - Change all text to i18 text
 - Add custom thumbnail replacement if no thumbnail exists in youtube or manually set
 - Change goLive link input example from id to link
+- SET SCHEDULED STREAMS THAT NEVER GO LIVE TO LIVE
+- SEND EMAIL IF STREAM GOES LIVE
 
 ** ABOUT PAGE **
 - Create custom about page
 
 ** LIVE & SCHEDULED STREAMS **
+- GO LIVE BUTTON FOR SCHEDULED STREAM (confirm : if missing details, request before live)
+- SHOW LIVE INDICATOR IF LIVE
 - REGISTER for upcoming streams
 - Rich text editor for video descriptions (CKEDITOR5)
 - Select whether stream preview is with YouTube, Facebook, Twitch at Go Live & Edit stream
@@ -102,9 +107,19 @@
 - Custom confirmation message
 - Email collection
 
-
+TUTORIAL PAGE
 
 # NEXT WEEK
+
+** GO LIVE AGAIN **
+- From editor, go live again?
+
+** Video advanced **
+- Stream from one place to many
+
+** Video Legitimacy **
+- Check if live
+- Check if existts
 
 ** Protection **
 - Prevent unauthorized changes and display page/component saying 'not authorized'

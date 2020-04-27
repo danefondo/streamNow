@@ -66,8 +66,8 @@
         "desc-placeholder": "Briefly describe your livestream",
         "add-tags": "Add tags",
         "tags-placeholder": "Write a tag",
-        "add-youtube-id": "YouTube video ID",
-        "youtube-placeholder": "e.g. NMPqo3XiOUg",
+        "add-video-link": "YouTube video ID",
+        "link-placeholder": "e.g. https://www.facebook.com/165028986841241/videos/254040489051203",
         "upload-thumbnail": "Upload custom thumbnail (optional)",
         "thumbnail-instruction": "Upload custom thumbnail",
         "instruction-help": "Or just drag and drop a file",
@@ -166,5 +166,11 @@
         "verified": "Your email has been verified",
         "error-occurred": "An error has occurred",
         "ensure-account": "Please ensure you have an account"
+    },
+    "successPage": {
+        "welcome": "Welcome abord!",
+        "tagline": "You're officially part of the club!",
+        "start-streaming": "Start streaming!",
+        "start-watching": "Watch streams!"
     }
 }
