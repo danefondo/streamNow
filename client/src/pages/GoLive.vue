@@ -24,7 +24,7 @@
     </div>
     <div class="stream_input_container">
       <div class="stream_input_title">Add tags (max 3)</div>
-      <input-tag v-model="tags" id="input-tags" type="text" placeholder="Write a tag" />
+      <input-tag v-model="tags" :limit="limit" id="input-tags" type="text" placeholder="Write a tag" />
       <div v-if="tagsEmpty && !tags.length" class="inputErrorContainer">
         <div class="inputErrorText">{{ $t("form.empty") }}</div>
       </div>
@@ -141,6 +141,7 @@ export default {
       },
       isScheduledOpened: false,
       date: new Date(),
+      limit: 3,
       time: "",
       name: "",
       description: "",

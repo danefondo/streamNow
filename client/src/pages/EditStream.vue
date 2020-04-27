@@ -38,7 +38,13 @@
           </div>
           <div class="stream_input_container edit_input">
             <div class="stream_input_title">Change tags (max 3)</div>
-            <input-tag v-model="tags" id="input-tags" type="text" placeholder="Write a tag" />
+            <input-tag
+              v-model="tags"
+              :limit="limit"
+              id="input-tags"
+              type="text"
+              placeholder="Write a tag"
+            />
             <div v-if="tagsEmpty && !tags.length" class="inputErrorContainer">
               <div class="inputErrorText">{{ $t("form.empty") }}</div>
             </div>
@@ -78,6 +84,7 @@ export default {
   data() {
     return {
       editor: DecoupledEditor,
+      limit: 3,
       isScheduledOpened: false,
       streamId: null,
       date: new Date(),
@@ -100,7 +107,7 @@ export default {
       thumbnailName: null,
       isLive: null,
       editorConfig: {
-        placeholder: 'Intrigue your audience',
+        placeholder: "Intrigue your audience",
         removePlugins: [
           "FontSize",
           "MediaEmbed",
@@ -230,6 +237,43 @@ export default {
 </script>
 
 <style>
+.vue-input-tag-wrapper {
+  width: 200px;
+  border-radius: 3px;
+  border: 1px solid #eee;
+  margin-right: 16px;
+  padding: 10px;
+  margin-left: auto;
+  margin-right: auto;
+  width: 325px;
+  padding: 15px !important;
+  display: block !important;
+  font-size: 18px !important;
+  box-shadow: 4px 5px 0px 0px #e6e6e6;
+  margin-top: 15px;
+  box-sizing: border-box;
+  font-family: "Trebuchet MS", sans-serif;
+}
+
+.vue-input-tag-wrapper .input-tag {
+    color: unset;
+    cursor: default;
+    margin: 9px 7px 3px 0;
+    padding: 5px 6px;
+    background: #f2f2f2;
+    font-size: 20px;
+    border: 0 solid #d0d0d0;
+    display: inline-block;
+}
+
+.vue-input-tag-wrapper .input-tag .remove {
+  color: unset;
+}
+
+.vue-input-tag-wrapper .new-tag {
+  font-size: 18px;
+}
+
 .ckspecial {
   outline: none !important;
   box-shadow: 4px 5px 0px 0px #e6e6e6 !important;
