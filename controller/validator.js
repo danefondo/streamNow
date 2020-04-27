@@ -84,5 +84,8 @@ module.exports = {
 		 	.withMessage('File name is required'),
 		 check('fileURL').not().isEmpty()
 		 	.withMessage('File url is required')
-	]
+	],
+	checkSignUpEmail: [
+		check('email').isEmail().withMessage('Email empty or in incorrect format')
+   ],
 }

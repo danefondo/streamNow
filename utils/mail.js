@@ -21,6 +21,20 @@ module.exports = {
 		});
 	},
 
+	sendVideoSignUpEmail(email, stream) {
+		let name = stream.stream_name;
+		const data = {
+		  from: 'Eeter.tv <noreply@eeter.tv>',
+		  to: email,
+		  subject: `Signed up for ${name}`,
+		  html: '',
+		  text: `Verify your email address to get the most of Eeter.tv by clicking this link ${stream.stream_description}`
+		};
+		mailgun.messages().send(data, function (error, body) {
+		  console.log(body);
+		});
+	},
+
 
 	sendResetMail(email, link) {
 		console.log(link, 'mail js file');

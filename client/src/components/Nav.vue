@@ -1,7 +1,7 @@
 <template>
   <div class="nav-container">
     <div class="title-container">
-      <a class="title-btn" href="/">eeter.tv</a>
+      <router-link class="title-btn" to="/">eeter.tv</router-link>
     </div>
     <div class="navlinks-container">
       <router-link class="topNavigationLink__topBar" to="/scheduled">Kava</router-link>
@@ -92,7 +92,7 @@ export default {
   },
   computed: {
     myProfile() {
-      return `/profile/${auth.isAuthenticated()._id}`;
+      return `/profile/${this.user._id}`;
     },
   },
   methods: {

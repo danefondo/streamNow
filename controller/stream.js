@@ -1,7 +1,9 @@
+const { validationResult } = require('express-validator');
 let Stream = require('../models/stream');
 let User = require('../models/user');
 const streamUtils = require('../utils/stream')
 const moment = require('moment');
+const mail = require('../utils/mail');
 const streamController = {
     async fetchStreams(req, res) {
         let query = { "is_live": true }
@@ -240,6 +242,37 @@ const streamController = {
 
 
             await stream.save();
+
+            res.json({
+                stream: stream
+            })
+        } catch (error) {
+            console.log(error);
+            res.status(500).json({
+                errors: "An unknown error occurred"
+            });
+        }
+    },
+
+    async signUpForVideo(req, res) {
+		const errors = validationResult(req);
+		if (!errors.isEmpty()) {
+			console.log('errors')
+			return res.status(422).json({ errors: errors.array() });
+		}
+        try {
+            let stream_id = req.params.streamId;
+            let signupEmail = req.body.email;
+            let stream = await Stream.findById(stream_id);
+            if (!stream) {
+                return res.status(404).json({
+                    errors: "Stream not found."
+                });
+            }
+            stream.waitlist_emails.push(signupEmail);
+            await stream.save();
+
+            mail.sendVideoSignUpEmail(signupEmail, stream);
 
             res.json({
                 stream: stream

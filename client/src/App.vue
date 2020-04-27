@@ -36,7 +36,10 @@ export default {
     update(details) {
       if (details.token) {
         setAuth(details.token, false);
-        localStorage.isLive = details.user.is_live;
+        if (details.user.is_live) {
+          localStorage.isLive = details.user.is_live;
+          localStorage.active_stream_id = details.user.active_stream_id;
+        }
         this.isAuthenticated = true;
       }
       this.user = details.user;

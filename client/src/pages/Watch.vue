@@ -20,13 +20,19 @@
       <div v-if="stream.is_scheduled" class="register_block">
         <div v-if="!isAuthenticated" class="register_text">Register to watch</div>
         <div v-if="!isAuthenticated" class="register_email_block">
-          <input class="watch_register_input" />
-          <div class="register_email_watch_button">Register</div>
+          <input v-if="!registered" v-model="registerInput" class="watch_register_input" />
+          <div v-if="registerMessage"> {{ registerMessage }} </div>
+          <div @click="signUpForVideo" class="register_email_watch_button">Register</div>
         </div>
         <div v-if="isAuthenticated" class="register_watch_button">Register to watch</div>
       </div>
       <div v-if="!stream.is_live" class="section_center">
         <div class="scheduled_stream_container">
+          <div class="featured_streamPreviewContainer">
+            <img class="featured_streamPreview" :src="thumbnail(stream)" />
+            <div class="live"></div>
+            <div class="viewerCount"></div>
+          </div>
           <div class="scheduled_stream_name">{{ stream.stream_name}}</div>
           <div class="scheduled_stream_description" v-html="stream.stream_description"></div>
         </div>
@@ -155,7 +161,10 @@ export default {
       FollowIcon,
       showModal: false,
       streamNotFound: false,
-      isAuthenticated: false
+      isAuthenticated: false,
+      registerInput: "",
+      registerMessage: "",
+      registered: false
     };
   },
   mounted() {
@@ -165,6 +174,28 @@ export default {
     }
   },
   methods: {
+    async signUpForVideo() {
+      if (!this.registerInput) {
+        this.registerMessage = "You must enter a valid email";
+        this.registered = false;
+        return;
+      }
+      try {
+      let signupEmail = this.registerInput;
+      await axios.post(`/streams/${this.$route.params.id}/register`, {email: signupEmail});
+      this.registered = true;
+      this.registerMessage = "Successfully registered";
+      } catch (err) {
+        if (err.response.status === 422) {
+          this.registered = false;
+          this.registerMessage = err.response.data.errors[0].msg;
+          return;
+        }
+        this.registerMessage = err.response.data.errors;
+        this.registered = false;
+        console.log("fail", err.response.data);
+      }
+    },
     async getStream() {
       try {
         const { data } = await axios.get(`/streams/${this.$route.params.id}`);
@@ -176,6 +207,11 @@ export default {
         this.userFollowing = data.user_following_boolean;
       } catch (error) {
         this.streamNotFound = true;
+      }
+    },
+    thumbnail(stream) {
+      if (stream.thumbnail_url) {
+        return stream.thumbnail_url;
       }
     },
     async likeStream() {
@@ -215,9 +251,9 @@ export default {
       return this.streamer._id === auth.isAuthenticated()._id;
     },
     videoUrl() {
-      if (this.stream.platform_status.includes("facebook")) {
+      if (this.stream.platform_status && this.stream.platform_status.includes("facebook")) {
         return `https://www.facebook.com/video/embed?video_id=${this.stream.stream_video_id}`;
-      } else if (this.stream.platform_status.includes("twitch")) {
+      } else if (this.stream.platform_status && this.stream.platform_status.includes("twitch")) {
         return `https://player.twitch.tv/?channel=${this.stream.stream_video_id}`;
       }
       return `https://www.youtube-nocookie.com/embed/${this.stream.stream_video_id}?autoplay=1&amp;modestbranding=1&amp;showinfo=0&amp;rel=0&amp;theme=light&amp;color=white`;
@@ -227,7 +263,7 @@ export default {
         return this.streamer.profile_image_url;
       }
       return profileIcon;
-    }
+    },
   },
   watch: {
     $route() {
@@ -238,6 +274,12 @@ export default {
 </script>
 
 <style>
+.scheduled_stream_name {
+  font-size: 28px;
+}
+.scheduled_stream_description {
+  font-size: 24px;
+}
 .register_block {
 }
 .register_text {
