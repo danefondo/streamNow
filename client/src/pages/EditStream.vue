@@ -238,40 +238,39 @@ export default {
 
 <style>
 .vue-input-tag-wrapper {
-  width: 200px;
-  border-radius: 3px;
-  border: 1px solid #eee;
-  margin-right: 16px;
-  padding: 10px;
-  margin-left: auto;
-  margin-right: auto;
-  width: 325px;
+  border-radius: 3px !important;
+  border: 1px solid #eee !important;
+  margin-right: 16px !important;
+  padding: 10px !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  width: 325px !important;
   padding: 15px !important;
   display: block !important;
   font-size: 18px !important;
-  box-shadow: 4px 5px 0px 0px #e6e6e6;
-  margin-top: 15px;
-  box-sizing: border-box;
-  font-family: "Trebuchet MS", sans-serif;
+  box-shadow: 4px 5px 0px 0px #e6e6e6 !important;
+  margin-top: 15px !important;
+  box-sizing: border-box !important;
+  font-family: "Trebuchet MS", sans-serif !important;
 }
 
 .vue-input-tag-wrapper .input-tag {
-    color: unset;
-    cursor: default;
-    margin: 9px 7px 3px 0;
-    padding: 5px 6px;
-    background: #f2f2f2;
-    font-size: 20px;
-    border: 0 solid #d0d0d0;
-    display: inline-block;
+    color: unset !important;
+    cursor: default !important;
+    margin: 9px 7px 3px 0 !important;
+    padding: 5px 6px !important;
+    background: #f2f2f2 !important;
+    font-size: 20px !important;
+    border: 0 solid #d0d0d0 !important;
+    display: inline-block !important;
 }
 
 .vue-input-tag-wrapper .input-tag .remove {
-  color: unset;
+  color: unset !important;
 }
 
 .vue-input-tag-wrapper .new-tag {
-  font-size: 18px;
+  font-size: 18px !important;
 }
 
 .ckspecial {
