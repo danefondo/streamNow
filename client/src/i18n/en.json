@@ -12,7 +12,7 @@
         "caption": "Upcoming streams",
         "featured_caption": "Featured Stream",
         "live_now": "Live now",
-        "next": "Next up",
+        "next-up": "Next up",
         "featured": "Featured",
         "no-scheduled": "Currently, no one has scheduled any streams.",
         "oops": "Howdy!",
@@ -172,5 +172,11 @@
         "tagline": "You're officially part of the club!",
         "start-streaming": "Start streaming!",
         "start-watching": "Watch streams!"
+    },
+    "streamManager": {
+        "no-streams-yet": "No streams yet?",
+        "no-problem": "No problem.",
+        "you-can": "You can ",
+        "create-one": "create one now"
     }
 }

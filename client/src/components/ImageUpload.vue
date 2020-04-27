@@ -62,7 +62,7 @@ export default {
       },
       caption: {
         type: String,
-        default: "Upload custom thumbnail (optional)"
+        default: "Upload custom thumbnail"
       }
   },
   data() {
@@ -96,9 +96,9 @@ export default {
 </script>
 
 <style>
-.image-caption {
+/* .image-caption {
   text-align: center;
-}
+} */
 .file-upload {
   background-color: #fbfbfb;
   box-sizing: border-box;

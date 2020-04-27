@@ -5,7 +5,7 @@
     </div>
     <div class="navlinks-container">
       <router-link class="topNavigationLink__topBar" to="/scheduled">Kava</router-link>
-      <router-link class="topNavigationLink__topBar" to="/discover">Avasta</router-link>
+      <!-- <router-link class="topNavigationLink__topBar" to="/discover">Avasta</router-link> -->
     </div>
     <template v-if="isAuthenticated">
       <div class="stream_buttons">

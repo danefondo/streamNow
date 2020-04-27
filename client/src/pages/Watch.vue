@@ -17,6 +17,12 @@
     </div>
     <div class="user_check" data-user-id="5e770037c84aaa1088d5315c"></div>
     <div class="streaming_area">
+      <div v-if="stream.is_scheduled" class="register_block">
+        <div class="register_text">Register to watch</div>
+        <div class="register_email_block">
+          <input class="watch_register_input" />
+        </div>
+      </div>
       <div class="section_center">
         <div class="stream_center_top">
           <router-link :to="'/profile/' +streamer._id" class="stream_owner">
@@ -123,7 +129,7 @@ import auth from "../config/auth";
 import FollowingIcon from "../assets/images/following_icon.png";
 import FollowIcon from "../assets/images/follow_icon.png";
 import profileIcon from "../assets/images/profile_icon.png";
-import NotFoundStream from "../components/NotFoundStream"
+import NotFoundStream from "../components/NotFoundStream";
 
 export default {
   name: "Watch",
@@ -140,7 +146,7 @@ export default {
       FollowingIcon,
       FollowIcon,
       showModal: false,
-      streamNotFound: false,
+      streamNotFound: false
     };
   },
   mounted() {
@@ -200,7 +206,7 @@ export default {
       if (this.stream.platform_status.includes("facebook")) {
         return `https://www.facebook.com/video/embed?video_id=${this.stream.stream_video_id}`;
       } else if (this.stream.platform_status.includes("twitch")) {
-        return `https://player.twitch.tv/?channel=${this.stream.stream_video_id}`
+        return `https://player.twitch.tv/?channel=${this.stream.stream_video_id}`;
       }
       return `https://www.youtube-nocookie.com/embed/${this.stream.stream_video_id}?autoplay=1&amp;modestbranding=1&amp;showinfo=0&amp;rel=0&amp;theme=light&amp;color=white`;
     },
@@ -220,6 +226,35 @@ export default {
 </script>
 
 <style>
+.register_block {
+}
+.register_text {
+  font-size: 40px;
+  text-align: center;
+}
+
+.register_email_block {
+  margin-top: 20px;
+  margin-bottom: 30px;
+}
+
+.watch_register_input {
+width: 200px;
+    border-radius: 3px;
+    border: 1px solid #eee;
+    margin-right: 16px;
+    padding: 10px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 600px;
+    padding: 15px !important;
+    display: block !important;
+    font-size: 28px !important;
+    box-shadow: 4px 5px 0px 0px #e6e6e6;
+    margin-top: 15px;
+    box-sizing: border-box;
+    font-family: "Trebuchet MS", sans-serif;
+}
 .watch {
   display: flex;
   flex-wrap: wrap;
@@ -500,6 +535,7 @@ p {
   margin-right: auto;
   margin-top: 50px;
   display: flex;
+  flex-direction: column;
 }
 .streamer_first_name,
 .streamer_last_name {

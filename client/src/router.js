@@ -61,7 +61,7 @@ const routes = [
       requireAuthentication: true,
     },
   },
-  { path: "/", component: Home },
+  { path: "/", component: Scheduled },
   { path: "*", component: Error404 },
 ];
 

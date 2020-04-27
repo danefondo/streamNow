@@ -34,7 +34,8 @@
         <p>{{featured.stream_description}}</p>
       </div>
       <!--  if is live, show  'watch now !-->
-      <div class="watch_now">Watch now</div>
+      <div v-if="featured.is_live" class="watch_now">Watch now</div>
+      <div v-if="featured.is_scheduled" class="watch_now">Register to watch</div>
       <!--  if is scheduled, show  'register for event' -->
       <!--  if is scheduled/live && has_price show 'Get ticket $price' -->
     </div>

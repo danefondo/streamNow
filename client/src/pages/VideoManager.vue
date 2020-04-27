@@ -1,34 +1,60 @@
 <template>
-  <div class="manager">
+  <div v-if="streams.length" class="manager">
     <div class="manager-header">
       <h1 class="manager-title">Stream Manager</h1>
       <p class="manager-tagline">Manage all your streams from here. Quickly go live or end streams.</p>
     </div>
     <div class="manager-switch">
-      <div @click="activetab='all'" class="manager-option" v-bind:class="[ activetab === 'all' ? 'manager-selected' : '' ]">All</div>
-      <div @click="activetab='upcoming'" class="manager-option" v-bind:class="[ activetab === 'upcoming' ? 'manager-selected' : '' ]">Upcoming</div>
-      <div @click="activetab='previous'" class="manager-option" v-bind:class="[ activetab === 'previous' ? 'manager-selected' : '' ]">Previous</div>
-      <div @click="activetab='live'" class="manager-option" v-bind:class="[ activetab === 'live' ? 'manager-selected' : '' ]">Live</div>
+      <div
+        @click="activetab='all'"
+        class="manager-option"
+        v-bind:class="[ activetab === 'all' ? 'manager-selected' : '' ]"
+      >All</div>
+      <div
+        @click="activetab='upcoming'"
+        class="manager-option"
+        v-bind:class="[ activetab === 'upcoming' ? 'manager-selected' : '' ]"
+      >Upcoming</div>
+      <div
+        @click="activetab='previous'"
+        class="manager-option"
+        v-bind:class="[ activetab === 'previous' ? 'manager-selected' : '' ]"
+      >Previous</div>
+      <div
+        @click="activetab='live'"
+        class="manager-option"
+        v-bind:class="[ activetab === 'live' ? 'manager-selected' : '' ]"
+      >Live</div>
     </div>
     <!-- all upcoming, current & new streams, old ones in other tab-->
-    <StreamBar v-for="stream in streams" :key="stream._id" :stream="stream" :activetab="activetab" />
+    <div v-if="streams.length" class="manager-streams">
+      <StreamBar
+        v-for="stream in streams"
+        :key="stream._id"
+        :stream="stream"
+        :activetab="activetab"
+      />
+    </div>
   </div>
+  <ManagerNoStreams v-else />
 </template>
 
 <script>
 import axios from "axios";
 import StreamBar from "../components/StreamBar";
+import ManagerNoStreams from "../components/ManagerNoStreams";
 
 export default {
   name: "VideoManager",
   data() {
     return {
       streams: {},
-      activetab: 'all',
+      activetab: "all"
     };
   },
   components: {
-    StreamBar
+    StreamBar,
+    ManagerNoStreams
   },
   async mounted() {
     axios.get("/dashboard/golive");

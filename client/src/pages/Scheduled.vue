@@ -5,9 +5,9 @@
       <div class="examplesSection__landingPage">
         <div class="examplesContainer__landingPage">
           <div
-            v-if="!loading"
+            v-if="!loading && featured" 
             class="examplesTitle__landingPage"
-          >{{ featured.is_live ? $t('scheduled.live_now') : $t('scheduled.next_up') }}</div>
+          >{{ featured.is_live ? $t('scheduled.live_now') : $t('scheduled.next-up') }}</div>
         </div>
       </div>
       <Featured v-if="featured" :featured="featured" />
@@ -60,7 +60,8 @@ export default {
   async mounted() {
     try {
       const { data } = await axios.get(`${BASE_PATH}/streams?scheduled=true`);
-      this.featured = data.featured;
+      // this.featured = data.featured;
+      this.featured = data.streams[0];
       this.loading = false;
       data.streams.forEach(eachStream => {
         const options = { weekday: "long", month: "long", day: "numeric" };

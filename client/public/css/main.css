@@ -466,6 +466,7 @@ img.streamPreview {
   transition: 0.2s ease-in-out;
   margin: 30px 17px;
   margin-top: 10px;
+  margin-bottom: 60px;
 }
 .featured_stream:hover {
   border: 2px solid #1903a01c;
