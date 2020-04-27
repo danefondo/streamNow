@@ -82,7 +82,7 @@
                   :src="userFollowing ? FollowingIcon  : FollowIcon"
                 />
               </div>
-              <div class="streamer_follow_state">{{ userFollowing ? 'Following' : 'Follow' }}</div>
+              <div class="streamer_follow_state">{{ userFollowing ? $t("watch.following") : $t("watch.follow") }}</div>
             </div>
           </div>
         </div>
