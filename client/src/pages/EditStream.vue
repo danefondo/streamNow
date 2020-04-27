@@ -26,7 +26,12 @@
           </div>
           <div class="stream_input_container edit_input">
             <div class="stream_input_title">Change livestream description</div>
-            <ckeditor :editor="editor" v-model="description" :config="editorConfig" class="unreset"></ckeditor>
+            <ckeditor
+              :editor="editor"
+              v-model="description"
+              :config="editorConfig"
+              class="unreset ckspecial"
+            ></ckeditor>
             <div v-if="descriptionEmpty && !description" class="inputErrorContainer">
               <div class="inputErrorText">{{ $t("form.empty") }}</div>
             </div>
@@ -60,7 +65,7 @@
 <script>
 import InputTag from "vue-input-tag";
 import axios from "axios";
-import DecoupledEditor from '@ckeditor/ckeditor5-build-decoupled-document';
+import DecoupledEditor from "@ckeditor/ckeditor5-build-decoupled-document";
 import auth from "../config/auth";
 import ImageUpload from "../components/ImageUpload";
 
@@ -95,8 +100,26 @@ export default {
       thumbnailName: null,
       isLive: null,
       editorConfig: {
-        removePlugins: [ 'FontSize', 'MediaEmbed', 'insertTable', 'Heading', 'alignment', 'Undo', 'Redo', 'FontFamily', 'highlight' ],
-        toolbar: ["bold", "italic", "|" ,"bulletedList", "numberedList", "Link", "blockQuote"]
+        removePlugins: [
+          "FontSize",
+          "MediaEmbed",
+          "insertTable",
+          "Heading",
+          "alignment",
+          "Undo",
+          "Redo",
+          "FontFamily",
+          "highlight"
+        ],
+        toolbar: [
+          "bold",
+          "italic",
+          "|",
+          "bulletedList",
+          "numberedList",
+          "Link",
+          "blockQuote"
+        ]
       }
     };
   },
@@ -206,6 +229,31 @@ export default {
 </script>
 
 <style>
+.ckspecial {
+  outline: none !important;
+  box-shadow: 4px 5px 0px 0px #e6e6e6 !important;
+  border: 1px solid #eee !important;
+  border-radius: 3px;
+  border: 1px solid #eee;
+  margin-right: 16px;
+  padding: 10px;
+  margin-left: auto;
+  margin-right: auto;
+  width: 325px;
+  padding: 15px !important;
+  padding-top: 0px !important;
+  display: block !important;
+  font-size: 18px !important;
+  box-shadow: 4px 5px 0px 0px #e6e6e6;
+  margin-top: 15px;
+  box-sizing: border-box;
+  font-family: "Trebuchet MS", sans-serif;
+}
+
+.ckspecial:focus {
+  border-left: 3px solid #120088 !important;
+}
+
 /*! CSS Used from: https://www.eeter.tv/css/streaming.css */
 .cancel_stream_changes,
 .save_stream_changes {
