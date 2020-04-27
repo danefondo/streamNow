@@ -26,14 +26,6 @@ router.delete('/DeleteImage', imageController.deleteImage);
 
 router.delete('/DeleteProfileImage', imageController.deleteProfileImage);
 
-router.get('/settings', function(req, res) {
-
-	res.render('user__accountSettings', {
-    settings: true
-  });
-
-})
-
 router.get('/streams', auth.ensureAuthenticated, streamController.getAllUserStreams);
 
 module.exports = router;
