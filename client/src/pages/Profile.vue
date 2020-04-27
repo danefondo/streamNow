@@ -275,7 +275,7 @@ p {
   flex-wrap: wrap;
   max-width: 100%;
   height: 100%;
-  min-height: calc(100vh - 105px);
+  min-height: calc(100vh - 116px);
 }
 .confirm_modal {
   position: fixed;
