@@ -17,7 +17,7 @@
     </div>
     <div class="stream_input_container">
       <div class="stream_input_title">What's your livestream about?</div>
-      <ckeditor  :editor="editor" v-model="description" :config="editorConfig"></ckeditor>
+      <ckeditor  :editor="editor" v-model="description" :config="editorConfig" class="unreset"></ckeditor>
       <div v-if="descriptionEmpty && !description" class="inputErrorContainer">
         <div class="inputErrorText">{{ $t("form.empty") }}</div>
       </div>
