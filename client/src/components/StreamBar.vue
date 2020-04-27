@@ -26,7 +26,7 @@
         <div v-if="stream.is_live" class="is_live">LIVE</div>
         <div v-if="!stream.is_live && !stream.is_scheduled" class="is_previous">Previous</div>
         <div v-if="stream.is_scheduled" class="take_live">Go live</div>
-        <div class="edit_stream">Edit</div>
+        <div @click="editStream" class="edit_stream">Edit</div>
       </div>
     </div>
   </a>
@@ -86,7 +86,10 @@ export default {
     },
     goLive() {
       this.$emit("updateLive", true, this.stream)
-    }
+    },
+    editStream() {
+      this.$router.push(`/edit/${this.stream._id}`);
+    },
   }
 };
 </script>

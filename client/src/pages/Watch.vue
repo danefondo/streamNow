@@ -18,13 +18,13 @@
     <div class="user_check" data-user-id="5e770037c84aaa1088d5315c"></div>
     <div class="streaming_area">
       <div v-if="stream.is_scheduled" class="register_block">
-        <div v-if="!isAuthenticated" class="register_text">Register to watch</div>
-        <div v-if="!isAuthenticated" class="register_email_block">
-          <input v-if="!registered" v-model="registerInput" class="watch_register_input" />
-          <div v-if="!registered" @click="signUpForVideo" class="register_email_watch_button">Register</div>
+        <div v-if="!isAuthenticated && !owner" class="register_text">Register to watch</div>
+        <div v-if="!isAuthenticated && !owner" class="register_email_block">
+          <input v-if="!registered && !owner" v-model="registerInput" class="watch_register_input" />
+          <div v-if="!registered && !owner" @click="signUpForVideo" class="register_email_watch_button">Register</div>
         </div>
-        <div v-if="isAuthenticated && !registered" @click="signUpForVideo" class="register_watch_button">Register to watch</div>
-        <div v-if="registerMessage"> {{ registerMessage }} </div>
+        <div v-if="isAuthenticated && !registered && !owner" @click="signUpForVideo" class="register_watch_button">Register to watch</div>
+        <div v-if="registerMessage && !owner"> {{ registerMessage }} </div>
       </div>
       <div v-if="!stream.is_live" class="section_center">
         <div class="scheduled_stream_container">
@@ -82,7 +82,7 @@
           ></iframe>
         </div>
         <div class="stream_details">
-          <div class="stream_details_block">
+          <div class="stream_details_part">
             <div class="stream_name_display">{{ stream.stream_name }}</div>
             <div
               :class="[stream.is_live ? 'stream_live' : 'stream_offline']"
@@ -94,9 +94,7 @@
                 @click="showModal = true"
                 class="stream_end_button margin-left-auto"
               >End stream</div>
-              <div class="share_buttons">
-                <div class="share_options">Share</div>
-              </div>
+              <ShareDropdown :stream="stream" />
               <div @click="likeStream" class="stream_likes" :class="{userLiked}">
                 <div class="stream_like_button">
                   <img class="stream_like_icon" src="../assets/images/like_icon.png" />
@@ -106,10 +104,10 @@
               </div>
             </div>
           </div>
-          <div class="stream_details_block">
+          <div class="stream_details_part">
             <div class="stream_description_display" v-html="stream.stream_description"></div>
           </div>
-          <div class="stream_details_block">
+          <div class="stream_details_part">
             <div class="stream_tags_display">
               <div
                 v-for="(tag, index) in stream.stream_tags"
@@ -144,11 +142,13 @@ import FollowingIcon from "../assets/images/following_icon.png";
 import FollowIcon from "../assets/images/follow_icon.png";
 import profileIcon from "../assets/images/profile_icon.png";
 import NotFoundStream from "../components/NotFoundStream";
+import ShareDropdown from "../components/ShareDropdown";
 
 export default {
   name: "Watch",
   components: {
-    NotFoundStream
+    NotFoundStream,
+    ShareDropdown
   },
   data() {
     return {
@@ -653,10 +653,19 @@ p {
   max-width: 850px;
   padding-top: 10px;
 }
+
+.stream_details_part {
+    padding: 10px;
+    display: flex;
+    align-items: center;
+}
+
 .stream_details_block {
-  padding: 10px;
-  display: flex;
-  align-items: flex-start;
+    padding: 10px;
+    display: flex;
+    /* justify-content: center; */
+    width: 325px;
+    margin: 0 auto;
 }
 .stream_name_display {
   font-size: 25px;
@@ -791,8 +800,8 @@ p {
   box-sizing: border-box;
 }
 .edit_stream_inputs {
-  display: flex;
-  flex-wrap: wrap;
+  /* display: flex;
+  flex-wrap: wrap; */
   margin-top: 40px;
   margin-left: 60px;
 }

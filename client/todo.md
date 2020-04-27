@@ -52,7 +52,7 @@
 <!-- - Add 'Watch streams' to success page instead of streams list -->
 - Change all text to i18 text
 - Add custom thumbnail replacement if no thumbnail exists in youtube or manually set
-- Change goLive link input example from id to link
+<!-- - Change goLive link input example from id to link -->
 - SET SCHEDULED STREAMS THAT NEVER GO LIVE TO LIVE
 - SEND EMAIL IF STREAM GOES LIVE
 

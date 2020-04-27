@@ -177,6 +177,9 @@
         "no-streams-yet": "No streams yet?",
         "no-problem": "No problem.",
         "you-can": "You can ",
-        "create-one": "create one now"
+        "create-one": "create one now",
+        "confirm-go-live": "Confirm you want to go live",
+        "cancel-go-live": "Cancel",
+        "go-live": "Go live"
     }
 }

@@ -1,5 +1,20 @@
 <template>
   <div v-if="streams.length" class="manager">
+    <div v-if="showGoLiveModal" class="modal__deleteAccount">
+      <div class="modalBackground__deleteAccount"></div>
+      <div class="deleteModal">
+        <div class="content-wrapper">
+          <div class="msg-title">{{ $t("streamManager.confirm-go-live") }}</div>
+          <div
+            class="msg-body"
+          >{{ $t("streamManager.delete-acc-confirm-desc") }}</div>
+          <div class="action-group">
+            <div @click="showGoLiveModal=false" class="cancelPermaDeleteAccount button-outline">{{ $t("streamManager.cancel-go-live") }}</div>
+            <div @click="deleteAccount" class="confirmPermaDeleteAccount button-filled">{{ $t("streamManager.go-live") }}</div>
+          </div>
+        </div>
+      </div>
+    </div>
     <div class="manager-header">
       <h1 class="manager-title">Stream Manager</h1>
       <p class="manager-tagline">Manage all your streams from here. Quickly go live or end streams.</p>
@@ -49,7 +64,8 @@ export default {
   data() {
     return {
       streams: {},
-      activetab: "all"
+      activetab: "all",
+      showGoLiveModal: false,
     };
   },
   components: {

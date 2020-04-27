@@ -202,7 +202,7 @@ export default {
   transition: 0.2s ease;
   cursor: pointer;
   color: white;
-  background-color: blue;
+  background-color: #130088;
 }
 .cancel_stream_changes:hover,
 .save_stream_changes:hover {
@@ -214,9 +214,11 @@ export default {
 }
 
 .stream_details_block {
-  padding: 10px;
-  display: flex;
-  align-items: flex-start;
+    padding: 10px;
+    display: flex;
+    /* justify-content: center; */
+    width: 325px;
+    margin: 0 auto;
 }
 
 .stream_end_button:hover {

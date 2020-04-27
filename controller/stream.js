@@ -663,7 +663,7 @@ const streamController = {
 
             let userId = req.user._id;
 
-            let streams = await Stream.find({ "streamer_id": userId }).exec();
+            let streams = await Stream.find({ "streamer_id": userId }).sort({ scheduled_time: -1 }).exec();
             if (!streams) {
                 console.log("nooo streams");
                 return res.status(404).json({
