@@ -17,7 +17,7 @@
     </div>
     <div class="stream_input_container">
       <div class="stream_input_title">What's your livestream about?</div>
-      <ckeditor  :editor="editor" v-model="description" :config="editorConfig" class="unreset"></ckeditor>
+      <ckeditor  :editor="editor" v-model="description" :config="editorConfig" class="unreset ckspecial"></ckeditor>
       <div v-if="descriptionEmpty && !description" class="inputErrorContainer">
         <div class="inputErrorText">{{ $t("form.empty") }}</div>
       </div>
@@ -240,6 +240,30 @@ export default {
 
 <style>
 /*! CSS Used from: https://www.eeter.tv/css/main.css */
+.ckspecial {
+  outline: none !important;
+  box-shadow: 4px 5px 0px 0px #e6e6e6 !important;
+  border: 1px solid #eee !important;
+  border-radius: 3px;
+  border: 1px solid #eee;
+  margin-right: 16px;
+  padding: 10px;
+  margin-left: auto;
+  margin-right: auto;
+  width: 325px;
+  padding: 15px !important;
+  padding-top: 0px !important;
+  display: block !important;
+  font-size: 18px !important;
+  box-shadow: 4px 5px 0px 0px #e6e6e6;
+  margin-top: 15px;
+  box-sizing: border-box;
+  font-family: "Trebuchet MS", sans-serif;
+}
+
+.ckspecial:focus {
+  border-left: 3px solid #120088 !important;
+}
 * {
   -webkit-appearance: none;
   -moz-appearance: none;
