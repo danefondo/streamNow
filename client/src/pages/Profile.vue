@@ -38,19 +38,19 @@
               class="add_about_section"
             >{{$t("profile.add-profile-pic")}}</router-link>
             <div v-if="streamer" class="links">
-              <a v-if="streamer.fb_link" :href="streamer.fb_link" class="social_link">
+              <a v-if="streamer.fb_link" :href="streamer.fb_link" class="social_link" target="_blank">
                 <img class="fb_link" src="../assets/images/facebook.png" />
               </a>
-              <a v-if="streamer.insta_link" :href="streamer.insta_link" class="social_link">
+              <a v-if="streamer.insta_link" :href="streamer.insta_link" class="social_link" target="_blank">
                 <img class="insta_link" src="../assets/images/instagram.png" />
               </a>
-              <a v-if="streamer.yt_link" :href="streamer.yt_link" class="social_link">
+              <a v-if="streamer.yt_link" :href="streamer.yt_link" class="social_link" target="_blank">
                 <img class="yt_link" src="../assets/images/youtube.png" />
               </a>
-              <a v-if="streamer.twitter_link" :href="streamer.twitter_link" class="social_link">
+              <a v-if="streamer.twitter_link" :href="streamer.twitter_link" class="social_link" target="_blank">
                 <img class="insta_link" src="../assets/images/twitter.png" />
               </a>
-              <a v-if="streamer.website_link" :href="streamer.website_link" class="social_link">
+              <a v-if="streamer.website_link" :href="streamer.website_link" class="social_link" target="_blank">
                 <img class="website_link" src="../assets/images/website.png" />
               </a>
             </div>
