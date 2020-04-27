@@ -69,16 +69,10 @@
             <router-link :to="'/profile/' +streamer._id" class="stream_owner">
               <img class="streamer_profile_icon" :src="getProfileIcon" />
               <p
-                v-if="streamer"
-                class="streamer_first_name"
-              >{{streamer.firstname || streamer.username}}</p>
-              <p
                 v-if="streamer && streamer.firstname && streamer.lastname"
-                class="streamer_last_name"
-              >
-                {{
-                streamer.lastname }}
-              </p>
+                class="streamer_first_name"
+              >{{streamer.firstname + " " + streamer.lastname }}</p>
+              <p v-else class="streamer_first_name">{{streamer.username}}</p>
             </router-link>
             <div
               @click="follow"
@@ -104,16 +98,10 @@
           <router-link :to="'/profile/' +streamer._id" class="stream_owner">
             <img class="streamer_profile_icon" :src="getProfileIcon" />
             <p
-              v-if="streamer"
-              class="streamer_first_name"
-            >{{streamer.firstname || streamer.username}}</p>
-            <p
               v-if="streamer && streamer.firstname && streamer.lastname"
-              class="streamer_last_name"
-            >
-              {{
-              streamer.lastname }}
-            </p>
+              class="streamer_first_name"
+            >{{streamer.firstname + " " + streamer.lastname }}</p>
+            <p v-else class="streamer_first_name">{{streamer.username}}</p>
           </router-link>
           <div
             @click="follow"
@@ -267,7 +255,8 @@ export default {
         this.streamNotFound = false;
         this.userFollowing = data.user_following_boolean;
         this.registered = data.user_registered;
-        this.registerMessage = this.registered && this.$t("watch.already-registered");
+        this.registerMessage =
+          this.registered && this.$t("watch.already-registered");
       } catch (error) {
         this.streamNotFound = true;
       }

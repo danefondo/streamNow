@@ -22,7 +22,7 @@
             />
             <div class="drag-text padding-60">
               <button class="file-upload-btn" type="button">{{$t("scheduling.thumbnail-instruction")}}</button>
-              <h3>{{$t("scheduling.instruction-helpl")}}</h3>
+              <h3>{{$t("scheduling.instruction-help")}}</h3>
             </div>
           </form>
           <div v-show="value" class="file-upload-content">
