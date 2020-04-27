@@ -365,7 +365,7 @@ p {
 .stream_center_top {
   display: flex;
   align-items: center;
-  max-width: 865;
+  max-width: 865px;
 }
 .streamer_about {
   padding: 20px;

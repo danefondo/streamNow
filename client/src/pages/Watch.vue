@@ -16,7 +16,7 @@
       </div>
     </div>
     <div class="user_check" data-user-id="5e770037c84aaa1088d5315c"></div>
-    <div class="streaming_area">
+    <div class="streaming_area" :class="{ 'custom_area': stream.is_live }">
       <div v-if="stream.is_scheduled" class="register_block">
         <div v-if="!isAuthenticated && !owner" class="register_text">Register to watch</div>
         <div v-if="!isAuthenticated && !owner" class="register_email_block">
@@ -271,6 +271,10 @@ export default {
 </script>
 
 <style>
+
+.custom_area {
+  flex-direction: row !important;
+}
 .scheduled_stream_name {
   font-size: 28px;
 }
@@ -692,7 +696,7 @@ p {
 .stream_center_top {
   display: flex;
   align-items: center;
-  max-width: 865;
+  max-width: 865px;
 }
 .stream_live,
 .stream_offline {
