@@ -39,7 +39,6 @@
 <script>
 import axios from "axios";
 import Featured from "../components/Featured";
-import { BASE_PATH } from "../constants";
 import Stream from "../components/Stream";
 import NoScheduledStreams from "../components/NoScheduledStreams";
 
@@ -59,7 +58,7 @@ export default {
   },
   async mounted() {
     try {
-      const { data } = await axios.get(`${BASE_PATH}/streams?scheduled=true`);
+      const { data } = await axios.get(`/streams?scheduled=true`);
       // this.featured = data.featured;
       this.featured = data.streams[0];
       this.loading = false;

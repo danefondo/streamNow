@@ -262,17 +262,36 @@ const streamController = {
 		}
         try {
             let stream_id = req.params.streamId;
-            let signupEmail = req.body.email;
+            let email = req.body.email;
+            let signUpId = req.body.email;
+            if (req.user && req.user._id) {
+                const user = await User.findById(req.user._id);
+                email = user.email;
+                signUpId = req.user._id
+            } else {
+                // check email
+                const re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+                if (!email || !re.test(email)) {
+                    return res.status(400).json({
+                        errors: "Email is not valid"
+                    });
+                }
+            }
             let stream = await Stream.findById(stream_id);
             if (!stream) {
                 return res.status(404).json({
                     errors: "Stream not found."
                 });
             }
-            stream.waitlist_emails.push(signupEmail);
+            if (stream.waitlist_emails.includes(signUpId)) {
+                return res.status(404).json({
+                    errors: "You have registered for this stream"
+                });
+            }
+            stream.waitlist_emails.push(signUpId);
             await stream.save();
 
-            mail.sendVideoSignUpEmail(signupEmail, stream);
+            mail.sendVideoSignUpEmail(email, stream);
 
             res.json({
                 stream: stream
@@ -345,6 +364,7 @@ const streamController = {
             let streamer_id = stream.streamer_id;
             let streamer_followers_count;
             let streamer_following_count;
+            let user_registered;
 
             let streamer;
             streamer = await User.findById(streamer_id).populate('previous_streams').exec();
@@ -371,6 +391,7 @@ const streamController = {
                 }
                 user_like_boolean = visitor.liked_streams_ids.includes(stream_id);
                 user_following_boolean = visitor.following.includes(stream.streamer_id);
+                user_registered = stream.waitlist_emails.includes(req.user._id);
             }
 
             let host_name = req.headers.host;
@@ -381,6 +402,7 @@ const streamController = {
                 streamer,
                 user_like_boolean,
                 user_following_boolean,
+                user_registered,
                 host_name
             });
         } catch (error) {

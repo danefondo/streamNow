@@ -21,10 +21,10 @@
         <div v-if="!isAuthenticated" class="register_text">Register to watch</div>
         <div v-if="!isAuthenticated" class="register_email_block">
           <input v-if="!registered" v-model="registerInput" class="watch_register_input" />
-          <div v-if="registerMessage"> {{ registerMessage }} </div>
-          <div @click="signUpForVideo" class="register_email_watch_button">Register</div>
+          <div v-if="!registered" @click="signUpForVideo" class="register_email_watch_button">Register</div>
         </div>
-        <div v-if="isAuthenticated" class="register_watch_button">Register to watch</div>
+        <div v-if="isAuthenticated && !registered" @click="signUpForVideo" class="register_watch_button">Register to watch</div>
+        <div v-if="registerMessage"> {{ registerMessage }} </div>
       </div>
       <div v-if="!stream.is_live" class="section_center">
         <div class="scheduled_stream_container">
@@ -175,22 +175,17 @@ export default {
   },
   methods: {
     async signUpForVideo() {
-      if (!this.registerInput) {
+      if (!this.isAuthenticated && !this.registerInput) {
         this.registerMessage = "You must enter a valid email";
         this.registered = false;
         return;
       }
       try {
-      let signupEmail = this.registerInput;
+      let signupEmail = this.isAuthenticated ? "": this.registerInput;
       await axios.post(`/streams/${this.$route.params.id}/register`, {email: signupEmail});
       this.registered = true;
       this.registerMessage = "Successfully registered";
       } catch (err) {
-        if (err.response.status === 422) {
-          this.registered = false;
-          this.registerMessage = err.response.data.errors[0].msg;
-          return;
-        }
         this.registerMessage = err.response.data.errors;
         this.registered = false;
         console.log("fail", err.response.data);
@@ -205,6 +200,8 @@ export default {
         this.userLiked = data.user_like_boolean;
         this.streamNotFound = false;
         this.userFollowing = data.user_following_boolean;
+        this.registered = data.user_registered;
+        this.registerMessage = this.registered && "You are already registered"
       } catch (error) {
         this.streamNotFound = true;
       }

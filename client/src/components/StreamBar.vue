@@ -83,6 +83,9 @@ export default {
       } else {
         return "previous";
       }
+    },
+    goLive() {
+      this.$emit("updateLive", true, this.stream)
     }
   }
 };
