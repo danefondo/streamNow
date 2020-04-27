@@ -754,6 +754,7 @@
     max-width: 150px;
     letter-spacing: 1px;
     text-transform: lowercase;
+    margin-right: 6px;
 }
 
 .featured_streamPreview {
@@ -764,6 +765,6 @@
 
 .featured_streamer_description_container_discover {
     /* color: #a3a2b5; */
-    color: #514f7a;
+    color: #514f7ab8;
     padding: 10px;
 }
