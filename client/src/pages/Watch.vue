@@ -21,10 +21,18 @@
         <div v-if="!isAuthenticated && !owner" class="register_text">Register to watch</div>
         <div v-if="!isAuthenticated && !owner" class="register_email_block">
           <input v-if="!registered && !owner" v-model="registerInput" class="watch_register_input" />
-          <div v-if="!registered && !owner" @click="signUpForVideo" class="register_email_watch_button">Register</div>
+          <div
+            v-if="!registered && !owner"
+            @click="signUpForVideo"
+            class="register_email_watch_button"
+          >Register</div>
         </div>
-        <div v-if="isAuthenticated && !registered && !owner" @click="signUpForVideo" class="register_watch_button">Register to watch</div>
-        <div v-if="registerMessage && !owner"> {{ registerMessage }} </div>
+        <div
+          v-if="isAuthenticated && !registered && !owner"
+          @click="signUpForVideo"
+          class="register_watch_button"
+        >Register to watch</div>
+        <div v-if="registerMessage && !owner">{{ registerMessage }}</div>
       </div>
       <div v-if="!stream.is_live" class="section_center">
         <div class="scheduled_stream_container">
@@ -33,8 +41,14 @@
             <div class="live"></div>
             <div class="viewerCount"></div>
           </div>
-          <div class="scheduled_stream_name">{{ stream.stream_name}}</div>
-          <div class="scheduled_stream_description" v-html="stream.stream_description"></div>
+          <div class="scheduled_stream_details">
+            <div class="scheduled_stream_details_section">
+              <div class="scheduled_stream_name">{{ stream.stream_name}}</div>
+            </div>
+            <div class="scheduled_stream_details_section">
+              <div class="scheduled_stream_description" v-html="stream.stream_description"></div>
+            </div>
+          </div>
         </div>
       </div>
       <div v-if="stream.is_live" class="section_center">
@@ -181,10 +195,12 @@ export default {
         return;
       }
       try {
-      let signupEmail = this.isAuthenticated ? "": this.registerInput;
-      await axios.post(`/streams/${this.$route.params.id}/register`, {email: signupEmail});
-      this.registered = true;
-      this.registerMessage = "Successfully registered";
+        let signupEmail = this.isAuthenticated ? "" : this.registerInput;
+        await axios.post(`/streams/${this.$route.params.id}/register`, {
+          email: signupEmail
+        });
+        this.registered = true;
+        this.registerMessage = "Successfully registered";
       } catch (err) {
         this.registerMessage = err.response.data.errors;
         this.registered = false;
@@ -201,7 +217,7 @@ export default {
         this.streamNotFound = false;
         this.userFollowing = data.user_following_boolean;
         this.registered = data.user_registered;
-        this.registerMessage = this.registered && "You are already registered"
+        this.registerMessage = this.registered && "You are already registered";
       } catch (error) {
         this.streamNotFound = true;
       }
@@ -248,9 +264,15 @@ export default {
       return this.streamer._id === auth.isAuthenticated()._id;
     },
     videoUrl() {
-      if (this.stream.platform_status && this.stream.platform_status.includes("facebook")) {
+      if (
+        this.stream.platform_status &&
+        this.stream.platform_status.includes("facebook")
+      ) {
         return `https://www.facebook.com/video/embed?video_id=${this.stream.stream_video_id}`;
-      } else if (this.stream.platform_status && this.stream.platform_status.includes("twitch")) {
+      } else if (
+        this.stream.platform_status &&
+        this.stream.platform_status.includes("twitch")
+      ) {
         return `https://player.twitch.tv/?channel=${this.stream.stream_video_id}`;
       }
       return `https://www.youtube-nocookie.com/embed/${this.stream.stream_video_id}?autoplay=1&amp;modestbranding=1&amp;showinfo=0&amp;rel=0&amp;theme=light&amp;color=white`;
@@ -260,7 +282,7 @@ export default {
         return this.streamer.profile_image_url;
       }
       return profileIcon;
-    },
+    }
   },
   watch: {
     $route() {
@@ -271,15 +293,25 @@ export default {
 </script>
 
 <style>
+.scheduled_stream_container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 600px;
+}
+
+.scheduled_stream_details_section {
+  margin-top: 15px;
+}
 
 .custom_area {
   flex-direction: row !important;
 }
 .scheduled_stream_name {
-  font-size: 28px;
+  font-size: 35px;
 }
 .scheduled_stream_description {
-  font-size: 24px;
+  font-size: 22px;
 }
 .register_block {
 }
@@ -659,17 +691,17 @@ p {
 }
 
 .stream_details_part {
-    padding: 10px;
-    display: flex;
-    align-items: center;
+  padding: 10px;
+  display: flex;
+  align-items: center;
 }
 
 .stream_details_block {
-    padding: 10px;
-    display: flex;
-    /* justify-content: center; */
-    width: 325px;
-    margin: 0 auto;
+  padding: 10px;
+  display: flex;
+  /* justify-content: center; */
+  width: 325px;
+  margin: 0 auto;
 }
 .stream_name_display {
   font-size: 25px;
