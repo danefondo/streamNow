@@ -22,7 +22,7 @@
     <div class="streaming_area" :class="{ 'custom_area': stream.is_live }">
       <div v-if="stream.is_scheduled" class="register_block">
         <div
-          v-if="!isAuthenticated && !owner"
+          v-if="!isAuthenticated && !owner && !registered"
           class="register_text"
         >{{$t("watch.register-to-watch")}}</div>
         <div v-if="!isAuthenticated && !owner" class="register_email_block">
