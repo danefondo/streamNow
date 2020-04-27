@@ -147,7 +147,14 @@
         "support": "Support",
         "live": "LIVE",
         "share": "Share",
-        "likes": "Likes"
+        "likes": "Likes",
+        "confirm-end": "Confirm end stream?",
+        "end-stream": "End stream",
+        "cancel-end-stream": "Cancel",
+        "register-to-watch": "Register to watch",
+        "register-watch": "Register",
+        "stream-has-ended": "Stream has ended. Watch recording.",
+        "edit": "Edit"
     },
     "form": {
         "empty": "Cannot be empty",

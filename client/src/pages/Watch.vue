@@ -6,10 +6,13 @@
       <div class="confirm_modal_background"></div>
       <div class="confirm_modal">
         <div class="big-content-wrapper">
-          <div class="confirm_modal_title">Confirm end stream?</div>
+          <div class="confirm_modal_title">{{$t("watch.confirm-end")}}</div>
           <div class="end_stream_actions">
-            <div @click="endStream" class="end_stream_confirm">End stream</div>
-            <div @click="showModal = false " class="cancel_end_stream">Cancel</div>
+            <div @click="endStream" class="end_stream_confirm">{{$t("watch.end-stream")}}</div>
+            <div
+              @click="showModal = false "
+              class="cancel_end_stream"
+            >{{$t("watch.cancel-end-stream")}}</div>
           </div>
           <div class="end_stream_fail_message"></div>
         </div>
@@ -18,20 +21,23 @@
     <div class="user_check" data-user-id="5e770037c84aaa1088d5315c"></div>
     <div class="streaming_area" :class="{ 'custom_area': stream.is_live }">
       <div v-if="stream.is_scheduled" class="register_block">
-        <div v-if="!isAuthenticated && !owner" class="register_text">Register to watch</div>
+        <div
+          v-if="!isAuthenticated && !owner"
+          class="register_text"
+        >{{$t("watch.register-to-watch")}}</div>
         <div v-if="!isAuthenticated && !owner" class="register_email_block">
           <input v-if="!registered && !owner" v-model="registerInput" class="watch_register_input" />
           <div
             v-if="!registered && !owner"
             @click="signUpForVideo"
             class="register_email_watch_button"
-          >Register</div>
+          >{{$t("watch.register-watch")}}</div>
         </div>
         <div
           v-if="isAuthenticated && !registered && !owner"
           @click="signUpForVideo"
           class="register_watch_button"
-        >Register to watch</div>
+        >{{$t("watch.register-to-watch")}}</div>
         <div v-if="registerMessage && !owner">{{ registerMessage }}</div>
       </div>
       <div v-if="!stream.is_live" class="section_center">
@@ -84,7 +90,7 @@
           <div
             v-if="!stream.is_live && !stream.is_scheduled"
             class="stream_not_live"
-          >Stream has ended. Watch recording.</div>
+          >{{$t("watch.stream-has-ended")}}</div>
           <iframe
             class="live_player"
             width="850"
@@ -102,17 +108,17 @@
               :class="[stream.is_live ? 'stream_live' : 'stream_offline']"
             >{{ stream.is_live ? $t('stream.live') : $t('stream.offline') }}</div>
             <div class="livestream_buttons">
-              <div v-if="owner" @click="editStream" class="stream_edit_button">Edit</div>
+              <div v-if="owner" @click="editStream" class="stream_edit_button">{{$("watch.edit")}}</div>
               <div
                 v-if="owner && stream.is_live && !stream.is_scheduled"
                 @click="showModal = true"
                 class="stream_end_button margin-left-auto"
-              >End stream</div>
+              >{{$("watch.end-stream")}}</div>
               <ShareDropdown :stream="stream" />
               <div @click="likeStream" class="stream_likes" :class="{userLiked}">
                 <div class="stream_like_button">
                   <img class="stream_like_icon" src="../assets/images/like_icon.png" />
-                  <span class="stream_like_text">Likes</span>
+                  <span class="stream_like_text">{{$t("watch.likes")}}</span>
                 </div>
                 <div class="stream_likes_count">{{ stream.stream_likes_count }}</div>
               </div>
@@ -135,7 +141,7 @@
       <div v-if="stream.is_live && !stream.is_scheduled" class="section_right">
         <div class="player_sidebar_container">
           <div class="sidebar_section_top">
-            <div class="hide_chat">Hide chat</div>
+            <div class="hide_chat">{{$t("watch.hide-chat")}}</div>
           </div>
           <iframe
             class="live_chat"
@@ -298,10 +304,19 @@ export default {
   flex-direction: column;
   align-items: center;
   max-width: 600px;
+  width: 600px;
+}
+
+.scheduled_stream_details {
+  background-color: #f9f9f9;
+  padding: 40px;
+  width: 600px;
+  box-sizing: border-box;
 }
 
 .scheduled_stream_details_section {
   margin-top: 15px;
+  font-family: "Poppins";
 }
 
 .custom_area {
@@ -309,9 +324,12 @@ export default {
 }
 .scheduled_stream_name {
   font-size: 35px;
+  font-family: "Poppins";
 }
 .scheduled_stream_description {
   font-size: 22px;
+  color: #333;
+  font-family: "Poppins";
 }
 .register_block {
 }
