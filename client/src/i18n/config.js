@@ -2,7 +2,7 @@ import en from "./en";
 import est from "./est";
 
 const i18nConfig = {
-    locale: "en",
+    locale: "est",
     messages: {
         en,
         est

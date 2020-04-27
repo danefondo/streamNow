@@ -90,10 +90,10 @@ export default {
     async goLive() {
       try {
         await axios.post(`/streams/golive/${this.streamToGoLive}`);
-        this.$emit("updateLive", this.streamToGoLive);
+        this.$emit("updateLive", true, this.streamToGoLive);
         this.$router.push(`/watch/${this.streamToGoLive}`);
       } catch (error) {
-        alert(error.response.data.message);
+        alert(error.response.data.errors);
       }
     },
     cancelModal() {
