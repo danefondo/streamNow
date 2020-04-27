@@ -158,7 +158,7 @@
         "edit": "Edit",
         "successful-register": "Successfully registered for event",
         "enter-valid-email": "You must enter a valid email",
-        "already-registered": "You are already registered for this event.",
+        "already-registered": "You are registered for this event.",
         "cannot-like-own-video": "You can't like your own video"
     },
     "form": {
