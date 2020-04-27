@@ -358,6 +358,7 @@ p {
   padding: 8px 10px 8px 10px;
   border-radius: 2px;
   cursor: pointer;
+  margin-right: 15px;
 }
 .stream_owner:hover {
   background-color: #f7f7f7;

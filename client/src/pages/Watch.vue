@@ -48,6 +48,16 @@
             <div class="viewerCount"></div>
           </div>
           <div class="scheduled_stream_details">
+            <div class="layer">
+              <div class="stream_tags_display">
+                <div
+                  v-for="(tag, index) in stream.stream_tags"
+                  :key="index"
+                  class="streamTagPreview"
+                >{{tag}}</div>
+              </div>
+              <ShareDropdown :stream="stream" />
+            </div>
             <div class="scheduled_stream_details_section">
               <div class="scheduled_stream_name">{{ stream.stream_name}}</div>
             </div>
@@ -82,7 +92,9 @@
                   :src="userFollowing ? FollowingIcon  : FollowIcon"
                 />
               </div>
-              <div class="streamer_follow_state">{{ userFollowing ? $t("watch.following") : $t("watch.follow") }}</div>
+              <div
+                class="streamer_follow_state"
+              >{{ userFollowing ? $t("watch.following") : $t("watch.follow") }}</div>
             </div>
           </div>
         </div>
@@ -112,7 +124,9 @@
             <div class="streamer_follow_button">
               <img class="streamer_follow_icon" :src="userFollowing ? FollowingIcon  : FollowIcon" />
             </div>
-            <div class="streamer_follow_state">{{ userFollowing ? $t("watch.following") : $t("watch.follow") }}</div>
+            <div
+              class="streamer_follow_state"
+            >{{ userFollowing ? $t("watch.following") : $t("watch.follow") }}</div>
           </div>
           <div class="donate_button">{{$t("watch.support")}}</div>
         </div>
@@ -214,7 +228,7 @@ export default {
       isAuthenticated: false,
       registerInput: "",
       registerMessage: "",
-      registered: false,
+      registered: false
     };
   },
   mounted() {
@@ -329,6 +343,36 @@ export default {
 </script>
 
 <style>
+.layer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.layer .share_options {
+  background-color: #e8e8e8;
+}
+
+.streamTagPreview {
+  font-size: 16.5px;
+  margin-right: 5.5px;
+  padding: 4px 20px;
+  display: inline-block;
+  border-radius: 2px;
+  background-color: #1500a00a;
+  color: #0f007363;
+  margin: 2px 2px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  max-width: 150px;
+  letter-spacing: 1px;
+  text-transform: lowercase;
+  margin-left: 0px;
+  margin-right: 9px;
+}
+
 .scheduled_stream_container {
   display: flex;
   flex-direction: column;
@@ -342,6 +386,7 @@ export default {
   padding: 40px;
   width: 600px;
   box-sizing: border-box;
+  padding-top: 30px;
 }
 
 .scheduled_stream_details_section {
@@ -731,6 +776,7 @@ p {
   padding: 8px 10px 8px 10px;
   border-radius: 2px;
   cursor: pointer;
+  margin-right: 15px;
 }
 .stream_owner:hover {
   background-color: #f7f7f7;
@@ -782,15 +828,15 @@ p {
 }
 
 .stream_center_top_preview {
-    display: flex;
-    align-items: center;
-    max-width: 865px;
-    width: 600px;
-    box-sizing: border-box;
-    margin-top: 10px;
-    /* background-color: #f9f9f9; */
-    /* border-top: 1px solid #efefef; */
-    /* border-bottom: 1px solid #efefef; */
+  display: flex;
+  align-items: center;
+  max-width: 865px;
+  width: 600px;
+  box-sizing: border-box;
+  margin-top: 10px;
+  /* background-color: #f9f9f9; */
+  /* border-top: 1px solid #efefef; */
+  /* border-bottom: 1px solid #efefef; */
 }
 
 .stream_live,
@@ -857,16 +903,16 @@ p {
 }
 
 .streamer_follow_preview {
-    margin-right: 20px;
-    display: flex;
-    align-items: center;
-    background-color: #f7f7f7;
-    border-radius: 4px;
-    padding: 4px 15px;
-    cursor: pointer;
-    transition: 0.2s ease;
-    font-weight: bold;
-    margin-left: auto;
+  margin-right: 20px;
+  display: flex;
+  align-items: center;
+  background-color: #f7f7f7;
+  border-radius: 4px;
+  padding: 4px 15px;
+  cursor: pointer;
+  transition: 0.2s ease;
+  font-weight: bold;
+  margin-left: auto;
 }
 
 .streamer_follow_preview:hover {
@@ -890,8 +936,10 @@ p {
   background-color: #e4ff00;
   transform: scale(1.01);
 }
-.streamer_follow:hover > .streamer_follow_button
-.streamer_follow_preview:hover > .streamer_follow_button {
+.streamer_follow:hover
+  > .streamer_follow_button
+  .streamer_follow_preview:hover
+  > .streamer_follow_button {
   border-color: #8686862b;
 }
 .streamer_follow_button {
