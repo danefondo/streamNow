@@ -1,5 +1,5 @@
 <template>
-  <a class="featured_stream" :href="'/watch/'+featured._id">
+  <router-link class="featured_stream" :to="'/watch/'+featured._id">
     <div class="featured_streamPreviewContainer">
       <img class="featured_streamPreview" :src="thumbnail" />
       <div class="live"></div>
@@ -39,7 +39,7 @@
       <!--  if is scheduled, show  'register for event' -->
       <!--  if is scheduled/live && has_price show 'Get ticket $price' -->
     </div>
-  </a>
+  </router-link>
 </template>
 
 <script>
