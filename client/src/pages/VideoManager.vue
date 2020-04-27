@@ -21,6 +21,7 @@ export default {
     StreamBar,
   },
   async mounted() {
+    axios.get('/dashboard/golive')
     const { data } = await axios.get('/dashboard/streams');
     this.streams = data.streams;
   }

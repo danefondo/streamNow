@@ -51,31 +51,4 @@ router.get('/settings', function(req, res) {
 
 router.get('/streams', auth.ensureAuthenticated, streamController.getAllUserStreams);
 
-router.get('/golive', function(req, res) {
-
-	res.render('go_live');
-
-})
-
-router.get('/profile', function(req, res) {
-
-	res.render('profile');
-
-})
-
-
-/*====== Access control  ======*/
-// function ensureAuthenticated(req, res, next){
-//   passport.authenticate('jwt', {session: false})
-//   console.log("user", req.user)
-//   // console.log("user is authenticated", req.isAuthenticated())
-//   // if(req.isAuthenticated()){
-//   // 	console.log("Authentication successful.");
-//   //   return next();
-//   // } else {
-//   // 	console.log("Authentication failed.");
-//   //   res.redirect(302, '/');
-//   // }
-// }
-
 module.exports = router;
