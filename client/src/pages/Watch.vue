@@ -403,7 +403,7 @@ export default {
   line-height: 44px;
 }
 .scheduled_stream_description {
-  font-size: 22px;
+  font-size: 21px;
   color: #333;
   font-family: "Poppins";
   line-height: 26px;
@@ -442,16 +442,16 @@ export default {
 .register_email_watch_button {
   text-align: center;
   margin-top: 20px;
-  padding: 20px;
-  font-size: 28px;
+  padding: 20px 20px;
+  font-size: 35px;
   border-radius: 3px;
   margin-left: auto;
   margin-right: auto;
-  color: white;
-  max-width: 300px;
+  color: #fff;
   background-color: #ca4c2f;
   cursor: pointer;
   transition: 0.1s ease;
+  margin-bottom: 15px;
 }
 .register_email_watch_button {
   max-width: 560px;
