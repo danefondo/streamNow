@@ -7,7 +7,7 @@
     <div class="HappyContainer">
       <img class="happy_image" src="../assets/images/success.png" />
     </div>
-    <router-link class="go_live_block" to="/dashboard/golive">
+    <router-link class="go_live_block" to="/golive">
       <h1 class="start_streaming">{{$t("successPage.start-streaming")}}</h1>
     </router-link>
     <router-link class="watch_streams_now" to="/">

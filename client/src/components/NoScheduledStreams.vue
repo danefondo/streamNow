@@ -9,7 +9,7 @@
         <p>{{$t("scheduled.check-back")}}</p>
         <p class="schedule_it">
           {{$t("scheduled.or")}}
-          <router-link to="/dashboard/golive">{{$t("scheduled.schedule-stream")}}</router-link>
+          <router-link to="/golive">{{$t("scheduled.schedule-stream")}}</router-link>
         </p>
       </div>
     </div>

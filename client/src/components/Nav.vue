@@ -10,7 +10,7 @@
     <template v-if="isAuthenticated">
       <div class="stream_buttons">
         <router-link v-if="user.is_live && user.active_stream_id" class="go_live_button" :to="'/watch/' + user.active_stream_id">{{ $t("nav.is-live") }}</router-link>
-        <router-link v-if="!user.is_live" class="go_live_button" to="/dashboard/golive">{{ $t("nav.go-live") }}</router-link>
+        <router-link v-if="!user.is_live" class="go_live_button" to="/golive">{{ $t("nav.go-live") }}</router-link>
       </div>
       <div class="logout-container">
         <div
@@ -40,11 +40,11 @@
                 <a class="entypo-plus OptionLink" href="#"></a>
               </li>
               <li>
-                <router-link class="entypo-archive NavLinkX" to="/dashboard/streams">Manage streams</router-link>
+                <router-link class="entypo-archive NavLinkX" to="/manage-streams">Manage streams</router-link>
                 <a class="entypo-plus OptionLink" href="#"></a>
               </li>
               <li>
-                <router-link class="entypo-archive NavLinkX" to="/dashboard/settings">Settings</router-link>
+                <router-link class="entypo-archive NavLinkX" to="/settings">Settings</router-link>
                 <a class="entypo-plus OptionLink" href="#"></a>
               </li>
               <li>

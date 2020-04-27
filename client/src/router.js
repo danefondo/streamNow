@@ -22,7 +22,7 @@ import VideoManager from "./pages/VideoManager";
 const routes = [
   { path: "/scheduled", component: Scheduled },
   {
-    path: "/dashboard/golive",
+    path: "/golive",
     component: GoLive,
     meta: {
       requireAuthentication: true,
@@ -37,7 +37,7 @@ const routes = [
     },
   },
   {
-    path: "/dashboard/streams",
+    path: "/manage-streams",
     component: VideoManager,
     meta: {
       requireAuthentication: true,
@@ -55,7 +55,7 @@ const routes = [
   { path: "/reset", component: ResetPass },
   { path: "/accounts/forgotPass", component: ForgotPass },
   {
-    path: "/dashboard/settings",
+    path: "/settings",
     component: Settings,
     meta: {
       requireAuthentication: true,

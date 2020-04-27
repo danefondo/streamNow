@@ -8,7 +8,7 @@
       <div class="short-desc">
         <p>
            {{$t("streamManager.you-can")}}
-          <router-link to="/dashboard/golive">{{$t("streamManager.create-one")}}.</router-link>
+          <router-link to="/golive">{{$t("streamManager.create-one")}}.</router-link>
         </p>
       </div>
     </div>

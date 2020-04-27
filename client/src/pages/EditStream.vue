@@ -5,7 +5,7 @@
         <div class="stream_details_block">
           <div @click="editStream" class="save_stream_changes">Save changes</div>
           <router-link
-            :to="$route.query.manage ? '/dashboard/streams' :`/watch/${streamId}`"
+            :to="$route.query.manage ? '/manage-streams' :`/watch/${streamId}`"
             class="cancel_stream_changes"
           >Cancel</router-link>
           <!-- <div class="stream_end_button margin-left-auto">End stream</div> -->
@@ -175,7 +175,7 @@ export default {
         }
         await axios.post(`dashboard/updateLiveStream`, streamData);
         if (this.$route.query.manage) {
-          return this.$router.push(`/dashboard/streams`);
+          return this.$router.push(`/manage-streams`);
         }
         this.$router.push(`/watch/${this.streamId}`);
       } catch (error) {

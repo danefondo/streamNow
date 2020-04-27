@@ -33,7 +33,7 @@
               :src="streamer.profile_image_url"
             />
             <router-link
-              to="/dashboard/settings"
+              to="/settings"
               v-if="!streamer.profile_image_url && user._id == streamer._id"
               class="add_about_section"
             >{{$t("profile.add-profile-pic")}}</router-link>
@@ -59,12 +59,12 @@
               <div class="streamer_description">{{streamer.description}}</div>
               <router-link
                 v-if="streamer.description && user._id == streamer._id"
-                to="/dashboard/settings"
+                to="/settings"
                 class="streamer_description_edit"
               >Edit</router-link>
             </div>
             <router-link
-              to="/dashboard/settings"
+              to="/settings"
               v-if="!streamer.description && user._id == streamer._id"
               class="add_about_section"
             >{{$t("profile.add-about")}}</router-link>

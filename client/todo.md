@@ -62,7 +62,7 @@
 ** LIVE & SCHEDULED STREAMS **
 - GO LIVE BUTTON FOR SCHEDULED STREAM (confirm : if missing details, request before live)
 - SHOW LIVE INDICATOR IF LIVE
-- REGISTER for upcoming streams
+<!-- - REGISTER for upcoming streams -->
 - Rich text editor for video descriptions (CKEDITOR5)
 - Select whether stream preview is with YouTube, Facebook, Twitch at Go Live & Edit stream
 - Disable scheduling streams if email not verified
@@ -89,8 +89,8 @@
 - Socket.io live chatroom-box
 - Only owner should be able to end stream
 - Only owner should be able to edit stream
-- Owner should not be able to follow oneself
-- Owner should not be able to like one's own stream
+<!-- - Owner should not be able to follow oneself -->
+<!-- - Owner should not be able to like one's own stream -->
 
 ** BROWSE & DISCOVERY FOR STREAMS **
 - Filter streams by category
