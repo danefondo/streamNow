@@ -38,7 +38,7 @@
           @click="signUpForVideo"
           class="register_watch_button"
         >{{$t("watch.register-to-watch")}}</div>
-        <div v-if="registerMessage && !owner">{{ registerMessage }}</div>
+        <div v-if="registerMessage && !owner" class="register_success">{{ registerMessage }}</div>
       </div>
       <div v-if="!stream.is_live" class="section_center">
         <div class="scheduled_stream_container">
@@ -240,7 +240,7 @@ export default {
   methods: {
     async signUpForVideo() {
       if (!this.isAuthenticated && !this.registerInput) {
-        this.registerMessage = "You must enter a valid email";
+        this.registerMessage = this.$t("watch.enter-valid-email");
         this.registered = false;
         return;
       }
@@ -250,7 +250,7 @@ export default {
           email: signupEmail
         });
         this.registered = true;
-        this.registerMessage = "Successfully registered";
+        this.registerMessage = this.$t("watch.successful-register");
       } catch (err) {
         this.registerMessage = err.response.data.errors;
         this.registered = false;
@@ -267,7 +267,7 @@ export default {
         this.streamNotFound = false;
         this.userFollowing = data.user_following_boolean;
         this.registered = data.user_registered;
-        this.registerMessage = this.registered && "You are already registered";
+        this.registerMessage = this.registered && this.$t("watch.already-registered");
       } catch (error) {
         this.streamNotFound = true;
       }
@@ -279,7 +279,8 @@ export default {
     },
     async likeStream() {
       if (this.owner) {
-        alert("You can't like your video");
+        let alertText = this.$t("watch.cannot-like-own-video");
+        alert(alertText);
         return;
       }
       try {
@@ -439,7 +440,8 @@ export default {
 }
 
 .register_watch_button,
-.register_email_watch_button {
+.register_email_watch_button,
+.register_success {
   text-align: center;
   margin-top: 20px;
   padding: 20px 20px;
@@ -460,6 +462,15 @@ export default {
 .register_watch_button:hover,
 .register_email_watch_button:hover {
   background-color: #ca4c2fcf;
+  transform: scale(1.02);
+}
+
+.register_success {
+  background-color: #130088;
+}
+
+.register_success:hover {
+  background-color: #120088bd;
   transform: scale(1.02);
 }
 .watch {
