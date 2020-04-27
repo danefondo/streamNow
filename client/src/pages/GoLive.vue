@@ -135,6 +135,7 @@ export default {
     return {
       editor: DecoupledEditor,
       editorConfig: {
+        removePlugins: [ 'FontSize', 'MediaEmbed', 'insertTable', 'Heading', 'alignment', 'Undo', 'Redo', 'FontFamily', 'highlight' ],
         toolbar: ["bold", "italic", "|" ,"bulletedList", "numberedList", "Link", "blockQuote"]
       },
       isScheduledOpened: false,

@@ -95,6 +95,7 @@ export default {
       thumbnailName: null,
       isLive: null,
       editorConfig: {
+        removePlugins: [ 'FontSize', 'MediaEmbed', 'insertTable', 'Heading', 'alignment', 'Undo', 'Redo', 'FontFamily', 'highlight' ],
         toolbar: ["bold", "italic", "|" ,"bulletedList", "numberedList", "Link", "blockQuote"]
       }
     };
