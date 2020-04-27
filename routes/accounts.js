@@ -131,7 +131,7 @@ router.post('/updatePassword', auth.ensureAuthenticated, async function (req, re
 
 router.post('/sendResetPass', validator.forgotPass, accountController.sendResetPass);
 
-router.get('/reset/:token', async function (req, res) {
+/*router.get('/reset/:token', async function (req, res) {
 	if (req.isAuthenticated()) {
 		res.redirect('/');
 	} else {
@@ -143,7 +143,7 @@ router.get('/reset/:token', async function (req, res) {
 			valid: !!user && Date.now() < user.resetTokenExpires
 		});
 	}
-})
+})*/
 
 router.post('/reset/', validator.reset, accountController.resetPassword)
 

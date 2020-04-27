@@ -100,8 +100,7 @@ const accountController = {
 		const { body: { token, password } } = req;
 		const errors = validationResult(req);
 		if (!errors.isEmpty()) {
-			console.log('errors')
-			return res.status(422).json({ err: errors.array()[0].msg });
+			return res.status(422).json({ message: errors.array()[0].msg });
 		}
 		try {
 			const user = await User.findOne({
@@ -109,10 +108,9 @@ const accountController = {
 			});
 
 			if (!user || Date.now() > user.resetTokenExpires) {
-				// return res.status(400).json({
-				// 	err: 'Invalid password reset link'
-				// });
-				return res.redirect(req.originalUrl);
+				return res.status(400).json({
+					message: 'Invalid password reset link'
+				});
 			}
 
 			user.password = await accountUtil.hashPassword(password)
@@ -152,7 +150,7 @@ const accountController = {
 
 			await user.save();
 
-			const link = `${req.protocol}://${req.get('host')}/accounts/reset/${token}`;
+			const link = `${req.protocol}://${req.get('host')}/reset/${token}`;
 			console.log(link);
 			mail.sendResetMail(req.body.email, link);
 			res.status(200).json({

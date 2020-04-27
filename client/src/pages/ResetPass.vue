@@ -1,12 +1,13 @@
 <template>
   <div class="account-manager">
-    <form class="form__resetPass" method="POST">
+    <form @submit.prevent="resetPassword" class="form__resetPass" method="POST">
       <div class="inputErrorContainer">
         <div class="inputErrorText"></div>
       </div>
       <div class="form__title">Reset password</div>
       <div class="subtitle__resetPass">Enter your new password.</div>
       <input
+        v-model="password"
         class="input__general"
         name="password"
         type="password"
@@ -14,6 +15,7 @@
         autocomplete="off"
       />
       <input
+        v-model="confirmPassword"
         class="input__general"
         name="passcheck"
         type="password"
@@ -23,13 +25,48 @@
       <div class="submit">
         <input class="button__resetPass" type="submit" value="Submit" />
       </div>
+      <div v-if="message" class="successMessage">{{ message }}</div>
     </form>
   </div>
 </template>
 
 <script>
+import axios from "axios";
+
 export default {
-  name: "ResetPass"
+  name: "ResetPass",
+  data() {
+    return {
+      password: "",
+      confirmPassword: "",
+      message: "",
+      loading: true,
+      validToken: ""
+    };
+  },
+  mounted() {
+    // check if token is valid
+  },
+  methods: {
+    async resetPassword() {
+      if (!this.password || this.password != this.confirmPassword) {
+        return (this.message = "Passwords are required and they must match");
+      }
+      try {
+        const { data } = await axios.post("/accounts/reset", {
+          password: this.password,
+          passcheck: this.confirmPassword,
+          token: this.$route.params.t
+        });
+        setTimeout(() => {
+          this.$router.push('/login')
+        }, 1500);
+        this.message = data.message;
+      } catch ({ response }) {
+        this.message = response.data.message;
+      }
+    }
+  }
 };
 </script>
 

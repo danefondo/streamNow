@@ -21,7 +21,7 @@
         placeholder="Password"
         autocomplete="off"
       />
-      <a class="forgotPass" href="/accounts/forgotPass">Unustasid parooli?</a>
+      <router-link class="forgotPass" to="/forgotpassword">Unustasid parooli?</router-link>
       <div class="submit">
         <input :disabled="submitting" class="login-button" type="submit" value="Log in" />
       </div>
@@ -55,11 +55,8 @@ export default {
           password,
         });
         this.error = '';
-        this.success = true;
         this.$emit("update", response.data);
-        setTimeout(() => {
-          this.$router.push('/');
-        }, 1000);
+        this.$router.push('/');
       } catch (error) {
         if (error.response.status === 401) {
           this.error = error.response.data.error;

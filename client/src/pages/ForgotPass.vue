@@ -1,6 +1,6 @@
 <template>
   <div class="account-manager">
-    <form class="form__forgotPass" method="POST">
+    <form @submit.prevent="sendResetPassword" class="form__forgotPass" method="POST">
       <div class="inputErrorContainer">
         <div class="inputErrorText"></div>
       </div>
@@ -9,6 +9,7 @@
         class="subtitle__forgotPass"
       >Enter the email address you used to create your account. We will send you a link to reset your password. You may need to check your spam folder.</div>
       <input
+        v-model="email"
         class="login-input"
         name="email"
         type="text"
@@ -18,17 +19,33 @@
       <div class="submit">
         <input class="forgotPass-button" type="submit" value="Submit" />
       </div>
-      <div
-        class="successMessage"
-      >A password reset link has been sent to the email address you entered.</div>
-      <a class="accountExists__registerPage" href="/accounts/loginForm">Login instead.</a>
+      <div v-if="message" class="successMessage">{{ message }}</div>
+      <router-link class="accountExists__registerPage" to="/login">Login instead.</router-link>
     </form>
   </div>
 </template>
 
 <script>
+import axios from "axios";
 export default {
-  name: "ForgotPass"
+  name: "ForgotPass",
+  data() {
+    return {
+      email: "",
+      message: ""
+    };
+  },
+  methods: {
+    async sendResetPassword() {
+      try {
+        await axios.post("/accounts/sendResetPass", { email: this.email });
+        this.message =
+          "A password reset link has been sent to the email address you entered.";
+      } catch ({ response }) {
+        this.mesage = response.data.message;
+      }
+    }
+  }
 };
 </script>
 
@@ -195,6 +212,5 @@ div {
   padding: 8px;
   border-radius: 3px;
   font-family: "Trebuchet MS", sans-serif;
-  display: none;
 }
 </style>

@@ -52,8 +52,8 @@ const routes = [
   { path: "/terms", component: Terms },
   { path: "/contact", component: Contact },
   { path: "/profile/:id", component: Profile },
-  { path: "/reset", component: ResetPass },
-  { path: "/accounts/forgotPass", component: ForgotPass },
+  { path: "/reset/:t", component: ResetPass },
+  { path: "/forgotpassword", component: ForgotPass, name: "ForgotPassword" },
   {
     path: "/settings",
     component: Settings,
@@ -70,7 +70,7 @@ const router = new VueRouter({
   routes,
 });
 
-const noReAuth = ["Login", "Register"];
+const noReAuth = ["Login", "Register", "ForgotPassword"];
 router.beforeEach((to, from, next) => {
   if (to.meta.requireAuthentication && !auth.isAuthenticated()) {
     next({ name: "Login" });
