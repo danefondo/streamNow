@@ -55,6 +55,36 @@
               <div class="scheduled_stream_description" v-html="stream.stream_description"></div>
             </div>
           </div>
+          <div class="stream_center_top_preview">
+            <router-link :to="'/profile/' +streamer._id" class="stream_owner">
+              <img class="streamer_profile_icon" :src="getProfileIcon" />
+              <p
+                v-if="streamer"
+                class="streamer_first_name"
+              >{{streamer.firstname || streamer.username}}</p>
+              <p
+                v-if="streamer && streamer.firstname && streamer.lastname"
+                class="streamer_last_name"
+              >
+                {{
+                streamer.lastname }}
+              </p>
+            </router-link>
+            <div
+              @click="follow"
+              v-if="!owner && isAuthenticated"
+              class="streamer_follow_preview"
+              :class="{followingBg: userFollowing}"
+            >
+              <div class="streamer_follow_button">
+                <img
+                  class="streamer_follow_icon"
+                  :src="userFollowing ? FollowingIcon  : FollowIcon"
+                />
+              </div>
+              <div class="streamer_follow_state">{{ userFollowing ? 'Following' : 'Follow' }}</div>
+            </div>
+          </div>
         </div>
       </div>
       <div v-if="stream.is_live" class="section_center">
@@ -82,9 +112,9 @@
             <div class="streamer_follow_button">
               <img class="streamer_follow_icon" :src="userFollowing ? FollowingIcon  : FollowIcon" />
             </div>
-            <div class="streamer_follow_state">{{ userFollowing ? 'Following' : 'Follow' }}</div>
+            <div class="streamer_follow_state">{{ userFollowing ? $t("watch.following") : $t("watch.follow") }}</div>
           </div>
-          <div class="donate_button">Support $</div>
+          <div class="donate_button">{{$t("watch.support")}}</div>
         </div>
         <div class="player_container">
           <div
@@ -184,7 +214,7 @@ export default {
       isAuthenticated: false,
       registerInput: "",
       registerMessage: "",
-      registered: false
+      registered: false,
     };
   },
   mounted() {
@@ -750,6 +780,19 @@ p {
   align-items: center;
   max-width: 865px;
 }
+
+.stream_center_top_preview {
+    display: flex;
+    align-items: center;
+    max-width: 865px;
+    width: 600px;
+    box-sizing: border-box;
+    margin-top: 10px;
+    /* background-color: #f9f9f9; */
+    /* border-top: 1px solid #efefef; */
+    /* border-bottom: 1px solid #efefef; */
+}
+
 .stream_live,
 .stream_offline {
   padding: 6px 12px;
@@ -812,6 +855,25 @@ p {
   border-radius: 360px;
   object-fit: cover;
 }
+
+.streamer_follow_preview {
+    margin-right: 20px;
+    display: flex;
+    align-items: center;
+    background-color: #f7f7f7;
+    border-radius: 4px;
+    padding: 4px 15px;
+    cursor: pointer;
+    transition: 0.2s ease;
+    font-weight: bold;
+    margin-left: auto;
+}
+
+.streamer_follow_preview:hover {
+  background-color: #e4ff00;
+  transform: scale(1.01);
+}
+
 .streamer_follow {
   margin-left: 22px;
   margin-right: 20px;
@@ -828,7 +890,8 @@ p {
   background-color: #e4ff00;
   transform: scale(1.01);
 }
-.streamer_follow:hover > .streamer_follow_button {
+.streamer_follow:hover > .streamer_follow_button
+.streamer_follow_preview:hover > .streamer_follow_button {
   border-color: #8686862b;
 }
 .streamer_follow_button {

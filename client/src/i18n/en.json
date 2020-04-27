@@ -143,8 +143,9 @@
     },
     "watch": {
         "follow": "Follow",
+        "following": "Following",
         "hide-chat": "Hide chat",
-        "support": "Support",
+        "support": "Support $",
         "live": "LIVE",
         "share": "Share",
         "likes": "Likes",
