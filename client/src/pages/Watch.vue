@@ -325,11 +325,13 @@ export default {
 .scheduled_stream_name {
   font-size: 35px;
   font-family: "Poppins";
+  line-height: 44px;
 }
 .scheduled_stream_description {
   font-size: 22px;
   color: #333;
   font-family: "Poppins";
+  line-height: 26px;
 }
 .register_block {
 }
