@@ -1,7 +1,7 @@
 <template>
   <NoScheduledStreams v-if="!loading && !Object.keys(streams).length" />
   <div v-else class="contentArea">
-    <div class="registration-block">
+    <div v-if="!isAuthenticated" class="registration-block">
       <div class="title__landingPage cd-words-wrapper">
         <div class="landingTitleP1">{{$t("home.landing-title-core")}}</div>
         <div class="landingTitleP2">{{$t("home.landing-title-changing-1")}}</div>
@@ -47,6 +47,7 @@
 
 <script>
 import axios from "axios";
+import auth from "../config/auth";
 import Featured from "../components/Featured";
 import Stream from "../components/Stream";
 import NoScheduledStreams from "../components/NoScheduledStreams";
@@ -57,7 +58,8 @@ export default {
     return {
       featured: null,
       streams: {},
-      loading: true
+      loading: true,
+      isAuthenticated: false,
     };
   },
   components: {
@@ -66,6 +68,9 @@ export default {
     NoScheduledStreams
   },
   async mounted() {
+    if (auth.isAuthenticated()) {
+      this.isAuthenticated = true;
+    }
     try {
       const { data } = await axios.get(`/streams?scheduled=true`);
       // this.featured = data.featured;
