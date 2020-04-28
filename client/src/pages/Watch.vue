@@ -305,6 +305,11 @@ export default {
         alert(alertText);
         return;
       }
+      if (!this.isAuthenticated) {
+        let alertText = "You need to login before you can like a video";
+        alert(alertText);
+        return;
+      }
       try {
         if (!this.userLiked) {
           this.userLiked = true;
