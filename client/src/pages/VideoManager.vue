@@ -1,16 +1,16 @@
 <template>
   <div v-if="streams.length" class="manager">
-    <div v-if="showGoLiveModal" class="modal__deleteAccount">
-      <div class="modalBackground__deleteAccount"></div>
-      <div class="deleteModal">
+    <div v-if="showGoLiveModal" class="goLiveModal">
+      <div class="goLiveModalBackground"></div>
+      <div class="toLiveModal">
         <div class="content-wrapper">
           <div class="msg-title">{{ $t("streamManager.confirm-go-live") }}</div>
           <div
             class="msg-body"
-          >{{ $t("streamManager.delete-acc-confirm-desc") }}</div>
+          >{{ $t("streamManager.confirm-go-live") }}</div>
           <div class="action-group">
             <div @click="cancelModal" class="cancelPermaDeleteAccount button-outline">{{ $t("streamManager.cancel-go-live") }}</div>
-            <div @click="goLive" class="confirmPermaDeleteAccount button-filled">{{ $t("streamManager.go-live") }}</div>
+            <div @click="goLive" class="confirm-golive button-filled">{{ $t("streamManager.go-live") }}</div>
           </div>
         </div>
       </div>
@@ -155,5 +155,53 @@ export default {
 
 .manager-tagline {
   font-size: 20px;
+}
+
+.goLiveModalBackground {
+  background-color: #1f1f1f;
+  opacity: 0.5;
+  top: 0;
+  left: 0;
+  z-index: 1003;
+  position: fixed;
+  width: 100%;
+  height: 100%;
+}
+
+.toLiveModal {
+  position: fixed;
+  z-index: 9999;
+  top: 20%;
+  right: 0;
+  left: 0;
+  margin: 0 auto;
+  width: 350px;
+  background: #ffffff;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.1), 0 5px 15px 0 rgba(0, 0, 0, 0.05);
+  border-radius: 2px;
+  border: none;
+  padding: 20px;
+}
+
+.confirm-golive {
+  margin-right:12px;
+  background-color: #0000ff94;
+}
+
+.button-filled {
+  display: inline-block;
+  font-weight: 600;
+  color: white;
+  letter-spacing: 0.1rem;
+  background-color: blue;
+  cursor: pointer;
+  border-radius: 3px;
+  border: none;
+  padding: 12px;
+  text-align: center;
+  transition: 0.2s ease;
+}
+.button-filled:hover {
+  background-color: #0000ff94;
 }
 </style>

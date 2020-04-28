@@ -42,16 +42,22 @@ h1.RegisterSuccess {
 .WelcomeMessage {
   font-size: 66px !important;
 }
-.WelcomeSubtitle {
+/* .WelcomeSubtitle {
   font-size: 22px !important;
   color: #333 !important;
   max-width: 600px;
+} */
+.WelcomeSubtitle {
+  font-size: 23px !important;
+  color: #333 !important;
+  max-width: 700px;
+  line-height: 28px;
 }
 .go_live_block,
 .watch_streams_now {
   background-color: #130089;
   margin: 50px auto 0px auto;
-  padding: 27px 30px;
+  padding: 25px 30px;
   border-radius: 4px;
   color: white;
   cursor: pointer;

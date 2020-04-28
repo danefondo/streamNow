@@ -272,8 +272,8 @@
         "desc-holder": "Inspireeriv ja pilkupüüdev kirjeldus"
     },
     "restrict": {
-        "head": "Tahad minna Eetrisse?",
-        "tagline": "Võta meiega ühendust või anna märku oma huvist all oleva nupuga ja aitame sul Eetrisse saada.",
-        "action": "TAHAN EETRISSE"
+        "head": "Soovid eetrisse minna?",
+        "tagline": "Üsna pea saavad kõik Eeter.tvs oma striime jagada, ent praegu on veel proovinädal ja kuvame vaid kinnitatud kasutajaid. Aga ega me kätt ette pane. Kui soovid eetrisse minna, vajuta all olevat nuppu ning võtame sinuga meili teel ühendust!",
+        "action": "Tahan eetrisse"
     }
 }
