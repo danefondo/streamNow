@@ -26,7 +26,12 @@
           class="register_text"
         >{{$t("watch.register-to-watch")}}</div>
         <div v-if="!isAuthenticated && !owner" class="register_email_block">
-          <input v-if="!registered && !owner" v-model="registerInput" class="watch_register_input" :placeholder="$t('watch.event-register-email')"/>
+          <input
+            v-if="!registered && !owner"
+            v-model="registerInput"
+            class="watch_register_input"
+            :placeholder="$t('watch.event-register-email')"
+          />
           <div
             v-if="!registered && !owner"
             @click="signUpForVideo"
@@ -44,6 +49,12 @@
         <div class="scheduled_stream_container">
           <div class="featured_streamPreviewContainer">
             <img class="featured_streamPreview" :src="thumbnail(stream)" />
+            <div v-if="stream.is_scheduled" class="streamPreviewMeta">
+              <div class="streamDate">{{ getStreamDate(stream) + ' /'}}</div>
+            </div>
+            <div v-if="stream.is_scheduled" class="streamPreviewMeta">
+              <div class="streamTime">{{ getStreamTime(stream) }}</div>
+            </div>
             <div class="live"></div>
             <div class="viewerCount"></div>
           </div>
@@ -226,6 +237,28 @@ export default {
     }
   },
   methods: {
+    getStreamTime(stream) {
+      let time;
+      if (stream.is_scheduled && stream.scheduled_time) {
+        console.log(stream.scheduled_time);
+        time = stream.scheduled_time;
+        time = new Date(time);
+        const options = { hour: "2-digit", minute: "2-digit" };
+        time = time.toLocaleTimeString("et-EE", options);
+      }
+      return time;
+    },
+    getStreamDate(stream) {
+      let time;
+      if (stream.is_scheduled && stream.scheduled_time) {
+        console.log(stream.scheduled_time);
+        time = stream.scheduled_time;
+        time = new Date(time);
+        const options = { month: "long", day: "numeric" };
+        time = time.toLocaleDateString("et-EE", options);
+      }
+      return time;
+    },
     async signUpForVideo() {
       if (!this.isAuthenticated && !this.registerInput) {
         this.registerMessage = this.$t("watch.enter-valid-email");
@@ -333,6 +366,23 @@ export default {
 </script>
 
 <style>
+
+.streamTimeMeta,
+.streamDateMeta {
+  height: 48px;
+  /* background-color: #fbfbfb; */
+  background-color: transparent;
+  z-index: 9999;
+  width: auto;
+  position: absolute;
+  top: 20px;
+  right: 35px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* box-shadow: 3px 2px 11px 0px rgba(10, 0, 70, 0.42); */
+}
+
 .layer {
   display: flex;
   flex-direction: row;

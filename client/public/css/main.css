@@ -481,6 +481,7 @@ img.streamPreview {
   width: 600px;
   height: 400px !important;
   box-shadow: 3px 2px 11px 0px rgba(10, 0, 70, 0.42);
+  position: relative;
 }
 .featured_streamMetaContainer {
   width: 100%;
