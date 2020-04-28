@@ -74,6 +74,7 @@
         "public": "Public",
         "unlisted": "Unlisted",
         "create-event": "Create event",
+        "creating-event": "Creating event...",
         "give-name": "Give your livestream a name",
         "name-placeholder": "Your livestream name",
         "give-desc": "What's your livestream about?",

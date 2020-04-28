@@ -124,7 +124,7 @@
       <div
         @click="submit('schedule')"
         class="create_event"
-      >{{ submitting === 'schedule' ? $t('scheduling.updating-stream') : $t('scheduling.save') }}</div>
+      >{{ submitting === 'schedule' ? $t('scheduling.creating-event') : $t('scheduling.create-event') }}</div>
     </div>
   </div>
   <ShowInterest v-else />

@@ -74,6 +74,7 @@
         "public": "Avalik",
         "unlisted": "Peidetud",
         "create-event": "Loo sündmus",
+        "creating-event": "Loome sündmust...",
         "give-name": "Striimi pealkiri",
         "name-placeholder": "Anna oma striimile huvitav pealkiri",
         "give-desc": "Striimi kirjeldus",
