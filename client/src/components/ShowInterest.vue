@@ -4,16 +4,16 @@
       <!-- <h1 class="RegisterSuccess WelcomeMessage">{{$t("successPage.welcome")}}</h1> -->
       <h1
         class="RegisterSuccess WelcomeMessage"
-      >Hetkel pole meie striimimisvõimalused publikule avatud.</h1>
+      >{{$t("restrict.head")}}</h1>
       <h1
         class="RegisterSuccess WelcomeSubtitle"
-      >Kuid avame need peagi. Tahad minna Eetrisse?</h1>
-      <h1
+      >{{$t("restrict.tagline")}}</h1>
+      <!-- <h1
         class="RegisterSuccess WelcomeSubtitle"
-      >Anna märku.</h1>
+      >Anna märku.</h1> -->
     </div>
     <router-link class="go_live_block" to="/">
-      <h1 class="start_streaming">Tahan eetrisse</h1>
+      <h1 class="start_streaming">{{$t("restrict.action")}}</h1>
     </router-link>
   </div>
 </template>
@@ -26,7 +26,7 @@ export default {
 
 <style scoped>
 .WelcomeBlock {
-  margin: 80px auto 0px auto;
+  margin: -40px auto 0px auto;
   max-width: 800px;
   display: flex;
   flex-direction: column;
@@ -45,6 +45,7 @@ h1.RegisterSuccess {
 .WelcomeSubtitle {
   font-size: 22px !important;
   color: #333 !important;
+  max-width: 600px;
 }
 .go_live_block,
 .watch_streams_now {
@@ -57,7 +58,7 @@ h1.RegisterSuccess {
   transition: 0.2s ease-in-out;
   margin-bottom: 20px;
   text-align: center;
-  width: 350px;
+  /* width: 350px; */
   border: 1px solid #130089;
 }
 .watch_streams_now {
@@ -71,7 +72,7 @@ h1.RegisterSuccess {
 
 h1.start_streaming,
 h1.start_watching {
-  font-size: 50px;
+  font-size: 45px;
 }
 .RegisterSuccessContainer {
   display: flex;
@@ -80,6 +81,8 @@ h1.start_watching {
   width: 100%;
   z-index: 1;
   margin-bottom: 40px;
+  align-items: center;
+  justify-content: center;
 }
 .CheckOthersBlock {
   margin: 65px auto 0px auto;

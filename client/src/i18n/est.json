@@ -270,5 +270,10 @@
         "change-video-link": "Muuda video viidet",
         "video-placeholder": "nt. https://www.facebook.com/165028986841241/videos/254040489051203",
         "desc-holder": "Inspireeriv ja pilkupüüdev kirjeldus"
+    },
+    "restrict": {
+        "head": "Tahad minna Eetrisse?",
+        "tagline": "Võta meiega ühendust või anna märku oma huvist all oleva nupuga ja aitame sul Eetrisse saada.",
+        "action": "Tahan eetrisse"
     }
 }
