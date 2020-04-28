@@ -20,7 +20,7 @@
         </div>
       </div>
       <Featured v-if="weLive" :featured="liveNow" />
-      <Featured v-else :featured="featured" />
+      <Featured v-else-if="featured" :featured="featured" />
     </div>
     <div class="discovery_section">
       <div class="examplesSection__landingPage">

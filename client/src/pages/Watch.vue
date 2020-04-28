@@ -240,7 +240,6 @@ export default {
     getStreamTime(stream) {
       let time;
       if (stream.is_scheduled && stream.scheduled_time) {
-        console.log(stream.scheduled_time);
         time = stream.scheduled_time;
         time = new Date(time);
         const options = { hour: "2-digit", minute: "2-digit" };
@@ -251,7 +250,6 @@ export default {
     getStreamDate(stream) {
       let time;
       if (stream.is_scheduled && stream.scheduled_time) {
-        console.log(stream.scheduled_time);
         time = stream.scheduled_time;
         time = new Date(time);
         const options = { month: "long", day: "numeric" };
@@ -275,7 +273,6 @@ export default {
       } catch (err) {
         this.registerMessage = err.response.data.errors;
         this.registered = false;
-        console.log("fail", err.response.data);
       }
     },
     async getStream() {

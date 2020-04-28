@@ -35,13 +35,13 @@ module.exports = {
 		});
 	},
 
-	sendVideoSignUpEmail(email, stream) {
+	sendVideoSignUpEmail(email, streamName, link) {
 		const data = {
 		  from: 'Eeter.tv <noreply@eeter.tv>',
 		  to: email,
-		  subject: `Registreerisid vaatama ${stream_name}`,
+		  subject: `Registreerisid vaatama ${streamName}`,
 		  html: '',
-		  text: `Ära muretse! Tuletame sulle meelde kohe kui ${stream_name} eetrisse läheb! Seniks, mine uudista Eeter.tv lehel ringi, äkki leiad midagi muud põnevat.`
+		  text: `Ära muretse! Tuletame sulle meelde kohe kui ${streamName} eetrisse läheb! Seniks, mine uudista Eeter.tv lehel ringi, äkki leiad midagi muud põnevat.`
 		};
 		mailgun.messages().send(data, function (error, body) {
 		  console.log(body);
@@ -62,13 +62,13 @@ module.exports = {
 		});
 	},
 
-	sendVideoSignUpReminderEmail(email, link) {
+	sendVideoSignUpReminderEmail(email, streamName, link) {
 		const data = {
 		  from: 'Eeter.tv <noreply@eeter.tv>',
 		  to: email,
-		  subject: `${stream_name} on eetris!`,
+		  subject: `${streamName} on eetris!`,
 		  html: '',
-		  text: `${stream_name} on juba eetris! Tõtta vaatama! ${link}`
+		  text: `${streamName} on juba eetris! Tõtta vaatama! ${link}`
 		};
 		mailgun.messages().send(data, function (error, body) {
 		  console.log(body);

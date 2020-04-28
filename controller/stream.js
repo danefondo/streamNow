@@ -309,8 +309,8 @@ const streamController = {
             }
             stream.waitlist_emails.push(signUpId);
             await stream.save();
-
-            mail.sendVideoSignUpEmail(email, stream);
+            const link = `${req.protocol}://${req.get('host')}/watch/${stream._id}`;
+            mail.sendVideoSignUpEmail(email, stream.stream_name, link);
 
             res.json({
                 stream: stream
@@ -665,21 +665,9 @@ const streamController = {
             user.current_stream_thumbnail = stream.stream_thumbnail_url;
             await user.save();
             
-            // let emails = stream.waitlist_emails;
-            // let link = window.location.origin + '/watch/' + stream._id;
-            // emails.forEach(function(email, index) {
-            //     //- Later check if valid email
-            //     if (email.contains("@")) {
-            //         mail.sendVideoSignUpReminderEmail(email, link);
-            //     } else {
-            //         let user = await User.findById(email);
-            //         if (!user) {
-            //             console.log("Not a valid user id.");
-            //         }
-            //         email = user.email;
-            //         mail.sendVideoSignUpReminderEmail(email, link);
-            //     }
-            // })
+            let emails = stream.waitlist_emails;
+            const link = `${req.protocol}://${req.get('host')}/watch/${stream._id}`;
+            streamUtils.sendGoLiveMails(emails, link);
 
             res.status(200).json({
                 stream: stream
