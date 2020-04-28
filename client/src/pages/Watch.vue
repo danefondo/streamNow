@@ -127,7 +127,7 @@
               class="streamer_follow_state"
             >{{ userFollowing ? $t("watch.following") : $t("watch.follow") }}</div>
           </div>
-          <div class="donate_button">{{$t("watch.support")}}</div>
+          <a v-if="stream.supportLink" :href="stream.supportLink" class="donate_button">{{$t("watch.support")}}</a>
         </div>
         <div class="player_container">
           <div
@@ -779,6 +779,7 @@ p {
   border-radius: 3px;
   cursor: pointer;
   transition: 0.2s ease;
+  display: block;
 }
 .donate_button:hover {
   opacity: 0.8;

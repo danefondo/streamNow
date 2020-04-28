@@ -49,7 +49,7 @@ module.exports = {
 	},
 
 
-	sendVideoSignUpReminderEmail30(email, stream) {
+	sendVideoSignUpReminderEmail30(email, link) {
 		const data = {
 		  from: 'Eeter.tv <noreply@eeter.tv>',
 		  to: email,
@@ -62,13 +62,13 @@ module.exports = {
 		});
 	},
 
-	sendVideoSignUpReminderEmail(email, stream) {
+	sendVideoSignUpReminderEmail(email, link) {
 		const data = {
 		  from: 'Eeter.tv <noreply@eeter.tv>',
 		  to: email,
 		  subject: `${stream_name} on eetris!`,
 		  html: '',
-		  text: `${stream_name} on juba eetris! Tõtta vaatama!`
+		  text: `${stream_name} on juba eetris! Tõtta vaatama! ${link}`
 		};
 		mailgun.messages().send(data, function (error, body) {
 		  console.log(body);

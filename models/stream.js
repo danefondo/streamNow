@@ -26,7 +26,8 @@ const stream_schema = new mongoose.Schema({
     scheduled_time: Date,
     public_status: String,
     platform_status: String,
-    waitlist_emails: [String]
+    waitlist_emails: [String],
+    support_link: String
 });
 
 const Stream = module.exports = mongoose.model('Stream', stream_schema);
