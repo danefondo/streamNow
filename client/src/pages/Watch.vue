@@ -127,7 +127,7 @@
               class="streamer_follow_state"
             >{{ userFollowing ? $t("watch.following") : $t("watch.follow") }}</div>
           </div>
-          <a v-if="stream.supportLink" :href="stream.supportLink" class="donate_button">{{$t("watch.support")}}</a>
+          <a v-if="stream.support_link" :href="stream.support_link" class="donate_button">{{$t("watch.support")}}</a>
         </div>
         <div class="player_container">
           <div
