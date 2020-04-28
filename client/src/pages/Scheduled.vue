@@ -1,11 +1,20 @@
 <template>
   <NoScheduledStreams v-if="!loading && !Object.keys(streams).length" />
   <div v-else class="contentArea">
+    <div class="registration-block">
+      <div class="title__landingPage cd-words-wrapper">
+        <div class="landingTitleP1">{{$t("home.landing-title-core")}}</div>
+        <div class="landingTitleP2">{{$t("home.landing-title-changing-1")}}</div>
+        <div class="landingSubtitle">{{$t("home.subtitle")}}</div>
+      </div>
+      <router-link to="/register" class="signupPageLink">{{$t("home.join")}}</router-link>
+    </div>
+
     <div class="discovery_section">
       <div class="examplesSection__landingPage">
         <div class="examplesContainer__landingPage">
           <div
-            v-if="!loading && featured" 
+            v-if="!loading && featured"
             class="examplesTitle__landingPage"
           >{{ featured.is_live ? $t('scheduled.live_now') : $t('scheduled.next-up') }}</div>
         </div>
@@ -54,7 +63,7 @@ export default {
   components: {
     Stream,
     Featured,
-    NoScheduledStreams,
+    NoScheduledStreams
   },
   async mounted() {
     try {
