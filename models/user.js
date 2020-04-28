@@ -42,7 +42,8 @@ const UserSchema = new mongoose.Schema({
 	liked_streams_ids: [String],
 	profile_image_name: String,
 	profile_image_url: String,
-	profile_image_key: String
+	profile_image_key: String,
+	admin: Boolean
 });
 
 const User = module.exports = mongoose.model('User', UserSchema);

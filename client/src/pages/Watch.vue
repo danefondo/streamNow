@@ -26,7 +26,7 @@
           class="register_text"
         >{{$t("watch.register-to-watch")}}</div>
         <div v-if="!isAuthenticated && !owner" class="register_email_block">
-          <input v-if="!registered && !owner" v-model="registerInput" class="watch_register_input" />
+          <input v-if="!registered && !owner" v-model="registerInput" class="watch_register_input" :placeholder="$t('watch.event-register-email')"/>
           <div
             v-if="!registered && !owner"
             @click="signUpForVideo"
@@ -445,9 +445,6 @@ export default {
   margin-bottom: 15px;
   max-width: 600px;
   box-sizing: border-box;
-}
-.register_email_watch_button {
-  max-width: 560px;
 }
 
 .register_watch_button:hover,

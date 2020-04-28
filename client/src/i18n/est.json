@@ -181,7 +181,8 @@
         "successful-register": "Oled kirjas",
         "enter-valid-email": "Sisesta korralik meiliaadress",
         "already-registered": "Oled vaatajana kirjas.",
-        "cannot-like-own-video": "Ennast kiitmast ma ei väsi"
+        "cannot-like-own-video": "Ennast kiitmast ma ei väsi",
+        "event-register-email": "mina@mail.ee"
     },
     "form": {
         "empty": "Ei tohi olla tühi",

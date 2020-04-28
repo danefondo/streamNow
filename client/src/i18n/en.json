@@ -181,7 +181,8 @@
         "successful-register": "Successfully registered for event",
         "enter-valid-email": "You must enter a valid email",
         "already-registered": "You are registered for this event.",
-        "cannot-like-own-video": "You can't like your own video"
+        "cannot-like-own-video": "You can't like your own video",
+        "event-register-email": "example@email.com"
     },
     "form": {
         "empty": "Cannot be empty",
