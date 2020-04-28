@@ -1,5 +1,5 @@
 <template>
-  <div class="contentArea">
+  <div v-if=" user && user.admin" class="contentArea">
     <div v-if="error" class="generalErrorContainer">
       <div class="generalErrorText">{{ $t("form.wrong") }}</div>
     </div>
@@ -127,21 +127,25 @@
       >{{ submitting === 'schedule' ? $t('scheduling.creating-stream') : 'Create Event' }}</div>
     </div>
   </div>
+  <ShowInterest v-else />
 </template>
 
 <script>
 import axios from "axios";
+import auth from "../config/auth";
 import DecoupledEditor from "@ckeditor/ckeditor5-build-decoupled-document";
 import Datepicker from "vuejs-datepicker";
 import InputTag from "vue-input-tag";
 import ImageUpload from "../components/ImageUpload";
+import ShowInterest from "../components/ShowInterest";
 
 export default {
   name: "GoLive",
   components: {
     Datepicker,
     InputTag,
-    ImageUpload
+    ImageUpload,
+    ShowInterest
   },
   data() {
     return {
@@ -188,8 +192,18 @@ export default {
       submitting: false,
       image: null,
       uploadingImage: false,
-      public_status: "public"
+      public_status: "public",
+      user: {},
+      isAuthenticated: false
     };
+  },
+  mounted() {
+    if (auth.isAuthenticated()) {
+      console.log("auth", auth.isAuthenticated());
+      this.user = auth.isAuthenticated();
+      this.isAuthenticated = true;
+      console.log("user", this.user);
+    }
   },
   methods: {
     toggle() {

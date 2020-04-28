@@ -36,9 +36,13 @@ router.get('/verify/:verificationToken', function (req, res, next) {
 			console.log('Please ensure you have created an account');
 			return res.status(401).send({ message: "verification.ensure-account" });
 		}
+		let adminStatus = false;
+		if (theUser.admin) {
+			adminStatus = true;
+		}
 		theUser.verifiedStatus = true;
 		theUser.save((err, savedUser) => {
-			const tokenUser = { username: savedUser.username, _id: savedUser._id, is_live: savedUser.is_live }
+			const tokenUser = { username: savedUser.username, _id: savedUser._id, is_live: savedUser.is_live, admin: adminStatus }
 			const token = jwt.sign({ user: tokenUser }, process.env.SECRET, {
 				expiresIn: '1d',
 			});
@@ -56,11 +60,16 @@ router.post('/login', function (req, res, next) {
 		}
 		req.login(user, { session: false }, function (err) {
 			if (err) { return next(err) }
+			let adminStatus = false;
+			if (user.admin) {
+				adminStatus = true;
+			}
 			const theUser = {
 				username: user.username,
 				_id: user._id,
 				is_live: user.is_live,
-				active_stream_id: user.active_stream_id
+				active_stream_id: user.active_stream_id,
+				admin: adminStatus
 			}
 			console.log(theUser);
 			const token = jwt.sign({ user: theUser }, process.env.SECRET, {
