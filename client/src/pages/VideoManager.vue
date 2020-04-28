@@ -193,7 +193,7 @@ export default {
   font-weight: 600;
   color: white;
   letter-spacing: 0.1rem;
-  background-color: blue;
+  background-color: #130089;
   cursor: pointer;
   border-radius: 3px;
   border: none;

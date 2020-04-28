@@ -23,7 +23,7 @@
     <p dir="ltr" style="line-height:1.38;margin-top:0pt;margin-bottom:0pt;">
       <span
         style="font-size:11pt;font-family:Arial;color:#000000;background-color:transparent;font-weight:400;font-style:normal;font-variant:normal;text-decoration:none;vertical-align:baseline;white-space:pre;white-space:pre-wrap;"
-      >Eeter.tv sai alguse ideest aidata eriolukorra t&otilde;ttu sissetulekuallika kaotanud inimesi. Teiste toetamine on tore ja &uuml;llas. Lisaks, me usume andmisesse enne k&uuml;simist. Kui lood maailma v&auml;&auml;rtust, n&auml;iteks hariva v&otilde;i meelt lahutava sisu n&auml;ol, siis maailm reageerib. Vahel rahaliselt, teinekord metafoorilise k&auml;epigistuse ja s&otilde;braliku julgustusega.&nbsp;</span>
+      >Meie eesmärk on kõigi isolatsioon produktiivsemaks teha. Eeter.tv sai alguse soovist aidata eriolukorra tõttu sissetulekuallika kaotanud inimesi. Sellele truuks jäädes oleme püüdnud ehitada platvormi, mis oleks ka vaatajatele kasulik. Teiste toetamine on tore ja üllas, ent usume, et kui lood maailma väärtust, näiteks hariva või meelt lahutava sisu näol, siis maailm reageerib. Vahel on see rahaliselt, teinekord metafoorilise käepigistuse ja sõbraliku julgustusega.</span>
     </p>
     <p dir="ltr" style="line-height:1.38;margin-top:0pt;margin-bottom:0pt;">
       <br />
@@ -39,7 +39,7 @@
       >Looja alustab&nbsp;</span>
       <span
         style="font-size:11pt;font-family:Arial;color:#000000;background-color:transparent;font-weight:400;font-style:italic;font-variant:normal;text-decoration:none;vertical-align:baseline;white-space:pre;white-space:pre-wrap;"
-      >striimimist</span>
+      >striimimist </span>
       <span
         style="font-size:11pt;font-family:Arial;color:#000000;background-color:transparent;font-weight:400;font-style:normal;font-variant:normal;text-decoration:none;vertical-align:baseline;white-space:pre;white-space:pre-wrap;"
       >&nbsp;</span>
@@ -67,14 +67,6 @@
       <span
         style="font-size:11pt;font-family:Arial;color:#000000;background-color:transparent;font-weight:400;font-style:normal;font-variant:normal;text-decoration:none;vertical-align:baseline;white-space:pre;white-space:pre-wrap;"
       >&nbsp;ja seej&auml;rel jagab seda Eeter.tv veebis. Kuna me vaid koondame sisu, j&auml;&auml;b k&otilde;ik looja originaalplatvormile alles. Aga see, kas see ka seal kajastub, on looja enda valida. Varsti saab alustada striimimist ka otse l&auml;bi meie veebi ja lausa mitmesse sotsiaalmeediakanalisse korraga. &nbsp;</span>
-      <a
-        href="https://docs.google.com/document/d/1cepWidrvKydDOanysr1nRh4aXccbtB5ySVxoQwGnj_E/edit#"
-        style="text-decoration:none;"
-      >
-        <span
-          style="font-size:11pt;font-family:Arial;color:#1155cc;background-color:transparent;font-weight:400;font-style:italic;font-variant:normal;text-decoration:underline;-webkit-text-decoration-skip:none;text-decoration-skip-ink:none;vertical-align:baseline;white-space:pre;white-space:pre-wrap;"
-        >VAATA &Otilde;PETUST.</span>
-      </a>
     </p>
     <p dir="ltr" style="line-height:1.38;margin-top:0pt;margin-bottom:0pt;">
       <br />
@@ -92,15 +84,7 @@
     <p dir="ltr" style="line-height:1.38;margin-top:0pt;margin-bottom:0pt;">
       <span
         style="font-size:11pt;font-family:Arial;color:#000000;background-color:transparent;font-weight:400;font-style:normal;font-variant:normal;text-decoration:none;vertical-align:baseline;white-space:pre;white-space:pre-wrap;"
-      >a, aga selleni on veel aega. Sellegipoolest, kuna me oleme k&otilde;ige eest tasunud omast taskust, siis v&auml;ikesest toetusest ise ka &auml;ra ei &uuml;tleks&nbsp;</span>
-      <a
-        href="https://docs.google.com/document/d/1cepWidrvKydDOanysr1nRh4aXccbtB5ySVxoQwGnj_E/edit#"
-        style="text-decoration:none;"
-      >
-        <span
-          style="font-size:11pt;font-family:Arial;color:#1155cc;background-color:transparent;font-weight:400;font-style:normal;font-variant:normal;text-decoration:underline;-webkit-text-decoration-skip:none;text-decoration-skip-ink:none;vertical-align:baseline;white-space:pre;white-space:pre-wrap;"
-        >TOETA EETRIT.</span>
-      </a>
+      >Aga selleni on veel aega.
     </p>
     <p>
       <br />
@@ -115,7 +99,7 @@
         style="font-size:11pt;font-family:Arial;color:#000000;background-color:transparent;font-weight:400;font-style:normal;font-variant:normal;text-decoration:none;vertical-align:baseline;white-space:pre;white-space:pre-wrap;"
       >Alusta striimimist ja v&otilde;ida s&uuml;dameid! &nbsp;</span>
       <a
-        href="https://docs.google.com/document/d/1cepWidrvKydDOanysr1nRh4aXccbtB5ySVxoQwGnj_E/edit#"
+        href="https://www.eeter.tv/golive"
         style="text-decoration:none;"
       >
         <span
@@ -131,7 +115,7 @@
         style="font-size:11pt;font-family:Arial;color:#000000;background-color:transparent;font-weight:400;font-style:normal;font-variant:normal;text-decoration:none;vertical-align:baseline;white-space:pre;white-space:pre-wrap;"
       >Platvormi kasutamisel palun tutvu meie ka meie&nbsp;</span>
       <a
-        href="https://docs.google.com/document/d/1cepWidrvKydDOanysr1nRh4aXccbtB5ySVxoQwGnj_E/edit#"
+        href="https://www.eeter.tv/terms"
         style="text-decoration:none;"
       >
         <span
