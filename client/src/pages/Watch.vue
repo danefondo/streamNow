@@ -49,11 +49,11 @@
         <div class="scheduled_stream_container">
           <div class="featured_streamPreviewContainer">
             <img class="featured_streamPreview" :src="thumbnail(stream)" />
-            <div v-if="stream.is_scheduled" class="streamPreviewMeta">
-              <div class="streamDate">{{ getStreamDate(stream) + ' /'}}</div>
+            <div v-if="stream.is_scheduled" class="streamPreviewDateContainer">
+              <div class="streamPreviewDate">{{ getStreamDate(stream) + ' /'}}</div>
             </div>
-            <div v-if="stream.is_scheduled" class="streamPreviewMeta">
-              <div class="streamTime">{{ getStreamTime(stream) }}</div>
+            <div v-if="stream.is_scheduled" class="streamPreviewTimeContainer">
+              <div class="streamPreviewTime">{{ getStreamTime(stream) }}</div>
             </div>
             <div class="live"></div>
             <div class="viewerCount"></div>
@@ -366,6 +366,47 @@ export default {
 </script>
 
 <style>
+.streamPreviewTimeContainer {
+  height: 60px;
+  background-color: #fbfbfb;
+  z-index: 9999;
+  width: 18%;
+  position: absolute;
+  top: 0;
+  left: 120px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.streamPreviewDateContainer {
+  height: 60px;
+  background-color: #fbfbfb;
+  z-index: 9999;
+  width: 23%;
+  position: absolute;
+  top: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 3px 2px 11px 0px rgba(10, 0, 70, 0.42);
+}
+
+.streamPreviewTime {
+  padding: 11px 15px;
+  font-weight: bold;
+  font-size: 28px;
+  color: #f4f3ff;
+  color: #292295;
+}
+
+.streamPreviewDate {
+  padding: 11px 15px;
+  font-weight: bold;
+  font-size: 28px;
+  color: #f4f3ff;
+  color: #292295;
+}
 
 .streamTimeMeta,
 .streamDateMeta {
