@@ -1034,7 +1034,7 @@ textarea {
   align-items: center;
 }
 .end_stream_confirm {
-  width: 165px;
+  /* width: 165px; */
   background-color: #f5f5f5;
   cursor: pointer;
   border-radius: 2px;

@@ -3,14 +3,20 @@
     <div v-if="showGoLiveModal" class="goLiveModal">
       <div class="goLiveModalBackground"></div>
       <div class="toLiveModal">
-        <div class="content-wrapper">
-          <div class="msg-title">{{ $t("streamManager.confirm-go-live") }}</div>
-          <div
-            class="msg-body"
-          >{{ $t("streamManager.confirm-go-live") }}</div>
+        <div class="modal-content-wrapper">
+          <div class="modal-text-container">
+            <div class="modal-title">{{ $t("streamManager.confirm-go-live") }}</div>
+            <div class="modal-body">{{ $t("streamManager.confirm-go-live") }}</div>
+          </div>
           <div class="action-group">
-            <div @click="cancelModal" class="cancelPermaDeleteAccount button-outline">{{ $t("streamManager.cancel-go-live") }}</div>
-            <div @click="goLive" class="confirm-golive button-filled">{{ $t("streamManager.go-live") }}</div>
+            <div
+              @click="cancelModal"
+              class="cancelPermaDeleteAccount button-outline"
+            >{{ $t("streamManager.cancel-go-live") }}</div>
+            <div
+              @click="goLive"
+              class="confirm-golive button-filled"
+            >{{ $t("streamManager.go-live") }}</div>
           </div>
         </div>
       </div>
@@ -67,7 +73,7 @@ export default {
       streams: {},
       activetab: "all",
       showGoLiveModal: false,
-      streamToGoLive: null,
+      streamToGoLive: null
     };
   },
   components: {
@@ -184,7 +190,7 @@ export default {
 }
 
 .confirm-golive {
-  margin-right:12px;
+  margin-right: 12px;
   background-color: #0000ff94;
 }
 
@@ -203,5 +209,31 @@ export default {
 }
 .button-filled:hover {
   background-color: #0000ff94;
+}
+
+.modal-text-container {
+  width: 250px;
+}
+
+.modal-content-wrapper {
+  width: 290px;
+  margin: auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-title {
+  margin-top: 30px;
+  font-size: 20px;
+  width: 250px;
+}
+.modal-body {
+  padding-top: 10px;
+  font-weight: 100;
+  font-size: 16px;
+  display: block;
+  width: 250px
 }
 </style>
