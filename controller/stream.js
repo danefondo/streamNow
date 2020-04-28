@@ -5,6 +5,24 @@ const streamUtils = require('../utils/stream')
 const moment = require('moment');
 const mail = require('../utils/mail');
 const streamController = {
+    async fetchLiveStreams(req, res) {
+        let query = { "is_live": true }
+        try {
+            let streams = await Stream.find(query).populate('streamer').exec();
+            if (!streams.length) {
+                return res.status(404).json({
+                    message: "No live streams found"
+                });
+            }
+            res.status(200).json({
+                streams: streams
+            });
+        } catch (error) {
+            res.status(500).json({
+                errors: "An unknown error occurred"
+            });
+        }
+    },
     async fetchStreams(req, res) {
         let query = { "is_live": true }
         if (req.query.scheduled) {

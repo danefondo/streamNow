@@ -16,10 +16,11 @@
           <div
             v-if="!loading && featured"
             class="examplesTitle__landingPage"
-          >{{ featured.is_live ? $t('scheduled.live_now') : $t('scheduled.next-up') }}</div>
+          >{{ weLive ? $t('scheduled.live_now') : $t('scheduled.next-up') }}</div>
         </div>
       </div>
-      <Featured v-if="featured" :featured="featured" />
+      <Featured v-if="weLive" :featured="liveNow" />
+      <Featured v-else :featured="featured" />
     </div>
     <div class="discovery_section">
       <div class="examplesSection__landingPage">
@@ -58,8 +59,11 @@ export default {
     return {
       featured: null,
       streams: {},
+      liveStreams: {},
       loading: true,
       isAuthenticated: false,
+      liveNow: null,
+      weLive: false,
     };
   },
   components: {
@@ -87,6 +91,14 @@ export default {
         }
         this.streams[date].push(eachStream);
       });
+    } catch (error) {
+      this.loading = false;
+    }
+    try {
+      const { data } = await axios.get(`/streams/fetchLiveStreams`);
+      this.liveStreams = data.streams;
+      this.liveNow = data.streams[0];
+      this.weLive = true;
     } catch (error) {
       this.loading = false;
     }

@@ -7,6 +7,8 @@ const streamController = require('../controller/stream');
 
 router.get('/', streamController.fetchStreams); 
 
+router.get('/fetchLiveStreams', streamController.fetchLiveStreams); 
+
 router.get('/:streamId', auth.checkAuthenticated, streamController.showStream);
 
 router.post('/:streamId/updateLikes', auth.checkAuthenticated, streamController.updateLikes);
