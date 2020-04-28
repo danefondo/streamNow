@@ -120,7 +120,7 @@
             <div
               @click="editStream"
               class="create_event"
-            >{{ submitting === 'schedule' ? $t('scheduling.creating-stream') : 'Create Event' }}</div>
+            >{{ submitting === 'schedule' ? $t('scheduling.updating-stream') : $t('scheduling.save') }}</div>
           </div>
         </div>
       </div>

@@ -89,7 +89,9 @@
         "creating-stream": "Loome striimi...",
         "uploading-img": "Pildi üleslaadimine...",
         "remove-img": "Eemalda",
-        "image": "pilt"
+        "image": "pilt",
+        "save": "Salvesta",
+        "updating-stream": "Uuendan..."
     },
     "settings": {
         "settings-title": "Kasutaja seaded",

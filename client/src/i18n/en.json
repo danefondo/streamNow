@@ -89,7 +89,9 @@
         "creating-stream": "Creating stream...",
         "uploading-img": "Uploading image...",
         "remove-img": "Remove",
-        "image": "image"
+        "image": "image",
+        "save": "Save changes",
+        "updating-stream": "Updating..."
     },
     "settings": {
         "settings-title": "Account settings",
