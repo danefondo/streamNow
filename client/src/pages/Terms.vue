@@ -7,10 +7,9 @@
         <span class="textStyle">28.04.2020</span>
       </div>
 
-      <div class="textTitle"></div>Mõisted
+      <div class="textTitle">Mõisted</div>
       <div class="textSection">
-        <span class="textStyle">
-          Eeter.tv - Meie, tere@eeter.tv
+        <span class="textStyle">Eeter.tv - Meie, tere@eeter.tv
           <br />Kasutustingimused - käesolevad tingimused veebilehe kasutamiseks, sisu üleslaadimiseks, toetuste kogumiseks.
           <br />Kasutaja - Eeter.tv keskkonna kasutaja.
           <br />Looja - Kasutaja, kes lisab Eeter.tv keskkonda videosisu, ja/või kogub sellelt toetuseid.
@@ -21,11 +20,9 @@
         </span>
       </div>
 
+      <div class="textTitle">Tere tulemast Eeter.tv veebilehele. Kasutustingimused kehtivad kõikidele Kasutajatele.</div>
       <div class="textSection">
-        <span class="textStyle">
-          Tere tulemast Eeter.tv veebilehele. Kasutustingimused kehtivad kõikidele Kasutajatele.
-          <br />
-          <br />Eeter.tv -l on õigus Üldtingimusi ühepoolselt muuta. Üldtingimuste muudatusest teavitab Eeter.tv Kasutajaid kodulehel ja e-posti teel.
+        <span class="textStyle">Eeter.tv -l on õigus Üldtingimusi ühepoolselt muuta. Üldtingimuste muudatusest teavitab Eeter.tv Kasutajaid kodulehel ja e-posti teel.
           <br />
           <br />Eeter.tv ei oma juriidilist vastutust kasutajate poolt sisestatud Sisu eest.
           <br />
