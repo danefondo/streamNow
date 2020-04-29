@@ -60,7 +60,8 @@
         "terms": "Terms of service",
         "contact": "Contact",
         "rights": "All rights reserved.",
-        "copyright": "© 2020 Eeter.tv"
+        "copyright": "© 2020 Eeter.tv",
+        "feature-requests": "Feature requests"
     },
     "scheduling": {
         "schedule-later": "Schedule for later?",
@@ -178,14 +179,17 @@
         "end-stream": "End stream",
         "cancel-end-stream": "Cancel",
         "register-to-watch": "Register to watch",
-        "register-watch": "Register",
+        "register-watch": "Register to watch",
         "stream-has-ended": "Stream has ended. Watch recording.",
         "edit": "Edit",
         "successful-register": "Successfully registered for event",
         "enter-valid-email": "You must enter a valid email",
         "already-registered": "You are registered for this event.",
         "cannot-like-own-video": "You can't like your own video",
-        "event-register-email": "example@email.com"
+        "event-register-email": "example@email.com",
+        "put-email": "Add your email and click 'Register to watch'",
+        "copy": "Copy Link",
+        "copied": "Copied!"
     },
     "form": {
         "empty": "Cannot be empty",

@@ -18,6 +18,7 @@ import Settings from "./pages/Settings";
 import Error404 from "./pages/Error404";
 import auth from "./config/auth";
 import VideoManager from "./pages/VideoManager";
+import FeatureRequests from "./pages/FeatureRequests";
 
 const routes = [
   { path: "/scheduled", component: Scheduled },
@@ -49,6 +50,7 @@ const routes = [
   { path: "/verify/:token", component: VerifyUser, name: "Verify" },
   { path: "/about", component: About },
   { path: "/privacy", component: Privacy },
+  { path: "/feature-requests", component: FeatureRequests },
   { path: "/terms", component: Terms },
   { path: "/contact", component: Contact },
   { path: "/profile/:id", component: Profile },

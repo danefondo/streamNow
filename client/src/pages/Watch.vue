@@ -26,6 +26,7 @@
           class="register_text"
         >{{$t("watch.register-to-watch")}}</div>
         <div v-if="!isAuthenticated && !owner" class="register_email_block">
+          <div v-if="!registered && !owner" class="pass_field">{{ $t("watch.put-email") }}</div>
           <input
             v-if="!registered && !owner"
             v-model="registerInput"
@@ -127,7 +128,11 @@
               class="streamer_follow_state"
             >{{ userFollowing ? $t("watch.following") : $t("watch.follow") }}</div>
           </div>
-          <a v-if="stream.support_link" :href="stream.support_link" class="donate_button">{{$t("watch.support")}}</a>
+          <a
+            v-if="stream.support_link"
+            :href="stream.support_link"
+            class="donate_button"
+          >{{$t("watch.support")}}</a>
         </div>
         <div class="player_container">
           <div
@@ -181,7 +186,10 @@
           </div>
         </div>
       </div>
-      <div v-if="stream.is_live && !stream.is_scheduled" class="section_right">
+      <div
+        v-if="stream.is_live && !stream.is_scheduled && stream.platform_status && stream.platform_status.includes('youtu')"
+        class="section_right"
+      >
         <div class="player_sidebar_container">
           <div class="sidebar_section_top">
             <div class="hide_chat">{{$t("watch.hide-chat")}}</div>
@@ -1277,5 +1285,15 @@ textarea {
 }
 .userLiked {
   background-color: #0000ff17;
+}
+
+.pass_field {
+  font-size: 13px;
+  color: #545454;
+  font-weight: 500;
+  margin-left: auto;
+  display: block;
+  margin-bottom: -10px;
+  margin-top: 20px;
 }
 </style>

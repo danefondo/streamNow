@@ -13,6 +13,9 @@
       <router-link to="/contact" class="footer_section">
         <div class="footer_contact">{{$t("footer.contact")}}</div>
      </router-link>
+      <router-link to="/feature-requests" class="footer_section">
+        <div class="footer_feature_request">{{$t("footer.feature-requests")}}</div>
+     </router-link>
       <div class="footer_section right">
         <div class="rights_reserved">{{$t("footer.rights")}}</div>
       </div>

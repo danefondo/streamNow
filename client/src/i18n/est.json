@@ -39,7 +39,7 @@
         "settings": "Seaded",
         "logout": "Logi välja",
         "schedule": "Tulevased",
-        "manage-streams": "Muuda striime",
+        "manage-streams": "Halda striime",
         "register": "Loo kasutaja",
         "login": "Logi sisse"
     },
@@ -60,7 +60,8 @@
         "terms": "Kasutustingimused",
         "contact": "Kontakt",
         "rights": "Kõik õigused kaitstud.",
-        "copyright": "© 2020 Eeter.tv"
+        "copyright": "© 2020 Eeter.tv",
+        "feature-requests": "Esita soov"
     },
     "scheduling": {
         "schedule-later": "Planeeri hilisemaks?",
@@ -78,11 +79,11 @@
         "give-name": "Striimi pealkiri",
         "name-placeholder": "Anna oma striimile huvitav pealkiri",
         "give-desc": "Striimi kirjeldus",
-        "desc-placeholder": "Millest striimima hakkad?",
+        "desc-placeholder": "Tekita oma pealkirjaga põnevust",
         "add-tags": "Lisa märksõnad",
         "tags-placeholder": "Kirjuta märksõna",
         "add-video-link": "Video aadress",
-        "link-placeholder": "Youtube, Facebook, või Twitchi aadress",
+        "link-placeholder": "Veebiaadress otse videole",
         "upload-thumbnail": "Lae üles illustreeriv pilt (valikuline)",
         "thumbnail-instruction": "Lisa pilt",
         "instruction-help": "Või lihtsalt lohista fail siia",
@@ -185,7 +186,10 @@
         "enter-valid-email": "Sisesta korralik meiliaadress",
         "already-registered": "Oled vaatajana kirjas.",
         "cannot-like-own-video": "Ennast kiitmast ma ei väsi",
-        "event-register-email": "mina@mail.ee"
+        "event-register-email": "mina@mail.ee",
+        "put-email": "Lisa kasti oma meili aadress ja vajuta 'Pane kirja'",
+        "copy": "Kopeeri Link",
+        "copied": "Kopeeritud!"
     },
     "form": {
         "empty": "Ei tohi olla tühi",
@@ -196,7 +200,7 @@
         "not-found": "Oi ei. Me ei leidnud seda lehte.",
         "not-found-help-1": "Me ei leia seda lehte.",
         "not-found-help-2": "Mine eelmisele tagasi",
-        "contact-us": "või krijuta meile",
+        "contact-us": "või kirjuta meile",
         "not-found-help-3": "ja küsi abi."
     },
     "verification": {
@@ -207,7 +211,7 @@
     },
     "successPage": {
         "welcome": "Tere tulemast!",
-        "tagline": "Asi on ametlik! Väga põne, kuulud nüüd meie klubisse!",
+        "tagline": "Asi on ametlik! Väga põnev, kuulud nüüd meie klubisse!",
         "start-streaming": "Hakka striimima!",
         "start-watching": "Vaata striime!"
     },
@@ -276,5 +280,9 @@
         "head": "Soovid eetrisse minna?",
         "tagline": "Üsna pea saavad kõik Eeter.tvs oma striime jagada, ent praegu on veel proovinädal ja kuvame vaid kinnitatud kasutajaid. Aga ega me kätt ette pane. Kui soovid eetrisse minna, vajuta all olevat nuppu ning võtame sinuga meili teel ühendust!",
         "action": "Tahan eetrisse"
+    },
+    "features": {
+        "estonian": "Eesti keel",
+        "english": "English"
     }
 }

@@ -60,7 +60,7 @@
             />
           </div>
           <div class="pass_section">
-            <div class="pass_field">Last name</div>
+            <div class="pass_field">{{ $t("settings.last-name") }}</div>
             <input
               v-model="user.lastname"
               class="stream_input stream_name"

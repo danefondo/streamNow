@@ -105,10 +105,12 @@ let accounts = require('./routes/accounts');
 let dashboard = require('./routes/dashboard');
 let profile = require('./routes/profile');
 let streams = require('./routes/streams');
+let features = require('./routes/features');
 app.use('/accounts', accounts);
 app.use('/dashboard', passport.authenticate('jwt', { session: false }), dashboard);
 app.use('/profile', profile);
 app.use('/streams', streams);
+app.use('/features', features);
 
 app.get('*', function(req, res) {
   res.sendFile(path.join(__dirname, 'client/dist/index.html'))
