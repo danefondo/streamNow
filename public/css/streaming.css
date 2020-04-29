@@ -182,6 +182,8 @@
 
 .stream_offline {
     color: #555;
+    width: 100%;
+    max-width: 90px;
 }
 
 .stream_edit_button,

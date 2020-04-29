@@ -105,7 +105,10 @@
           </div>
         </div>
       </div>
-      <div v-if="stream.is_live || (!stream.is_live && !stream.is_scheduled)" class="section_center">
+      <div
+        v-if="stream.is_live || (!stream.is_live && !stream.is_scheduled)"
+        class="section_center"
+      >
         <div class="stream_center_top">
           <router-link :to="'/profile/' +streamer._id" class="stream_owner">
             <img class="streamer_profile_icon" :src="getProfileIcon" />
@@ -890,7 +893,8 @@ p {
 .stream_details_part {
   padding: 10px;
   display: flex;
-  align-items: center;
+  /* align-items: center; */
+  align-items: flex-start;
 }
 
 .stream_details_block {
@@ -960,6 +964,8 @@ p {
 
 .stream_offline {
   color: #555;
+  width: 100%;
+  max-width: 90px;
 }
 
 .stream_likes {
