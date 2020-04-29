@@ -33,8 +33,8 @@ const streamController = {
                 is_live: false,
                 is_scheduled: false,
                 scheduled_time: {
-                    $gte: date,
-                    $lte: anotherDate.setDate(date.getDate() - 9),
+                    $gte: anotherDate.setDate(date.getDate() - 9),
+                    $lte: date,
                 }
             }
         }

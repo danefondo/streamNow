@@ -46,7 +46,7 @@
         >{{$t("watch.register-to-watch")}}</div>
         <div v-if="registerMessage && !owner" class="register_success">{{ registerMessage }}</div>
       </div>
-      <div v-if="!stream.is_live" class="section_center">
+      <div v-if="!stream.is_live && stream.is_scheduled" class="section_center">
         <div class="scheduled_stream_container">
           <div class="featured_streamPreviewContainer">
             <img class="featured_streamPreview" :src="thumbnail(stream)" />
@@ -105,7 +105,7 @@
           </div>
         </div>
       </div>
-      <div v-if="stream.is_live" class="section_center">
+      <div v-if="stream.is_live || (!stream.is_live && !stream.is_scheduled)" class="section_center">
         <div class="stream_center_top">
           <router-link :to="'/profile/' +streamer._id" class="stream_owner">
             <img class="streamer_profile_icon" :src="getProfileIcon" />
