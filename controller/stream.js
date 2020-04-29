@@ -3,10 +3,42 @@ let Stream = require('../models/stream');
 let User = require('../models/user');
 const streamUtils = require('../utils/stream')
 const moment = require('moment');
-const mail = require('../utils/mail');
+const mail = require('../utils/mail');  
 const streamController = {
     async fetchLiveStreams(req, res) {
-        let query = { "is_live": true }
+        let query = { "is_live": true };
+        try {
+            let streams = await Stream.find(query).populate('streamer').exec();
+            if (!streams.length) {
+                return res.status(404).json({
+                    message: "No live streams found"
+                });
+            }
+            res.status(200).json({
+                streams: streams
+            });
+        } catch (error) {
+            res.status(500).json({
+                errors: "An unknown error occurred"
+            });
+        }
+    },
+    async fetchPastStreams(req, res) {
+
+        let query = {};
+        if (req.body.date) {
+            const date = req.body.date ? new Date(req.body.date) : new Date();
+            const anotherDate = new Date();
+            query = {
+                is_live: false,
+                is_scheduled: false,
+                scheduled_time: {
+                    $gte: date,
+                    $lte: anotherDate.setDate(date.getDate() - 9),
+                }
+            }
+        }
+
         try {
             let streams = await Stream.find(query).populate('streamer').exec();
             if (!streams.length) {

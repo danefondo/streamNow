@@ -7,7 +7,9 @@ const streamController = require('../controller/stream');
 
 router.get('/', streamController.fetchStreams); 
 
-router.get('/fetchLiveStreams', streamController.fetchLiveStreams); 
+router.get('/fetchLiveStreams', streamController.fetchLiveStreams);
+
+router.post('/fetchPastStreams', streamController.fetchPastStreams); 
 
 router.get('/:streamId', auth.checkAuthenticated, streamController.showStream);
 
