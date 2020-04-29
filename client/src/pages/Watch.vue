@@ -132,7 +132,7 @@
             >{{ userFollowing ? $t("watch.following") : $t("watch.follow") }}</div>
           </div>
           <a
-            v-if="stream.support_link"
+            v-if="stream.support_link && stream.is_live"
             :href="stream.support_link"
             class="donate_button"
           >{{$t("watch.support")}}</a>
@@ -379,6 +379,17 @@ export default {
 </script>
 
 <style>
+.stream_not_live {
+    padding: 10px;
+    font-size: 20px;
+    background-color: #f7f7f7;
+    margin-bottom: 15px;
+    border-radius: 4px;
+    width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+    color: blue;
+}
 .streamPreviewTimeContainer {
   height: 60px;
   background-color: #fbfbfb;
