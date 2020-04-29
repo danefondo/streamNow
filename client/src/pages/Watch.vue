@@ -375,7 +375,8 @@ export default {
         this.stream.platform_status &&
         this.stream.platform_status.includes("facebook")
       ) {
-        return `https://www.facebook.com/video/embed?video_id=${this.stream.stream_video_id}`;
+        return  `https://www.facebook.com/v2.3/plugins/video.php?allowfullscreen=true&autoplay=true&container_width=800&href=${this.stream.stream_video_link}`;
+        // return `https://www.facebook.com/video/embed?video_id=${this.stream.stream_video_id}`;
       } else if (
         this.stream.platform_status &&
         this.stream.platform_status.includes("twitch")
