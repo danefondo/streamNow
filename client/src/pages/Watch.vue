@@ -162,6 +162,16 @@
             allow="accelerometer; allow='encrypted-media' allowFullScreen=true data-autoplay; encrypted-media; gyroscope; picture-in-picture"
             allowfullscreen
           ></iframe>
+          <iframe
+            v-else-if="stream.platform_status && stream.platform_status.includes('twitch')"
+            class="live_player"
+            width="100%"
+            height="100%"
+            :src="videoUrl"
+            frameborder="0"
+            allow="accelerometer; allow='encrypted-media' allowFullScreen=true data-autoplay; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen
+          ></iframe>
         </div>
         <div class="stream_details">
           <div class="stream_details_part">
