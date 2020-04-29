@@ -137,6 +137,7 @@ export default {
 .streamGroup {
   display: flex;
   flex-direction: row;
+  flex-wrap: wrap;
 }
 
 .dateGroups {
