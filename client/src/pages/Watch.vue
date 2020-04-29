@@ -154,9 +154,9 @@
           ></iframe>
           <iframe
             v-else-if="stream.platform_status && stream.platform_status.includes('facebook')"
-            class="live_player"
-            width="850px"
-            height="479px"
+            class="live_player_facebook"
+            width="100%"
+            height="100%"
             :src="videoUrl"
             frameborder="0"
             allow="accelerometer; allow='encrypted-media' allowFullScreen=true data-autoplay; encrypted-media; gyroscope; picture-in-picture"
@@ -903,6 +903,11 @@ p {
 }
 .live_player {
   border-radius: 10px;
+}
+.live_player_facebook {
+    border-radius: 10px;
+    height: 479px;
+    width: 850px;
 }
 .live_chat {
   border-radius: 3px;
