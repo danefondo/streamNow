@@ -132,6 +132,7 @@
 import InputTag from "vue-input-tag";
 import axios from "axios";
 import DecoupledEditor from "@ckeditor/ckeditor5-build-decoupled-document";
+// import RemoveFormat from "@ckeditor/ckeditor5-remove-format";
 import Datepicker from "vuejs-datepicker";
 import auth from "../config/auth";
 import ImageUpload from "../components/ImageUpload";

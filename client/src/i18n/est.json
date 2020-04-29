@@ -18,7 +18,8 @@
         "oops": "Heihopsti!",
         "check-back": "Aga piilu varsti jälle uuesti! :)",
         "or": "Või siis ",
-        "schedule-stream": "hakka ise striimima"
+        "schedule-stream": "hakka ise striimima",
+        "watch-again": "Vaata järgi"
     },
     "register": {
         "create": "Loo kasutaja",

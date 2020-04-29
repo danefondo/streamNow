@@ -43,6 +43,18 @@
         </div>
       </div>
     </div>
+    <div class="discovery_section">
+      <div class="examplesSection__landingPage">
+        <div class="examplesContainer__landingPage">
+          <div v-if="!loading" class="examplesTitle__landingPage">{{ $t('scheduled.watch-again') }}</div>
+        </div>
+      </div>
+      <div class="streams">
+        <div class="streamGroup">
+          <Stream v-for="stream in pastStreams" :key="stream._id" :stream="stream" />
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -60,10 +72,11 @@ export default {
       featured: null,
       streams: {},
       liveStreams: {},
+      pastStreams: {},
       loading: true,
       isAuthenticated: false,
       liveNow: null,
-      weLive: false,
+      weLive: false
     };
   },
   components: {
@@ -99,6 +112,16 @@ export default {
       this.liveStreams = data.streams;
       this.liveNow = data.streams[0];
       this.weLive = true;
+    } catch (error) {
+      this.loading = false;
+    }
+    try {
+      let sendData = {
+        date: new Date()
+      };
+      const { data } = await axios.post(`/streams/fetchPastStreams`, sendData);
+      this.pastStreams = data.streams;
+      console.log("past", this.pastStreams);
     } catch (error) {
       this.loading = false;
     }
