@@ -107,6 +107,11 @@ html, body, .container {
         flex-direction: column;
         width: unset;
     }
+
+    .watch_now {
+        margin: 0 auto;
+        width: 75%;
+    }
     
 }
 
