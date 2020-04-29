@@ -156,7 +156,7 @@
             v-else-if="stream.platform_status && stream.platform_status.includes('facebook')"
             class="live_player"
             width="850px"
-            height="540px"
+            height="479px"
             :src="videoUrl"
             frameborder="0"
             allow="accelerometer; allow='encrypted-media' allowFullScreen=true data-autoplay; encrypted-media; gyroscope; picture-in-picture"
