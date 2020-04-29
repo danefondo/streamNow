@@ -86,7 +86,7 @@
         />
       </div>
       <div @click="addNewFeature" class="feature_button">Send your wish!</div>
-      <div class="features_leaderboard">Nõutumad ideed</div>
+      <div class="features_leaderboard">Most in demand</div>
       <div v-if="featuresExist && features" class="requested_features">
         <div
           v-for="feature in features"
@@ -145,6 +145,13 @@ export default {
       }
     } catch (error) {
       this.featuresExist = false;
+    }
+  },
+  computed: {
+    sortFunc: function() {
+      return this.features.slice().sort(function(a, b) {
+        return a.demand_count > b.demand_count ? 1 : -1;
+      });
     }
   },
   methods: {
