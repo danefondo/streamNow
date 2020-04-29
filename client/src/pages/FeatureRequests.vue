@@ -57,6 +57,10 @@
           <div class="demand_count">{{ feature.demand_count }}</div>
         </div>
       </div>
+      <div
+        v-else-if="!features && !featuresExist"
+        class="requested_feature"
+      >Ole esimene ideed jagama!</div>
     </div>
     <div v-else-if="activetab == 'english'" class="request_page">
       <div class="features_title">Don't be shy.</div>
@@ -101,6 +105,10 @@
           <div class="demand_count">{{ feature.demand_count }}</div>
         </div>
       </div>
+      <div
+        v-else-if="!features && !featuresExist"
+        class="requested_feature"
+      >Be the first to add an idea!</div>
     </div>
   </div>
 </template>
