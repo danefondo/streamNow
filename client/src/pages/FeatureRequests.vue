@@ -45,7 +45,7 @@
       <div class="features_leaderboard">Nõutumad ideed</div>
       <div v-if="featuresExist && features" class="requested_features">
         <div
-          v-for="feature in features"
+          v-for="feature in sortFunc"
           v-bind:key="feature.id"
           v-show="feature.language == activetab"
           class="requested_feature"
@@ -89,7 +89,7 @@
       <div class="features_leaderboard">Most in demand</div>
       <div v-if="featuresExist && features" class="requested_features">
         <div
-          v-for="feature in features"
+          v-for="feature in sortFunc"
           v-bind:key="feature.id"
           v-show="feature.language == activetab"
           class="requested_feature"
@@ -150,7 +150,7 @@ export default {
   computed: {
     sortFunc: function() {
       return this.features.slice().sort(function(a, b) {
-        return a.demand_count > b.demand_count ? 1 : -1;
+        return a.demand_count < b.demand_count ? 1 : -1;
       });
     }
   },
