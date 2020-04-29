@@ -2,6 +2,19 @@
     scheduled streams
 -----------------------*/
 
+@media screen and (max-width: 320px) and (min-width: 320px) { 
+
+html, body, .container {
+    width: 320px;
+}
+.title-container {
+    display: flex;
+    justify-content: center;
+}
+
+
+}
+
 @media screen and (max-width: 480px) {
 
     .featured_stream {
@@ -11,6 +24,10 @@
         margin-right: auto;
         margin-left: auto;
         padding-top: 0px;
+    }
+
+    .streamGroup {
+        flex-direction: column;
     }
 
     .examplesTitle__landingPage {

@@ -143,12 +143,23 @@
             class="stream_not_live"
           >{{$t("watch.stream-has-ended")}}</div>
           <iframe
+            v-if="stream.platform_status && stream.platform_status.includes('youtu')"
             class="live_player"
             width="850"
             height="540"
             :src="videoUrl"
             frameborder="0"
             allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen
+          ></iframe>
+          <iframe
+            v-else-if="stream.platform_status && stream.platform_status.includes('facebook')"
+            class="live_player"
+            width="100%"
+            height="100%"
+            :src="videoUrl"
+            frameborder="0"
+            allow="accelerometer; allow='encrypted-media' allowFullScreen=true data-autoplay; encrypted-media; gyroscope; picture-in-picture"
             allowfullscreen
           ></iframe>
         </div>
