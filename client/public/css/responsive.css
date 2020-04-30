@@ -1,25 +1,9 @@
-/*-----------------------
-    scheduled streams
------------------------*/
-
-@media screen and (max-width: 320px) and (min-width: 320px) { 
-
-html, body, .container {
-    width: 320px;
-}
-.title-container {
-    display: flex;
-    justify-content: center;
-}
-
-
-}
 
 /*-----------------------
     scheduled streams
 -----------------------*/
 
-@media screen and (max-width: 400px) and (min-width: 320px) { 
+@media screen and (min-width: 600px) and (min-width: 320px) { 
 
     /* html, body, .container {
         max-width: 360vw !important;
