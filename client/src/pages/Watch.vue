@@ -360,7 +360,8 @@ export default {
       this.$router.push(`/edit/${this.stream._id}`);
     },
     async endStream() {
-      await axios.post(`streams/${this.stream._id}/endStream`);
+      let date = new Date();
+      await axios.post(`streams/${this.stream._id}/endStream`, { date: date });
       this.showModal = false;
       this.stream.is_live = false;
       this.$emit("updateLive", false);

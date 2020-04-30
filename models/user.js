@@ -25,6 +25,7 @@ const UserSchema = new mongoose.Schema({
 	dateCreated: Date,
 	upcoming_streams: [{type: Schema.Types.ObjectId, ref: 'Stream'}],
 	previous_streams: [{type: Schema.Types.ObjectId, ref: 'Stream'}],
+	current_streams: [{type: Schema.Types.ObjectId, ref: 'Stream'}],
 	active_stream_id: String,
 	is_live: Boolean,
 	current_stream_url: String,

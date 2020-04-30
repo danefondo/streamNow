@@ -10,7 +10,6 @@ const stream_schema = new mongoose.Schema({
     stream_video_id: String,
     stream_video_link: String,
     date_created: Date,
-    end_date: Date,
     thumbnail_key: String,
     thumbnail_url: String,
     thumbnail_name: String,
@@ -22,12 +21,14 @@ const stream_schema = new mongoose.Schema({
     is_live: Boolean,
     is_scheduled: Boolean,
     is_featured: Boolean,
-    has_gone_live: Boolean,
+    was_live: Boolean,
     scheduled_time: Date,
     public_status: String,
     platform_status: String,
     waitlist_emails: [String],
-    support_link: String
+    support_link: String,
+    started_time: Date,
+    ended_time: Date
 });
 
 const Stream = module.exports = mongoose.model('Stream', stream_schema);

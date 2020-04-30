@@ -367,7 +367,8 @@ const streamController = {
             console.log("yo  made it");
             if (stream.is_live) {
                 stream.is_live = false;
-                stream.end_date = req.body.end_date;
+                stream.was_live = true;
+                stream.ended_time = req.body.date ? req.body.date : new Date();
             }
 
             await stream.save();
@@ -383,6 +384,7 @@ const streamController = {
             user.active_stream_id = undefined;
             user.current_stream_url = undefined;
             user.current_stream_thumbnail = undefined;
+            user.current_streams.pull(stream._id);
             user.previous_streams.push(stream._id);
             await user.save();
 
@@ -479,6 +481,11 @@ const streamController = {
                         path: 'streamer'
                     }
                 }).sort({ scheduled_time: 1 }).exec();
+                if (!user) {
+                    return res.status(404).json({
+                        error: "User not found."
+                    });
+                }
 
             let stream;
             let stream_id;
@@ -488,7 +495,7 @@ const streamController = {
 
                 stream = await Stream.findById(stream_id);
                 if (!stream) {
-                    return res.render('stream_not_found', {
+                    return res.status(404).json({
                         error: "Stream not found."
                     });
                 }
@@ -676,10 +683,10 @@ const streamController = {
                 });
             }
 
-            console.log("yo  made it");
             if (!stream.is_live) {
                 stream.is_live = true;
                 stream.is_scheduled = false;
+                stream.started_time = new Date();
             }
 
             await stream.save();
@@ -695,6 +702,8 @@ const streamController = {
             user.active_stream_id = stream._id;
             user.current_stream_url = stream.stream_video_link;
             user.current_stream_thumbnail = stream.stream_thumbnail_url;
+            user.current_streams.push(stream_id);
+            user.upcoming_streams.pull(stream._id);
             await user.save();
             
             let emails = stream.waitlist_emails;

@@ -36,6 +36,7 @@ module.exports = {
 	},
 
 	sendVideoSignUpEmail(email, streamName, link) {
+		console.log("THE LINK LINK LINK", link);
 		const data = {
 		  from: 'Eeter.tv <noreply@eeter.tv>',
 		  to: email,
