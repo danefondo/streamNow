@@ -19,7 +19,7 @@ html, body, .container {
     scheduled streams
 -----------------------*/
 
-@media screen and (max-width: 400px) and (min-width: 360px) { 
+@media screen and (max-width: 400px) and (min-width: 320px) { 
 
     /* html, body, .container {
         max-width: 360vw !important;
@@ -31,6 +31,57 @@ html, body, .container {
 
     .contentArea {
         width: 100vw !important;
+    }
+
+    .registration-block {
+        width: 100vw;
+    }
+
+    .title__landingPage.cd-words-wrapper {
+        display: flex;
+        box-sizing: border-box;
+        flex-wrap: wrap;
+        flex-direction: column;
+        justify-content: center !important;
+        align-items: center !important;
+        padding: 20px !important;
+        width: 100vw;
+        margin: auto;
+        text-align: center;
+    }
+
+    .landingTitleP1 {
+        max-width: 100vw;
+        font-size: 70px;
+        display: inline-block;
+        font-weight: 600;
+    }
+
+    .landingTitleP2 {
+        max-width: 100vw;
+        font-size: 70px;
+    }
+
+    .landingTitleP2 {
+        background-color: #0000ff1f;
+        margin-left: 18px;
+    }
+
+    .landingSubtitle {
+        max-width: 100vw;
+        font-size: 19px;
+        line-height: 25px;
+        text-align: center;
+        color: #585858;
+    }
+
+    a.signupPageLink {
+        width: calc(100vw - 14%);
+        box-sizing: border-box;
+        margin-left: calc(100vw - 93%);
+        margin-right: calc(100vw - 93%);
+        font-size: 34px;
+        margin-top: 10px;
     }
 
     .discovery_section {
