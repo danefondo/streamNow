@@ -702,7 +702,7 @@ const streamController = {
             user.active_stream_id = stream._id;
             user.current_stream_url = stream.stream_video_link;
             user.current_stream_thumbnail = stream.stream_thumbnail_url;
-            user.current_streams.push(stream_id);
+            user.current_streams.push(stream._id);
             user.upcoming_streams.pull(stream._id);
             await user.save();
             
