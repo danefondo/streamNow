@@ -62,7 +62,7 @@
     <template v-else>
       <div class="stream_buttons">
         <router-link class="go_live_button" to="/register">{{$t("nav.register")}}</router-link>
-        <router-link class="go_live_button" to="/login">{{$t("nav.login")}}</router-link>
+        <router-link class="go_live_button login-responsive" to="/login">{{$t("nav.login")}}</router-link>
       </div>
     </template>
   </div>

@@ -8,17 +8,72 @@
     /* html, body, .container {
         max-width: 360vw !important;
     } */
+    .nav-container {
+        padding: 10px 0px !important;
+        padding-top: 0px !important;
+        display: flex;
+        flex-wrap: wrap;
+        flex-flow: row nowrap;
+        align-items: center;
+        background-color: #b1f6ff00;
+        height: unset;
+    }
+
     .title-container {
         display: flex !important;
         justify-content: center !important;
+        width: 100%;
+        margin-bottom: 10px;
+        padding-left: 0;
+        padding: 0;
+        align-items: flex-start;
+        margin-top: 5px;
+        margin-right: 5px;
+        flex-wrap: wrap;
+        flex-direction: row;
+    }
+
+    .title-btn {
+        border-radius: 4px;
+        padding: 8px 20px;
+        box-sizing: border-box;
+        font-size: 21px;
+        font-weight: 500;
+        color: #120088;
+        font-size: 21px;
+        padding-top: 4px;
+        padding-bottom: 4px;
+        text-decoration: none;
+    }
+
+    .go_live_button {
+        color: white;
+        font-weight: bold;
+        border-radius: 2px;
+        box-sizing: border-box;
+        border: 1px solid transparent;
+        display: inline-block;
+        background-color: #130089;
+        cursor: pointer;
+        margin: 4px 3px;
+        text-align: right;
+        padding: 4px !important;
+        font-size: 14px;
+    }
+
+    .login-responsive {
+        background-color: white;
+        color: #130088;
     }
 
     .contentArea {
         width: 100vw !important;
+        margin-top: 0px !important;
     }
 
     .registration-block {
         width: 100vw;
+        margin-top: 10px;
     }
 
     .title__landingPage.cd-words-wrapper {
