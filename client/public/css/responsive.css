@@ -155,7 +155,8 @@ html, body, .container {
     }
 
     .streamGroup {
-        flex-direction: column;
+        display: flex !important;
+        flex-direction: column !important;
     }
 
     .examplesTitle__landingPage {
