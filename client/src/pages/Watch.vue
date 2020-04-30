@@ -51,7 +51,7 @@
           <div class="featured_streamPreviewContainer">
             <img class="featured_streamPreview" :src="thumbnail(stream)" />
             <div v-if="stream.is_scheduled" class="streamPreviewDateContainer">
-              <div class="streamPreviewDate">{{ getStreamDate(stream) + ' /'}}</div>
+              <div class="streamPreviewDate">{{ getStreamDate(stream)}}</div>
             </div>
             <div v-if="stream.is_scheduled" class="streamPreviewTimeContainer">
               <div class="streamPreviewTime">{{ getStreamTime(stream) }}</div>
@@ -417,10 +417,10 @@ export default {
   height: 60px;
   background-color: #fbfbfb;
   z-index: 9999;
-  width: 18%;
+  width: 22%;
   position: absolute;
   top: 0;
-  left: 120px;
+  right: 0;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -430,7 +430,7 @@ export default {
   height: 60px;
   background-color: #fbfbfb;
   z-index: 9999;
-  width: 23%;
+  width: 38%;
   position: absolute;
   top: 0;
   display: flex;

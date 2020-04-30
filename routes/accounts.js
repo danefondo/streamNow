@@ -8,6 +8,7 @@ const auth = require('../config/auth')
 let User = require('../models/user');
 // const mail = require('../utils/mail');
 const accountController = require('../controller/accounts');
+const adminController = require('../controller/admin');
 // const accountUtil = require('../utils/account')
 const validator = require('../controller/validator');
 
@@ -23,6 +24,8 @@ const validator = require('../controller/validator');
 router.post('/checkUnique', accountController.checkUnique);
 
 router.post('/register', validator.register, accountController.register);
+
+router.get('/admin-dashboard', auth.ensureAuthenticated, adminController.getAllUsers);
 
 //token verification
 router.get('/verify/:verificationToken', function (req, res, next) {

@@ -19,6 +19,7 @@ import Error404 from "./pages/Error404";
 import auth from "./config/auth";
 import VideoManager from "./pages/VideoManager";
 import FeatureRequests from "./pages/FeatureRequests";
+import AdminDashboard from "./pages/AdminDashboard";
 
 const routes = [
   { path: "/scheduled", component: Scheduled },
@@ -40,6 +41,13 @@ const routes = [
   {
     path: "/manage-streams",
     component: VideoManager,
+    meta: {
+      requireAuthentication: true,
+    },
+  },
+  {
+    path: "/admin-dashboard",
+    component: AdminDashboard,
     meta: {
       requireAuthentication: true,
     },
