@@ -66,6 +66,13 @@ export default {
 </script>
 
 <style>
+
+.featured_streamer_description_container_discover span,
+.scheduled_stream_description span {
+    background-color: transparent !important;
+    color: inherit !important;
+}
+
 .watch_now {
   padding: 20px;
   font-size: 30px;
