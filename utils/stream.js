@@ -31,12 +31,12 @@ const getVideoId = (platform, videoLink) => {
   }
 };
 
-const sendGoLiveMails = async (emailsOrIds, link) => {
+const sendGoLiveMails = async (emailsOrIds, stream, link) => {
   const userIds = [];
   emailsOrIds.forEach(function (email, index) {
     //- Later check if valid email
     if (email.includes("@")) {
-      mail.sendVideoSignUpReminderEmail(email, link);
+      mail.sendVideoSignUpReminderEmail(email, stream, link);
     } else {
       userIds.push(mongoose.Types.ObjectId(email));
     }
@@ -50,7 +50,7 @@ const sendGoLiveMails = async (emailsOrIds, link) => {
     { email: 1 }
   );
   userEmails.forEach(user => {
-    mail.sendVideoSignUpReminderEmail(user.email, link)
+    mail.sendVideoSignUpReminderEmail(user.email, stream, link)
   })
 };
 

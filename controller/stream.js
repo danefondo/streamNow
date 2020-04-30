@@ -699,7 +699,7 @@ const streamController = {
             
             let emails = stream.waitlist_emails;
             const link = `${req.protocol}://${req.get('host')}/watch/${stream._id}`;
-            streamUtils.sendGoLiveMails(emails, link);
+            streamUtils.sendGoLiveMails(emails, stream, link);
 
             res.status(200).json({
                 stream: stream

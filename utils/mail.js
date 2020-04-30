@@ -41,7 +41,7 @@ module.exports = {
 		  to: email,
 		  subject: `Registreerisid vaatama ${streamName}`,
 		  html: '',
-		  text: `Ära muretse! Tuletame sulle meelde kohe kui ${streamName} eetrisse läheb! Seniks, mine uudista Eeter.tv lehel ringi, äkki leiad midagi muud põnevat.`
+		  text: `Ära muretse! Tuletame sulle meelde kohe kui ${streamName} eetrisse läheb! Seniks, mine uudista Eeter.tv lehel ringi, äkki leiad midagi muud põnevat. ${link}`
 		};
 		mailgun.messages().send(data, function (error, body) {
 		  console.log(body);
@@ -62,13 +62,13 @@ module.exports = {
 		});
 	},
 
-	sendVideoSignUpReminderEmail(email, streamName, link) {
+	sendVideoSignUpReminderEmail(email, stream, link) {
 		const data = {
 		  from: 'Eeter.tv <noreply@eeter.tv>',
 		  to: email,
-		  subject: `${streamName} on eetris!`,
+		  subject: `${stream.stream_name} on eetris!`,
 		  html: '',
-		  text: `${streamName} on juba eetris! Tõtta vaatama! ${link}`
+		  text: `${stream.stream_name} on juba eetris! Tõtta vaatama! ${link}`
 		};
 		mailgun.messages().send(data, function (error, body) {
 		  console.log(body);
