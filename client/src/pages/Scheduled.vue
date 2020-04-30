@@ -130,6 +130,12 @@ export default {
 </script>
 
 <style scoped>
+.featured_streamer_description_container_discover span,
+.scheduled_stream_description span {
+    background-color: transparent !important;
+    color: inherit !important;
+}
+
 .stream {
   padding-top: 20px;
 }
