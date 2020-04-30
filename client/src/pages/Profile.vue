@@ -164,6 +164,21 @@ export default {
   About streamer
 ----------------------*/
 
+.no_previous_streams,
+.no_upcoming_streams {
+    padding: 24px;
+    font-size: 22px;
+    font-weight: bold;
+    color: #444;
+    background-color: #f7f7f7;
+    border-radius: 4px;
+    height: 250px;
+}
+
+.no_upcoming_streams {
+    width: 630px;
+}
+
 .fb_link,
 .twitter_link,
 .yt_link,
@@ -434,6 +449,7 @@ p {
   flex: 1;
   overflow-y: auto;
   width: 900px;
+  margin-bottom: 40px;
 }
 .previous_streams_container {
   width: 900px;

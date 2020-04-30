@@ -31,7 +31,7 @@ export default {
   data() {
     return {
       isOpened: false,
-      linkText: "Copy Link",
+      linkText: this.$t("watch.copy"),
     };
   },
   mounted() {
@@ -62,9 +62,9 @@ export default {
         input.select();
         var result = document.execCommand('copy');
         document.body.removeChild(input);
-        this.linkText = "Copied!";
+        this.linkText = this.$t("watch.copied");
         setTimeout(() => {
-            this.linkText = "Copy Link";
+            this.linkText = this.$t("watch.copy");
         }, 2000)
         return result;
     }
