@@ -39,6 +39,10 @@
                 <router-link class="entypo-newspaper NavLinkX" :to="myProfile">{{$t("nav.profile")}}</router-link>
                 <a class="entypo-plus OptionLink" href="#"></a>
               </li>
+              <li v-if="user.superadmin">
+                <router-link class="entypo-archive NavLinkX" to="/superadmin">{{$t("admin.superadmin")}}</router-link>
+                <a class="entypo-plus OptionLink" href="#"></a>
+              </li>
               <li>
                 <router-link class="entypo-archive NavLinkX" to="/manage-streams">{{$t("nav.manage-streams")}}</router-link>
                 <a class="entypo-plus OptionLink" href="#"></a>

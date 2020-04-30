@@ -285,5 +285,13 @@
     "features": {
         "estonian": "Eesti keel",
         "english": "English"
+    },
+    "admin": {
+        "make-admin": "Tee adminiks",
+        "remove-admin": "Eemalda admin privileeg",
+        "is-admin": "Admin",
+        "admin-dashboard": "Superadmin ala",
+        "superadmin-notice": "NB! Ole ettevaatlik, et sellele lehele, ega superadmin kasutajale keegi ligi ei pääseks.",
+        "superadmin": "Superadmin"
     }
 }

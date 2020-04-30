@@ -45,7 +45,7 @@ const UserSchema = new mongoose.Schema({
 	profile_image_url: String,
 	profile_image_key: String,
 	admin: Boolean,
-	super_admin: Boolean
+	superadmin: Boolean
 });
 
 const User = module.exports = mongoose.model('User', UserSchema);

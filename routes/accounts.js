@@ -20,12 +20,15 @@ const validator = require('../controller/validator');
 // this resource suggest using async for crypto.randomBytes
 // https://github.com/nodejs/help/issues/457
 
+function usernameToLowerCase(req, res, next){
+	req.body.username = req.body.username.toLowerCase();
+	next();
+}
+
 
 router.post('/checkUnique', accountController.checkUnique);
 
-router.post('/register', validator.register, accountController.register);
-
-router.get('/admin-dashboard', auth.ensureAuthenticated, adminController.getAllUsers);
+router.post('/register', usernameToLowerCase, validator.register, accountController.register);
 
 //token verification
 router.get('/verify/:verificationToken', function (req, res, next) {
@@ -43,9 +46,13 @@ router.get('/verify/:verificationToken', function (req, res, next) {
 		if (theUser.admin) {
 			adminStatus = true;
 		}
+		let superadmin = false;
+		if (theUser.superadmin) {
+			superadmin = true;
+		}
 		theUser.verifiedStatus = true;
 		theUser.save((err, savedUser) => {
-			const tokenUser = { username: savedUser.username, _id: savedUser._id, is_live: savedUser.is_live, admin: adminStatus }
+			const tokenUser = { username: savedUser.username, _id: savedUser._id, is_live: savedUser.is_live, admin: adminStatus, superadmin: superadmin }
 			const token = jwt.sign({ user: tokenUser }, process.env.SECRET, {
 				expiresIn: '1d',
 			});
@@ -55,7 +62,7 @@ router.get('/verify/:verificationToken', function (req, res, next) {
 });
 
 // Login
-router.post('/login', function (req, res, next) {
+router.post('/login', usernameToLowerCase, function (req, res, next) {
 	passport.authenticate('local', { session: false }, function (err, user, info) {
 		if (err) { return next(err) }
 		if (!user) {
@@ -67,12 +74,17 @@ router.post('/login', function (req, res, next) {
 			if (user.admin) {
 				adminStatus = true;
 			}
+			let superadmin = false;
+			if (user.superadmin) {
+				superadmin = true;
+			}
 			const theUser = {
 				username: user.username,
 				_id: user._id,
 				is_live: user.is_live,
 				active_stream_id: user.active_stream_id,
-				admin: adminStatus
+				admin: adminStatus,
+				superadmin: superadmin
 			}
 			console.log(theUser);
 			const token = jwt.sign({ user: theUser }, process.env.SECRET, {

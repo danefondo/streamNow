@@ -38,19 +38,44 @@
               class="add_about_section"
             >{{$t("profile.add-profile-pic")}}</router-link>
             <div v-if="streamer" class="links">
-              <a v-if="streamer.fb_link" :href="streamer.fb_link" class="social_link" target="_blank">
+              <a
+                v-if="streamer.fb_link"
+                :href="streamer.fb_link"
+                class="social_link"
+                target="_blank"
+              >
                 <img class="fb_link" src="../assets/images/facebook.png" />
               </a>
-              <a v-if="streamer.insta_link" :href="streamer.insta_link" class="social_link" target="_blank">
+              <a
+                v-if="streamer.insta_link"
+                :href="streamer.insta_link"
+                class="social_link"
+                target="_blank"
+              >
                 <img class="insta_link" src="../assets/images/instagram.png" />
               </a>
-              <a v-if="streamer.yt_link" :href="streamer.yt_link" class="social_link" target="_blank">
+              <a
+                v-if="streamer.yt_link"
+                :href="streamer.yt_link"
+                class="social_link"
+                target="_blank"
+              >
                 <img class="yt_link" src="../assets/images/youtube.png" />
               </a>
-              <a v-if="streamer.twitter_link" :href="streamer.twitter_link" class="social_link" target="_blank">
+              <a
+                v-if="streamer.twitter_link"
+                :href="streamer.twitter_link"
+                class="social_link"
+                target="_blank"
+              >
                 <img class="insta_link" src="../assets/images/twitter.png" />
               </a>
-              <a v-if="streamer.website_link" :href="streamer.website_link" class="social_link" target="_blank">
+              <a
+                v-if="streamer.website_link"
+                :href="streamer.website_link"
+                class="social_link"
+                target="_blank"
+              >
                 <img class="website_link" src="../assets/images/website.png" />
               </a>
             </div>
@@ -69,9 +94,15 @@
               class="add_about_section"
             >{{$t("profile.add-about")}}</router-link>
             <div class="streamer_followings">
-              <p class="streamer_count">{{streamer.followers.length + " " + $t("profile.followers")}}</p>
-              <p class="streamer_count">{{streamer.following.length + " " + $t("profile.following")}}</p>
-              <p class="streamer_count">{{streamer.previous_streams.length + " " + $t("profile.streams-done")}}</p>
+              <p
+                class="streamer_count"
+              >{{streamer.followers.length + " " + $t("profile.followers")}}</p>
+              <p
+                class="streamer_count"
+              >{{streamer.following.length + " " + $t("profile.following")}}</p>
+              <p
+                class="streamer_count"
+              >{{streamer.previous_streams.length + " " + $t("profile.streams-done")}}</p>
             </div>
           </div>
           <div class="streams_container">
@@ -133,7 +164,9 @@ export default {
   },
   methods: {
     async getStream() {
-      const { data } = await axios.get(`/profile/user/${this.$route.params.id}`);
+      const { data } = await axios.get(
+        `/profile/user/${this.$route.params.id}`
+      );
       this.stream = data.stream;
       this.streamer = data.streamer;
       this.hostName = data.host_name;
@@ -166,17 +199,20 @@ export default {
 
 .no_previous_streams,
 .no_upcoming_streams {
-    padding: 24px;
-    font-size: 22px;
-    font-weight: bold;
-    color: #444;
-    background-color: #f7f7f7;
-    border-radius: 4px;
-    height: 250px;
+  padding: 24px;
+  font-size: 22px;
+  font-weight: bold;
+  color: #444;
+  background-color: #f7f7f7;
+  border-radius: 4px;
+  height: 250px;
 }
 
 .no_upcoming_streams {
-    width: 630px;
+  width: 600px;
+  margin-left: 20px;
+  margin-top: 15px;
+  border-radius: 3px;
 }
 
 .fb_link,
@@ -188,11 +224,11 @@ export default {
 }
 
 .social_link {
-    display: inline-block;
-    margin-right: 4px;
-    margin-top: 2px;
-    padding: 2px 4px;
-    border-radius: 4px;
+  display: inline-block;
+  margin-right: 4px;
+  margin-top: 2px;
+  padding: 2px 4px;
+  border-radius: 4px;
 }
 
 .social_link:hover {

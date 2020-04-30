@@ -481,7 +481,10 @@
 }
 
 .no_upcoming_streams {
-    width: 630px;
+    width: 600px;
+    margin-left: 20px;
+    margin-top: 15px;
+    border-radius: 3px;
 }
 
 .previous_stream,

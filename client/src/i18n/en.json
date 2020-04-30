@@ -281,5 +281,12 @@
         "head": "Want to go live?",
         "tagline": "Reach out to us or indicate your interest below, and we'll help you get live on Eeter.tv.",
         "action": "I WANT TO GO LIVE"
+    },
+    "admin": {
+        "make-admin": "Make admin",
+        "remove-admin": "Withdraw admin powers",
+        "is-admin": "Admin",
+        "superadmin-notice": "NB! Pay attention to make sure no one gains access to this page or account with access to this page.",
+        "superadmin": "Superadmin"
     }
 }
