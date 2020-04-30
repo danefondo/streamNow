@@ -91,14 +91,14 @@
 
     .landingTitleP1 {
         max-width: 100vw;
-        font-size: 70px;
+        font-size: 65px;
         display: inline-block;
         font-weight: 600;
     }
 
     .landingTitleP2 {
         max-width: 100vw;
-        font-size: 70px;
+        font-size: 65px;
     }
 
     .landingTitleP2 {
@@ -108,10 +108,10 @@
 
     .landingSubtitle {
         max-width: 100vw;
-        font-size: 19px;
+        font-size: 18px;
         line-height: 25px;
         text-align: center;
-        color: #585858;
+        color: #555;
     }
 
     a.signupPageLink {
