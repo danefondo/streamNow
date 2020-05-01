@@ -152,8 +152,8 @@
     "profile": {
         "add-profile-pic": "+ Lisa profiilipilt",
         "add-about": "+ Lisa kirjeldus",
-        "followers": "jälgijad",
-        "following": "jälgib",
+        "followers": "Jälgijad",
+        "following": "Jälgib",
         "streams-done": "Edukat striimi",
         "no-streams": "Kasutajal pole ühtegi striimi planeeritud",
         "prev-streams": "Vanad striimid",
@@ -164,12 +164,12 @@
         "edit-about": "Muuda",
         "confirm-end-stream": "Oled kindel, et soovid striimi lõpetada?",
         "end-stream": "Lõpeta striimimine",
-        "cancel": "Tühista"
-
+        "cancel": "Tühista",
+        "make-account": "Make an account to start following your favorite streamers today!"
     },
     "watch": {
-        "follow": "jälgi",
-        "following": "jälgid",
+        "follow": "Jälgi",
+        "following": "Jälgid",
         "hide-chat": "Peida jututuba",
         "support": "TOETA €",
         "live": "EETRIS",

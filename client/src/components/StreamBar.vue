@@ -64,7 +64,6 @@ export default {
     getStreamDate(stream) {
       let time;
       if (stream.is_scheduled && stream.scheduled_time) {
-        console.log(stream.scheduled_time);
         time = stream.scheduled_time;
         time = new Date(time);
         const options = { month: "long", day: "numeric" };

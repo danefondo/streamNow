@@ -37,6 +37,22 @@
               v-if="!streamer.profile_image_url && user._id == streamer._id"
               class="add_about_section"
             >{{$t("profile.add-profile-pic")}}</router-link>
+            <div
+              @click="follow"
+              v-if="!owner"
+              class="streamer_follow_preview follow-profile"
+              :class="{followingBg: userFollowing}"
+            >
+              <div class="streamer_follow_button">
+                <img
+                  class="streamer_follow_icon"
+                  :src="userFollowing ? FollowingIcon  : FollowIcon"
+                />
+              </div>
+              <div
+                class="streamer_follow_state"
+              >{{ userFollowing ? $t("watch.following") : $t("watch.follow") }}</div>
+            </div>
             <div v-if="streamer" class="links">
               <a
                 v-if="streamer.fb_link"
@@ -145,6 +161,8 @@ import auth from "../config/auth";
 import axios from "axios";
 import profileIcon from "../assets/images/profile_icon.png";
 import ProfileStream from "../components/ProfileStream";
+import FollowingIcon from "../assets/images/following_icon.png";
+import FollowIcon from "../assets/images/follow_icon.png";
 
 export default {
   name: "Profile",
@@ -153,13 +171,20 @@ export default {
       showModal: false,
       streamer: null,
       stream: null,
-      hostName: null
+      hostName: null,
+      FollowingIcon,
+      FollowIcon,
+      userFollowing: null,
+      isAuthenticated: false,
     };
   },
   components: {
     ProfileStream
   },
   mounted() {
+    if (auth.isAuthenticated()) {
+      this.isAuthenticated = true;
+    }
     this.getStream();
   },
   methods: {
@@ -170,7 +195,15 @@ export default {
       this.stream = data.stream;
       this.streamer = data.streamer;
       this.hostName = data.host_name;
-    }
+      this.userFollowing = data.user_following_boolean;
+    },
+    follow() {
+      if (!auth.isAuthenticated()) {
+        return alert(this.$t("profile.make-account"))
+      }
+      this.userFollowing = !this.userFollowing;
+      axios.post(`/streams/${this.streamer._id}/followUnfollow`);
+    },  
   },
   computed: {
     getProfileIcon() {
@@ -181,7 +214,10 @@ export default {
     },
     user() {
       return auth.isAuthenticated();
-    }
+    },
+    owner() {
+      return this.streamer._id === auth.isAuthenticated()._id;
+    },
   },
   watch: {
     $route() {
@@ -196,6 +232,15 @@ export default {
 /*----------------------
   About streamer
 ----------------------*/
+
+.follow-profile {
+    margin-top: 10px;
+    padding: 6px 15px;
+    font-size: 16px;
+    margin-bottom: 10px;
+    margin-right: unset;
+    margin-left: unset;
+}
 
 .no_previous_streams,
 .no_upcoming_streams {

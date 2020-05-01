@@ -354,7 +354,7 @@ export default {
     },
     follow() {
       this.userFollowing = !this.userFollowing;
-      axios.post(`/streams/${this.stream._id}/followUnfollow`);
+      axios.post(`/streams/${this.streamer._id}/followUnfollow`);
     },
     editStream() {
       this.$router.push(`/edit/${this.stream._id}`);

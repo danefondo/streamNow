@@ -15,7 +15,7 @@ router.get('/:streamId', auth.checkAuthenticated, streamController.showStream);
 
 router.post('/:streamId/updateLikes', auth.checkAuthenticated, streamController.updateLikes);
 
-router.post('/:streamId/followUnfollow', auth.checkAuthenticated, streamController.followUnfollow);
+router.post('/:streamerId/followUnfollow', auth.checkAuthenticated, streamController.followUnfollow);
 
 router.post('/:streamId/endStream', auth.ensureAuthenticated, streamController.endStream);
 

@@ -620,14 +620,9 @@ const streamController = {
     async followUnfollow(req, res) {
         try {
             // if not user, then cancel (for oh so clever frontend check bypassers)
-            let stream_id = req.params.streamId;
-            let stream = await Stream.findById(stream_id);
-            if (!stream) {
-                return res.status(404).json({
-                    errors: "Stream not found."
-                });
-            }
-            if (req.user._id == stream.streamer_id) {
+            let streamer_id = req.params.streamerId;
+
+            if (req.user._id == streamer_id) {
                 return res.status(400).json({
                     errors: "Cannot follow yourself."
                 });
@@ -639,7 +634,6 @@ const streamController = {
                     errors: "User not found."
                 });
             }
-            let streamer_id = stream.streamer_id
             let user_following_boolean = user.following.includes(streamer_id);
             if (user_following_boolean == true) {
                 user.following.pull(streamer_id);
@@ -663,7 +657,6 @@ const streamController = {
             await streamer.save();
             // let stream_followers_count = stream.stream_followers_count;
             res.json({
-                stream: stream,
                 streamer: streamer
             })
 

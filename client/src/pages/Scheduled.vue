@@ -121,7 +121,6 @@ export default {
       };
       const { data } = await axios.post(`/streams/fetchPastStreams`, sendData);
       this.pastStreams = data.streams;
-      console.log("past", this.pastStreams);
     } catch (error) {
       this.loading = false;
     }
@@ -132,8 +131,8 @@ export default {
 <style scoped>
 .featured_streamer_description_container_discover span,
 .scheduled_stream_description span {
-    background-color: transparent !important;
-    color: inherit !important;
+  background-color: transparent !important;
+  color: inherit !important;
 }
 
 .stream {
