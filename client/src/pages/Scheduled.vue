@@ -89,6 +89,14 @@ export default {
       this.isAuthenticated = true;
     }
     try {
+      const { data } = await axios.get(`/streams/fetchLiveStreams`);
+      this.liveStreams = data.streams;
+      this.liveNow = data.streams[0];
+      this.weLive = true;
+    } catch (error) {
+      this.loading = false;
+    }
+    try {
       const { data } = await axios.get(`/streams?scheduled=true`);
       // this.featured = data.featured;
       this.featured = data.streams[0];
@@ -104,14 +112,6 @@ export default {
         }
         this.streams[date].push(eachStream);
       });
-    } catch (error) {
-      this.loading = false;
-    }
-    try {
-      const { data } = await axios.get(`/streams/fetchLiveStreams`);
-      this.liveStreams = data.streams;
-      this.liveNow = data.streams[0];
-      this.weLive = true;
     } catch (error) {
       this.loading = false;
     }
