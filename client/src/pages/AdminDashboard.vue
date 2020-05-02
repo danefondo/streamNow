@@ -10,12 +10,12 @@
         class="manager-option"
         v-bind:class="[ activetab === 'users' ? 'manager-selected' : '' ]"
       >Users</div>
-      <!-- <div
-        @click="activetab='upcoming '"
-        class="manager-option"
-        v-bind:class="[ activetab === 'upcoming' ? 'manager-selected' : '' ]"
-      >Upcoming</div>
       <div
+        @click="activetab='statistics'"
+        class="manager-option"
+        v-bind:class="[ activetab === 'statistics' ? 'manager-selected' : '' ]"
+      >Statistics</div>
+      <!-- <div
         @click="activetab='previous'"
         class="manager-option"
         v-bind:class="[ activetab === 'previous' ? 'manager-selected' : '' ]"
@@ -36,12 +36,19 @@
         :activetab="activetab"
       />
     </div>
+    <div v-if="users && users.length" class="manager-streams">
+      <SuperadminStatistics
+        :users="users"
+        :activetab="activetab"
+      />
+    </div>
   </div>
 </template>
 
 <script>
 import axios from "axios";
 import UserBar from "../components/UserBar";
+import SuperadminStatistics from "../components/SuperadminStatistics";
 
 export default {
   name: "AdminDashboard",
@@ -52,7 +59,8 @@ export default {
     };
   },
   components: {
-    UserBar
+    UserBar,
+    SuperadminStatistics
   },
   async mounted() {
     const { data } = await axios.get("/admin/superadmin");

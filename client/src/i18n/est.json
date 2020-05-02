@@ -275,7 +275,16 @@
         "tags-holder": "Kirjuta märksõna",
         "change-video-link": "Muuda video viidet",
         "video-placeholder": "nt. https://www.facebook.com/165028986841241/videos/254040489051203",
-        "desc-holder": "Inspireeriv ja pilkupüüdev kirjeldus"
+        "desc-holder": "Inspireeriv ja pilkupüüdev kirjeldus",
+        "delete-title": "Kustuta oma striim",
+        "delete-stream-desc": "Striimi kustutamine eemaldab meie andmebaasidest kõik sinu striimiga seotud andmed.",
+        "delete-stream": "Kustuta striim",
+        "delete-confirm-title": "Oled kindel, et soovid striimi kustutada?",
+        "delete-notice": "Sa kaotad kõik striimist tulnud like-id ja vaatamised oma kasutajalt. Striimi kustutamist ei ole võimalik tagasi võtta. ",
+        "confirm-delete": "Kustuta",
+        "cancel-delete": "Tühista",
+        "end-stream-title": "Lõpeta striim",
+        "end-stream-notice": "Vajuta 'Lõpeta striim' kui soovid striimi lõpetada. Juhul kui soovid oma striimi kustutada, pead enne oma striimi lõpetama."
     },
     "restrict": {
         "head": "Soovid eetrisse minna?",

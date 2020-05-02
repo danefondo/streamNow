@@ -41,7 +41,6 @@
 - Make autoscroll name-bar work
 
 ** GENERAL **
-- Change all <a> links to router-links with to:link
 - PROPER EMAILS SENT TO USERSS
 
 
@@ -50,11 +49,11 @@
 ** GENERAL **
 - Make upcoming / previous with dates to navigate more easily
 <!-- - Add 'Watch streams' to success page instead of streams list -->
-- Change all text to i18 text
+<!-- - Change all text to i18 text -->
 - Add custom thumbnail replacement if no thumbnail exists in youtube or manually set
 <!-- - Change goLive link input example from id to link -->
 - SET SCHEDULED STREAMS THAT NEVER GO LIVE TO LIVE
-- SEND EMAIL IF STREAM GOES LIVE
+<!-- - SEND EMAIL IF STREAM GOES LIVE -->
 
 ** ABOUT PAGE **
 - Create custom about page
@@ -63,8 +62,8 @@
 - GO LIVE BUTTON FOR SCHEDULED STREAM (confirm : if missing details, request before live)
 - SHOW LIVE INDICATOR IF LIVE
 <!-- - REGISTER for upcoming streams -->
-- Rich text editor for video descriptions (CKEDITOR5)
-- Select whether stream preview is with YouTube, Facebook, Twitch at Go Live & Edit stream
+<!-- - Rich text editor for video descriptions (CKEDITOR5) -->
+<!-- - Select whether stream preview is with YouTube, Facebook, Twitch at Go Live & Edit stream -->
 - Disable scheduling streams if email not verified
 <!-- - Schedule streams -->
 - View single scheduled stream
@@ -101,7 +100,7 @@
 
 ** GENERAL **
 - MOBILE RESPONSIVE DESIGN
-- Embed Segment analytics
+<!-- - Embed Segment analytics -->
 
 ** EMAIL ** 
 - Custom confirmation message
@@ -127,18 +126,6 @@ TUTORIAL PAGE
 ** PAYWALL FOR EVENTS **
 - Buy access to an event (access code?)
 
-** BROWSE & DISCOVERY FOR STREAMS **
-- 4x grid for live streams
-- Order streams by view count
-- Location detectioin & regional view of local streams
-- Algolia search for creators
-
-** CATEGORIES, TAGS & CREATORS PAGE ** 
-- View & find streams by categories, tags & creators
-
-** LANGUAGE ** 
-- Switchable toggle between English & Estonian
-- Automatic location detector to set language (unless otherwise specified in user settings)
 
 
 # done

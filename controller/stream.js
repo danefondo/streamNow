@@ -778,7 +778,63 @@ const streamController = {
                 errors: "An unknown error occurred"
             });
         }
-    }
+    },
+
+	async deleteStream(req, res) {
+
+		try {
+			let stream_id = req.params.streamId;
+
+			if (!stream_id) {
+				return res.status(404).json({
+					errors: "Stream id missing."
+				});
+            }
+            
+            let stream = await Stream.findById(stream_id);
+            if (!stream) {
+				return res.status(404).json({
+					errors: "Stream you tried to delete was not found or the id is incorrect."
+				});
+            }
+
+            if (stream.is_live) {
+				return res.status(404).json({
+					errors: "Cannot delete stream that is live"
+				});
+            }
+
+            let userId = stream.streamer_id;
+
+			Stream.deleteOne({ _id: stream_id }).exec(function (err, removed) {
+				if (err) {
+					return console.log("Failed to delete stream: ", err);
+				}
+				console.log("Successfully deleted stream.");
+
+            })
+            
+            let user = await User.findById(userId);
+            if (!user) {
+				return res.status(404).json({
+					errors: "Could not find user."
+				});
+            }
+            user.upcoming_streams.pull(stream_id);
+            user.previous_streams.pull(stream_id);
+            await user.save();
+
+			res.status(200).json({
+				message: "Removed."
+			})
+
+		} catch (err) {
+			console.log(err);
+			res.status(500).json({
+				message: 'An error occurred while deleting stream, please try again later.'
+			});
+		}
+	},
 
 }
 

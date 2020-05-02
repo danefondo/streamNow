@@ -275,7 +275,16 @@
         "tags-holder": "Write a tag",
         "change-video-link": "Change video link",
         "video-placeholder": "e.g. https://www.facebook.com/165028986841241/videos/254040489051203",
-        "desc-holder": "Intrigue your audience"
+        "desc-holder": "Intrigue your audience",
+        "delete-title": "Delete your stream",
+        "delete-stream-desc": "Deleting your stream will delete all data about your stream from our databases.",
+        "delete-stream": "Delete stream",
+        "delete-confirm-title": "Are you sure you want to delete your stream?",
+        "delete-notice": "Remember, deleting your stream is irreversible. The stream's likes and views will be removed from your account.",
+        "confirm-delete": "Delete",
+        "cancel-delete": "Cancel",
+        "end-stream-title": "End stream",
+        "end-stream-notice": "Click 'End stream' if you want to end your stream. In case you want to delete your stream, you must first end your stream."
     },
     "restrict": {
         "head": "Want to go live?",

@@ -23,7 +23,7 @@
       </div>
     </div>
     <div v-if="showDeleteModal" class="modal__deleteAccount">
-      <div class="modalBackground__deleteAccount"></div>
+      <div @click="showDeleteModal=false" class="modalBackground__deleteAccount"></div>
       <div class="deleteModal">
         <div class="content-wrapper">
           <div class="msg-title">{{ $t("settings.delete-acc-confirm-title") }}</div>

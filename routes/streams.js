@@ -5,6 +5,8 @@ const router = express.Router();
 
 const streamController = require('../controller/stream');
 
+router.delete('/:streamId/deleteStream', auth.ensureAuthenticated, streamController.deleteStream);
+
 router.get('/', streamController.fetchStreams); 
 
 router.get('/fetchLiveStreams', streamController.fetchLiveStreams);

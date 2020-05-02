@@ -1,7 +1,7 @@
 <template>
   <div v-if="streams.length" class="manager">
     <div v-if="showGoLiveModal" class="goLiveModal">
-      <div class="goLiveModalBackground"></div>
+      <div @click="cancelModal" class="goLiveModalBackground"></div>
       <div class="toLiveModal">
         <div class="modal-content-wrapper">
           <div class="modal-text-container">
