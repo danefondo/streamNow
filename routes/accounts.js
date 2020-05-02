@@ -21,14 +21,25 @@ const validator = require('../controller/validator');
 // https://github.com/nodejs/help/issues/457
 
 function usernameToLowerCase(req, res, next){
+	// also strip it from spaces
+	let username = req.body.username;
+	req.body.username = username.replace(/\s+/g, '');
 	req.body.username = req.body.username.toLowerCase();
+	next();
+}
+
+function emailToLowerCase(req, res, next){
+	// also strip it from spaces
+	let email = req.body.email;
+	req.body.email = email.replace(/\s+/g, '');
+	req.body.email = req.body.email.toLowerCase();
 	next();
 }
 
 
 router.post('/checkUnique', accountController.checkUnique);
 
-router.post('/register', usernameToLowerCase, validator.register, accountController.register);
+router.post('/register', usernameToLowerCase, emailToLowerCase, validator.register, accountController.register);
 
 //token verification
 router.get('/verify/:verificationToken', function (req, res, next) {

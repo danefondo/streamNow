@@ -452,6 +452,11 @@ export default {
 </script>
 
 <style>
+
+.stream_description_display span {
+    background-color: transparent!important;
+    color: inherit!important;
+}
 .shareSpecial {
   margin-left: auto;
   box-sizing: border-box;
