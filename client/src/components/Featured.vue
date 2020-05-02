@@ -2,6 +2,9 @@
   <router-link class="featured_stream" :to="'/watch/'+featured._id">
     <div class="featured_streamPreviewContainer">
       <img class="featured_streamPreview" :src="thumbnail" />
+      <div v-if="featured.is_live" class="streamPreviewLiveContainer">
+        <div class="streamPreviewLive">{{ $t("stream.live")}}</div>
+      </div>
       <div class="live"></div>
       <div class="viewerCount"></div>
     </div>
@@ -9,8 +12,11 @@
       <div class="featured_streamNameContainer">
         <div class="featured_streamName">{{featured.stream_name}}</div>
       </div>
-      <div class="streamPreviewDateTime">
-        <div v-if="featured.is_scheduled" class="streamPreviewDateContainer unsetPosition streamDateSpecial">
+      <div v-if="featured.is_scheduled" class="streamPreviewDateTime">
+        <div
+          v-if="featured.is_scheduled"
+          class="streamPreviewDateContainer unsetPosition streamDateSpecial"
+        >
           <div class="streamPreviewDate">{{ getStreamDate(featured)}}</div>
         </div>
         <div v-if="featured.is_scheduled" class="streamPreviewTimeContainer unsetPosition">
@@ -96,12 +102,31 @@ export default {
 </script>
 
 <style>
+.streamPreviewLiveContainer {
+  height: 50px;
+  background-color: #fbfbfb;
+  z-index: 9999;
+  width: 25%;
+  position: absolute;
+  top: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 3px 2px 11px 0px rgba(10, 0, 70, 0.42);
+}
+
+.streamPreviewLive {
+  padding: 11px 15px;
+  font-weight: bold;
+  font-size: 28px;
+  color: #ca1b0e;
+}
 
 .streamPreviewDateTime {
-    display: flex;
-    flex-direction: row;
-    margin-top: 10px;
-    margin-bottom: 10px;
+  display: flex;
+  flex-direction: row;
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
 
 .unsetPosition {
