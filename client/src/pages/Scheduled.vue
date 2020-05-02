@@ -9,7 +9,6 @@
       </div>
       <router-link to="/register" class="signupPageLink">{{$t("home.join")}}</router-link>
     </div>
-
     <div class="discovery_section">
       <div class="examplesSection__landingPage">
         <div class="examplesContainer__landingPage">

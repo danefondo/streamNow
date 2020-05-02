@@ -9,6 +9,14 @@
       <div class="featured_streamNameContainer">
         <div class="featured_streamName">{{featured.stream_name}}</div>
       </div>
+      <div class="streamPreviewDateTime">
+        <div v-if="featured.is_scheduled" class="streamPreviewDateContainer unsetPosition streamDateSpecial">
+          <div class="streamPreviewDate">{{ getStreamDate(featured)}}</div>
+        </div>
+        <div v-if="featured.is_scheduled" class="streamPreviewTimeContainer unsetPosition">
+          <div class="streamPreviewTime">{{ getStreamTime(featured) }}</div>
+        </div>
+      </div>
       <div class="featured_streamTags">
         <div
           v-for="(tag, index) in featured.stream_tags"
@@ -61,16 +69,56 @@ export default {
       }
       return profileIcon;
     }
+  },
+  methods: {
+    getStreamTime(featured) {
+      let time;
+      if (featured.is_scheduled && featured.scheduled_time) {
+        time = featured.scheduled_time;
+        time = new Date(time);
+        const options = { hour: "2-digit", minute: "2-digit" };
+        time = time.toLocaleTimeString("et-EE", options);
+      }
+      return time;
+    },
+    getStreamDate(featured) {
+      let time;
+      if (featured.is_scheduled && featured.scheduled_time) {
+        time = featured.scheduled_time;
+        time = new Date(time);
+        const options = { month: "long", day: "numeric" };
+        time = time.toLocaleDateString("et-EE", options);
+      }
+      return time;
+    }
   }
 };
 </script>
 
 <style>
 
+.streamPreviewDateTime {
+    display: flex;
+    flex-direction: row;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.unsetPosition {
+  position: relative !important;
+  background-color: white !important;
+  box-shadow: unset !important;
+  height: 50px !important;
+}
+
+.streamDateSpecial {
+  margin-right: 10px !important;
+}
+
 .featured_streamer_description_container_discover span,
 .scheduled_stream_description span {
-    background-color: transparent !important;
-    color: inherit !important;
+  background-color: transparent !important;
+  color: inherit !important;
 }
 
 .watch_now {
@@ -80,10 +128,11 @@ export default {
   color: white;
   border-radius: 2px;
   margin-left: auto;
-  margin-top: 104px;
+  margin-top: 50px;
   margin-right: auto;
   text-align: center;
-  width: 75%;
+  width: 97%;
+  box-sizing: border-box;
 }
 
 .watch_now:hover {
