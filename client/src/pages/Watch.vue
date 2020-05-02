@@ -98,7 +98,7 @@
             </div>
             <div
               @click="initiateGoLive(stream._id)"
-              v-if="stream.is_scheduled"
+              v-if="stream.is_scheduled && owner"
               class="take_live takeLiveSpecial"
             >{{$t("streamManager.go-live")}}</div>
             <div class="scheduled_stream_details_section">
