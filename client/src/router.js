@@ -82,7 +82,7 @@ const router = new VueRouter({
 
 const noReAuth = ["Login", "Register", "ForgotPassword"];
 router.beforeEach((to, from, next) => {
-  console.log(auth.isAuthenticated());
+  // console.log(auth.isAuthenticated());
   if (to.meta.requireAuthentication && !auth.isAuthenticated()) {
     next({ name: "Login" });
   } else if (to.meta.superAuth && !auth.isAuthenticated().superadmin) {

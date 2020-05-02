@@ -69,6 +69,7 @@
                 >{{tag}}</div>
               </div>
               <ShareDropdown :stream="stream" />
+              <div v-if="owner" @click="editStream" class="stream_edit_button editSpecial">{{$t("watch.edit")}}</div>
             </div>
             <div class="scheduled_stream_details_section">
               <div class="scheduled_stream_name">{{ stream.stream_name}}</div>
@@ -402,6 +403,11 @@ export default {
 </script>
 
 <style>
+
+.editSpecial {
+  background-color: #e8e8e8 !important;
+}
+
 .stream_not_live {
     padding: 10px;
     font-size: 20px;
