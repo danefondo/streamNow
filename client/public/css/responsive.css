@@ -13,11 +13,15 @@
         display: none !important;
     }
 
+    .mobileSize {
+        display: flex !important;
+    }
+
     .stream_buttons {
         display: flex;
         flex-direction: row;
         box-sizing: border-box;
-        width: 500px;
+        margin-right: 5px;
     }
 
     .nav-container {
@@ -71,7 +75,7 @@
         margin: 4px 3px !important;
         text-align: right !important;
         padding: 4px !important;
-        font-size: 15spx !important;
+        font-size: 18px !important;
     }
 
     .login-responsive {

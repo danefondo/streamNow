@@ -2,6 +2,18 @@
   <div class="nav-container">
     <div class="title-container">
       <router-link class="title-btn" to="/">eeter.tv</router-link>
+        <div v-if="isAuthenticated" class="stream_buttons mobileSize">
+          <router-link
+            v-if="user.is_live && user.active_stream_id"
+            class="go_live_button"
+            :to="'/watch/' + user.active_stream_id"
+          >{{ $t("nav.is-live") }}</router-link>
+          <router-link
+            v-if="!user.is_live"
+            class="go_live_button"
+            to="/golive"
+          >{{ $t("nav.go-live") }}</router-link>
+        </div>
     </div>
     <div class="navlinks-container">
       <router-link class="topNavigationLink__topBar desktopSize" to="/scheduled">{{$t("nav.scheduled")}}</router-link>
@@ -142,6 +154,10 @@ export default {
 </script>
 
 <style>
+
+.mobileSize {
+  display: none;
+}
 
 .DropdownX.is-expanded nav {
   visibility: visible;
