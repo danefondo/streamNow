@@ -19,7 +19,8 @@
         "check-back": "Aga piilu varsti jälle uuesti! :)",
         "or": "Või siis ",
         "schedule-stream": "hakka ise striimima",
-        "watch-again": "Vaata järgi"
+        "watch-again": "Vaata järgi",
+        "took-place": "Toimus"
     },
     "register": {
         "create": "Loo kasutaja",

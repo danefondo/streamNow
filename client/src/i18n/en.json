@@ -19,7 +19,8 @@
         "check-back": "However, check back soon! :)",
         "or": "Or you can ",
         "schedule-stream": "schedule a stream",
-        "watch-again": "Watch again"
+        "watch-again": "Watch again",
+        "took-place": "Took place"
     },
     "register": {
         "create": "Create account",

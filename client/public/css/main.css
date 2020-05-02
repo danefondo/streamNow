@@ -564,6 +564,7 @@ img.streamPreview {
 .featured_streamer_description_container_discover {
   color: #514f7ab8;
   padding: 10px;
+  min-height: 112px;
 }
 /*! CSS Used from: https://www.eeter.tv/css/content.css */
 .contentArea {

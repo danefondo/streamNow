@@ -282,6 +282,7 @@ export default {
 
 .streamer_description {
   margin-left: 5px;
+  line-height: 21px;
 }
 
 .streamer_description_edit {

@@ -106,7 +106,7 @@ img.streamPreview {
   height: 48px;
   /* background-color: #fbfbfb; */
   background-color: transparent;
-  z-index: 9999;
+  /* z-index: 9999; */
   width: auto;
   position: absolute;
   top: 20px;

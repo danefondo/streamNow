@@ -5,6 +5,10 @@
       <div v-if="stream.is_scheduled" class="streamPreviewMeta">
         <div class="streamTime">{{ getStreamTime(stream) }}</div>
       </div>
+      <div v-if="!stream.is_scheduled && !stream.is_live" class="streamOldPreviewDateContainer">
+        <div class="streamOldPreviewDate">{{$t("scheduled.took-place")}} {{ getOldStreamDate(stream)}} /</div>
+        <div class="streamOldTime">{{ getOldStreamTime(stream) }}</div>
+      </div>
       <div class="live"></div>
       <div class="viewerCount"></div>
     </div>
@@ -64,8 +68,38 @@ export default {
       if (stream.is_scheduled && stream.scheduled_time) {
         time = stream.scheduled_time;
         time = new Date(time);
-        const options = {hour: '2-digit', minute: '2-digit'};
-        time = time.toLocaleTimeString('et-EE', options);
+        const options = { hour: "2-digit", minute: "2-digit" };
+        time = time.toLocaleTimeString("et-EE", options);
+      }
+      return time;
+    },
+    getStreamDate(stream) {
+      let time;
+      if (stream.is_scheduled && stream.scheduled_time) {
+        time = stream.scheduled_time;
+        time = new Date(time);
+        const options = { month: "long", day: "numeric" };
+        time = time.toLocaleDateString("et-EE", options);
+      }
+      return time;
+    },
+    getOldStreamTime(stream) {
+      let time;
+      if (stream.started_time && stream.ended_time && stream.scheduled_time) {
+        time = stream.scheduled_time;
+        time = new Date(time);
+        const options = { hour: "2-digit", minute: "2-digit" };
+        time = time.toLocaleTimeString("et-EE", options);
+      }
+      return time;
+    },
+    getOldStreamDate(stream) {
+      let time;
+      if (stream.started_time && stream.ended_time && stream.scheduled_time) {
+        time = stream.scheduled_time;
+        time = new Date(time);
+        const options = { month: "long", day: "numeric" };
+        time = time.toLocaleDateString("et-EE", options);
       }
       return time;
     }
@@ -74,30 +108,54 @@ export default {
 </script>
 
 <style>
+.streamPreviewContainer {
+  position: relative;
+}
 
-  .streamPreviewContainer {
-    position: relative;
-  }
+.streamPreviewMeta {
+  height: 48px;
+  background-color: #fbfbfb;
+  /* z-index: 9999; */
+  width: 31%;
+  position: absolute;
+  top: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 3px 2px 11px 0px rgba(10, 0, 70, 0.42);
+}
 
-  .streamPreviewMeta {
-    height: 48px;
-    background-color: #fbfbfb;
-    z-index: 9999;
-    width: 31%;
+.streamTime {
+  padding: 11px 15px;
+  font-weight: bold;
+  font-size: 24px;
+  color: #f4f3ff;
+  color: #292295;
+}
+
+.streamOldPreviewDateContainer {
+    height: 36px;
+    background-color: #fbfbfbd4;
+    width: 100%;
     position: absolute;
     top: 0;
     display: flex;
     justify-content: center;
     align-items: center;
     box-shadow: 3px 2px 11px 0px rgba(10, 0, 70, 0.42);
-  }
+}
 
-  .streamTime {
-    padding: 11px 15px;
-    font-weight: bold;
-    font-size: 24px;
-    color: #f4f3ff;
-    color: #292295;
-  }
+.streamOldPreviewDate {
+  padding: 6px 5px;
+  font-weight: bold;
+  font-size: 20px;
+  color: #292295c4;
+}
 
+.streamOldTime {
+  padding: 6px 15px 6px 0px;
+  font-weight: bold;
+  font-size: 20px;
+  color: #292295c4;
+}
 </style>

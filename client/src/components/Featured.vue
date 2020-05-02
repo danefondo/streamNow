@@ -105,7 +105,7 @@ export default {
 .streamPreviewLiveContainer {
   height: 50px;
   background-color: #fbfbfb;
-  z-index: 9999;
+  /* z-index: 9999; */
   width: 25%;
   position: absolute;
   top: 0;

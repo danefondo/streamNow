@@ -1,6 +1,27 @@
 <template>
   <NotFoundStream v-if="streamNotFound" />
   <div v-else-if="stream" class="watch">
+    <div v-if="showGoLiveModal" class="goLiveModal">
+      <div @click="cancelModal" class="goLiveModalBackground"></div>
+      <div class="toLiveModal">
+        <div class="modal-content-wrapper">
+          <div class="modal-text-container">
+            <div class="modal-title">{{ $t("streamManager.confirm-go-live") }}</div>
+            <div class="modal-body">{{ $t("streamManager.confirm-go-live") }}</div>
+          </div>
+          <div class="action-group">
+            <div
+              @click="cancelModal"
+              class="cancelPermaDeleteAccount button-outline"
+            >{{ $t("streamManager.cancel-go-live") }}</div>
+            <div
+              @click="goLive"
+              class="confirm-golive button-filled"
+            >{{ $t("streamManager.go-live") }}</div>
+          </div>
+        </div>
+      </div>
+    </div>
     <div class="stream_id" data-stream-id="5e91425bd877200ca0862a81"></div>
     <div v-if="showModal" class="confirm_end_modal">
       <div class="confirm_modal_background"></div>
@@ -68,9 +89,18 @@
                   class="streamTagPreview"
                 >{{tag}}</div>
               </div>
-              <ShareDropdown :stream="stream" />
-              <div v-if="owner" @click="editStream" class="stream_edit_button editSpecial">{{$t("watch.edit")}}</div>
+              <ShareDropdown :stream="stream" class="shareSpecial" />
+              <div
+                v-if="owner"
+                @click="editStream"
+                class="stream_edit_button editSpecial"
+              >{{$t("watch.edit")}}</div>
             </div>
+            <div
+              @click="initiateGoLive(stream._id)"
+              v-if="stream.is_scheduled"
+              class="take_live takeLiveSpecial"
+            >{{$t("streamManager.go-live")}}</div>
             <div class="scheduled_stream_details_section">
               <div class="scheduled_stream_name">{{ stream.stream_name}}</div>
             </div>
@@ -248,6 +278,8 @@ export default {
   },
   data() {
     return {
+      showGoLiveModal: false,
+      streamToGoLive: null,
       stream: null,
       streamer: null,
       hostName: null,
@@ -270,6 +302,23 @@ export default {
     }
   },
   methods: {
+    initiateGoLive(streamId) {
+      this.streamToGoLive = streamId;
+      this.showGoLiveModal = true;
+    },
+    async goLive() {
+      try {
+        await axios.post(`/streams/golive/${this.streamToGoLive}`);
+        this.$emit("updateLive", true, this.streamToGoLive);
+        location.reload();
+      } catch (error) {
+        alert(error.response.data.errors);
+      }
+    },
+    cancelModal() {
+      this.streamToGoLive = null;
+      this.showGoLiveModal = false;
+    },
     getStreamTime(stream) {
       let time;
       if (stream.is_scheduled && stream.scheduled_time) {
@@ -377,7 +426,7 @@ export default {
         this.stream.platform_status &&
         this.stream.platform_status.includes("facebook")
       ) {
-        return  `https://www.facebook.com/v2.3/plugins/video.php?allowfullscreen=true&autoplay=true&container_width=800&href=${this.stream.stream_video_link}`;
+        return `https://www.facebook.com/v2.3/plugins/video.php?allowfullscreen=true&autoplay=true&container_width=800&href=${this.stream.stream_video_link}`;
         // return `https://www.facebook.com/video/embed?video_id=${this.stream.stream_video_id}`;
       } else if (
         this.stream.platform_status &&
@@ -403,26 +452,61 @@ export default {
 </script>
 
 <style>
+.shareSpecial {
+  margin-left: auto;
+  box-sizing: border-box;
+  height: 38px;
+}
+
+.take_live {
+  padding: 10px 16px;
+  padding-top: 11px;
+  font-size: 17px;
+  display: inline-block;
+  background-color: #f7f7f7;
+  border-radius: 3px;
+  margin-right: 15px;
+  text-align: center;
+  transition: 0.2s ease;
+  cursor: pointer;
+  white-space: nowrap;
+  font-weight: bold;
+  width: 100px;
+}
+
+.take_live:hover {
+  color: #aaa;
+}
+
+.take_live {
+  background-color: #130089;
+  color: white;
+}
+
+.takeLiveSpecial {
+  float: right;
+  margin-top: 10px;
+}
 
 .editSpecial {
   background-color: #e8e8e8 !important;
 }
 
 .stream_not_live {
-    padding: 10px;
-    font-size: 20px;
-    background-color: #f7f7f7;
-    margin-bottom: 15px;
-    border-radius: 4px;
-    width: 800px;
-    margin-left: auto;
-    margin-right: auto;
-    color: blue;
+  padding: 10px;
+  font-size: 20px;
+  background-color: #f7f7f7;
+  margin-bottom: 15px;
+  border-radius: 4px;
+  width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+  color: blue;
 }
 .streamPreviewTimeContainer {
   height: 60px;
   background-color: #fbfbfb;
-  z-index: 9999;
+  /* z-index: 9999; */
   width: 22%;
   position: absolute;
   top: 0;
@@ -435,7 +519,7 @@ export default {
 .streamPreviewDateContainer {
   height: 60px;
   background-color: #fbfbfb;
-  z-index: 9999;
+  /* z-index: 9999; */
   width: 38%;
   position: absolute;
   top: 0;
@@ -466,7 +550,7 @@ export default {
   height: 48px;
   /* background-color: #fbfbfb; */
   background-color: transparent;
-  z-index: 9999;
+  /* z-index: 9999; */
   width: auto;
   position: absolute;
   top: 20px;
@@ -912,9 +996,9 @@ p {
   border-radius: 10px;
 }
 .live_player_facebook {
-    border-radius: 10px;
-    height: 479px;
-    width: 850px;
+  border-radius: 10px;
+  height: 479px;
+  width: 850px;
 }
 .live_chat {
   border-radius: 3px;

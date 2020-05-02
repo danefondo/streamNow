@@ -40,7 +40,7 @@ const streamController = {
         }
 
         try {
-            let streams = await Stream.find(query).populate('streamer').exec();
+            let streams = await Stream.find(query).populate('streamer').sort({ scheduled_time: -1 }).exec();
             if (!streams.length) {
                 return res.status(404).json({
                     message: "No live streams found"
