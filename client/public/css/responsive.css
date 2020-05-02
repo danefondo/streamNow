@@ -8,6 +8,18 @@
     /* html, body, .container {
         max-width: 360vw !important;
     } */
+
+    .desktopSize {
+        display: none !important;
+    }
+
+    .stream_buttons {
+        display: flex;
+        flex-direction: row;
+        box-sizing: border-box;
+        width: 500px;
+    }
+
     .nav-container {
         padding: 10px 0px !important;
         padding-top: 0px !important;
@@ -59,7 +71,7 @@
         margin: 4px 3px !important;
         text-align: right !important;
         padding: 4px !important;
-        font-size: 14px !important;
+        font-size: 15spx !important;
     }
 
     .login-responsive {
@@ -74,7 +86,7 @@
 
     .registration-block {
         width: 100vw !important;
-        margin-top: 10px !important;
+        margin-top: 20px !important;
     }
 
     .title__landingPage.cd-words-wrapper {
