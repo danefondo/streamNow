@@ -64,6 +64,18 @@
         border-radius: 0px !important;
     }
 
+    .go_live_button {
+        width: 130px !important;
+    }
+
+    .desktopSize {
+        display: none !important;
+    }
+
+    .mobileSize {
+        display: flex !important;
+    }
+
 }
 
 @media screen and (max-width: 374px) and (min-width: 320px) {
@@ -71,6 +83,10 @@
     .live_player_facebook {
         height: 232px !important;
       }
+
+      .go_live_button {
+        width: 120px !important;
+    }
 }
 
 @media screen and (max-width: 600px) and (min-width: 320px) {
@@ -201,14 +217,6 @@
     padding: 8px 15px !important;
   }
 
-  .desktopSize {
-    display: none !important;
-  }
-
-  .mobileSize {
-    display: flex !important;
-  }
-
   .stream_buttons {
     display: flex;
     flex-direction: row;
@@ -268,7 +276,6 @@
     text-align: right !important;
     padding: 6px 4px !important;
     font-size: 18px !important;
-    width: 120px;
     margin-right: 5px !important;
   }
 
@@ -440,6 +447,15 @@
     cursor: pointer !important;
     box-sizing: border-box !important;
     transition: 0.2s ease-in-out !important;
+  }
+
+
+  .desktopSize {
+    display: none !important;
+  }
+
+  .mobileSize {
+    display: flex !important;
   }
 }
 
