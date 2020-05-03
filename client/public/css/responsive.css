@@ -41,6 +41,19 @@
     .live_player_facebook {
         height: 223px !important;
     }
+
+    .stream_live,
+    .stream_offline {
+        margin-top: 7px !important;
+        margin-bottom: 5px !important;
+        margin-left: 0px !important;
+    }
+
+    .livestream_buttons {
+        flex-direction: row-reverse !important;
+        margin-left: unset !important;
+    }
+
 }
 
 @media screen and (max-width: 374px) and (min-width: 320px) {
