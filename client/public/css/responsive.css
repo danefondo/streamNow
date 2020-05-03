@@ -43,7 +43,7 @@
     }
 }
 
-@media screen and (max-width: 375px) and (min-width: 320px) {
+@media screen and (max-width: 374px) and (min-width: 320px) {
 
     .live_player_facebook {
         width: 100vw !important;
@@ -114,6 +114,7 @@
 
   .stream_details {
     width: 100vw !important;
+    padding-top: 0px !important;
   }
 
   .stream_details_part {
