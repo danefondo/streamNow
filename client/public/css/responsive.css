@@ -9,6 +9,34 @@
         max-width: 360vw !important;
     } */
 
+
+/*-----------------------
+    watch page
+-----------------------*/
+
+.footer_wrapper {
+    display: flex !important;
+    flex-wrap: wrap !important;
+}
+
+.footer_bottom_container {
+    margin-top: 20px !important;
+}
+
+.footer_sections {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    justify-content: center !important;
+}
+
+.footer_section {
+    display: flex !important;
+    margin-bottom: 8px;
+    flex-direction: column;
+}
+
+
+
 /*-----------------------
     watch page
 -----------------------*/
