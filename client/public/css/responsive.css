@@ -1,92 +1,98 @@
 @media screen and (max-width: 600px) and (min-width: 375px) {
+  html,
+  body {
+    overflow-x: hidden !important;
+  }
+  .nav-container {
+    padding-top: 5px !important;
+  }
 
-    html, body {
-        overflow-x: hidden;
-    }
-    .nav-container {
-        padding-top: 5px !important;
-    }
+  .login-responsive {
+    width: 100px !important;
+  }
 
-    .login-responsive {
-        width: 100px !important;
-    }
+  .donate_button {
+    width: 100vw !important;
+    margin: 0 !important;
+    border-radius: 0px !important;
+    text-align: center !important;
+    font-size: 18px !important;
+  }
 
-    .donate_button {
-        width: 100vw !important;
-        margin: 0 !important;
-        border-radius: 0px !important;
-        text-align: center !important;
-        font-size: 18px !important;
-    }
+  .stream_center_top {
+    flex-wrap: wrap !important;
+  }
 
-    .stream_center_top {
-        flex-wrap: wrap !important;
-    }
+  .stream_owner {
+    width: 100vw !important;
+    margin-right: 0px !important;
+    margin-bottom: 7px !important;
+    justify-content: center !important;
+  }
 
-    .stream_owner {
-        width: 100vw !important;
-        margin-right: 0px !important;
-        margin-bottom: 7px !important;
-        justify-content: center !important;
-    }
+  .streamer_follow {
+    width: 100vw !important;
+    justify-content: center !important;
+    margin-bottom: 10px !important;
+    margin-right: 0px !important;
+    margin-left: 0px !important;
+  }
 
-    .streamer_follow {
-        width: 100vw !important;
-        justify-content: center !important;
-        margin-bottom: 10px !important;
-        margin-right: 0px !important;
-        margin-left: 0px !important;
-    }
+  .streamer_follow_state {
+    margin-right: 16px !important;
+  }
 
-    .streamer_follow_state {
-        margin-right: 16px !important;
-    }
+  .live_player_facebook {
+    height: 223px !important;
+  }
 
-    .live_player_facebook {
-        height: 223px !important;
-    }
+  .stream_live,
+  .stream_offline {
+    margin-top: 7px !important;
+    margin-bottom: 5px !important;
+    margin-left: 0px !important;
+  }
 
-    .stream_live,
-    .stream_offline {
-        margin-top: 7px !important;
-        margin-bottom: 5px !important;
-        margin-left: 0px !important;
-    }
+  .livestream_buttons {
+    flex-direction: row-reverse !important;
+    margin-left: unset !important;
+  }
 
-    .livestream_buttons {
-        flex-direction: row-reverse !important;
-        margin-left: unset !important;
-    }
+  .stream_not_live {
+    width: 100vw !important;
+    box-sizing: border-box !important;
+    border-radius: 0px !important;
+  }
 
-    .stream_not_live {
-        width: 100vw !important;
-        box-sizing: border-box !important;
-        border-radius: 0px !important;
-    }
+  .go_live_button {
+    width: 130px !important;
+  }
 
-    .go_live_button {
-        width: 130px !important;
-    }
+  .Dropdown-nav {
+    width: 150px !important;
+  }
 
-    .desktopSize {
-        display: none !important;
-    }
+  .share-links {
+    right: 12px !important;
+  }
 
-    .mobileSize {
-        display: flex !important;
-    }
+  .desktopSize {
+    display: none !important;
+  }
 
+  .mobileSize {
+    display: flex !important;
+  }
 }
 
 @media screen and (max-width: 374px) and (min-width: 320px) {
+  .live_player_facebook {
+    height: 232px !important;
+  }
 
-    .live_player_facebook {
-        height: 232px !important;
-      }
-
-      .go_live_button {
-        width: 120px !important;
-    }
+  .go_live_button {
+    width: 120px !important;
+  }
 }
 
 @media screen and (max-width: 600px) and (min-width: 320px) {
@@ -98,11 +104,11 @@
     watch page
 -----------------------*/
 
-.live_player_facebook {
+  .live_player_facebook {
     width: 100vw !important;
     /* height: 26vh !important; */
     border-radius: 0px !important;
-    margin-bottom: 5px;
+    margin-bottom: 5px !important;
   }
 
   .footer {
@@ -128,9 +134,9 @@
 
   .footer_section {
     display: flex !important;
-    margin-bottom: 8px;
-    flex-direction: column;
-    font-size: 17px;
+    margin-bottom: 8px !important;
+    flex-direction: column !important;
+    font-size: 17px !important;
   }
 
   /*-----------------------
@@ -138,11 +144,11 @@
 -----------------------*/
 
   .Dropdown-nav {
-    width: 120px;
+    width: 150px !important;
   }
 
   .share-links {
-    right: -35px;
+    right: 12px !important;
   }
 
   .stream_center_top {
@@ -208,8 +214,8 @@
 -----------------------*/
 
   .streamPreviewLiveContainer {
-      height: 40px;
-      width: 26%;
+    height: 40px;
+    width: 26%;
   }
 
   .streamPreviewLive {
@@ -448,7 +454,6 @@
     box-sizing: border-box !important;
     transition: 0.2s ease-in-out !important;
   }
-
 
   .desktopSize {
     display: none !important;
