@@ -1,4 +1,8 @@
 @media screen and (max-width: 600px) and (min-width: 375px) {
+
+    html, body {
+        overflow-x: hidden;
+    }
     .nav-container {
         padding-top: 5px !important;
     }
@@ -52,6 +56,12 @@
     .livestream_buttons {
         flex-direction: row-reverse !important;
         margin-left: unset !important;
+    }
+
+    .stream_not_live {
+        width: 100vw !important;
+        box-sizing: border-box !important;
+        border-radius: 0px !important;
     }
 
 }
