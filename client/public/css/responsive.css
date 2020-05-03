@@ -48,6 +48,14 @@
     watch page
 -----------------------*/
 
+    .Dropdown-nav {
+        width: 120px;
+    }
+
+    .share-links {
+        right: -35px;
+    }
+
     .stream_center_top {
         width: 100vw !important;
     }
@@ -62,6 +70,7 @@
         /* height: 26vh !important; */
         height: 232px !important;
         border-radius: 0px !important;
+        margin-bottom: 5px;
     }
 
     .stream_details {
@@ -70,8 +79,13 @@
 
     .stream_details_part {
         flex-wrap: wrap !important;
-        width: 92vw !important;
-        padding: 12px 20px !important;
+        width: 100vw !important;
+        padding: 0px 15px 12px 20px !important;
+        box-sizing: border-box !important;
+    }
+
+    .stream_description_display {
+        padding: 20px 10px !important;
     }
 
     .livestream_buttons {
