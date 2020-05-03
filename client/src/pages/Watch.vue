@@ -1137,8 +1137,10 @@ p {
 }
 .streamer_profile_icon {
   height: 45px;
+  min-height: 45px;
   margin-right: 10px;
   width: 45px;
+  min-width: 45px;
   border-radius: 360px;
   object-fit: cover;
 }
