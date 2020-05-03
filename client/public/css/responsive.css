@@ -9,6 +9,44 @@
         max-width: 360vw !important;
     } */
 
+/*-----------------------
+    watch page
+-----------------------*/
+
+    .streaming_area {
+        width: 100vw !important;
+    }
+
+    .register_block {
+        width: 100vw !important;
+    }
+
+    .register_email_block {
+        width: 88vw !important;
+        margin: 20px auto !important;
+    }
+
+    .watch_register_input {
+        width: 88vw !important;
+    }
+
+    .scheduled_stream_container {
+        width: 100vw !important;
+    }
+
+    .scheduled_stream_details {
+        width: 100vw !important;
+    }
+
+    .stream_center_top_preview {
+        width: 95px !important;
+    }
+
+
+/*-----------------------
+    home page
+-----------------------*/
+
     .desktopSize {
         display: none !important;
     }
@@ -76,6 +114,8 @@
         text-align: right !important;
         padding: 6px 4px !important;
         font-size: 18px !important;
+        width: 120px;
+        margin-right: 5px !important;
     }
 
     .login-responsive {
@@ -90,7 +130,7 @@
 
     .registration-block {
         width: 100vw !important;
-        margin-top: 100px !important;
+        margin-top: 30px !important;
     }
 
     .title__landingPage.cd-words-wrapper {
