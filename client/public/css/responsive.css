@@ -54,11 +54,13 @@
 
     .player_container {
         width: 100vw !important;
+        margin-right: 0px !important;
     }
 
     .live_player_facebook {
         width: 100vw !important;
-        height: 26vh !important;
+        /* height: 26vh !important; */
+        height: 232px !important;
         border-radius: 0px !important;
     }
 
@@ -68,12 +70,12 @@
 
     .stream_details_part {
         flex-wrap: wrap !important;
-        width: 92vw;
+        width: 92vw !important;
         padding: 12px 20px !important;
     }
 
     .livestream_buttons {
-        margin-top: 12px;
+        margin-top: 12px !important;
     }
 
     .streaming_area {
