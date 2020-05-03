@@ -16,7 +16,27 @@
     }
 
     .stream_center_top {
-        flex-wrap: wrap;
+        flex-wrap: wrap !important;
+    }
+
+    .stream_owner {
+        width: 100vw !important;
+        margin-right: 0px !important;
+        margin-bottom: 7px !important;
+        justify-content: center !important;
+    }
+    }
+
+    .streamer_follow {
+        width: 100vw !important;
+        justify-content: center !important;
+        margin-bottom: 10px !important;
+        margin-right: 0px !important;
+        margin-left: 0px !important;
+    }
+
+    .streamer_follow_state {
+        margin-right: 16px !important;
     }
 
 @media screen and (max-width: 600px) and (min-width: 320px) {
