@@ -420,11 +420,11 @@ p {
   float: right;
 }
 .donate_button {
-  background-color: #1b9a6b;
+  background-color: #130088;
   padding: 11px 15px;
   margin-left: auto;
   margin-right: 80px;
-  color: white;
+  color: #FF9800;
   font-weight: bold;
   border-radius: 3px;
   cursor: pointer;
@@ -493,8 +493,10 @@ p {
 }
 .streamer_profile_icon {
   height: 45px;
+  min-height: 45px;
   margin-right: 10px;
   width: 45px;
+  min-width: 45px;
   border-radius: 360px;
   object-fit: cover;
 }
