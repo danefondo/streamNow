@@ -14,6 +14,10 @@
     watch page
 -----------------------*/
 
+.footer {
+    padding-bottom: 10px !important;
+}
+
 .footer_wrapper {
     display: flex !important;
     flex-wrap: wrap !important;
@@ -33,6 +37,7 @@
     display: flex !important;
     margin-bottom: 8px;
     flex-direction: column;
+    font-size: 17px;
 }
 
 
@@ -40,6 +45,34 @@
 /*-----------------------
     watch page
 -----------------------*/
+
+    .stream_center_top {
+        width: 100vw !important;
+    }
+
+    .player_container {
+        width: 100vw !important;
+    }
+
+    .live_player_facebook {
+        width: 100vw !important;
+        height: 26vh !important;
+        border-radius: 0px !important;
+    }
+
+    .stream_details {
+        width: 100vw !important;
+    }
+
+    .stream_details_part {
+        flex-wrap: wrap !important;
+        width: 98vw;
+        padding: 12px 20px !important;
+    }
+
+    .livestream_buttons {
+        margin-top: 12px;
+    }
 
     .streaming_area {
         width: 100vw !important;
