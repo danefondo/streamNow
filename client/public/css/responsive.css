@@ -16,6 +16,8 @@
 
 .footer {
     padding-bottom: 10px !important;
+    width: 100vw !important;
+    box-sizing: border-box !important;
 }
 
 .footer_wrapper {
@@ -66,7 +68,7 @@
 
     .stream_details_part {
         flex-wrap: wrap !important;
-        width: 98vw;
+        width: 92vw;
         padding: 12px 20px !important;
     }
 
