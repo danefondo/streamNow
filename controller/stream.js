@@ -278,17 +278,38 @@ const streamController = {
             }
 
             let stream_data = req.body;
-            stream.thumbnail_key = stream_data.thumbnail_key;
-            stream.thumbnail_url = stream_data.thumbnail_url;
-            stream.thumbnail_name = stream_data.thumbnail_name;
-            stream.stream_name = stream_data.stream_name;
-            stream.stream_description = stream_data.stream_description;
-            stream.stream_video_link = stream_data.stream_video_link;
-            stream.platform_status = streamUtils.getPlatform(stream_data.stream_video_link);
-            stream.stream_video_id = streamUtils.getVideoId(stream.platform_status, stream_data.stream_video_link)
-            stream.stream_tags = stream_data.stream_tags;
-            stream.scheduled_time = stream_data.scheduled_time;
-            stream.public_status = stream_data.public_status;
+
+            //- DOING CHECKS BECAUSE IF YOU DO NOT, WHEN YOU UDPATE AND DO NOT GET ALL, IT SETS THE FIELD TO ZERO, SOME OF THESE FIELDS LOSE ORIGINAL VALUE THIS WAY, AS NOT ALL VALUES ARE RECEIVED.
+            if (stream_data.thumbnail_key) {
+                stream.thumbnail_key = stream_data.thumbnail_key;
+            }
+            if (stream_data.thumbnail_url) {
+                stream.thumbnail_url = stream_data.thumbnail_url;
+            }
+            if (stream_data.thumbnail_name) {
+                stream.thumbnail_name = stream_data.thumbnail_name;
+            }
+            if (stream_data.stream_name) {
+                stream.stream_name = stream_data.stream_name;
+            }
+            if (stream_data.stream_description) {
+                stream.stream_description = stream_data.stream_description;
+            }
+            if (stream_data.stream_video_link) {
+                stream.stream_video_link = stream_data.stream_video_link;
+                stream.platform_status = streamUtils.getPlatform(stream_data.stream_video_link);
+                stream.stream_video_id = streamUtils.getVideoId(stream.platform_status, stream_data.stream_video_link);
+            }
+            if (stream_data.stream_tags) {
+                stream.stream_tags = stream_data.stream_tags;
+            }
+            if (stream_data.scheduled_time) {
+                stream.scheduled_time = stream_data.scheduled_time;
+            }
+            if (stream_data.public_status) {
+                stream.public_status = stream_data.public_status;
+            }
+        
 
             console.log("user_id", req.user._id);
 
