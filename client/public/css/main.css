@@ -330,6 +330,8 @@ img.streamPreview {
 }
 .streamNameContainer {
   padding: 8px 5px 5px 4px;
+  width: 63%;
+  margin-bottom: 5px;
 }
 .streamName {
   font-size: 24px;
