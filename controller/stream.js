@@ -401,12 +401,20 @@ const streamController = {
                     errors: "User not found."
                 });
             }
-            user.is_live = false;
-            user.active_stream_id = undefined;
-            user.current_stream_url = undefined;
-            user.current_stream_thumbnail = undefined;
-            user.current_streams.pull(stream._id);
-            user.previous_streams.push(stream._id);
+
+            if (user.is_live) {
+                user.is_live = false;
+                user.active_stream_id = undefined;
+                user.current_stream_url = undefined;
+                user.current_stream_thumbnail = undefined;
+                user.current_streams.pull(stream._id);
+            }
+
+            let previousBoolean = user.previous_streams.includes(stream._id);
+            if (!previousBoolean) {
+                user.previous_streams.push(stream._id);
+            }
+
             await user.save();
 
             res.json({
