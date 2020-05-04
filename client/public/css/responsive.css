@@ -320,7 +320,7 @@
 
   .registration-block {
     width: 100vw !important;
-    margin-top: 40px !important;
+    margin-top: 30px !important;
   }
 
   .title__landingPage.cd-words-wrapper {
@@ -366,7 +366,7 @@
     box-sizing: border-box !important;
     margin-left: calc(100vw - 93%) !important;
     margin-right: calc(100vw - 93%) !important;
-    font-size: 34px !important;
+    font-size: 32px !important;
     margin-top: 10px !important;
   }
 
