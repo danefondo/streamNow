@@ -1,4 +1,4 @@
-*** Watch page *** 
+## Watch page 
 The watch page has several states it can be in. The states affect the elements that are displayed and rendered, the styles that get applied, and the functions that are available.
 
 All that is to be taken into consideration when creating styles, new functions or changing existing functions, to avoid conflicts and to avoid forgetting to design an element or to handle a functionality case.
