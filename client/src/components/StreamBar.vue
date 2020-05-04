@@ -1,13 +1,5 @@
 <template>
-  <div
-    class="stream all"
-    v-if="activetab === 'all' || activetab == getStreamState(stream)">
-    <div v-if="stream.is_scheduled" class="streamDateMeta">
-      <div class="streamDate">{{ getStreamDate(stream) + ' /'}}</div>
-    </div>
-    <div v-if="stream.is_scheduled" class="streamTimeMeta">
-      <div class="streamTime">{{ getStreamTime(stream) }}</div>
-    </div>
+  <div class="stream all" v-if="activetab === 'all' || activetab == getStreamState(stream)">
     <div class="streamPreviewContainer">
       <img class="streamPreview" :src="thumbnail" />
       <div class="live"></div>
@@ -15,15 +7,33 @@
     </div>
     <div class="streamMetaContainer">
       <div class="streamNameContainer">
-        <router-link :to="'/watch/'+stream._id" class="streamName">{{stream.stream_name || "Untitled stream"}}</router-link>
+        <router-link
+          :to="'/watch/'+stream._id"
+          class="streamName"
+        >{{stream.stream_name || "Untitled stream"}}</router-link>
       </div>
+    <div class="streamDateTime">
+      <div v-if="stream.is_scheduled" class="streamDateMeta">
+        <div class="streamDate">{{ getStreamDate(stream) + ' /'}}</div>
+      </div>
+      <div v-if="stream.is_scheduled" class="streamTimeMeta">
+        <div class="streamTime">{{ getStreamTime(stream) }}</div>
+      </div>
+    </div>
       <div class="streamTags">
         <div v-for="(tag, index) in stream.stream_tags" :key="index" class="streamTag">{{tag}}</div>
       </div>
       <div class="stream-controller">
         <div v-if="stream.is_live" class="is_live">{{$t("watch.live")}}</div>
-        <div v-if="!stream.is_live && !stream.is_scheduled" class="is_previous">{{$t("watch.previous")}}</div>
-        <div @click="$emit('initiateGoLive', stream._id)" v-if="stream.is_scheduled" class="take_live">{{$t("streamManager.go-live")}}</div>
+        <div
+          v-if="!stream.is_live && !stream.is_scheduled"
+          class="is_previous"
+        >{{$t("watch.previous")}}</div>
+        <div
+          @click="$emit('initiateGoLive', stream._id)"
+          v-if="stream.is_scheduled"
+          class="take_live"
+        >{{$t("streamManager.go-live")}}</div>
         <div @click="editStream" class="edit_stream">{{$t("streamManager.edit")}}</div>
       </div>
     </div>
@@ -82,12 +92,42 @@ export default {
     },
     editStream() {
       this.$router.push(`/edit/${this.stream._id}?manage=1`);
-    },
+    }
   }
 };
 </script>
 
 <style scoped>
+.streamDateTime {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  width: 285px;
+  background-color: transparent;
+  margin-bottom: 14px;  
+  height: 35px;
+}
+
+.streamDateTime .streamTimeMeta,
+.streamDateTime .streamDateMeta {
+  height: 35px;
+  background-color: #f5f6fb;
+  position: unset;
+}
+
+.streamDateTime .streamTime,
+.streamDateTime .streamDate {
+  font-size: 19px;
+}
+
+.streamDateTime .streamDate {
+  padding: 9px 10px 9px 15px;
+}
+
+.streamDateTime .streamTime {
+  padding: 9px 15px 9px 0px;
+}
+
 .stream {
   width: 800px;
   flex-direction: row;
