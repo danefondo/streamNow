@@ -243,4 +243,8 @@ img.streamPreview {
   cursor: default;
   background-color: transparent;
 }
+
+.mobileSize {
+  display: none;
+}
 </style>

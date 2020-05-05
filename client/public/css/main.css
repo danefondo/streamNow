@@ -294,6 +294,10 @@ img.streamPreview {
   background-color: transparent;
   box-shadow: 3px 2px 11px 0px rgba(10, 0, 70, 0.42);
 }
+
+.manager-streams .streamPreviewContainer {
+  height: 152px !important;
+}
 .streamMetaContainer {
   width: 100%;
   max-width: 325px;

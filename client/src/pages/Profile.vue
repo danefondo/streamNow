@@ -298,7 +298,7 @@ export default {
   cursor: pointer;
   white-space: nowrap;
   font-weight: bold;
-  margin-left: 130px;
+  margin-left: auto;
 }
 
 .streamer_description_edit:hover {

@@ -1,4 +1,4 @@
-@media screen and (max-width: 600px) and (min-width: 375px) {
+@media screen and (max-width: 700px) and (min-width: 375px) {
   html,
   body {
     overflow-x: hidden !important;
@@ -124,7 +124,7 @@
   }
 }
 
-@media screen and (max-width: 600px) and (min-width: 320px) {
+@media screen and (max-width: 700px) and (min-width: 320px) {
   html,
   body {
     overflow-x: hidden !important;
@@ -380,6 +380,15 @@
 /*-----------------------
    profile
 -----------------------*/
+
+.streamPreview {
+    min-height: 50vw !important;
+}
+.streamPreviewContainer {
+    width: 75vw !important;
+    height: 50vw !important;
+}
+
 .streaming_area {
     margin-left: auto !important;
     margin-right: auto !important;
