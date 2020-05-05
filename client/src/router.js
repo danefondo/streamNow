@@ -20,6 +20,7 @@ import auth from "./config/auth";
 import VideoManager from "./pages/VideoManager";
 import FeatureRequests from "./pages/FeatureRequests";
 import AdminDashboard from "./pages/AdminDashboard";
+import Philosophy from "./pages/Philosophy";
 
 const routes = [
   { path: "/scheduled", component: Scheduled },
@@ -57,6 +58,7 @@ const routes = [
   { path: "/register", component: Register, name: "Register" },
   { path: "/verify/:token", component: VerifyUser, name: "Verify" },
   { path: "/about", component: About },
+  { path: "/philosophy", component: Philosophy },
   { path: "/privacy", component: Privacy },
   { path: "/feature-requests", component: FeatureRequests },
   { path: "/terms", component: Terms },
