@@ -10,3 +10,23 @@ The watch page can be in at least the following 6 states:
 - There exists an authenticated user
 - There does not exist an authenticated user
 - There exists an authenticated user and the user is the owner of the video
+
+## All pages
+- Scheduled streams (home)
+- Stream preview / Stream watch
+- Edit stream / Create stream
+- Profile
+- Settings
+- Superadmin
+- Manage streams
+- About
+- Privacy policy
+- Terms of service
+- Contact
+- Request feature
+- Log in
+- Register
+- Forget password
+- Reset pass
+- Wait to get in!
+- Successful registration

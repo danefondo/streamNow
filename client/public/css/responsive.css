@@ -76,6 +76,15 @@
     right: 12px !important;
   }
 
+  .contentArea {
+    width: 100vw !important;
+    margin-top: 20px !important;
+  }
+
+  .examplesTitle__landingPage {
+    font-size: 37px !important;
+}
+
   .desktopSize {
     display: none !important;
   }
@@ -93,12 +102,43 @@
   .go_live_button {
     width: 125px !important;
   }
+
+  .contentArea {
+    width: 100vw !important;
+    margin-top: 15px !important;
+  }
+
+  .examplesTitle__landingPage {
+      font-size: 34px !important;
+  }
 }
 
 @media screen and (max-width: 600px) and (min-width: 320px) {
   /* html, body, .container {
         max-width: 360vw !important;
     } */
+
+    .login-input {
+        width: 85vw !important;
+    }
+
+    .login-title {
+        width: 85vw !important;
+    }
+
+    .forgotPass {
+        width: 85vw !important;
+    }
+
+    .login-button {
+        width: 85vw !important;
+    }
+
+    .signin-form {
+        margin-top: 100px !important;
+        margin-bottom: 0px !important;
+        width: 85vw;
+    }
 
   /*-----------------------
     watch page
@@ -233,7 +273,7 @@
     flex-direction: row !important;
     box-sizing: border-box !important;
     width: 100vw !important;
-    margin: 0px !important
+    margin: 0px !important;
   }
 
   .nav-container {
@@ -276,11 +316,11 @@
   }
 
   .navlinks-container {
-      display: flex !important;
-      flex-direction: column !important;
-      flex-wrap: wrap;
-      width: 100% !important;
-      margin: 0px !important;
+    display: flex !important;
+    flex-direction: column !important;
+    flex-wrap: wrap;
+    width: 100% !important;
+    margin: 0px !important;
   }
 
   .go_live_button {
@@ -311,11 +351,6 @@
   .login-responsive {
     background-color: white !important;
     color: #130088 !important;
-  }
-
-  .contentArea {
-    width: 100vw !important;
-    margin-top: 0px !important;
   }
 
   .registration-block {
@@ -392,7 +427,6 @@
   }
 
   .examplesTitle__landingPage {
-    font-size: 37px !important;
     margin: unset !important;
     width: unset !important;
     text-align: unset !important;
@@ -476,6 +510,37 @@
     cursor: pointer !important;
     box-sizing: border-box !important;
     transition: 0.2s ease-in-out !important;
+  }
+
+  .authNav {
+    flex-direction: row !important;
+  }
+
+  .authNav .title-container {
+    width: 50vw !important;
+    justify-content: left !important;
+  }
+
+  .authNav .title-btn {
+    font-size: 24px !important;
+  }
+
+  .authNav .navlinks-container {
+    width: 50vw !important;
+  }
+
+  .authProfile {
+    margin-left: 0px !important;
+    padding-right: 15px !important;
+    width: 50vw !important;
+  }
+
+  .dropLive {
+    display: block !important;
+  }
+
+  .goOnAir {
+    display: none !important;
   }
 
   .desktopSize {

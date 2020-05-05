@@ -1,25 +1,28 @@
 <template>
-  <div class="nav-container">
+  <div class="nav-container" :class="isAuthenticated ? 'authNav' : 'notAuthNav'">
     <div class="title-container">
       <router-link class="title-btn" to="/">eeter.tv</router-link>
     </div>
     <div class="navlinks-container">
-      <router-link class="topNavigationLink__topBar desktopSize" to="/scheduled">{{$t("nav.scheduled")}}</router-link>
+      <router-link
+        class="topNavigationLink__topBar desktopSize"
+        to="/scheduled"
+      >{{$t("nav.scheduled")}}</router-link>
       <!-- <router-link class="topNavigationLink__topBar" to="/discover">Avasta</router-link> -->
       <template v-if="isAuthenticated">
-        <div class="stream_buttons">
+        <div class="stream_buttons desktopSize">
           <router-link
             v-if="user.is_live && user.active_stream_id"
-            class="go_live_button"
+            class="go_live_button isOnAir"
             :to="'/watch/' + user.active_stream_id"
           >{{ $t("nav.is-live") }}</router-link>
           <router-link
             v-if="!user.is_live"
-            class="go_live_button"
+            class="go_live_button goOnAir"
             to="/golive"
           >{{ $t("nav.go-live") }}</router-link>
         </div>
-        <div class="logout-container">
+        <div class="logout-container" :class="isAuthenticated ? 'authProfile' : 'notAuthProfile'">
           <div
             ref="dropdown"
             @click="toggleDropdown()"
@@ -42,6 +45,13 @@
             </div>
             <nav class="Dropdown-nav SettingsNav">
               <ul class="Dropdown-group">
+                <li class="dropLive">
+                  <router-link
+                    class="entypo-newspaper NavLinkX"
+                    to="/golive"
+                  >{{ $t("nav.go-live") }}</router-link>
+                  <a class="entypo-plus OptionLink" href="#"></a>
+                </li>
                 <li>
                   <router-link
                     class="entypo-newspaper NavLinkX"
@@ -84,6 +94,18 @@
           <router-link class="go_live_button" to="/register">{{$t("nav.register")}}</router-link>
         </div>
       </template>
+    </div>
+    <div v-if="isAuthenticated" class="stream_buttons mobileSize">
+      <router-link
+        v-if="user.is_live && user.active_stream_id"
+        class="go_live_button isOnAir"
+        :to="'/watch/' + user.active_stream_id"
+      >{{ $t("nav.is-live") }}</router-link>
+      <router-link
+        v-if="!user.is_live"
+        class="go_live_button goOnAir"
+        to="/golive"
+      >{{ $t("nav.go-live") }}</router-link>
     </div>
   </div>
 </template>
@@ -142,6 +164,13 @@ export default {
 </script>
 
 <style>
+.dropLive {
+  display: none;
+  background-color: #130088;
+  color: white;
+  font-weight: 600;
+  border-radius: 2px;
+}
 
 .mobileSize {
   display: none;
