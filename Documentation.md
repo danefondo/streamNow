@@ -12,11 +12,13 @@ The watch page can be in at least the following 6 states:
 - There exists an authenticated user and the user is the owner of the video
 
 ## All pages
+Currently, I'll have these pages responsive from 320px to 600px
+
 - Scheduled streams (home)
 - Stream preview / Stream watch
 - Edit stream / Create stream
 - Profile
-- Settings
++ Settings
 - Superadmin
 - Manage streams
 - About
@@ -24,8 +26,8 @@ The watch page can be in at least the following 6 states:
 - Terms of service
 - Contact
 - Request feature
-- Log in
-- Register
++ Log in
++ Register
 - Forget password
 - Reset pass
 - Wait to get in!

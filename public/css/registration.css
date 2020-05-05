@@ -214,7 +214,7 @@
 .forgotPass-button,
 .button__resetPass,
 .button__generic {
-	width: 325px !important;
+	width: 325px;
 	font-size: 18px !important;
 	transition: .2s ease-in-out !important;
 	margin-top: 5px !important;

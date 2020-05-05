@@ -1,19 +1,16 @@
 <template>
-  <div class="RegisterSuccessContainer">
-    <div class="WelcomeBlock">
+  <div class="interestContainer">
+    <div class="interestBlock">
       <!-- <h1 class="RegisterSuccess WelcomeMessage">{{$t("successPage.welcome")}}</h1> -->
       <h1
-        class="RegisterSuccess WelcomeMessage"
+        class="interestTitle"
       >{{$t("restrict.head")}}</h1>
       <h1
-        class="RegisterSuccess WelcomeSubtitle"
+        class="interestSubtitle"
       >{{$t("restrict.tagline")}}</h1>
-      <!-- <h1
-        class="RegisterSuccess WelcomeSubtitle"
-      >Anna märku.</h1> -->
     </div>
-    <router-link class="go_live_block" to="/">
-      <h1 class="start_streaming">{{$t("restrict.action")}}</h1>
+    <router-link class="showInterestButton" to="/">
+      <h1 class="showInterestText">{{$t("restrict.action")}}</h1>
     </router-link>
   </div>
 </template>
@@ -25,7 +22,7 @@ export default {
 </script>
 
 <style scoped>
-.WelcomeBlock {
+.interestBlock {
   margin: -40px auto 0px auto;
   max-width: 800px;
   display: flex;
@@ -34,27 +31,22 @@ export default {
   justify-content: center;
   text-align: center;
 }
-h1.RegisterSuccess {
-  font-size: 6vh;
+
+.interestTitle {
+  font-size: 66px;
   margin: 10px 0px;
   padding: 5px;
 }
-.WelcomeMessage {
-  font-size: 66px !important;
-}
-/* .WelcomeSubtitle {
-  font-size: 22px !important;
-  color: #333 !important;
-  max-width: 600px;
-} */
-.WelcomeSubtitle {
-  font-size: 23px !important;
+
+.interestSubtitle {
+  font-size: 23px;
   color: #333 !important;
   max-width: 700px;
   line-height: 28px;
+  margin: 10px 0px;
+  padding: 5px;
 }
-.go_live_block,
-.watch_streams_now {
+.showInterestButton {
   background-color: #130089;
   margin: 50px auto 0px auto;
   padding: 25px 30px;
@@ -67,20 +59,15 @@ h1.RegisterSuccess {
   /* width: 350px; */
   border: 1px solid #130089;
 }
-.watch_streams_now {
-  background-color: transparent;
-  color: #130089;
-}
-.go_live_block:hover,
-.watch_streams_now:hover {
+
+.showInterestButton:hover {
   transform: scale(1.02);
 }
 
-h1.start_streaming,
-h1.start_watching {
+h1.showInterestText {
   font-size: 45px;
 }
-.RegisterSuccessContainer {
+.interestContainer {
   display: flex;
   flex-direction: column;
   max-width: 100%;
@@ -90,23 +77,5 @@ h1.start_watching {
   align-items: center;
   justify-content: center;
 }
-.CheckOthersBlock {
-  margin: 65px auto 0px auto;
-}
-h2.CheckOthers {
-  background-color: #ffffff80;
-  padding: 5px;
-  margin: 10px auto;
-  font-size: 25px;
-}
-.HappyContainer {
-  z-index: -1;
-  display: flex;
-  justify-content: center;
-  margin-bottom: 60px;
-  margin-top: 20px;
-}
-.happy_image {
-  height: 390px;
-}
+
 </style>

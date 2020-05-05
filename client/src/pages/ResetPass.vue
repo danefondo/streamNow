@@ -155,7 +155,7 @@ div {
   border-left: 3px solid #120088;
 }
 .button__resetPass {
-  width: 325px !important;
+  width: 325px;
   font-size: 18px !important;
   transition: 0.2s ease-in-out !important;
   margin-top: 5px !important;
