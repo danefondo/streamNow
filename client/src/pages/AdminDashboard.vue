@@ -9,12 +9,12 @@
         @click="activetab='users'"
         class="manager-option"
         v-bind:class="[ activetab === 'users' ? 'manager-selected' : '' ]"
-      >Users</div>
+      >{{ $t("streamManager.users") }}</div>
       <div
         @click="activetab='statistics'"
         class="manager-option"
         v-bind:class="[ activetab === 'statistics' ? 'manager-selected' : '' ]"
-      >Statistics</div>
+      >{{ $t("streamManager.statistics") }}</div>
       <!-- <div
         @click="activetab='previous'"
         class="manager-option"

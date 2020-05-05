@@ -280,22 +280,28 @@
 
 .manager-header {
     margin-top: 8vw !important;
+    width: 100vw !important;
 }
 
 .manager-title {
     font-size: 40px !important;
 }
 
+.admin-tagline {
+    width: 90vw !important;
+    margin: 0 auto;
+}
+
 .manager-switch {
-    /* flex-wrap: wrap;
-    justify-content: center; */
+    flex-wrap: wrap;
     display: flex !important;
     flex-direction: row !important;
     margin: 20px 0px !important;
-    width: 100% !important;
-    overflow-y: scroll !important;
+    width: 100vw !important;
+    justify-content: center !important;
+    /* overflow-y: scroll !important;
     height: 50px !important;
-    margin-left: 15px !important;
+    margin-left: 15px !important; */
 }
 
 .manager-option {
@@ -326,7 +332,7 @@
 }
 
 .manager-streams .streamNameContainer {
-    width: 90vw !important;
+    width: 85vw !important;
 }
 
 .manager-streams .stream-controller {
@@ -349,6 +355,24 @@
     position: absolute !important;
     top: 0 !important;
 }
+
+/*-----------------------
+   admin panel
+-----------------------*/
+
+.edit_stream,
+.is_live,
+.take_live,
+.is_previous {
+    font-size: 15px !important;
+    padding-top: 10px !important;
+}
+
+.streamerEmailContainer {
+    width: 85vw !important;
+    padding: 8px 5px 5px 4px;
+}
+
 
 /*-----------------------
     watch page

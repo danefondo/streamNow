@@ -30,22 +30,22 @@
         @click="activetab='all'"
         class="manager-option"
         v-bind:class="[ activetab === 'all' ? 'manager-selected' : '' ]"
-      >All</div>
+      >{{ $t("streamManager.all") }}</div>
       <div
         @click="activetab='upcoming'"
         class="manager-option"
         v-bind:class="[ activetab === 'upcoming' ? 'manager-selected' : '' ]"
-      >Upcoming</div>
+      >{{ $t("streamManager.upcoming") }}</div>
       <div
         @click="activetab='previous'"
         class="manager-option"
         v-bind:class="[ activetab === 'previous' ? 'manager-selected' : '' ]"
-      >Previous</div>
+      >{{ $t("streamManager.previous") }}</div>
       <div
         @click="activetab='live'"
         class="manager-option"
         v-bind:class="[ activetab === 'live' ? 'manager-selected' : '' ]"
-      >Live</div>
+      >{{ $t("streamManager.live") }}</div>
     </div>
     <!-- all upcoming, current & new streams, old ones in other tab-->
     <div v-if="streams.length" class="manager-streams">

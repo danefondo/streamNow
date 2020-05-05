@@ -227,7 +227,13 @@
         "go-live": "Mine eetrisse",
         "manager-title": "Striimide haldur",
         "manager-tagline": "Halda siit kõiki oma striime.",
-        "edit": "Muuda"
+        "edit": "Muuda",
+        "all": "Kõik",
+        "upcoming": "Tulevased",
+        "previous": "Eelmised",
+        "live": "Eetris",
+        "users": "Kasutajad",
+        "statistics": "Statistika"
     },
     "reset-pass": {
         "reset-title": "Lähtesta parool",
