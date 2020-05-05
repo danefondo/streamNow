@@ -16,6 +16,9 @@
       <router-link to="/feature-requests" class="footer_section">
         <div class="footer_feature_request">{{$t("footer.feature-requests")}}</div>
       </router-link>
+      <router-link to="/philosophy">
+      <img class="elonicon" src="../assets/images/elonicon.png">
+      </router-link>
       <div class="footer_section right">
         <div class="rights_reserved">{{$t("footer.rights")}}</div>
       </div>
@@ -46,6 +49,9 @@
         </div>
       </div>
       <div class="footer_bottom_container">
+        <router-link to="/philosophy">
+        <img class="elonicon" src="../assets/images/elonicon.png" />
+        </router-link>
         <div class="footer_section right">
           <div class="rights_reserved">{{$t("footer.rights")}}</div>
         </div>
@@ -62,3 +68,11 @@ export default {
   name: "Footer"
 };
 </script>
+
+<style scoped>
+.elonicon {
+  height: 18px;
+  margin-left: auto;
+  float: right;
+}
+</style>

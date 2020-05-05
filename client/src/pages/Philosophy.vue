@@ -5,6 +5,7 @@
     <iframe
       width="560"
       height="315"
+      class="elon"
       src="https://www.youtube.com/embed/U0sJJU3FaOQ"
       frameborder="0"
       allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
@@ -21,6 +22,10 @@ export default {
 
 
 <style scoped>
+.elon {
+  margin-top: 10px;
+  border: 3px solid aquamarine;
+}
 
 .philosophy {
   width: 100%;
