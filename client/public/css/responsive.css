@@ -149,8 +149,32 @@
     .signin-form {
         margin-top: 20vw !important;
         margin-bottom: 0px !important;
-        width: 85vw;
+        width: 85vw !important;
     }
+
+/*---------------------
+    register
+---------------------*/
+
+.registrationBlock__registerPage {
+    margin: 0 auto;
+    margin-bottom: 40px;
+    width: 100vw !important;
+    margin-top: 8vw !important;
+}
+
+.titleBlock__registerPage {
+    width: 85vw !important;
+    padding-top: unset !important;
+}
+
+.registration-form {
+    width: 84vw !important;
+}
+
+input[type="submit"] {
+    width: 75vw;
+}
 
   /*-----------------------
     watch page
