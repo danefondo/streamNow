@@ -2,6 +2,14 @@
   <div class="stream all" v-if="activetab === 'all' || activetab == getStreamState(stream)">
     <div class="streamPreviewContainer">
       <img class="streamPreview" :src="thumbnail" />
+      <div v-if="stream.is_scheduled" class="streamDateTime mobileSize">
+        <div v-if="stream.is_scheduled" class="streamDateMeta">
+          <div class="streamDate">{{ getStreamDate(stream) + ' /'}}</div>
+        </div>
+        <div v-if="stream.is_scheduled" class="streamTimeMeta">
+          <div class="streamTime">{{ getStreamTime(stream) }}</div>
+        </div>
+      </div>
       <div class="live"></div>
       <div class="viewerCount"></div>
     </div>
@@ -12,14 +20,14 @@
           class="streamName"
         >{{stream.stream_name || "Untitled stream"}}</router-link>
       </div>
-    <div class="streamDateTime">
-      <div v-if="stream.is_scheduled" class="streamDateMeta">
-        <div class="streamDate">{{ getStreamDate(stream) + ' /'}}</div>
+      <div v-if="stream.is_scheduled" class="streamDateTime desktopSize">
+        <div v-if="stream.is_scheduled" class="streamDateMeta">
+          <div class="streamDate">{{ getStreamDate(stream) + ' /'}}</div>
+        </div>
+        <div v-if="stream.is_scheduled" class="streamTimeMeta">
+          <div class="streamTime">{{ getStreamTime(stream) }}</div>
+        </div>
       </div>
-      <div v-if="stream.is_scheduled" class="streamTimeMeta">
-        <div class="streamTime">{{ getStreamTime(stream) }}</div>
-      </div>
-    </div>
       <div class="streamTags">
         <div v-for="(tag, index) in stream.stream_tags" :key="index" class="streamTag">{{tag}}</div>
       </div>
@@ -104,7 +112,7 @@ export default {
   flex-wrap: nowrap;
   width: 285px;
   background-color: transparent;
-  margin-bottom: 14px;  
+  margin-bottom: 14px;
   height: 35px;
 }
 
@@ -145,7 +153,7 @@ export default {
   position: relative;
   min-width: 225px;
   width: 225px;
-  height: 152px !important;
+  height: 152px;
 }
 
 .streamMetaContainer {
