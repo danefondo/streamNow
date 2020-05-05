@@ -114,9 +114,10 @@
 }
 
 @media screen and (max-width: 600px) and (min-width: 320px) {
-  /* html, body, .container {
-        max-width: 360vw !important;
-    } */
+    html,
+    body {
+      overflow-x: hidden !important;
+    }
 
     .curataContainer {
         width: unset !important;
