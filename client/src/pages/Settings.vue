@@ -624,7 +624,7 @@ p {
   margin-right: 12px;
 }
 .confirmPermaDeleteAccount {
-  background-color: #a70029;
+  background-color: #a70029 !important;
 }
 .modalBackground__deleteAccount,
 .modalBackground__changePassword {

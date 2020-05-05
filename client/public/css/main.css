@@ -368,9 +368,6 @@ img.streamPreview {
 }
 /*! CSS Used from: https://www.eeter.tv/css/responsive.css */
 @media screen and (max-width: 480px) {
-  body {
-    max-width: 480px;
-  }
   .nav-container {
     padding: 10px 0px;
     flex-wrap: wrap;

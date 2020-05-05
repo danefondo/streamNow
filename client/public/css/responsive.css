@@ -118,6 +118,10 @@
         max-width: 360vw !important;
     } */
 
+    .curataContainer {
+        width: unset !important;
+    }
+
     .login-input {
         width: 85vw !important;
     }
@@ -569,10 +573,6 @@
 
   .examplesTitle__landingPage {
     text-align: center;
-  }
-
-  body {
-    max-width: 480px;
   }
 
   .nav-container {
