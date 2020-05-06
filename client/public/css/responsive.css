@@ -847,7 +847,7 @@
 
   .watch_now {
     margin: 0 auto !important;
-    width: 75% !important;
+    margin-top: 15px !important;
   }
 
   .dateGroups {

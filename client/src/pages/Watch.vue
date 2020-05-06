@@ -512,8 +512,8 @@ export default {
   height: 60px;
   background-color: #fbfbfb;
   /* z-index: 9999; */
-  width: 22%;
   position: absolute;
+  padding: 0px 5px;
   top: 0;
   right: 0;
   display: flex;
@@ -525,7 +525,7 @@ export default {
   height: 60px;
   background-color: #fbfbfb;
   /* z-index: 9999; */
-  width: 38%;
+  padding: 0px 5px;
   position: absolute;
   top: 0;
   display: flex;
