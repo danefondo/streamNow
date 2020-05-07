@@ -68,7 +68,7 @@
     <div class="schedule_container" :class="{hidden: !isScheduledOpened}">
       <div class="schedule_stream_section">
         <div class="stream_input_title">{{ $t("golive.pick-date") }}</div>
-        <div class="date_picker">
+        <div class="date_picker date_picker_special">
           <datepicker v-model="date" name="date"></datepicker>
           <button class="date_picker_button">
             <i class="fa fa-calendar"></i>
@@ -83,7 +83,7 @@
         <div class="time_picker">
           <input
             v-model="time"
-            class="timepicker"
+            class="timepicker timepicker_special"
             name="time"
             type="time"
             placeholder="Choose a time"
@@ -324,8 +324,8 @@ export default {
 
 
 .date_picker input {
-  max-width: 285px !important;
-  width: 285px !important;
+  max-width: 285px ;
+  width: 285px;
   border-radius: 3px;
   border: 1px solid #eee;
   margin-right: 16px;
@@ -346,8 +346,8 @@ export default {
 }
 
 .timepicker {
-  max-width: 285px !important;
-  width: 285px !important;
+  max-width: 285px;
+  width: 285px;
   border-radius: 3px;
   border: 1px solid #eee;
   margin-right: 16px;

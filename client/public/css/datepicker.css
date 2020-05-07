@@ -10,12 +10,15 @@
 
  .picker,
  .timepicker {
-    font-size: 17px;
-    border: 1px solid #eee;
-    border-radius: 4px;
+  font-size: 17px;
+  border: 1px solid #eee;
+  border-radius: 4px;
+  padding: 12px;
+  margin-top: 15px;
+ }
+
+ .timepicker {
     width: 200px;
-    padding: 12px;
-    margin-top: 15px;
  }
 
  .date_picker_button {
