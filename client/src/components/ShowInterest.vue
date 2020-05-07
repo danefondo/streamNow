@@ -9,7 +9,7 @@
         class="interestSubtitle"
       >{{$t("restrict.tagline")}}</h1>
     </div>
-    <router-link class="showInterestButton" to="/">
+    <router-link class="showInterestButton" to="/contact">
       <h1 class="showInterestText">{{$t("restrict.action")}}</h1>
     </router-link>
   </div>
