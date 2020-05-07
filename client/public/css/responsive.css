@@ -163,6 +163,9 @@
     width: 76vw !important;
     font-size: 15px !important;
   }
+  .scheduled_stream_name {
+    font-size: 25px !important;
+  }
 }
 
 @media screen and (max-width: 374px) and (min-width: 320px) {
@@ -226,22 +229,22 @@
   }
 
   .stream_center_top_preview {
-      flex-wrap: wrap !important;
-      width: 100vw !important;
+    flex-wrap: wrap !important;
+    width: 100vw !important;
   }
 
   .stream_owner {
-      width: 100vw !important;
-      margin-right: 0px !important;
+    width: 100vw !important;
+    margin-right: 0px !important;
   }
 
   .streamer_follow_preview {
-      width: 100vw !important;
-      margin-right: 0px !important;
-      justify-content: center !important;
-      margin-top: 12px !important;
-      padding: 8px 15px !important;
-      font-size: 18px !important;
+    width: 100vw !important;
+    margin-right: 0px !important;
+    justify-content: center !important;
+    margin-top: 12px !important;
+    padding: 8px 15px !important;
+    font-size: 18px !important;
   }
 
   .date_picker_special input {
@@ -257,8 +260,8 @@
   }
 
   .go_live {
-      width: 85vw !important;
-      margin: 0 auto !important;
+    width: 85vw !important;
+    margin: 0 auto !important;
   }
 
   .timepicker_special {
@@ -272,10 +275,10 @@
   }
 
   .entryDetailsGroup {
-      width: 85vw !important;
-      max-width: 85vw !important;
-      margin-right: 0px !important;
-      margin-left: 0px !important;
+    width: 85vw !important;
+    max-width: 85vw !important;
+    margin-right: 0px !important;
+    margin-left: 0px !important;
   }
 
   .stream_input {
@@ -287,11 +290,11 @@
   }
 
   .image-upload-wrap {
-      width: 85vw !important;
+    width: 85vw !important;
   }
 
   #input-tags {
-      width: 85vw !important;
+    width: 85vw !important;
   }
 
   .stream_input_container {
@@ -1008,6 +1011,16 @@
     object-fit: cover !important;
     max-width: unset !important;
     min-height: unset !important;
+  }
+
+  .specialPreviewContainer {
+    width: 100vw !important;
+    height: 221px !important;
+  }
+
+  .specialPreview {
+    width: 100vw !important;
+    height: 221px !important;
   }
 
   .featured_streamMetaContainer {

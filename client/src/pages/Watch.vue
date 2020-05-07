@@ -69,8 +69,8 @@
       </div>
       <div v-if="!stream.is_live && stream.is_scheduled" class="section_center">
         <div class="scheduled_stream_container">
-          <div class="featured_streamPreviewContainer">
-            <img class="featured_streamPreview" :src="thumbnail(stream)" />
+          <div class="featured_streamPreviewContainer specialPreviewContainer">
+            <img class="featured_streamPreview specialPreview" :src="thumbnail(stream)" />
             <div v-if="stream.is_scheduled" class="streamPreviewDateContainer">
               <div class="streamPreviewDate">{{ getStreamDate(stream)}}</div>
             </div>
