@@ -534,8 +534,15 @@ export default {
   box-shadow: 3px 2px 11px 0px rgba(10, 0, 70, 0.42);
 }
 
+.unsetPosition {
+  position: relative !important;
+  background-color: white !important;
+  box-shadow: unset !important;
+  height: 50px;
+}
+
 .streamPreviewTime {
-  padding: 11px 15px;
+  padding: 0px 15px;
   font-weight: bold;
   font-size: 28px;
   color: #f4f3ff;
@@ -543,7 +550,7 @@ export default {
 }
 
 .streamPreviewDate {
-  padding: 11px 15px;
+  padding: 0px 15px;
   font-weight: bold;
   font-size: 28px;
   color: #f4f3ff;

@@ -133,7 +133,7 @@ export default {
   position: relative !important;
   background-color: white !important;
   box-shadow: unset !important;
-  height: 50px !important;
+  height: 50px;
 }
 
 .streamDateSpecial {

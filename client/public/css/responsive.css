@@ -1,3 +1,10 @@
+@media screen and (max-width: 700px) and (min-width: 414px) {
+  .featured_streamer_description_container_discover {
+    width: 76vw;
+    font-size: 18px;
+  }
+}
+
 @media screen and (max-width: 700px) and (min-width: 375px) {
   html,
   body {
@@ -96,7 +103,59 @@
   .mobileSize {
     display: flex !important;
   }
+
+  /*-----------------------
+        FONTS
+    -----------------------*/
+  .streamPreviewTime,
+  .streamPreviewDate {
+    font-size: 24px !important;
+  }
+
+  .streamPreviewDateContainer,
+  .streamPreviewTimeContainer,
+  .unsetPosition {
+    height: 45px !important;
+  }
+  .streamOldTime,
+  .streamOldPreviewDate {
+    font-size: 20px !important;
+  }
+
+  .examplesTitle__landingPage {
+    font-size: 38px !important;
+  }
+
+  .featured_streamName {
+    font-size: 30px !important;
+  }
+
+  .featured_streamPreviewContainer {
+    height: 204px !important;
+  }
+
+  .streamMetaContainer {
+    max-width: 75vw !important;
+  }
+
+  .featured_streamPreview {
+    height: 204px !important;
+  }
 }
+
+@media screen and (max-width: 413px) and (min-width: 360px) {
+    .featured_streamer_description_container_discover {
+      width: 76vw;
+      font-size: 16px;
+    }
+  }
+
+@media screen and (max-width: 359px) and (min-width: 320px) {
+    .featured_streamer_description_container_discover {
+      width: 76vw;
+      font-size: 15px;
+    }
+  }
 
 @media screen and (max-width: 374px) and (min-width: 320px) {
   .live_player_facebook {
@@ -122,11 +181,8 @@
   .curataContainer {
     width: 90vw !important;
   }
-}
-
-@media screen and (max-width: 700px) and (min-width: 360px) {
-  .examplesTitle__landingPage {
-    font-size: 38px !important;
+  .featured_streamName {
+    font-size: 27px !important;
   }
 }
 
@@ -813,7 +869,7 @@
 
   .featured_stream {
     display: flex !important;
-    width: calc(100vw - 10%) !important;
+    width: 90vw !important;
     flex-direction: column !important;
     align-items: center !important;
     margin: 0 auto !important;
@@ -827,8 +883,8 @@
   }
 
   .featured_streamPreviewContainer {
-    width: calc(100vw - 22%) !important;
-    height: 204px !important;
+    width: 82vw !important;
+    height: 190px !important;
     box-sizing: border-box !important;
     overflow: hidden !important;
     display: flex !important;
@@ -843,8 +899,8 @@
   }
 
   .featured_streamPreview {
-    width: calc(100vw - 22%) !important;
-    height: 204px !important;
+    width: 82vw !important;
+    height: 190px !important;
     object-fit: cover !important;
     max-width: unset !important;
     min-height: unset !important;
@@ -852,12 +908,11 @@
 
   .featured_streamMetaContainer {
     margin: 0 !important;
-    width: 100% !important;
+    width: 82vw !important;
     box-sizing: border-box !important;
     padding: 5px !important;
     display: flex !important;
     flex-direction: column !important;
-    width: unset !important;
   }
 
   .watch_now {
@@ -943,276 +998,23 @@
   .mobileSize {
     display: flex !important;
   }
-}
 
-@media screen and (max-width: 480px) {
-  .featured_stream {
-    width: 600px;
-    flex-direction: column;
-    align-items: center;
-    margin-right: auto;
-    margin-left: auto;
-    padding-top: 0px;
+  /*-----------------------
+    FONTS
+-----------------------*/
+  .streamOldTime,
+  .streamOldPreviewDate {
+    font-size: 17px !important;
   }
 
-  .examplesTitle__landingPage {
-    text-align: center;
+  .streamPreviewTime,
+  .streamPreviewDate {
+    font-size: 24px !important;
   }
 
-  .nav-container {
-    padding: 10px 0px;
-    flex-wrap: wrap;
-  }
-
-  .title-container {
-    width: 100%;
-    margin-bottom: 10px;
-    padding-left: 5px;
-  }
-
-  .navlinks-container {
-    margin-left: 10px;
-  }
-
-  .navlink,
-  .topNavigationLink__topBar {
-    padding: 10px 6px;
-    margin: 0px 4px;
-  }
-
-  .Dropdown-profile {
-    padding: 4px;
-  }
-
-  .Dropdown-nav {
-    right: 12px;
-    width: 94%;
-    margin: 15px auto;
-  }
-
-  .so-good-container {
-    position: relative;
-    margin-bottom: 5px;
-    margin-left: 5px;
-  }
-
-  .allCuratas {
-    width: 100%;
-  }
-
-  .allCuratasContainer {
-    margin: 50px auto 35px auto;
-  }
-
-  .curataPageTitle {
-    font-size: 35px;
-    margin-left: 20px;
-  }
-
-  .addNewCurata {
-    position: relative;
-    margin-top: 65px;
-    font-size: 22px;
-    width: 180px;
-    padding: 9px;
-  }
-
-  .alteredNewCurata {
-    position: relative;
-    margin-left: 18px;
-    margin-top: 20px;
-    font-size: 20px;
-    width: 160px;
-    padding: 9px;
-  }
-
-  .noCuratas {
-  }
-
-  .noDefaultCurata {
-    width: 90%;
-    padding: 25px;
-  }
-
-  .noDefaultCurataText {
-    font-size: 25px;
-  }
-
-  .noDefaultCurataTextSmall {
-    font-size: 15px !important;
-    line-height: 18px;
-  }
-
-  .curatasList {
-    text-align: center;
-  }
-
-  .singleCurata {
-    width: 90%;
-    height: 200px;
-    text-align: left;
-  }
-
-  .noCuratas {
-    padding: 25px;
-    width: 94%;
-    margin-bottom: 0px;
-    height: 235px;
-  }
-
-  .noCuratasText {
-    font-size: 23px;
-  }
-
-  .noCuratasTextSmall {
-    font-size: 28px;
-  }
-
-  .errorContainer {
-    width: 310px;
-    margin-top: -20px;
-  }
-
-  .errorBox {
-    display: block !important;
-    padding: 25px;
-    margin-top: 0px;
-    width: 94%;
-  }
-
-  .errorTextSmall {
-    font-size: 18px;
-  }
-
-  .errorTextEmail {
-    font-size: 23px;
-  }
-
-  .errorImage {
-    display: block !important;
-    margin: 0 auto;
-  }
-
-  .openFilters {
-    margin-left: 10px;
-  }
-
-  #searchFilter {
-    margin-left: 15px;
-    margin-right: 15px;
-    width: 91%;
-  }
-}
-
-@media screen and (max-width: 935px) and (min-width: 481px) {
-  body {
-    max-width: 935px;
-  }
-
-  .allCuratas {
-    width: 90%;
-  }
-
-  .curatasList {
-    margin-left: 15px;
-  }
-
-  .singleCurata {
-    margin: 12px 10px;
-  }
-
-  .errorContainer {
-    width: 100%;
-  }
-
-  .errorBox {
-    display: block;
-    width: 95%;
-  }
-
-  .errorImage {
-    display: block !important;
-    margin: 0 auto;
-  }
-}
-
-@media screen and (max-width: 920px) and (min-width: 481px) {
-  body {
-    max-width: 920px;
-  }
-
-  .allCuratas {
-    width: 85%;
-  }
-
-  .singleCurata {
-    width: 225px;
-    height: 225px;
-  }
-}
-
-@media screen and (max-width: 885px) and (min-width: 481px) {
-  body {
-    max-width: 885px;
-  }
-
-  .allCuratas {
-    width: 90%;
-  }
-}
-
-@media screen and (max-width: 830) and (min-width: 481px) {
-  body {
-    max-width: 830;
-  }
-
-  .allCuratas {
-    width: 90%;
-  }
-}
-
-@media screen and (max-width: 835px) and (min-width: 700px) {
-  body {
-    max-width: 835px;
-  }
-
-  .component-more {
-    font-size: 20px;
-  }
-
-  .singleCurata {
-    width: 45%;
-    height: 250px;
-  }
-}
-
-@media screen and (max-width: 700px) and (min-width: 481px) {
-  body {
-    max-width: 700px;
-  }
-
-  .viewAsList {
-    display: none;
-  }
-
-  .curataLink {
-    font-size: 33px;
-  }
-
-  .component-more {
-    font-size: 20px;
-  }
-
-  .singleCurata {
-    width: 97%;
-  }
-
-  .alteredNewCurata {
-    position: relative;
-    margin-left: 0px;
-    margin-top: 20px;
-    font-size: 25px;
-    width: 200px;
-    padding: 9px;
+  .streamPreviewDateContainer,
+  .streamPreviewTimeContainer,
+  .unsetPosition {
+    height: 45px !important;
   }
 }
