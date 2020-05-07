@@ -37,7 +37,7 @@
           class="requester_email feature_input"
           autocomplete="off"
           placeholder="Jaga emaili, anname teada kui valmis!"
-          v-model="requesterEmail"
+          v-model.trim="requesterEmail"
           @keyup.enter="addNewFeature"
         />
       </div>
@@ -170,7 +170,7 @@ export default {
       if (!this.isAuthenticated) {
         if (this.requesterEmail && this.requesterEmail.includes("@")) {
           feature_data.requester_email =
-            this.requesterEmail && this.requesterEmail.trim();
+            this.requesterEmail;
         } else if (!this.requesterEmail || !this.requesterEmail.includes("@")) {
           return alert("Please enter valid email.");
         } else {

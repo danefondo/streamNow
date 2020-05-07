@@ -1,5 +1,5 @@
 <template>
-  <NoScheduledStreams v-if="!loading && !Object.keys(streams).length" />
+  <NoScheduledStreams v-if="!loading && !Object.keys(streams).length && !pastStreams.length" />
   <div v-else class="contentArea">
     <div v-if="!isAuthenticated" class="registration-block">
       <div class="title__landingPage cd-words-wrapper">
@@ -72,7 +72,11 @@ export default {
       streams: {},
       liveStreams: {},
       pastStreams: {},
-      loading: true,
+      loaders: {
+        scheduled: true,
+        past: true,
+        live: true,
+      },
       isAuthenticated: false,
       liveNow: null,
       weLive: false
@@ -91,7 +95,7 @@ export default {
       const { data } = await axios.get(`/streams?scheduled=true`);
       // this.featured = data.featured;
       this.featured = data.streams[0];
-      this.loading = false;
+      this.loaders.scheduled = false;
       data.streams.forEach(eachStream => {
         const options = { weekday: "long", month: "long", day: "numeric" };
         let date = new Date(eachStream.scheduled_time).toLocaleDateString(
@@ -104,24 +108,32 @@ export default {
         this.streams[date].push(eachStream);
       });
     } catch (error) {
-      this.loading = false;
+      this.loaders.scheduled = false;
     }
     try {
       const { data } = await axios.get(`/streams/fetchLiveStreams`);
       this.liveStreams = data.streams;
       this.liveNow = data.streams[0];
       this.weLive = true;
+      this.loaders.live = false;
     } catch (error) {
-      this.loading = false;
+      this.loaders.live = false;
     }
     try {
       let sendData = {
         date: new Date()
       };
       const { data } = await axios.post(`/streams/fetchPastStreams`, sendData);
+      this.loaders.past = false;
       this.pastStreams = data.streams;
     } catch (error) {
-      this.loading = false;
+      this.loaders.past = false;
+    }
+  },
+  computed: {
+    loading() {
+      const { scheduled, past, live } = this.loaders;
+      return scheduled || past || live;
     }
   }
 };

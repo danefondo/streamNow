@@ -11,6 +11,10 @@ The watch page can be in at least the following 6 states:
 - There does not exist an authenticated user
 - There exists an authenticated user and the user is the owner of the video
 
+bug:
+- gets double time
+- general errors needs to be shown when trying to update and fail so person knows somethiing went wrong
+
 ## All pages
 Currently, I'll have these pages responsive from 320px to 700px
 But now I also need all pages from 700px to 1200px
