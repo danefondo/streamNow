@@ -175,7 +175,7 @@ export default {
       FollowingIcon,
       FollowIcon,
       userFollowing: null,
-      isAuthenticated: false,
+      isAuthenticated: false
     };
   },
   components: {
@@ -199,11 +199,11 @@ export default {
     },
     follow() {
       if (!auth.isAuthenticated()) {
-        return alert(this.$t("profile.make-account"))
+        return alert(this.$t("profile.make-account"));
       }
       this.userFollowing = !this.userFollowing;
       axios.post(`/streams/${this.streamer._id}/followUnfollow`);
-    },  
+    }
   },
   computed: {
     getProfileIcon() {
@@ -217,7 +217,7 @@ export default {
     },
     owner() {
       return this.streamer._id === auth.isAuthenticated()._id;
-    },
+    }
   },
   watch: {
     $route() {
@@ -234,12 +234,12 @@ export default {
 ----------------------*/
 
 .follow-profile {
-    margin-top: 10px;
-    padding: 6px 15px;
-    font-size: 16px;
-    margin-bottom: 10px;
-    margin-right: unset;
-    margin-left: unset;
+  margin-top: 10px;
+  padding: 6px 15px;
+  font-size: 16px;
+  margin-bottom: 10px;
+  margin-right: unset;
+  margin-left: unset;
 }
 
 .no_previous_streams,
@@ -424,7 +424,7 @@ p {
   padding: 11px 15px;
   margin-left: auto;
   margin-right: 80px;
-  color: #FF9800;
+  color: #ff9800;
   font-weight: bold;
   border-radius: 3px;
   cursor: pointer;

@@ -16,8 +16,14 @@
             <div class="passwordChangeError__accountSettings"></div>
           </div>
           <div class="action-group modifiedActionGroup">
-            <div @click="showPasswordModal = false" class="cancelChangePassword button-outline">{{ $t("settings.cancel-newpass") }}</div>
-            <div @click="changePassword" class="confirmChangePassword button-filled">{{ $t("settings.confirm-newpass") }}</div>
+            <div
+              @click="showPasswordModal = false"
+              class="cancelChangePassword button-outline"
+            >{{ $t("settings.cancel-newpass") }}</div>
+            <div
+              @click="changePassword"
+              class="confirmChangePassword button-filled"
+            >{{ $t("settings.confirm-newpass") }}</div>
           </div>
         </div>
       </div>
@@ -27,12 +33,16 @@
       <div class="deleteModal">
         <div class="content-wrapper">
           <div class="msg-title">{{ $t("settings.delete-acc-confirm-title") }}</div>
-          <div
-            class="msg-body"
-          >{{ $t("settings.delete-acc-confirm-desc") }}</div>
+          <div class="msg-body">{{ $t("settings.delete-acc-confirm-desc") }}</div>
           <div class="action-group">
-            <div @click="showDeleteModal=false" class="cancelPermaDeleteAccount button-outline">{{ $t("settings.delete-cancel") }}</div>
-            <div @click="deleteAccount" class="confirmPermaDeleteAccount button-filled">{{ $t("settings.delete-confirm") }}</div>
+            <div
+              @click="showDeleteModal=false"
+              class="cancelPermaDeleteAccount button-outline"
+            >{{ $t("settings.delete-cancel") }}</div>
+            <div
+              @click="deleteAccount"
+              class="confirmPermaDeleteAccount button-filled"
+            >{{ $t("settings.delete-confirm") }}</div>
           </div>
         </div>
       </div>
@@ -41,9 +51,20 @@
       <div class="pageTitle__accountSettings">{{ $t("settings.settings-title") }}</div>
       <div v-if="!user.verifiedStatus" class="user_not_verified">
         <p class="not_verified_message">{{ $t("settings.verify-message") }}</p>
-        <a @click="resendVerification" v-if="!verificationSent" class="resend_verif_message">{{ $t("settings.resend-verif-message") }}</a>
-        <p v-if="verificationSent && !verificationSendError" class="resend_verif_success">{{ $t("settings.verif-sent") }}</p>
-        <a @click="resendVerification" v-if="verificationSent && verificationSendError" class="resend_verif_fail">{{ $t("settings.verif-sent-fail") }}</a>
+        <a
+          @click="resendVerification"
+          v-if="!verificationSent"
+          class="resend_verif_message"
+        >{{ $t("settings.resend-verif-message") }}</a>
+        <p
+          v-if="verificationSent && !verificationSendError"
+          class="resend_verif_success"
+        >{{ $t("settings.verif-sent") }}</p>
+        <a
+          @click="resendVerification"
+          v-if="verificationSent && verificationSendError"
+          class="resend_verif_fail"
+        >{{ $t("settings.verif-sent-fail") }}</a>
       </div>
       <div class="success_content">
         <div v-if="error" class="generalErrorContainer">
@@ -218,9 +239,7 @@
         <div class="settings_delete_section">
           <div class="success_input_title">{{ $t("settings.delete-acc-title") }}</div>
           <div class="section__accountSettings deleteAccount__accountSettings">
-            <div
-              class="deleteAccountText"
-            >{{ $t("settings.delete-acc-desc") }}</div>
+            <div class="deleteAccountText">{{ $t("settings.delete-acc-desc") }}</div>
             <div @click="showDeleteModal=true" class="deleteAccountButton">
               <p class="deleteAccountButtonText">{{ $t("settings.delete-acc-btn") }}</p>
             </div>
@@ -265,7 +284,7 @@ export default {
       passwordSuccess: null,
       showDeleteModal: false,
       verificationSent: false,
-      verificationSendError: false,
+      verificationSendError: false
     };
   },
   computed: {
@@ -275,7 +294,9 @@ export default {
   },
   async mounted() {
     try {
-      const response = await axios.get(`/profile/user/${this.loggedInUser._id}`);
+      const response = await axios.get(
+        `/profile/user/${this.loggedInUser._id}`
+      );
       this.user = response.data.streamer;
       if (this.user.profile_image_url) {
         this.image = {
@@ -333,7 +354,7 @@ export default {
       } catch ({ response }) {
         if (response.status === 422) {
           this.usernameSuccess = null;
-          return this.usernameError = response.data.errors[0].msg
+          return (this.usernameError = response.data.errors[0].msg);
         }
         this.usernameError = response.data.message;
       }
@@ -344,16 +365,13 @@ export default {
         return (this.emailSuccess = null);
       }
       try {
-        const { data } = await axios.post(
-          "/accounts/updateEmail",
-          this.user
-        );
+        const { data } = await axios.post("/accounts/updateEmail", this.user);
         this.emailSuccess = data.message;
         this.emailError = null;
       } catch ({ response }) {
         if (response.status === 422) {
           this.emailSuccess = null;
-          return this.emailError = response.data.errors[0].msg
+          return (this.emailError = response.data.errors[0].msg);
         }
         this.emailError = response.data.message;
       }
@@ -362,7 +380,7 @@ export default {
       try {
         await axios.post("/accounts/resendEmailVerification", this.user);
         this.verificationSendError = false;
-        return this.verificationSent = true;
+        return (this.verificationSent = true);
       } catch ({ response }) {
         this.verificationSendError = true;
       }
@@ -404,19 +422,19 @@ export default {
     },
     togglePasswordModal() {
       if (!this.password || !this.passconfirm) {
-        return this.passwordError = this.$t("settings.fill-empty-fields");
+        return (this.passwordError = this.$t("settings.fill-empty-fields"));
       } else if (this.password !== this.passconfirm) {
-        return this.passwordError = this.$t("settings.password_match_error");
+        return (this.passwordError = this.$t("settings.password_match_error"));
       }
       this.passwordError = false;
-      this.showPasswordModal = true
+      this.showPasswordModal = true;
     },
     async changePassword() {
       try {
         const { data } = await axios.post("/accounts/updatePassword", {
           password: this.password,
           currentpass: this.currentpass,
-          passconfirm: this.passconfirm,
+          passconfirm: this.passconfirm
         });
         this.passwordSuccess = data.message;
         this.passwordError = null;
@@ -429,7 +447,7 @@ export default {
       }
     },
     async deleteAccount() {
-      await axios.delete('/accounts/deleteAccount');
+      await axios.delete("/accounts/deleteAccount");
       auth.logout();
     }
   }
@@ -437,7 +455,6 @@ export default {
 </script>
 
 <style>
-
 .resend_verif_message,
 .resend_verif_success,
 .resend_verif_fail {

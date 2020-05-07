@@ -1,6 +1,6 @@
 <template>
   <div class="philosophy">
-<!-- WE ARE ELON-->
+    <!-- WE ARE ELON-->
     <div class="philosophyTitle">Our philosophy is simple.</div>
     <div class="philosophyTag">Here it is:</div>
     <iframe
@@ -12,7 +12,7 @@
       allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
       allowfullscreen
     ></iframe>
-<!-- WE ARE ELON-->
+    <!-- WE ARE ELON-->
   </div>
 </template>
 

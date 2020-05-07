@@ -234,6 +234,6 @@ export default {
   font-weight: 100;
   font-size: 16px;
   display: block;
-  width: 250px
+  width: 250px;
 }
 </style>

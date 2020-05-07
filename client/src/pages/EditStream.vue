@@ -164,7 +164,10 @@
               </div>
             </div>
           </div>
-          <div v-else-if="streamId && owner && isLive && !isScheduled" class="stream_delete_section">
+          <div
+            v-else-if="streamId && owner && isLive && !isScheduled"
+            class="stream_delete_section"
+          >
             <div class="success_input_title">{{ $t("editstream.end-stream-title") }}</div>
             <div class="section__streamSettings">
               <div class="deleteStreamText">{{ $t("editstream.end-stream-notice") }}</div>
@@ -253,7 +256,7 @@ export default {
   computed: {
     owner() {
       return this.streamerId === auth.isAuthenticated()._id;
-    },
+    }
   },
   methods: {
     async getStream() {
@@ -591,7 +594,7 @@ export default {
 }
 
 .confirmPermaDeleteStream.button-filled:hover {
-    background-color: #a7002acc !important;
+  background-color: #a7002acc !important;
 }
 
 .button-filled {

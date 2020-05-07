@@ -2,12 +2,8 @@
   <div class="interestContainer">
     <div class="interestBlock">
       <!-- <h1 class="RegisterSuccess WelcomeMessage">{{$t("successPage.welcome")}}</h1> -->
-      <h1
-        class="interestTitle"
-      >{{$t("restrict.head")}}</h1>
-      <h1
-        class="interestSubtitle"
-      >{{$t("restrict.tagline")}}</h1>
+      <h1 class="interestTitle">{{$t("restrict.head")}}</h1>
+      <h1 class="interestSubtitle">{{$t("restrict.tagline")}}</h1>
     </div>
     <router-link class="showInterestButton" to="/contact">
       <h1 class="showInterestText">{{$t("restrict.action")}}</h1>
@@ -77,5 +73,4 @@ h1.showInterestText {
   align-items: center;
   justify-content: center;
 }
-
 </style>

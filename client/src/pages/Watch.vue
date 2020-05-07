@@ -452,10 +452,9 @@ export default {
 </script>
 
 <style>
-
 .stream_description_display span {
-    background-color: transparent!important;
-    color: inherit!important;
+  background-color: transparent !important;
+  color: inherit !important;
 }
 .shareSpecial {
   margin-left: auto;
@@ -924,7 +923,7 @@ p {
   padding: 11px 15px;
   margin-left: auto;
   margin-right: 80px;
-  color: #FF9800;
+  color: #ff9800;
   font-weight: bold;
   border-radius: 3px;
   cursor: pointer;

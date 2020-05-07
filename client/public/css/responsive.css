@@ -726,7 +726,7 @@
   .register_watch_button,
   .register_email_watch_button,
   .register_success {
-      border-radius: 0px !important;
+    border-radius: 0px !important;
   }
 
   .livestream_buttons .Dropdown-nav {

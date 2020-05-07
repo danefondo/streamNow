@@ -24,7 +24,7 @@
         @click="activetab='live'"
         class="manager-option"
         v-bind:class="[ activetab === 'live' ? 'manager-selected' : '' ]"
-      >Live</div> -->
+      >Live</div>-->
     </div>
     <div v-if="users && users.length" class="manager-streams">
       <UserBar
@@ -37,10 +37,7 @@
       />
     </div>
     <div v-if="users && users.length" class="manager-streams">
-      <SuperadminStatistics
-        :users="users"
-        :activetab="activetab"
-      />
+      <SuperadminStatistics :users="users" :activetab="activetab" />
     </div>
   </div>
 </template>
@@ -77,7 +74,7 @@ export default {
 
 <style>
 .admin-tagline {
-    width: 500px;
+  width: 500px;
 }
 
 .manager {

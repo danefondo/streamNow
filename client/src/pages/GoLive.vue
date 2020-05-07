@@ -304,14 +304,14 @@ export default {
 }
 
 .vue-input-tag-wrapper .input-tag {
-    color: unset !important;
-    cursor: default !important;
-    margin: 9px 7px 3px 0 !important;
-    padding: 5px 6px !important;
-    background: #f2f2f2 !important;
-    font-size: 20px !important;
-    border: 0 solid #d0d0d0 !important;
-    display: inline-block !important;
+  color: unset !important;
+  cursor: default !important;
+  margin: 9px 7px 3px 0 !important;
+  padding: 5px 6px !important;
+  background: #f2f2f2 !important;
+  font-size: 20px !important;
+  border: 0 solid #d0d0d0 !important;
+  display: inline-block !important;
 }
 
 .vue-input-tag-wrapper .input-tag .remove {
@@ -322,9 +322,8 @@ export default {
   font-size: 18px !important;
 }
 
-
 .date_picker input {
-  max-width: 285px ;
+  max-width: 285px;
   width: 285px;
   border-radius: 3px;
   border: 1px solid #eee;
