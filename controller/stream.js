@@ -22,7 +22,7 @@ const streamController = {
                 errors: "An unknown error occurred"
             });
         }
-    },
+    }, 
     async fetchPastStreams(req, res) {
 
         let query = {};
@@ -33,7 +33,7 @@ const streamController = {
                 is_live: false,
                 is_scheduled: false,
                 scheduled_time: {
-                    $gte: anotherDate.setDate(date.getDate() - 9),
+                    $gte: anotherDate.setDate(date.getDate() - 100),
                     $lte: date,
                 }
             }
