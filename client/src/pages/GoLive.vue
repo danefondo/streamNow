@@ -137,15 +137,15 @@ import DecoupledEditor from "@ckeditor/ckeditor5-build-decoupled-document";
 import Datepicker from "vuejs-datepicker";
 import InputTag from "vue-input-tag";
 import ImageUpload from "../components/ImageUpload";
-import ShowInterest from "../components/ShowInterest";
+// import ShowInterest from "../components/ShowInterest";
 
 export default {
   name: "GoLive",
   components: {
     Datepicker,
     InputTag,
-    ImageUpload,
-    ShowInterest
+    ImageUpload
+    // ShowInterest
   },
   data() {
     return {
