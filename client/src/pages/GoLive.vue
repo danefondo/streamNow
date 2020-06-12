@@ -1,5 +1,5 @@
 <template>
-  <div v-if=" user && user.admin" class="contentArea">
+  <div v-if=" user" class="contentArea">
     <div v-if="error" class="generalErrorContainer">
       <div class="generalErrorText">{{ $t("form.wrong") }}</div>
     </div>
@@ -127,7 +127,7 @@
       >{{ submitting === 'schedule' ? $t('scheduling.creating-event') : $t('scheduling.create-event') }}</div>
     </div>
   </div>
-  <ShowInterest v-else />
+  <!-- <ShowInterest v-else /> -->
 </template>
 
 <script>
