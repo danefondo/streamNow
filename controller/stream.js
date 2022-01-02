@@ -32,10 +32,6 @@ const streamController = {
             query = {
                 is_live: false,
                 is_scheduled: false,
-                scheduled_time: {
-                    $gte: anotherDate.setDate(date.getDate() - 10000000),
-                    $lte: date,
-                }
             }
         }
 
